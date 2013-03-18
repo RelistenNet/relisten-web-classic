@@ -264,6 +264,7 @@ App.Router = (function(_super) {
     'login': 'login',
     'register': 'register',
     'year/:id': 'year',
+    'show/:id': 'show',
     ':notFound': 'notFound'
   };
 
@@ -281,6 +282,12 @@ App.Router = (function(_super) {
 
   Router.prototype.year = function(id) {
     return App.shows = new App.Views.Shows({
+      folder: id
+    });
+  };
+
+  Router.prototype.show = function(id) {
+    return App.songs = new App.Views.Songs({
       folder: id
     });
   };

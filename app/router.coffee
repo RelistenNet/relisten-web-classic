@@ -4,6 +4,7 @@ class App.Router extends Backbone.Router
     'login': 'login'
     'register': 'register'
     'year/:id': 'year'
+    'show/:id': 'show'
     # Last route should catch all
     ':notFound': 'notFound'
   initialize: ->
@@ -16,6 +17,8 @@ class App.Router extends Backbone.Router
     App.songs = new App.Views.Songs()
   year: (id) ->
     App.shows = new App.Views.Shows folder: id
+  show: (id) ->
+    App.songs = new App.Views.Songs folder: id
   login: ->
     @changeView(new App.Views.LoginPage())
   register: ->

@@ -5430,7 +5430,7 @@ position: fixed;
 @font-face{font-family:'Lato';font-style:italic;font-weight:700;src:local('Lato Bold Italic'),local('Lato-BoldItalic'),url("https://themes.googleusercontent.com/licensed/font?kit=HkF_qI1x_noxlxhrhMQYEI_sLczJPRm2COowb5SrMT8") format('woff')}
 *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 html{height:100%}
-body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;height:100%;}
+body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;height:100%;overflow:hidden;}
 body .container-fluid{height:100%;}
 body .container-fluid #page-container{display:none;height:100%}
 body ul#notifications{position:fixed;top:50px;right:0;padding:20px;z-index:99;}
