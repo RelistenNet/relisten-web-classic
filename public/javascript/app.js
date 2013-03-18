@@ -36,46 +36,10 @@ function program3(depth0,data) {
 this["JST"]["home"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
-
-function program1(depth0,data) {
   
-  var buffer = "", stack1;
-  buffer += "\n      <li>\n        <a href=\"/show/";
-  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\">";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</a>\n      </li>\n    ";
-  return buffer;
-  }
 
-function program3(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n      <li>\n        <a href=\"/song/";
-  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\">";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</a>\n      </li>\n    ";
-  return buffer;
-  }
 
-  buffer += "<div class=row-fluid>\n  <div class=\"span4 year-container\">\n  </div>\n\n\n  <div class=\"span4 shows-container\">\n    <div class=ul-header>Show</div>\n    <ul>\n    ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.shows),stack1 == null || stack1 === false ? stack1 : stack1.children), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n    </ul>\n  </div>\n\n  <div class=\"span4 show-container\">\n    <div class=ul-header>Song</div>\n    <ul>\n    ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.show),stack1 == null || stack1 === false ? stack1 : stack1.children), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n    </ul>\n  </div>\n</div>";
-  return buffer;
+  return "<div class=row-fluid>\n  <div class=\"span4 years-container\">\n  </div>\n\n  <div class=\"span4 shows-container\">\n  </div>\n\n  <div class=\"span4 songs-container\">\n  </div>\n</div>";
   });
 
 this["JST"]["login"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -145,7 +109,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n  <li>\n    <a href=\"/folder/";
+  buffer += "\n  <li>\n    <a href=\"/show/";
   if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -159,6 +123,33 @@ function program1(depth0,data) {
 
   buffer += "<div class=ul-header>Show</div>\n<ul>\n";
   stack2 = helpers.each.call(depth0, ((stack1 = depth0.shows),stack1 == null || stack1 === false ? stack1 : stack1.children), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n</ul>\n";
+  return buffer;
+  });
+
+this["JST"]["songs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n  <li>\n    <a href=\"/year/";
+  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</a>\n  </li>\n";
+  return buffer;
+  }
+
+  buffer += "<div class=ul-header>Songs</div>\n<ul>\n";
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.children), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</ul>\n";
   return buffer;
@@ -283,12 +274,13 @@ App.Router = (function(_super) {
 
   Router.prototype.index = function() {
     this.changeView(new App.Views.HomePage());
-    return App.years = new App.Views.Years();
+    App.years = new App.Views.Years();
+    App.shows = new App.Views.Shows();
+    return App.songs = new App.Views.Songs();
   };
 
   Router.prototype.year = function(id) {
-    this.changeView(new App.Views.HomePage());
-    return App.years = new App.Views.Years({
+    return App.shows = new App.Views.Shows({
       folder: id
     });
   };
@@ -500,12 +492,6 @@ App.Models.Folder = (function(_super) {
     return '/api/v1/folder/' + this.get('id');
   };
 
-  Folder.prototype.fetch = function() {
-    return $.getJSON(this.url, function(data) {
-      return console.log(data);
-    });
-  };
-
   return Folder;
 
 })(App.Models.Model);
@@ -686,10 +672,7 @@ App.Views.HomePage = (function(_super) {
     this.checkErr();
     App.router.clearActive();
     this.$el.html(this.template({
-      loggedIn: App.user.loggedIn(),
-      years: years,
-      shows: shows,
-      show: show
+      loggedIn: App.user.loggedIn()
     }));
     return this;
   };
@@ -922,7 +905,6 @@ App.Views.RegisterPage = (function(_super) {
 })(App.Views.View);
 
 var _ref,
-  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -930,7 +912,7 @@ App.Views.Shows = (function(_super) {
   __extends(Shows, _super);
 
   function Shows() {
-    this.render = __bind(this.render, this);    _ref = Shows.__super__.constructor.apply(this, arguments);
+    _ref = Shows.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -939,36 +921,66 @@ App.Views.Shows = (function(_super) {
   Shows.prototype.template = JST['shows'];
 
   Shows.prototype.initialize = function() {
-    this.folder = new App.Models.Folder({
-      id: 36
-    });
-    this.folder.fetch();
-    return this.listenTo(this.folder, 'change', this.render);
+    if (this.options.folder) {
+      this.folder = new App.Models.Folder({
+        id: this.options.folder
+      });
+      this.listenTo(this.folder, 'change', this.render);
+      return this.folder.fetch();
+    } else {
+      return this.render();
+    }
   };
 
   Shows.prototype.render = function() {
-    this.checkErr();
     App.router.clearActive();
     this.$el.html(this.template({
-      loggedIn: App.user.loggedIn(),
-      shows: shows
+      shows: this.folder ? this.folder.toJSON() : shows
     }));
     return this;
   };
 
-  Shows.prototype.checkErr = function() {
-    var params;
+  return Shows;
 
-    if (window.location.search) {
-      params = App.utils.getURLParameters(window.location.search);
-      switch (params.err) {
-        case "maxProviders":
-          return App.notify.send('Error', "This is how you send an error notification.", false, 4000);
-      }
+})(App.Views.View);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.Songs = (function(_super) {
+  __extends(Songs, _super);
+
+  function Songs() {
+    _ref = Songs.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Songs.prototype.el = '.songs-container';
+
+  Songs.prototype.template = JST['songs'];
+
+  Songs.prototype.initialize = function() {
+    if (this.options.folder) {
+      this.folder = new App.Models.Folder({
+        id: this.options.folder
+      });
+      this.listenTo(this.folder, 'change', this.render);
+      return this.folder.fetch();
+    } else {
+      return this.render();
     }
   };
 
-  return Shows;
+  Songs.prototype.render = function() {
+    App.router.clearActive();
+    this.$el.html(this.template({
+      songs: this.folder ? this.folder.toJSON() : songs
+    }));
+    return this;
+  };
+
+  return Songs;
 
 })(App.Views.View);
 
@@ -984,21 +996,26 @@ App.Views.Years = (function(_super) {
     return _ref;
   }
 
-  Years.prototype.el = '.year-container';
+  Years.prototype.el = '.years-container';
 
   Years.prototype.template = JST['years'];
 
   Years.prototype.initialize = function() {
-    this.folder = new App.Models.Folder({
-      id: this.options.folder
-    });
-    return this.render();
+    if (this.options.folder) {
+      this.folder = new App.Models.Folder({
+        id: this.options.folder
+      });
+      this.listenTo(this.folder, 'change', this.render);
+      return this.folder.fetch();
+    } else {
+      return this.render();
+    }
   };
 
   Years.prototype.render = function() {
     App.router.clearActive();
     this.$el.html(this.template({
-      years: years
+      years: this.folder ? this.folder.toJSON() : years
     }));
     return this;
   };

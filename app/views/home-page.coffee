@@ -6,9 +6,6 @@ class App.Views.HomePage extends App.Views.View
     App.router.clearActive()
     @$el.html @template
       loggedIn: App.user.loggedIn()
-      years: years
-      shows: shows
-      show: show
 
     @
   checkErr: ->

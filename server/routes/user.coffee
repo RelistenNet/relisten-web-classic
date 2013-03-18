@@ -28,7 +28,7 @@ router.get '/', (req, res, next) ->
           isProduction: false
           years: folders[0]
           shows: folders[1]
-          show: folders[2]
+          songs: folders[2]
       return next()
     # If the user is logged in, then render the views/loggedIn.jade
     # This way, we can bootstrap the user and csrf objects on page load
@@ -42,7 +42,7 @@ router.get '/', (req, res, next) ->
           isProduction: process.env.NODE_ENV is "production"
           years: folders[0]
           shows: folders[1]
-          show: folders[2]
+          songs: folders[2]
 
 router.post '/login', (req, res) ->
   unmentionables = { email, password } = req.body

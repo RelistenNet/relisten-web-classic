@@ -1,6 +1,6 @@
-class App.Views.Years extends App.Views.View
-  el: '.years-container'
-  template: JST['years']
+class App.Views.Songs extends App.Views.View
+  el: '.songs-container'
+  template: JST['songs']
   initialize: ->
     if @options.folder
       @folder = new App.Models.Folder id: @options.folder
@@ -11,6 +11,6 @@ class App.Views.Years extends App.Views.View
   render: ->
     App.router.clearActive()
     @$el.html @template
-      years: if @folder then @folder.toJSON() else years
+      songs: if @folder then @folder.toJSON() else songs
 
     @

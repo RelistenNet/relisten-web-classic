@@ -12,9 +12,10 @@ class App.Router extends Backbone.Router
   index: ->
     @changeView(new App.Views.HomePage())
     App.years = new App.Views.Years()
+    App.shows = new App.Views.Shows()
+    App.songs = new App.Views.Songs()
   year: (id) ->
-    @changeView(new App.Views.HomePage())
-    App.years = new App.Views.Years folder: id
+    App.shows = new App.Views.Shows folder: id
   login: ->
     @changeView(new App.Views.LoginPage())
   register: ->
