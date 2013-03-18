@@ -87,6 +87,15 @@ function program1(depth0,data) {
   return buffer;
   });
 
+this["JST"]["player"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  
+
+
+  return "<div class=player>\n  <div class=controls></div>\n</div>\n";
+  });
+
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
@@ -226,7 +235,8 @@ Application = (function() {
   Application.prototype.initViews = function() {
     App.notify = new App.Views.Notifications();
     this.header = new App.Views.Header();
-    return this.footer = new App.Views.Footer();
+    this.footer = new App.Views.Footer();
+    return App.player = new App.Views.Player();
   };
 
   Application.prototype.pushAnchors = function() {
@@ -835,6 +845,51 @@ App.Views.Notifications = (function(_super) {
   };
 
   return Notifications;
+
+})(App.Views.View);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.Player = (function(_super) {
+  __extends(Player, _super);
+
+  function Player() {
+    _ref = Player.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Player.prototype.el = '.player-container';
+
+  Player.prototype.template = JST['player'];
+
+  Player.prototype.initialize = function() {
+    var _this = this;
+
+    return soundManager.setup({
+      url: "/swf",
+      useHTML5Audio: true,
+      onready: function() {
+        return _this.render();
+      }
+    });
+  };
+
+  Player.prototype.render = function() {
+    return this.$el.html(this.template());
+  };
+
+  Player.prototype.play = function() {
+    return soundManager.createSound({
+      id: 'myMp3',
+      url: 'http://74.104.117.66:8044/stream?player=74&id=35787',
+      autoLoad: true,
+      autoPlay: true
+    });
+  };
+
+  return Player;
 
 })(App.Views.View);
 

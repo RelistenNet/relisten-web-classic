@@ -20,6 +20,7 @@ class Application
     App.notify = new App.Views.Notifications()
     @header = new App.Views.Header()
     @footer = new App.Views.Footer()
+    App.player = new App.Views.Player()
 
   pushAnchors: ->
     # Thanks Gib + Art.sy

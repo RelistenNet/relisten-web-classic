@@ -5497,3 +5497,5 @@ footer ul li a{color:#eee}
 .login-page form > div input:focus,.register-page form > div input:focus{border:none}
 .login-page form .forbutton,.register-page form .forbutton{text-align:center}
 .login-page form input[type=submit],.register-page form input[type=submit]{height:50px;width:100px;margin:0;background:#c9c9c9}
+
+.player-container{position:fixed;height:100px;width:100%;bottom:0;left:0}
