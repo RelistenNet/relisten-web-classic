@@ -31,8 +31,8 @@ router.get '/me/csrf', (req, res) ->
   res.json
     csrf: req.session._csrf
 
-router.get '/phish', (req, res) ->
-  subsonic.folder 32, (err, folder) ->
+router.get '/folder/:id', (req, res) ->
+  subsonic.folder req.params.id, (err, folder) ->
     res.json folder
 
 module.exports = router
