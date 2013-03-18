@@ -1,8 +1,8 @@
 <div class=row-fluid>
-  <div class=span4>
+  <div class="span4 year-container">
     <div class=ul-header>Choose a year</div>
     <ul>
-    {{#each years}}
+    {{#each years.children}}
       <li>
         <a href="/folder/{{id}}">{{title}}</a>
       </li>
@@ -11,10 +11,10 @@
   </div>
 
 
-  <div class=span4>
+  <div class="span4 shows-container">
     <div class=ul-header>Show</div>
     <ul>
-    {{#each shows}}
+    {{#each shows.children}}
       <li>
         <a href="/folder/{{id}}">{{title}}</a>
       </li>
@@ -22,10 +22,10 @@
     </ul>
   </div>
 
-  <div class=span4>
+  <div class="span4 show-container">
     <div class=ul-header>Song</div>
     <ul>
-    {{#each show}}
+    {{#each show.children}}
       <li>
         <a href="/folder/{{id}}">{{title}}</a>
       </li>
