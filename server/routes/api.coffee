@@ -6,6 +6,15 @@ User = mongoose.model 'User'
 
 { _ } = require 'underscore'
 
+nconf = require 'nconf'
+Subsonic = require 'subsonic'
+
+subsonic = new Subsonic
+  username: nconf.get('USERNAME')
+  password: nconf.get('PASSWORD')
+  application: 'spreadsheet'
+  server: nconf.get('SERVER')
+
 # Everything added under this router will be prefaced by /api/v1
 # You can change this path in your index.coffee middleware
 
@@ -21,5 +30,9 @@ router.get '/me', (req, res) ->
 router.get '/me/csrf', (req, res) ->
   res.json
     csrf: req.session._csrf
+
+router.get '/phish', (req, res) ->
+  subsonic.folder 32, (err, folder) ->
+    res.json folder
 
 module.exports = router

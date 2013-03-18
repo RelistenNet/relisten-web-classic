@@ -10,3 +10,36 @@
     It looks like you're <b>logged in</b>.
   </p>
 {{/if}}
+
+<div class=row-fluid>
+  <div class=span4>
+    <ul>
+    {{#each years}}
+      <li>
+        <a href="/folder/{{id}}">{{title}}</a>
+      </li>
+    {{/each}}
+    </ul>
+  </div>
+
+
+  <div class=span4>
+    <ul>
+    {{#each shows}}
+      <li>
+        <a href="/folder/{{id}}">{{title}}</a>
+      </li>
+    {{/each}}
+    </ul>
+  </div>
+
+  <div class=span4>
+    <ul>
+    {{#each show}}
+      <li>
+        <a href="/folder/{{id}}">{{title}}</a>
+      </li>
+    {{/each}}
+    </ul>
+  </div>
+</div>

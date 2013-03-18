@@ -1,104 +1,138 @@
 this["JST"] = this["JST"] || {};
 
 this["JST"]["footer"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
   var buffer = "";
 
 
-  return buffer;});
+  return buffer;
+  });
 
 this["JST"]["header"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, self=this;
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, self=this;
 
 function program1(depth0,data) {
   
   
-  return "\n    <li><a class=\"header-link\" href=\"/logout\">LOGOUT</a></li>\n  ";}
+  return "\n    <li><a class=\"header-link\" href=\"/logout\">LOGOUT</a></li>\n  ";
+  }
 
 function program3(depth0,data) {
   
   
-  return "\n    <li><a class=\"login header-link\" href=\"/login\">LOGIN</a></li>\n    <li><a class=\"register header-link\" href=\"/register\">REGISTER</a></li>\n  ";}
+  return "\n    <li><a class=\"login header-link\" href=\"/login\">LOGIN</a></li>\n    <li><a class=\"register header-link\" href=\"/register\">REGISTER</a></li>\n  ";
+  }
 
   buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\">Ghost<span>.phish</span></a></li>\n</ul>\n\n<ul class=\"right\">\n  ";
-  stack1 = depth0.loggedIn;
-  stack2 = {};
-  stack1 = helpers['if'].call(depth0, stack1, {hash:stack2,inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</ul>\n";
-  return buffer;});
+  return buffer;
+  });
 
 this["JST"]["home"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, self=this;
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
   
-  return "\n  <p>\n    It looks like you're <b>logged in</b>.\n  </p>\n";}
+  return "\n  <p>\n    It looks like you're <b>logged in</b>.\n  </p>\n";
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n      <li>\n        <a href=\"/folder/";
+  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</a>\n      </li>\n    ";
+  return buffer;
+  }
 
   buffer += "<p>\n  Hello. Welcome to backbone + express + coffee + mongo + handlebars + stylus boostrap.\n</p>\n<p>\n  Stay awhile and listen. Or don't. I don't care.\n</p>\n\n";
-  stack1 = depth0.loggedIn;
-  stack2 = {};
-  stack1 = helpers['if'].call(depth0, stack1, {hash:stack2,inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n";
-  return buffer;});
+  buffer += "\n\n<div class=row-fluid>\n  <div class=span4>\n    <ul>\n    ";
+  stack1 = helpers.each.call(depth0, depth0.years, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </ul>\n  </div>\n\n\n  <div class=span4>\n    <ul>\n    ";
+  stack1 = helpers.each.call(depth0, depth0.shows, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </ul>\n  </div>\n\n  <div class=span4>\n    <ul>\n    ";
+  stack1 = helpers.each.call(depth0, depth0.show, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </ul>\n  </div>\n</div>";
+  return buffer;
+  });
 
 this["JST"]["login"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
   buffer += "<form action=\"/login\" method=\"post\">\n  <input type=hidden value=";
-  foundHelper = helpers.csrf;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{},data:data}); }
+  if (stack1 = helpers.csrf) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.csrf; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1) + " name=_csrf />\n  <div>\n    <label for=email>Email:</label>\n    <input class=email type=\"text\" placeholder=\"Email\" name=\"email\"/>\n  </div>\n  <div>\n    <label for=password>Password:</label>\n    <input class=password type=\"password\" placeholder=\"Password\" name=\"password\"/>\n  </div>\n  <div class=forbutton>\n    <input type=\"submit\" value=\"Login\"/>\n  </div>\n</form>\n";
-  return buffer;});
+  buffer += escapeExpression(stack1)
+    + " name=_csrf />\n  <div>\n    <label for=email>Email:</label>\n    <input class=email type=\"text\" placeholder=\"Email\" name=\"email\"/>\n  </div>\n  <div>\n    <label for=password>Password:</label>\n    <input class=password type=\"password\" placeholder=\"Password\" name=\"password\"/>\n  </div>\n  <div class=forbutton>\n    <input type=\"submit\" value=\"Login\"/>\n  </div>\n</form>\n";
+  return buffer;
+  });
 
 this["JST"]["notification"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, foundHelper, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
-  var buffer = "", stack1, foundHelper;
+  var buffer = "", stack1;
   buffer += "<img src=";
-  foundHelper = helpers.img;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{},data:data}); }
+  if (stack1 = helpers.img) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.img; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1) + " alt='' />";
-  return buffer;}
+  buffer += escapeExpression(stack1)
+    + " alt='' />";
+  return buffer;
+  }
 
   buffer += "<div>\n  <a>×</a>\n  ";
-  stack1 = depth0.img;
-  stack2 = {};
-  stack1 = helpers['if'].call(depth0, stack1, {hash:stack2,inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.img, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  <h3>";
-  foundHelper = helpers.title;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{},data:data}); }
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1) + "</h3>\n  <p>";
-  foundHelper = helpers.message;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{},data:data}); }
+  buffer += escapeExpression(stack1)
+    + "</h3>\n  <p>";
+  if (stack1 = helpers.message) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.message; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1) + "</p>\n</div>";
-  return buffer;});
+  buffer += escapeExpression(stack1)
+    + "</p>\n</div>";
+  return buffer;
+  });
 
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, foundHelper, functionType="function", escapeExpression=this.escapeExpression;
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
   buffer += "<form action=\"/register\" method=\"post\">\n  <input type=hidden value=\"";
-  foundHelper = helpers.csrf;
-  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{},data:data}); }
+  if (stack1 = helpers.csrf) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.csrf; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1) + "\" name=\"_csrf\" />\n  <div>\n    <label for=email>Email:</label>\n    <input class=email type=\"text\" placeholder=\"Email\" name=\"email\"/>\n    <div class=invalid>✘</div>\n  </div>\n  <div>\n    <label for=password>Password:</label>\n    <input class=password type=\"password\" placeholder=\"Password\" name=\"password\"/>\n    <div class=invalid>✘</div>\n  </div>\n  <div class=forbutton>\n    <sup>Password must be at least 6 characters</sup>\n    <br>\n    <input type=\"submit\" value=\"Register\"/>\n  </div>\n</form>\n";
-  return buffer;});
+  buffer += escapeExpression(stack1)
+    + "\" name=\"_csrf\" />\n  <div>\n    <label for=email>Email:</label>\n    <input class=email type=\"text\" placeholder=\"Email\" name=\"email\"/>\n    <div class=invalid>✘</div>\n  </div>\n  <div>\n    <label for=password>Password:</label>\n    <input class=password type=\"password\" placeholder=\"Password\" name=\"password\"/>\n    <div class=invalid>✘</div>\n  </div>\n  <div class=forbutton>\n    <sup>Password must be at least 6 characters</sup>\n    <br>\n    <input type=\"submit\" value=\"Register\"/>\n  </div>\n</form>\n";
+  return buffer;
+  });
 
 window.App = {
   "Models": {},
@@ -174,7 +208,7 @@ Application = (function() {
 
 })();
 
-var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+var _this = this,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -183,7 +217,13 @@ App.Router = (function(_super) {
   __extends(Router, _super);
 
   function Router() {
-    this.changeView = __bind(this.changeView, this);
+    var _this = this;
+    this.changeView = function(view, render) {
+      if (render == null) {
+        render = true;
+      }
+      return Router.prototype.changeView.apply(_this, arguments);
+    };
     return Router.__super__.constructor.apply(this, arguments);
   }
 
@@ -400,9 +440,7 @@ App.Models.User = (function(_super) {
     return User.__super__.constructor.apply(this, arguments);
   }
 
-  User.prototype.url = function() {
-    return '/api/v1/me';
-  };
+  User.prototype.url = '/api/v1/me';
 
   User.prototype.loggedIn = function() {
     return !!this.get('email');
@@ -434,6 +472,27 @@ App.Collections.Collection = (function(_super) {
   return Collection;
 
 })(Backbone.Collection);
+
+var __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Collections.Folder = (function(_super) {
+
+  __extends(Folder, _super);
+
+  function Folder() {
+    return Folder.__super__.constructor.apply(this, arguments);
+  }
+
+  Folder.prototype.url = '/api/v1/phish';
+
+  Folder.prototype.initialize = function() {
+    return this.add(phish);
+  };
+
+  return Folder;
+
+})(App.Collections.Collection);
 
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -519,7 +578,7 @@ App.Views.Header = (function(_super) {
 
 })(App.Views.View);
 
-var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+var _this = this,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -528,7 +587,10 @@ App.Views.HomePage = (function(_super) {
   __extends(HomePage, _super);
 
   function HomePage() {
-    this.render = __bind(this.render, this);
+    var _this = this;
+    this.render = function() {
+      return HomePage.prototype.render.apply(_this, arguments);
+    };
     return HomePage.__super__.constructor.apply(this, arguments);
   }
 
@@ -540,7 +602,10 @@ App.Views.HomePage = (function(_super) {
     this.checkErr();
     App.router.clearActive();
     this.$el.html(this.template({
-      loggedIn: App.user.loggedIn()
+      loggedIn: App.user.loggedIn(),
+      years: years,
+      shows: shows,
+      show: show
     }));
     return this;
   };
@@ -602,7 +667,7 @@ App.Views.LoginPage = (function(_super) {
 
 })(App.Views.View);
 
-var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+var _this = this,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -611,7 +676,10 @@ App.Views.Notification = (function(_super) {
   __extends(Notification, _super);
 
   function Notification() {
-    this.close = __bind(this.close, this);
+    var _this = this;
+    this.close = function() {
+      return Notification.prototype.close.apply(_this, arguments);
+    };
     return Notification.__super__.constructor.apply(this, arguments);
   }
 
@@ -656,7 +724,16 @@ App.Views.Notifications = (function(_super) {
   __extends(Notifications, _super);
 
   function Notifications() {
-    this.send = __bind(this.send, this);
+    var _this = this;
+    this.send = function(title, message, sticky, time, img) {
+      if (sticky == null) {
+        sticky = false;
+      }
+      if (time == null) {
+        time = 3000;
+      }
+      return Notifications.prototype.send.apply(_this, arguments);
+    };
     return Notifications.__super__.constructor.apply(this, arguments);
   }
 

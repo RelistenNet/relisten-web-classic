@@ -2,14 +2,17 @@ extends layout
 
 block content
   header#header-container.header-container
-  .container.outer-container
+  .container-fluid.outer-container
     #page-container.page-container
   footer
   ul#notifications
   script(type='text/javascript')
     // bootstrap user and csrf objects
     var user = !{JSON.stringify(user)}
-    var csrf = !{JSON.stringify(csrf)}
+    , csrf = !{JSON.stringify(csrf)}
+    , years = !{JSON.stringify(years)}
+    , shows = !{JSON.stringify(shows)}
+    , show = !{JSON.stringify(show)}
   if isProduction
     script(type='text/javascript',src='/javascript/app.min.js')
   else

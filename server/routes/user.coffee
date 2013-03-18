@@ -4,27 +4,45 @@ router = new express.Router()
 mongoose = require 'mongoose'
 User = mongoose.model 'User'
 
+async = require 'async'
+
+nconf = require 'nconf'
+Subsonic = require 'subsonic'
+
+subsonic = new Subsonic
+  username: nconf.get('USERNAME')
+  password: nconf.get('PASSWORD')
+  application: 'spreadsheet'
+  server: nconf.get('SERVER')
+
 router.get '/', (req, res, next) ->
-  # If user isn't logged in then next() so public/index.html is served
-  unless req.session && req.session.userId
-    # If we're in development, then render via jade so we can set loggedIn
-    # TODO: Find a more robust solution, this is slightly messy
-    if process.env.NODE_ENV is "development"
-      return res.render 'loggedIn',
-        user: {}
-        csrf: ''
-        isProduction: false
-    return next()
-  # If the user is logged in, then render the views/loggedIn.jade
-  # This way, we can bootstrap the user and csrf objects on page load
-  User
-    .findById(req.session.userId, 'email')
-    .exec (err, user) ->
-      return next() if err || !user
-      res.render 'loggedIn',
-        user: user
-        csrf: req.session._csrf
-        isProduction: process.env.NODE_ENV is "production"
+  bootstrapData (err, folders) ->
+    # If user isn't logged in then next() so public/index.html is served
+    unless req.session && req.session.userId
+      # If we're in development, then render via jade so we can set loggedIn
+      # TODO: Find a more robust solution, this is slightly messy
+      if process.env.NODE_ENV is "development"
+        return res.render 'loggedIn',
+          user: {}
+          csrf: ''
+          isProduction: false
+          years: folders[0]
+          shows: folders[1]
+          show: folders[2]
+      return next()
+    # If the user is logged in, then render the views/loggedIn.jade
+    # This way, we can bootstrap the user and csrf objects on page load
+    User
+      .findById(req.session.userId, 'email')
+      .exec (err, user) ->
+        return next() if err || !user
+        res.render 'loggedIn',
+          user: user
+          csrf: req.session._csrf
+          isProduction: process.env.NODE_ENV is "production"
+          years: folders[0]
+          shows: folders[1]
+          show: folders[2]
 
 router.post '/login', (req, res) ->
   unmentionables = { email, password } = req.body
@@ -66,5 +84,18 @@ login = (req, res, {email, password}) ->
     switch reason
       when reasons.NOT_FOUND, reasons.PASSWORD_INCORRECT, reasons.MAX_ATTEMPTS
         res.redirect "login?err=#{reason}"
+
+bootstrapData = (cb) ->
+  async.parallel [
+    (callback) ->
+      subsonic.folder 32, (err, folder) ->
+        callback null, folder
+    , (callback) ->
+      subsonic.folder 54, (err, folder) ->
+        callback null, folder
+    , (callback) ->
+      subsonic.folder 33640, (err, folder) ->
+        callback null, folder
+    ], cb
 
 module.exports = router
