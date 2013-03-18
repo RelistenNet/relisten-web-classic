@@ -5429,8 +5429,10 @@ position: fixed;
 @font-face{font-family:'Lato';font-style:normal;font-weight:400;src:local('Lato Regular'),local('Lato-Regular'),url("https://themes.googleusercontent.com/static/fonts/lato/v6/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff") format('woff')}
 @font-face{font-family:'Lato';font-style:italic;font-weight:700;src:local('Lato Bold Italic'),local('Lato-BoldItalic'),url("https://themes.googleusercontent.com/licensed/font?kit=HkF_qI1x_noxlxhrhMQYEI_sLczJPRm2COowb5SrMT8") format('woff')}
 *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
-body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;}
-body #page-container{padding:20px;display:none}
+html{height:100%}
+body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;height:100%;}
+body .container-fluid{height:100%;}
+body .container-fluid #page-container{display:none;height:100%}
 body ul#notifications{position:fixed;top:50px;right:0;padding:20px;z-index:99;}
 body ul#notifications li{background:#fff;list-style-type:none;color:#333;width:300px;-webkit-border-radius:5px;border-radius:5px;border:3px solid #eee;margin:10px;}
 body ul#notifications li div{position:relative;padding:0 10px;}
@@ -5462,9 +5464,28 @@ footer ul{height:50px;width:50%;margin:auto;}
 footer ul li{height:100%;list-style-type:none;margin:0;padding:0;float:left;}
 footer ul li a{color:#eee}
 
-.home-page{color:#333;}
-.home-page .row-fluid{width:100%;}
-.home-page .row-fluid .span4 ul li{list-style-type:none;font-size:12px}
+.home-page{color:#333;height:100%;}
+.home-page .row-fluid{width:100%;height:64%;}
+.home-page .row-fluid .span4{height:100%;max-width:33%;position:relative;overflow-y:auto;overflow-x:hidden;}
+.home-page .row-fluid .span4 div.ul-header{position:absolute;color:#333;z-index:98;font-size:1.33em;text-shadow:0 1px 0 #fff;font-weight:600;text-align:center;line-height:1em;padding:1em 0 1em 0;width:99%;border:1px solid #aaa;border-top:0;background-color:#f6f6f6;-o-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;-webkit-box-shadow:0 4px 3px -2px rgba(61,61,61,0.4);-webkit-box-shadow:0 4px 3px -2px rgba(61,61,61,0.4);box-shadow:0 4px 3px -2px rgba(61,61,61,0.4)}
+.home-page .row-fluid .span4 ul{overflow-x:hidden;background-color:#f6f6f6;margin:0 2% 0 2%;top:53px;bottom:50px;width:95%;position:absolute;border-left:1px solid #aaa;border-right:1px solid #aaa;border-bottom:1px solid #aaa;}
+.home-page .row-fluid .span4 ul li{list-style:none;border-bottom:1px solid #aaa;cursor:pointer;font-size:.9em;position:relative;}
+.home-page .row-fluid .span4 ul li.footnotes p{padding:10px 0 0 5px}
+.home-page .row-fluid .span4 ul li > a{color:#555;height:100%;width:auto;padding:5px 0 5px 5px;text-decoration:none;display:block;-o-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
+.home-page .row-fluid .span4 ul li > a:hover{background:#e6e6e6}
+.home-page .row-fluid .span4 ul li > a.blue{color:asihtosblue}
+.home-page .row-fluid .span4 ul li > a.selected,.home-page .row-fluid .span4 ul li > a.true,.home-page .row-fluid .span4 ul li > a.truetrue{background:asihtosblue;color:#fff}
+.home-page .row-fluid .span4 ul li > a.clear{padding:0;width:auto;height:auto;display:inline-block}
+.home-page .row-fluid .span4 ul li > a.video-link{font-size:1.14em}
+.home-page .row-fluid .span4 ul li > a span.segue,.home-page .row-fluid .span4 ul li > a span.info{color:#555;font-size:.75em}
+.home-page .row-fluid .span4 ul li > a span.date{font-size:1.3em}
+.home-page .row-fluid .span4 ul li .report{color:#555;font-size:.91em;position:absolute;z-index:2;right:4px;bottom:10px;opacity:.7;filter:alpha(opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";}
+.home-page .row-fluid .span4 ul li .report:hover{opacity:1;-ms-filter:none;filter:none}
+.home-page .row-fluid .span4 ul li .report-actions{padding:5px;text-align:center;display:none;}
+.home-page .row-fluid .span4 ul li .report-actions > a{margin:5px}
+.home-page .row-fluid .span4 ul li form{margin:0;}
+.home-page .row-fluid .span4 ul li form input{margin:5px;width:93%;background:transparent;border:1px solid rgba(0,0,0,0.3)}
+.home-page .row-fluid .span4 ul li .error{font-size:3em;ne-height:1em;padding:10px;color:#d90f0f}
 
 .login-page,.register-page{text-align:center;}
 .login-page form,.register-page form{width:400px;margin:auto;text-align:left;}

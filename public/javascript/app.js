@@ -40,12 +40,6 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 
 function program1(depth0,data) {
   
-  
-  return "\n  <p>\n    It looks like you're <b>logged in</b>.\n  </p>\n";
-  }
-
-function program3(depth0,data) {
-  
   var buffer = "", stack1;
   buffer += "\n      <li>\n        <a href=\"/folder/";
   if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
@@ -59,17 +53,14 @@ function program3(depth0,data) {
   return buffer;
   }
 
-  buffer += "<p>\n  Hello. Welcome to backbone + express + coffee + mongo + handlebars + stylus boostrap.\n</p>\n<p>\n  Stay awhile and listen. Or don't. I don't care.\n</p>\n\n";
-  stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  buffer += "<div class=row-fluid>\n  <div class=span4>\n    <div class=ul-header>Choose a year</div>\n    <ul>\n    ";
+  stack1 = helpers.each.call(depth0, depth0.years, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n\n<div class=row-fluid>\n  <div class=span4>\n    <ul>\n    ";
-  stack1 = helpers.each.call(depth0, depth0.years, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  buffer += "\n    </ul>\n  </div>\n\n\n  <div class=span4>\n    <div class=ul-header>Show</div>\n    <ul>\n    ";
+  stack1 = helpers.each.call(depth0, depth0.shows, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    </ul>\n  </div>\n\n\n  <div class=span4>\n    <ul>\n    ";
-  stack1 = helpers.each.call(depth0, depth0.shows, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    </ul>\n  </div>\n\n  <div class=span4>\n    <ul>\n    ";
-  stack1 = helpers.each.call(depth0, depth0.show, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  buffer += "\n    </ul>\n  </div>\n\n  <div class=span4>\n    <div class=ul-header>Song</div>\n    <ul>\n    ";
+  stack1 = helpers.each.call(depth0, depth0.show, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n    </ul>\n  </div>\n</div>";
   return buffer;

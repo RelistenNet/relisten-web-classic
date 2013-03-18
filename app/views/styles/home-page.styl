@@ -2,14 +2,139 @@
 
 .home-page
   color #333
+  height 100%
 
   .row-fluid
     width 100%
+    height 64%
 
     .span4
+      height 100%
+      max-width 33%
+      position relative
+      overflow-y auto
+      overflow-x hidden
+
+      div.ul-header
+        position absolute
+        color #333
+        z-index 98
+        font-size 1.33em
+        //text-transform: uppercase
+        text-shadow 0 1px 0 #fff
+        font-weight 600
+        text-align center
+        line-height 1em
+        padding 1em 0 1em 0
+        width 99%
+        border 1px solid #AAA
+        border-top 0
+        background-color #F6F6F6
+        text-overflow ellipsis
+        white-space nowrap
+        overflow hidden
+        -webkit-box-shadow 0px 4px 3px -2px rgba(61, 61, 61, 0.4)
+        box-shadow 0px 4px 3px -2px rgba(61, 61, 61, 0.4)
 
       ul
+        overflow-x hidden
+        background-color #F6F6F6
+        margin 0 2% 0 2%
+        top 53px
+        bottom 50px
+        width 95%
+        position absolute
+        border-left 1px solid #AAA
+        border-right 1px solid #AAA
+        border-bottom 1px solid #AAA
 
         li
-          list-style-type none
-          font-size 12px
+          list-style none
+          border-bottom 1px solid #AAA
+          cursor pointer
+          font-size .9em
+          position relative
+          //-webkit-box-shadow 0px 0px 2px 2px rgba(61, 61, 61, 0.1)
+          //box-shadow 0px 0px 2px 2px rgba(61, 61, 61, 0.1)
+
+          &.footnotes p
+            padding 10px 0 0 5px
+
+          > a
+            color #555
+            height 100%
+            width auto
+            padding 5px 0px 5px 5px
+            //line-height 38px
+            text-decoration none
+            display block
+            text-overflow ellipsis
+            white-space nowrap
+            overflow hidden
+
+            &:hover
+              background #E6E6E6
+
+
+            &.blue
+              color asihtosblue
+
+            &.selected, &.true, &.truetrue
+              background asihtosblue
+              color #fff
+              //position relative
+              //z-index 3
+              //-webkit-box-shadow 0px 4px 3px -2px rgba(0, 0, 0, 0.3), 0px -4px 3px -2px rgba(0, 0, 0, 0.3)
+              //box-shadow 0px 4px 3px -2px rgba(0, 0, 0, 0.3), 0px -4px 3px -2px rgba(0, 0, 0, 0.3)
+
+            &.clear
+              padding: 0
+              width: auto
+              height: auto
+              display: inline-block
+
+            &.video-link
+              font-size 1.14em
+
+            span.segue, span.info
+              color #555
+              font-size 0.75em
+
+            span.date
+              font-size 1.3em
+
+            //span.date
+          .report
+            color #555
+            font-size 0.91em
+            position absolute
+            z-index 2
+            right 4px
+            bottom 10px
+            opacity .7
+
+            &:hover
+              opacity 1
+
+          .report-actions
+            padding 5px
+            text-align center
+            display none
+
+            > a
+              margin 5px
+
+          form
+            margin 0
+
+            input
+              margin 5px
+              width 93%
+              background transparent
+              border 1px solid rgba(0, 0, 0, .3)
+
+          .error
+            font-size 3em
+            ne-height 1em
+            padding 10px
+            color #D90F0F

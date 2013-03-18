@@ -1,18 +1,6 @@
-<p>
-  Hello. Welcome to backbone + express + coffee + mongo + handlebars + stylus boostrap.
-</p>
-<p>
-  Stay awhile and listen. Or don't. I don't care.
-</p>
-
-{{#if loggedIn}}
-  <p>
-    It looks like you're <b>logged in</b>.
-  </p>
-{{/if}}
-
 <div class=row-fluid>
   <div class=span4>
+    <div class=ul-header>Choose a year</div>
     <ul>
     {{#each years}}
       <li>
@@ -24,6 +12,7 @@
 
 
   <div class=span4>
+    <div class=ul-header>Show</div>
     <ul>
     {{#each shows}}
       <li>
@@ -34,6 +23,7 @@
   </div>
 
   <div class=span4>
+    <div class=ul-header>Song</div>
     <ul>
     {{#each show}}
       <li>
