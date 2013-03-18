@@ -36,12 +36,12 @@ function program3(depth0,data) {
 this["JST"]["home"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n      <li>\n        <a href=\"/folder/";
+  buffer += "\n      <li>\n        <a href=\"/show/";
   if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -53,15 +53,27 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div class=row-fluid>\n  <div class=span4>\n    <div class=ul-header>Choose a year</div>\n    <ul>\n    ";
-  stack1 = helpers.each.call(depth0, depth0.years, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    </ul>\n  </div>\n\n\n  <div class=span4>\n    <div class=ul-header>Show</div>\n    <ul>\n    ";
-  stack1 = helpers.each.call(depth0, depth0.shows, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n      <li>\n        <a href=\"/song/";
+  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</a>\n      </li>\n    ";
+  return buffer;
+  }
+
+  buffer += "<div class=row-fluid>\n  <div class=\"span4 year-container\">\n  </div>\n\n\n  <div class=span4>\n    <div class=ul-header>Show</div>\n    <ul>\n    ";
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.shows),stack1 == null || stack1 === false ? stack1 : stack1.children), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n    </ul>\n  </div>\n\n  <div class=span4>\n    <div class=ul-header>Song</div>\n    <ul>\n    ";
-  stack1 = helpers.each.call(depth0, depth0.show, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.show),stack1 == null || stack1 === false ? stack1 : stack1.children), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n    </ul>\n  </div>\n</div>";
   return buffer;
   });
@@ -125,6 +137,32 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   return buffer;
   });
 
+this["JST"]["years"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n  <li>\n    <a href=\"/year/";
+  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</a>\n  </li>\n";
+  return buffer;
+  }
+
+  buffer += "<div class=ul-header>Choose a year</div>\n<ul>\n";
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.years),stack1 == null || stack1 === false ? stack1 : stack1.children), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n</ul>";
+  return buffer;
+  });
 window.App = {
   "Models": {},
   "Collections": {},
@@ -136,26 +174,16 @@ window.App = {
 
 $(function() {
   var Tweezer;
+
   $.getJSON('/api/v1/me/csrf', function(data) {
     return App.csrf = data.csrf;
   });
-  Tweezer = new Application().initialize();
-  return $(document).ajaxSend(function(e, xhr, options) {
-    if (App.csrf) {
-      return xhr.setRequestHeader("X-CSRF-Token", App.csrf);
-    } else {
-      return $.getJSON('/api/v1/me/csrf', function(data) {
-        App.csrf = data.csrf;
-        return xhr.setRequestHeader("X-CSRF-Token", data.csrf);
-      });
-    }
-  });
+  return Tweezer = new Application().initialize();
 });
 
 var Application;
 
 Application = (function() {
-
   function Application() {}
 
   Application.prototype.title = 'Tweezer';
@@ -182,6 +210,7 @@ Application = (function() {
   Application.prototype.pushAnchors = function() {
     return $(document).on("click", "a[href^='/']", function(event) {
       var href, passThrough, url;
+
       href = $(event.currentTarget).attr('href');
       passThrough = /logout|auth/.test(href);
       if (!passThrough && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
@@ -199,29 +228,24 @@ Application = (function() {
 
 })();
 
-var _this = this,
+var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 App.Router = (function(_super) {
-
   __extends(Router, _super);
 
   function Router() {
-    var _this = this;
-    this.changeView = function(view, render) {
-      if (render == null) {
-        render = true;
-      }
-      return Router.prototype.changeView.apply(_this, arguments);
-    };
-    return Router.__super__.constructor.apply(this, arguments);
+    this.changeView = __bind(this.changeView, this);    _ref = Router.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
 
   Router.prototype.routes = {
     '': 'index',
     'login': 'login',
     'register': 'register',
+    'year/:id': 'year',
     ':notFound': 'notFound'
   };
 
@@ -231,7 +255,15 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.index = function() {
-    return this.changeView(new App.Views.HomePage());
+    this.changeView(new App.Views.HomePage());
+    return App.years = new App.Views.Years();
+  };
+
+  Router.prototype.year = function(id) {
+    this.changeView(new App.Views.HomePage());
+    return App.years = new App.Views.Years({
+      folder: id
+    });
   };
 
   Router.prototype.login = function() {
@@ -272,6 +304,7 @@ App.Router = (function(_super) {
 
   Router.prototype._trackPageview = function() {
     var url;
+
     url = Backbone.history.getFragment();
     return _gaq.push(['_trackPageview', "/" + url]);
   };
@@ -292,6 +325,7 @@ cookie = function(name, value, days) {
 
 createCookie = function(name, value, days) {
   var date, expires;
+
   if (days == null) {
     days = 7;
   }
@@ -307,6 +341,7 @@ createCookie = function(name, value, days) {
 
 readCookie = function(name) {
   var c, ca, nameEQ, result, _i, _len;
+
   nameEQ = name + "=";
   ca = document.cookie.split(';');
   for (_i = 0, _len = ca.length; _i < _len; _i++) {
@@ -332,9 +367,9 @@ App.utils.cookie = {
   deleteCookie: deleteCookie
 };
 
-
 $.fn.getCursorPosition = function() {
   var input, sel, selLen;
+
   input = this.get(0);
   if (!input) {
     return;
@@ -352,6 +387,7 @@ $.fn.getCursorPosition = function() {
 
 $.fn.setCursorPosition = function(pos) {
   var range;
+
   if ($(this).get(0).setSelectionRange) {
     return $(this).get(0).setSelectionRange(pos, pos);
   } else if ($(this).get(0).createTextRange) {
@@ -366,6 +402,7 @@ $.fn.setCursorPosition = function(pos) {
 $.fn.setCursorRange = function(start, end) {
   return this.each(function() {
     var range;
+
     if (this.setSelectionRange) {
       this.focus();
       return this.setSelectionRange(start, end);
@@ -379,12 +416,13 @@ $.fn.setCursorRange = function(start, end) {
   });
 };
 
-
 App.utils.getURLParameters = function(url) {
   var obj;
+
   obj = {};
   _.each(url.split('?')[1].split('&'), function(param) {
     var split;
+
     split = param.split('=');
     return obj[split[0]] = split[1];
   });
@@ -403,32 +441,58 @@ App.utils.validate = {
   validateEmail: validateEmail
 };
 
-var __hasProp = {}.hasOwnProperty,
+var _ref,
+  __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 App.Models.Model = (function(_super) {
-
   __extends(Model, _super);
 
   function Model() {
-    return Model.__super__.constructor.apply(this, arguments);
+    _ref = Model.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
-
-  Model.prototype.idAttribute = '_id';
 
   return Model;
 
 })(Backbone.Model);
 
-var __hasProp = {}.hasOwnProperty,
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Models.Folder = (function(_super) {
+  __extends(Folder, _super);
+
+  function Folder() {
+    _ref = Folder.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Folder.prototype.url = function() {
+    return '/api/v1/folder/' + this.get('id');
+  };
+
+  Folder.prototype.fetch = function() {
+    return $.getJSON(this.url, function(data) {
+      return console.log(data);
+    });
+  };
+
+  return Folder;
+
+})(App.Models.Model);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 App.Models.User = (function(_super) {
-
   __extends(User, _super);
 
   function User() {
-    return User.__super__.constructor.apply(this, arguments);
+    _ref = User.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
 
   User.prototype.url = '/api/v1/me';
@@ -449,30 +513,32 @@ App.Models.User = (function(_super) {
 
 })(App.Models.Model);
 
-var __hasProp = {}.hasOwnProperty,
+var _ref,
+  __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 App.Collections.Collection = (function(_super) {
-
   __extends(Collection, _super);
 
   function Collection() {
-    return Collection.__super__.constructor.apply(this, arguments);
+    _ref = Collection.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
 
   return Collection;
 
 })(Backbone.Collection);
 
-var __hasProp = {}.hasOwnProperty,
+var _ref,
+  __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 App.Collections.Folder = (function(_super) {
-
   __extends(Folder, _super);
 
   function Folder() {
-    return Folder.__super__.constructor.apply(this, arguments);
+    _ref = Folder.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
 
   Folder.prototype.url = '/api/v1/phish';
@@ -485,15 +551,16 @@ App.Collections.Folder = (function(_super) {
 
 })(App.Collections.Collection);
 
-var __hasProp = {}.hasOwnProperty,
+var _ref,
+  __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 App.Views.View = (function(_super) {
-
   __extends(View, _super);
 
   function View() {
-    return View.__super__.constructor.apply(this, arguments);
+    _ref = View.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
 
   View.prototype.initialize = function() {
@@ -517,15 +584,16 @@ App.Views.View = (function(_super) {
 
 })(Backbone.View);
 
-var __hasProp = {}.hasOwnProperty,
+var _ref,
+  __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 App.Views.Footer = (function(_super) {
-
   __extends(Footer, _super);
 
   function Footer() {
-    return Footer.__super__.constructor.apply(this, arguments);
+    _ref = Footer.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
 
   Footer.prototype.autoRender = true;
@@ -538,15 +606,16 @@ App.Views.Footer = (function(_super) {
 
 })(App.Views.View);
 
-var __hasProp = {}.hasOwnProperty,
+var _ref,
+  __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 App.Views.Header = (function(_super) {
-
   __extends(Header, _super);
 
   function Header() {
-    return Header.__super__.constructor.apply(this, arguments);
+    _ref = Header.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
 
   Header.prototype.autoRender = true;
@@ -569,20 +638,17 @@ App.Views.Header = (function(_super) {
 
 })(App.Views.View);
 
-var _this = this,
+var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 App.Views.HomePage = (function(_super) {
-
   __extends(HomePage, _super);
 
   function HomePage() {
-    var _this = this;
-    this.render = function() {
-      return HomePage.prototype.render.apply(_this, arguments);
-    };
-    return HomePage.__super__.constructor.apply(this, arguments);
+    this.render = __bind(this.render, this);    _ref = HomePage.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
 
   HomePage.prototype.className = 'home-page';
@@ -603,6 +669,7 @@ App.Views.HomePage = (function(_super) {
 
   HomePage.prototype.checkErr = function() {
     var params;
+
     if (window.location.search) {
       params = App.utils.getURLParameters(window.location.search);
       switch (params.err) {
@@ -616,15 +683,16 @@ App.Views.HomePage = (function(_super) {
 
 })(App.Views.View);
 
-var __hasProp = {}.hasOwnProperty,
+var _ref,
+  __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 App.Views.LoginPage = (function(_super) {
-
   __extends(LoginPage, _super);
 
   function LoginPage() {
-    return LoginPage.__super__.constructor.apply(this, arguments);
+    _ref = LoginPage.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
 
   LoginPage.prototype.className = 'login-page';
@@ -641,6 +709,7 @@ App.Views.LoginPage = (function(_super) {
 
   LoginPage.prototype.checkErr = function() {
     var params;
+
     if (window.location.search) {
       params = App.utils.getURLParameters(window.location.search);
       switch (params.err) {
@@ -658,20 +727,17 @@ App.Views.LoginPage = (function(_super) {
 
 })(App.Views.View);
 
-var _this = this,
+var _ref, _ref1,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 App.Views.Notification = (function(_super) {
-
   __extends(Notification, _super);
 
   function Notification() {
-    var _this = this;
-    this.close = function() {
-      return Notification.prototype.close.apply(_this, arguments);
-    };
-    return Notification.__super__.constructor.apply(this, arguments);
+    this.close = __bind(this.close, this);    _ref = Notification.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
 
   Notification.prototype.autoRender = true;
@@ -711,27 +777,18 @@ App.Views.Notification = (function(_super) {
 })(App.Views.View);
 
 App.Views.Notifications = (function(_super) {
-
   __extends(Notifications, _super);
 
   function Notifications() {
-    var _this = this;
-    this.send = function(title, message, sticky, time, img) {
-      if (sticky == null) {
-        sticky = false;
-      }
-      if (time == null) {
-        time = 3000;
-      }
-      return Notifications.prototype.send.apply(_this, arguments);
-    };
-    return Notifications.__super__.constructor.apply(this, arguments);
+    this.send = __bind(this.send, this);    _ref1 = Notifications.__super__.constructor.apply(this, arguments);
+    return _ref1;
   }
 
   Notifications.prototype.el = '#notifications';
 
   Notifications.prototype.send = function(title, message, sticky, time, img) {
     var notificationEl, type;
+
     if (sticky == null) {
       sticky = false;
     }
@@ -760,18 +817,18 @@ App.Views.Notifications = (function(_super) {
 
 })(App.Views.View);
 
-var validateEmail,
+var validateEmail, _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 validateEmail = App.utils.validate.validateEmail;
 
 App.Views.RegisterPage = (function(_super) {
-
   __extends(RegisterPage, _super);
 
   function RegisterPage() {
-    return RegisterPage.__super__.constructor.apply(this, arguments);
+    _ref = RegisterPage.__super__.constructor.apply(this, arguments);
+    return _ref;
   }
 
   RegisterPage.prototype.className = 'register-page';
@@ -785,6 +842,7 @@ App.Views.RegisterPage = (function(_super) {
 
   RegisterPage.prototype.render = function() {
     var params;
+
     App.router.clearActive($('header .register'));
     if (window.location.search) {
       params = App.utils.getURLParameters(window.location.search);
@@ -824,6 +882,7 @@ App.Views.RegisterPage = (function(_super) {
 
   RegisterPage.prototype.button = function(hide) {
     var disabled;
+
     disabled = 'disabled';
     if (!hide) {
       disabled = false;
@@ -832,5 +891,40 @@ App.Views.RegisterPage = (function(_super) {
   };
 
   return RegisterPage;
+
+})(App.Views.View);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.Years = (function(_super) {
+  __extends(Years, _super);
+
+  function Years() {
+    _ref = Years.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Years.prototype.el = '.year-container';
+
+  Years.prototype.template = JST['years'];
+
+  Years.prototype.initialize = function() {
+    this.folder = new App.Models.Folder({
+      id: this.options.folder
+    });
+    return this.render();
+  };
+
+  Years.prototype.render = function() {
+    App.router.clearActive();
+    this.$el.html(this.template({
+      years: years
+    }));
+    return this;
+  };
+
+  return Years;
 
 })(App.Views.View);

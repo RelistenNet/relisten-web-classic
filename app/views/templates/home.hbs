@@ -1,22 +1,14 @@
 <div class=row-fluid>
-  <div class=span4>
-    <div class=ul-header>Choose a year</div>
-    <ul>
-    {{#each years}}
-      <li>
-        <a href="/folder/{{id}}">{{title}}</a>
-      </li>
-    {{/each}}
-    </ul>
+  <div class="span4 year-container">
   </div>
 
 
   <div class=span4>
     <div class=ul-header>Show</div>
     <ul>
-    {{#each shows}}
+    {{#each shows.children}}
       <li>
-        <a href="/folder/{{id}}">{{title}}</a>
+        <a href="/show/{{id}}">{{title}}</a>
       </li>
     {{/each}}
     </ul>
@@ -25,9 +17,9 @@
   <div class=span4>
     <div class=ul-header>Song</div>
     <ul>
-    {{#each show}}
+    {{#each show.children}}
       <li>
-        <a href="/folder/{{id}}">{{title}}</a>
+        <a href="/song/{{id}}">{{title}}</a>
       </li>
     {{/each}}
     </ul>
