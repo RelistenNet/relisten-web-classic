@@ -26,5 +26,6 @@ songSchema = new Schema
   month: Number
   day: Number
   year: Number
+  _show: type: Schema.Types.ObjectId, ref: 'Show'
 
 Song = mongoose.model 'Song', songSchema

@@ -2,6 +2,7 @@
 program = require 'commander'
 async = require 'async'
 fs = require 'fs'
+_ = require 'underscore'
 extractDate = require './extract_date'
 
 mongoose = require 'mongoose'
@@ -40,14 +41,20 @@ getYears = (id = 32) ->
       console.log f.title
       year.save()
       subsonic.folder f.id, (err, folder) ->
+        dates = [0]
         for j in folder.children
           date = extractDate j.title
           j.month = date.month if date
           j.day = date.day if date
           j.year = date.year if date
+          dateStr = "#{j.year}-#{j.month}-#{j.day}"
+          i = _.reduce dates, (memo, val) ->
+            return ++memo if val is dateStr
+            memo
+          dates.push dateStr
           #console.log j.month, j.day, j.year
           console.log 'fail', j.title unless j.month > 0 || j.day > 0
-
+          j.version = i
           show = new Show j
           show.save()
           subsonic.folder j.id, (err, folder) ->

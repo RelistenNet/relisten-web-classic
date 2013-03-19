@@ -10,5 +10,8 @@ showSchema = new Schema
   parent: Number
   artist: String
   coverArt: Number
+  version: type: Number, default: 0
+  _songs: [ type: Schema.Types.ObjectId, ref: 'Song' ]
+  _year: type: Schema.Types.ObjectId, ref: 'Year'
 
 Show = mongoose.model 'Show', showSchema
