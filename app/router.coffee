@@ -3,12 +3,13 @@ class App.Router extends Backbone.Router
     '': 'index'
     'login': 'login'
     'register': 'register'
-    'year/:id': 'year'
-    'show/:id': 'show'
-    'song/:id': 'song'
     # Last route should catch all
-    ':notFound': 'notFound'
+    #':notFound': 'notFound'
   initialize: ->
+    @route /^([0-9]{4})\/?$/, 'year'
+    @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'show'
+    @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'song'
+
     @$container = $('#page-container')
     @bind 'all', @_trackPageview
   index: ->
@@ -17,18 +18,18 @@ class App.Router extends Backbone.Router
     App.years = new App.Views.Years()
     App.shows = new App.Views.Shows()
     App.songs = new App.Views.Songs()
-  year: (id) ->
+  year: (year) ->
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
-    App.shows = new App.Views.Shows folder: id
+    App.shows = new App.Views.Shows { year }
     App.songs.$el.empty()
-  show: (id) ->
+  show: (year, month, day) ->
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
-      App.shows = new App.Views.Shows folder: id
-    App.songs = new App.Views.Songs folder: id
+      App.shows = new App.Views.Shows { year }
+    App.songs = new App.Views.Songs { year, month, day }
   login: ->
     @changeView(new App.Views.LoginPage())
   song: (id) ->

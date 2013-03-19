@@ -3,6 +3,9 @@ router = new express.Router()
 
 mongoose = require 'mongoose'
 User = mongoose.model 'User'
+Year = mongoose.model 'Year'
+Song = mongoose.model 'Song'
+Show = mongoose.model 'Show'
 
 { _ } = require 'underscore'
 
@@ -17,6 +20,27 @@ subsonic = new Subsonic
 
 # Everything added under this router will be prefaced by /api/v1
 # You can change this path in your index.coffee middleware
+
+router.get /^\/([0-9]{4})\/?$/, (req, res) ->
+  Show.find year: +req.params[0], (err, shows) ->
+    res.json shows
+
+router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, (req, res) ->
+  Song.find
+    year: +req.params[0]
+    month: +req.params[1]
+    day: +req.params[2]
+  , (err, songs) ->
+    res.json songs
+
+router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, (req, res) ->
+  Song.findOne
+    year: +req.params[0]
+    month: +req.params[1]
+    day: +req.params[2]
+    number: +req.params[3]
+  , (err, song) ->
+    res.json song
 
 router.get '/me', (req, res) ->
   User
@@ -36,7 +60,7 @@ router.get '/folder/:id', (req, res) ->
     res.json folder
 
 router.get '/song/:id', (req, res) ->
-  subsonic.createShare req.params.id, (err, song) ->
+  subsonic.song req.params.id, (err, song) ->
     res.json song
 
 module.exports = router

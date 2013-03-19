@@ -176,9 +176,9 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n  <li>\n    <a href=\"/year/";
-  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += "\n  <li>\n    <a href=\"/";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
@@ -306,14 +306,13 @@ App.Router = (function(_super) {
   Router.prototype.routes = {
     '': 'index',
     'login': 'login',
-    'register': 'register',
-    'year/:id': 'year',
-    'show/:id': 'show',
-    'song/:id': 'song',
-    ':notFound': 'notFound'
+    'register': 'register'
   };
 
   Router.prototype.initialize = function() {
+    this.route(/^([0-9]{4})\/?$/, 'year');
+    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'show');
+    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'song');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
   };
@@ -334,27 +333,29 @@ App.Router = (function(_super) {
     return App.songs = new App.Views.Songs();
   };
 
-  Router.prototype.year = function(id) {
+  Router.prototype.year = function(year) {
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
     }
     App.shows = new App.Views.Shows({
-      folder: id
+      year: year
     });
     return App.songs.$el.empty();
   };
 
-  Router.prototype.show = function(id) {
+  Router.prototype.show = function(year, month, day) {
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
       App.shows = new App.Views.Shows({
-        folder: id
+        year: year
       });
     }
     return App.songs = new App.Views.Songs({
-      folder: id
+      year: year,
+      month: month,
+      day: day
     });
   };
 
@@ -634,6 +635,80 @@ App.Models.Player = (function(_super) {
   };
 
   return Player;
+
+})(App.Models.Model);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Models.Shows = (function(_super) {
+  __extends(Shows, _super);
+
+  function Shows() {
+    _ref = Shows.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Shows.prototype.url = function() {
+    var year;
+
+    year = this.get('year');
+    return "/api/v1/" + year;
+  };
+
+  return Shows;
+
+})(App.Models.Model);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Models.Song = (function(_super) {
+  __extends(Song, _super);
+
+  function Song() {
+    _ref = Song.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Song.prototype.url = function() {
+    var day, month, number, year;
+
+    year = this.get('year');
+    month = this.get('month');
+    day = this.get('day');
+    number = this.get('number');
+    return "/api/v1/" + year + "/" + month + "/" + day + "/" + number;
+  };
+
+  return Song;
+
+})(App.Models.Model);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Models.Songs = (function(_super) {
+  __extends(Songs, _super);
+
+  function Songs() {
+    _ref = Songs.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Songs.prototype.url = function() {
+    var day, month, year;
+
+    year = this.get('year');
+    month = this.get('month');
+    day = this.get('day');
+    return "/api/v1/" + year + "/" + month + "/" + day;
+  };
+
+  return Songs;
 
 })(App.Models.Model);
 
@@ -1201,8 +1276,8 @@ App.Views.Shows = (function(_super) {
     if (!this.options.folder) {
       return this.render();
     }
-    this.folder = new App.Models.Folder({
-      id: this.options.folder
+    this.folder = new App.Models.Year({
+      year: this.options.year
     });
     this.listenTo(this.folder, 'change', this.render);
     return this.folder.fetch();
@@ -1240,8 +1315,10 @@ App.Views.Songs = (function(_super) {
     if (!this.options.folder) {
       return this.render();
     }
-    App.songsFolder = this.folder = new App.Models.Folder({
-      id: this.options.folder
+    App.songsFolder = this.folder = new App.Models.Show({
+      year: this.options.year,
+      month: this.options.month,
+      day: this.options.day
     });
     this.listenTo(this.folder, 'change', this.render);
     return this.folder.fetch();
@@ -1271,25 +1348,16 @@ App.Views.Years = (function(_super) {
     return _ref;
   }
 
+  Years.prototype.autoRender = true;
+
   Years.prototype.el = '.years-container';
 
   Years.prototype.template = JST['years'];
 
-  Years.prototype.initialize = function() {
-    if (!this.options.folder) {
-      return this.render();
-    }
-    this.folder = new App.Models.Folder({
-      id: this.options.folder
-    });
-    this.listenTo(this.folder, 'change', this.render);
-    return this.folder.fetch();
-  };
-
   Years.prototype.render = function() {
     App.router.clearActive();
     this.$el.html(this.template({
-      years: this.folder ? this.folder.toJSON() : years
+      years: years
     }));
     return this;
   };

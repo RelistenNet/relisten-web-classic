@@ -1,10 +1,10 @@
 #!/usr/bin/env coffee
 program = require 'commander'
 async = require 'async'
+fs = require 'fs'
 extractDate = require './extract_date'
 
 mongoose = require 'mongoose'
-Schema = mongoose.Schema
 
 nconf = require 'nconf'
 Subsonic = require 'subsonic'
@@ -17,79 +17,25 @@ nconf.argv()
 
 mongoose.connect nconf.get('GHOST_URI')
 
+# Bootstrap models
+modelsPath = __dirname + '/../../server/models'
+fs.readdirSync(modelsPath).forEach (file) ->
+  require "#{modelsPath}/#{file}"
+
 subsonic = new Subsonic
   username: nconf.get('USERNAME')
   password: nconf.get('PASSWORD')
   application: 'spreadsheet'
   server: nconf.get('SERVER')
 
-## Schemas
-songSchema = new Schema
-  genre: String
-  albumId: Number
-  album: String
-  track: Number
-  parent: Number
-  contentType: String
-  isDir: Boolean
-  type: String
-  suffix: String
-  isVideo: Boolean
-  size: Number
-  transcodedSuffix: String
-  id: Number
-  transcodedContentType: String
-  title: String
-  duration: Number
-  artistId: Number
-  created: String
-  path: String
-  year: Number
-  artist: String
-  bitRate: Number
-
-setSchema = new Schema
-  number: String
-  songs: [songSchema]
-
-setlistSchema = new Schema
-  year: Number
-  month: Number
-  day: Number
-  venue: String
-  showid: Number
-  notes: String
-  footnotes: String
-  city: String
-  state: String
-  country: String
-  setlist: [setSchema]
-
-showSchema = new Schema
-  month: Number
-  day: Number
-  year: Number
-  id: Number
-  title: String
-  album: String
-  parent: Number
-  artist: String
-  coverArt: Number
-
-yearSchema = new Schema
-  title: String
-  id: Number
-  parent: Number
-  shows: [showSchema]
-
-Year = mongoose.model 'Year', yearSchema
-Show = mongoose.model 'Show', showSchema
-Song = mongoose.model 'Song', songSchema
-Setlist = mongoose.model 'Setlist', setlistSchema
+Year = mongoose.model 'Year'
+Show = mongoose.model 'Show'
+Song = mongoose.model 'Song'
 
 getYears = (id = 32) ->
   subsonic.folder id, (err, folder) ->
     for f in folder.children
+      f.year = parseInt f.title if parseInt f.title
       year = new Year f
       console.log f.title
       year.save()
