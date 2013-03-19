@@ -5465,7 +5465,7 @@ footer ul li{height:100%;list-style-type:none;margin:0;padding:0;float:left;}
 footer ul li a{color:#eee}
 
 .home-page{color:#333;height:100%;}
-.home-page .row-fluid{width:100%;height:64%;}
+.home-page .row-fluid{width:100%;height:75%;}
 .home-page .row-fluid .span4{height:100%;max-width:33%;position:relative;overflow-y:auto;overflow-x:hidden;}
 .home-page .row-fluid .span4 div.ul-header{position:absolute;color:#333;z-index:98;font-size:1.33em;text-shadow:0 1px 0 #fff;font-weight:600;text-align:center;line-height:1em;padding:1em 0 1em 0;width:99%;border:1px solid #aaa;border-top:0;background-color:#f6f6f6;-o-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;-webkit-box-shadow:0 4px 3px -2px rgba(61,61,61,0.4);-webkit-box-shadow:0 4px 3px -2px rgba(61,61,61,0.4);box-shadow:0 4px 3px -2px rgba(61,61,61,0.4)}
 .home-page .row-fluid .span4 ul{overflow-x:hidden;background-color:#f6f6f6;margin:0 2% 0 2%;top:53px;bottom:50px;width:95%;position:absolute;border-left:1px solid #aaa;border-right:1px solid #aaa;border-bottom:1px solid #aaa;}
@@ -5498,4 +5498,6 @@ footer ul li a{color:#eee}
 .login-page form .forbutton,.register-page form .forbutton{text-align:center}
 .login-page form input[type=submit],.register-page form input[type=submit]{height:50px;width:100px;margin:0;background:#c9c9c9}
 
-.player-container{position:fixed;height:100px;width:100%;bottom:0;left:0}
+.player-container{position:fixed;height:80px;width:100%;bottom:0;left:0;}
+.player-container h3.title{position:absolute;top:0;left:20px;line-height:.5em;color:#333}
+.player-container h4.album{position:absolute;top:20px;left:20px;line-height:.5em;color:#333}

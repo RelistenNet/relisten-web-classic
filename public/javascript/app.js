@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=controls></div>\n</div>\n";
+  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=progress></div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -279,6 +279,7 @@ App.Router = (function(_super) {
     'register': 'register',
     'year/:id': 'year',
     'show/:id': 'show',
+    'song/:id': 'song',
     ':notFound': 'notFound'
   };
 
@@ -308,6 +309,10 @@ App.Router = (function(_super) {
 
   Router.prototype.login = function() {
     return this.changeView(new App.Views.LoginPage());
+  };
+
+  Router.prototype.song = function(id) {
+    return App.player.play(id);
   };
 
   Router.prototype.register = function() {
@@ -864,6 +869,13 @@ App.Views.Player = (function(_super) {
 
   Player.prototype.template = JST['player'];
 
+  Player.prototype.events = {
+    'click .pause': 'pause',
+    'click .play': 'playButton',
+    'click .next': 'playNext',
+    'click .last': 'last'
+  };
+
   Player.prototype.initialize = function() {
     var _this = this;
 
@@ -880,13 +892,40 @@ App.Views.Player = (function(_super) {
     return this.$el.html(this.template());
   };
 
-  Player.prototype.play = function() {
-    return soundManager.createSound({
-      id: 'myMp3',
-      url: 'http://74.104.117.66:8044/stream?player=74&id=35787',
+  Player.prototype.play = function(id) {
+    var _this = this;
+
+    if (App.currentlyPlaying) {
+      soundManager.stop(App.currentlyPlaying);
+    }
+    App.currentlyPlaying = id;
+    soundManager.createSound({
+      id: "" + id,
+      url: "http://74.104.117.66:8044/stream?player=74&id=" + id,
       autoLoad: true,
       autoPlay: true
     });
+    return $.getJSON("/api/v1/song/" + id, function(song) {
+      _this.$el.find('h3').html(song.entry.title);
+      return _this.$el.find('h4').html(song.entry.album);
+    });
+  };
+
+  Player.prototype.pause = function() {
+    return soundManager.pause(App.currentlyPlaying);
+  };
+
+  Player.prototype.playButton = function() {
+    return soundManager.play(App.currentlyPlaying);
+  };
+
+  Player.prototype.playNext = function() {
+    console.log(App.currentlyPlaying);
+    return this.play(+App.currentlyPlaying + 1);
+  };
+
+  Player.prototype.last = function() {
+    return this.play(+App.currentlyPlaying - 1);
   };
 
   return Player;
@@ -1027,15 +1066,14 @@ App.Views.Songs = (function(_super) {
   Songs.prototype.template = JST['songs'];
 
   Songs.prototype.initialize = function() {
-    if (this.options.folder) {
-      this.folder = new App.Models.Folder({
-        id: this.options.folder
-      });
-      this.listenTo(this.folder, 'change', this.render);
-      return this.folder.fetch();
-    } else {
+    if (!this.options.folder) {
       return this.render();
     }
+    this.folder = new App.Models.Folder({
+      id: this.options.folder
+    });
+    this.listenTo(this.folder, 'change', this.render);
+    return this.folder.fetch();
   };
 
   Songs.prototype.render = function() {
@@ -1067,15 +1105,14 @@ App.Views.Years = (function(_super) {
   Years.prototype.template = JST['years'];
 
   Years.prototype.initialize = function() {
-    if (this.options.folder) {
-      this.folder = new App.Models.Folder({
-        id: this.options.folder
-      });
-      this.listenTo(this.folder, 'change', this.render);
-      return this.folder.fetch();
-    } else {
+    if (!this.options.folder) {
       return this.render();
     }
+    this.folder = new App.Models.Folder({
+      id: this.options.folder
+    });
+    this.listenTo(this.folder, 'change', this.render);
+    return this.folder.fetch();
   };
 
   Years.prototype.render = function() {

@@ -35,4 +35,8 @@ router.get '/folder/:id', (req, res) ->
   subsonic.folder req.params.id, (err, folder) ->
     res.json folder
 
+router.get '/song/:id', (req, res) ->
+  subsonic.createShare req.params.id, (err, song) ->
+    res.json song
+
 module.exports = router
