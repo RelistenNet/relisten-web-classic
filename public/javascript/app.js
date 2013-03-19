@@ -251,6 +251,7 @@ Application = (function() {
     if (window.csrf) {
       App.csrf = csrf;
     }
+    App.initial = true;
     this.initViews();
     App.router = new App.Router();
     Backbone.history.start({
@@ -317,19 +318,40 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.index = function() {
+    var n, _i, _len, _ref1;
+
     this.changeView(new App.Views.HomePage());
+    if (App[n]) {
+      _ref1 = ['shows', 'songs'];
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        n = _ref1[_i];
+        App[n].close();
+      }
+    }
     App.years = new App.Views.Years();
     App.shows = new App.Views.Shows();
     return App.songs = new App.Views.Songs();
   };
 
   Router.prototype.year = function(id) {
-    return App.shows = new App.Views.Shows({
+    if (App.initial) {
+      this.changeView(new App.Views.HomePage());
+      App.years = new App.Views.Years();
+    }
+    App.shows = new App.Views.Shows({
       folder: id
     });
+    return App.songs.$el.empty();
   };
 
   Router.prototype.show = function(id) {
+    if (App.initial) {
+      this.changeView(new App.Views.HomePage());
+      App.years = new App.Views.Years();
+      App.shows = new App.Views.Shows({
+        folder: id
+      });
+    }
     return App.songs = new App.Views.Songs({
       folder: id
     });
@@ -378,6 +400,7 @@ App.Router = (function(_super) {
   Router.prototype._trackPageview = function() {
     var url;
 
+    App.initial = false;
     url = Backbone.history.getFragment();
     return _gaq.push(['_trackPageview', "/" + url]);
   };

@@ -13,13 +13,21 @@ class App.Router extends Backbone.Router
     @bind 'all', @_trackPageview
   index: ->
     @changeView(new App.Views.HomePage())
+    App[n].close() for n in ['shows', 'songs'] if App[n]
     App.years = new App.Views.Years()
     App.shows = new App.Views.Shows()
     App.songs = new App.Views.Songs()
   year: (id) ->
+    if App.initial
+      @changeView(new App.Views.HomePage())
+      App.years = new App.Views.Years()
     App.shows = new App.Views.Shows folder: id
-    #App.songs.close() if App.songs
+    App.songs.$el.empty()
   show: (id) ->
+    if App.initial
+      @changeView(new App.Views.HomePage())
+      App.years = new App.Views.Years()
+      App.shows = new App.Views.Shows folder: id
     App.songs = new App.Views.Songs folder: id
   login: ->
     @changeView(new App.Views.LoginPage())
@@ -43,5 +51,6 @@ class App.Router extends Backbone.Router
   notFound: ->
     @navigate '/', trigger: true
   _trackPageview: ->
+    App.initial = false
     url = Backbone.history.getFragment()
     _gaq.push(['_trackPageview', "/#{url}"])

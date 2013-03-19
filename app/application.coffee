@@ -6,6 +6,7 @@ class Application
   initialize: ->
     App.user = new App.Models.User(user)
     App.csrf = csrf if window.csrf
+    App.initial = true
     @initViews()
 
     # Register all routes and start routing

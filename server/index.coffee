@@ -13,7 +13,6 @@ nconf.argv()
   .defaults
     GHOST_URI: 'mongodb://localhost/ghost'
 
-console.log nconf.get('GHOST_URI')
 mongoose.connect nconf.get('GHOST_URI'), (err) ->
   throw err if err
   console.log 'Connected to database'
@@ -48,10 +47,10 @@ app.configure ->
     secret: 'this is your call, buddy'
   app.use (req, res, next) ->
     # Only use CSRF if user is logged in
-    if req.session.userId
-      csrf req, res, next
-    else
-      next()
+    #if req.session.userId
+    #  csrf req, res, next
+    #else
+    next()
   app.use app.router
   app.use require('./routes/user').middleware
   app.use '/api/v1', require('./routes/api').middleware
