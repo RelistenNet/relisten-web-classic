@@ -7,7 +7,6 @@ class App.Models.Player extends App.Models.Model
     @sound = soundManager.createSound
       id: "#{id}"
       url: "http://74.104.117.66:8044/stream?player=74&id=#{id}"
-    @updateText()
     @sound.play
       whileloading: ->
         App.playerView.updateProgress @bytesLoaded, @bytesTotal
@@ -16,11 +15,13 @@ class App.Models.Player extends App.Models.Model
         unless @loaded
           App.playerView.updateText
             duration: @duration
+    @updateText()
 
   updateText: ->
     id = @get 'id'
-    if id and App.songsFolder
-      song = _.findWhere App.songsFolder.get('children'), { id: +id }
+    if id
+      children = if App.songsFolder then App.songsFolder.get('children') else songs.children
+      song = _.findWhere children, { id: +id }
       App.playerView.updateText
         title: song.title
         album: song.album

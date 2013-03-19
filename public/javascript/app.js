@@ -597,8 +597,7 @@ App.Models.Player = (function(_super) {
       id: "" + id,
       url: "http://74.104.117.66:8044/stream?player=74&id=" + id
     });
-    this.updateText();
-    return this.sound.play({
+    this.sound.play({
       whileloading: function() {
         return App.playerView.updateProgress(this.bytesLoaded, this.bytesTotal);
       },
@@ -611,14 +610,16 @@ App.Models.Player = (function(_super) {
         }
       }
     });
+    return this.updateText();
   };
 
   Player.prototype.updateText = function() {
-    var id, song;
+    var children, id, song;
 
     id = this.get('id');
-    if (id && App.songsFolder) {
-      song = _.findWhere(App.songsFolder.get('children'), {
+    if (id) {
+      children = App.songsFolder ? App.songsFolder.get('children') : songs.children;
+      song = _.findWhere(children, {
         id: +id
       });
       return App.playerView.updateText({
