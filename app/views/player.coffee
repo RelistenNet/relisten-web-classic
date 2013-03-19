@@ -7,6 +7,7 @@ class App.Views.Player extends App.Views.View
     'click .play': 'playButton'
     'click .next': 'playNext'
     'click .last': 'last'
+    'click .progress-bar': 'seek'
   initialize: ->
     soundManager.setup
       url: "/swf"
@@ -17,6 +18,7 @@ class App.Views.Player extends App.Views.View
     @$el.html @template()
     App.player.updateText()
     @$progress = @$el.find '.progress-bar'
+    @$position = @$el.find '.position-bar'
   updateText: (title, album) ->
     @$el.find('h3').html title
     @$el.find('h4').html album
@@ -32,3 +34,9 @@ class App.Views.Player extends App.Views.View
     App.player.play +App.player.get('id') - 1
   updateProgress: (loaded, total) ->
     @$progress.width "#{(loaded/total)*100}%"
+  updatePlaying: (position, duration) ->
+    @$position.css 'left', "#{(position/duration)*100}%"
+  seek: (e) ->
+    coord = e.pageX / $(window).width()
+    estimate = App.player.sound.durationEstimate
+    App.player.sound.setPosition coord * estimate

@@ -5501,4 +5501,5 @@ footer ul li a{color:#eee}
 .player-container{position:fixed;height:80px;width:100%;bottom:0;left:0;}
 .player-container h3.title{position:absolute;top:0;left:20px;line-height:.5em;color:#333}
 .player-container h4.album{position:absolute;top:20px;left:20px;line-height:.5em;color:#333}
-.player-container .progress-bar{height:3px;width:1%;background:#000;position:fixed;bottom:0;left:0}
+.player-container .progress-bar{height:5px;width:1%;background:#000;position:fixed;bottom:0;left:0}
+.player-container .position-bar{width:2px;height:7px;background:#fff;position:fixed;left:0%;bottom:0}

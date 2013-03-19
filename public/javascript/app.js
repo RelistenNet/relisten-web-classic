@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=progress-bar></div>\n  </div>\n</div>\n";
+  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -557,6 +557,9 @@ App.Models.Player = (function(_super) {
     this.sound.play({
       whileloading: function() {
         return App.playerView.updateProgress(this.bytesLoaded, this.bytesTotal);
+      },
+      whileplaying: function() {
+        return App.playerView.updatePlaying(this.position, this.duration);
       }
     });
     return App.player.updateText();
@@ -954,7 +957,8 @@ App.Views.Player = (function(_super) {
     'click .pause': 'pause',
     'click .play': 'playButton',
     'click .next': 'playNext',
-    'click .last': 'last'
+    'click .last': 'last',
+    'click .progress-bar': 'seek'
   };
 
   Player.prototype.initialize = function() {
@@ -972,7 +976,8 @@ App.Views.Player = (function(_super) {
   Player.prototype.render = function() {
     this.$el.html(this.template());
     App.player.updateText();
-    return this.$progress = this.$el.find('.progress-bar');
+    this.$progress = this.$el.find('.progress-bar');
+    return this.$position = this.$el.find('.position-bar');
   };
 
   Player.prototype.updateText = function(title, album) {
@@ -1004,6 +1009,18 @@ App.Views.Player = (function(_super) {
 
   Player.prototype.updateProgress = function(loaded, total) {
     return this.$progress.width("" + ((loaded / total) * 100) + "%");
+  };
+
+  Player.prototype.updatePlaying = function(position, duration) {
+    return this.$position.css('left', "" + ((position / duration) * 100) + "%");
+  };
+
+  Player.prototype.seek = function(e) {
+    var coord, estimate;
+
+    coord = e.pageX / $(window).width();
+    estimate = App.player.sound.durationEstimate;
+    return App.player.sound.setPosition(coord * estimate);
   };
 
   return Player;

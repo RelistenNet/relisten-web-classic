@@ -10,6 +10,8 @@ class App.Models.Player extends App.Models.Model
     @sound.play
       whileloading: ->
         App.playerView.updateProgress @bytesLoaded, @bytesTotal
+      whileplaying: ->
+        App.playerView.updatePlaying @position, @duration
     App.player.updateText()
   updateText: ->
     id = @get 'id'
