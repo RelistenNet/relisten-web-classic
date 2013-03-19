@@ -25,5 +25,6 @@ toHHMMSS = (seconds) ->
   hours = "0" + hours  if hours < 10
   minutes = "0" + minutes  if minutes < 10
   seconds = "0" + seconds  if seconds < 10
-  time = hours + ":" + minutes + ":" + seconds
+  hourStr = if hours isnt "00" then hours + ":" else ""
+  time = hourStr + minutes + ":" + seconds
   time

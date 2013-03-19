@@ -44,21 +44,6 @@ router.get '/', (req, res, next) ->
           shows: folders[1]
           songs: folders[2]
 
-router.post '/', (req, res) ->
-  console.log req
-  res.send 200, """
-  <html>
-
-  <head>
-      <meta http-equiv="refresh" content="0;URL=index.view">
-  </head>
-
-  <body>
-  </body>
-
-  </html>
-  """
-
 router.get '/rest/*', (req, res) ->
   res.redirect 'http://74.104.117.66:8044' + req._parsedUrl.path
 

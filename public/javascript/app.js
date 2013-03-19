@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00:00</div>/<div class=total></div>\n    </div>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
+  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>fish</div>/<div class=total>man</div>\n    </div>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -220,7 +220,7 @@ resize = function() {
 };
 
 toHHMMSS = function(seconds) {
-  var hours, minutes, sec_numb, time;
+  var hourStr, hours, minutes, sec_numb, time;
 
   sec_numb = parseInt(seconds);
   hours = Math.floor(sec_numb / 3600);
@@ -235,7 +235,8 @@ toHHMMSS = function(seconds) {
   if (seconds < 10) {
     seconds = "0" + seconds;
   }
-  time = hours + ":" + minutes + ":" + seconds;
+  hourStr = hours !== "00" ? hours + ":" : "";
+  time = hourStr + minutes + ":" + seconds;
   return time;
 };
 
@@ -608,6 +609,9 @@ App.Models.Player = (function(_super) {
             duration: this.duration
           });
         }
+      },
+      onfinish: function() {
+        return App.playerView.playNext();
       }
     });
     return this.updateText();
@@ -1194,15 +1198,14 @@ App.Views.Shows = (function(_super) {
   Shows.prototype.template = JST['shows'];
 
   Shows.prototype.initialize = function() {
-    if (this.options.folder) {
-      this.folder = new App.Models.Folder({
-        id: this.options.folder
-      });
-      this.listenTo(this.folder, 'change', this.render);
-      return this.folder.fetch();
-    } else {
+    if (!this.options.folder) {
       return this.render();
     }
+    this.folder = new App.Models.Folder({
+      id: this.options.folder
+    });
+    this.listenTo(this.folder, 'change', this.render);
+    return this.folder.fetch();
   };
 
   Shows.prototype.render = function() {

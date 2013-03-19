@@ -13,8 +13,9 @@ class App.Models.Player extends App.Models.Model
       whileplaying: ->
         App.playerView.updatePlaying @position, @duration
         unless @loaded
-          App.playerView.updateText
-            duration: @duration
+          App.playerView.updateText { @duration }
+      onfinish: ->
+        App.playerView.playNext()
     @updateText()
 
   updateText: ->
