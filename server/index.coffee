@@ -6,9 +6,15 @@ mongoose = require 'mongoose'
 nconf = require 'nconf'
 csrf = express.csrf()
 PORT = process.env.PORT || 3000
-URI = 'mongodb://localhost/sneakingsally'
 
-mongoose.connect URI, (err) ->
+nconf.argv()
+  .env()
+  .file(__dirname + '/../config.json')
+  .defaults
+    GHOST_URI: 'mongodb://localhost/ghost'
+
+console.log nconf.get('GHOST_URI')
+mongoose.connect nconf.get('GHOST_URI'), (err) ->
   throw err if err
   console.log 'Connected to database'
 
@@ -16,10 +22,6 @@ mongoose.connect URI, (err) ->
 modelsPath = __dirname + '/models'
 fs.readdirSync(modelsPath).forEach (file) ->
   require "#{modelsPath}/#{file}"
-
-nconf.argv()
-  .env()
-  .file(__dirname + '/../config.json')
 
 # Remove this and app.use forceSSL below if you do not want SSL enabled
 forceSSL = (req, res, next) ->

@@ -2,7 +2,7 @@
   "author": "Daniel Saewitz",
   "name": "ghost",
   "description": "Backbone + Express + Coffee + Mongo",
-  "version": "0.0.1",
+  "version": "0.0.1-6",
   "engines": {
     "node": "0.8.x"
   },
@@ -64,7 +64,7 @@
       ]
     }
   },
-  "subdomain": "ghost",
+  "subdomain": "ghostbar",
   "readmeFilename": "README.md",
   "gitHead": "54ebb3e322fd7c2e240852c35d4e9c01c8b75749",
   "main": "server.js",
