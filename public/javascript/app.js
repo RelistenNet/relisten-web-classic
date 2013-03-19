@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
+  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=seconds>00:00:00</div>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -194,7 +194,7 @@ function program1(depth0,data) {
   buffer += "\n</ul>";
   return buffer;
   });
-var resize;
+var resize, toHHMMSS;
 
 window.App = {
   "Models": {},
@@ -217,6 +217,26 @@ $(function() {
 
 resize = function() {
   return $('.home-page .row-fluid').height($(window).height() - 100);
+};
+
+toHHMMSS = function(seconds) {
+  var hours, minutes, sec_numb, time;
+
+  sec_numb = parseInt(seconds);
+  hours = Math.floor(sec_numb / 3600);
+  minutes = Math.floor((sec_numb - (hours * 3600)) / 60);
+  seconds = sec_numb - (hours * 3600) - (minutes * 60);
+  if (hours < 10) {
+    hours = "0" + hours;
+  }
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  time = hours + ":" + minutes + ":" + seconds;
+  return time;
 };
 
 var Application;
@@ -958,7 +978,7 @@ App.Views.Player = (function(_super) {
     'click .play': 'playButton',
     'click .next': 'playNext',
     'click .last': 'last',
-    'click .progress-bar': 'seek'
+    'click': 'seek'
   };
 
   Player.prototype.initialize = function() {
@@ -977,7 +997,8 @@ App.Views.Player = (function(_super) {
     this.$el.html(this.template());
     App.player.updateText();
     this.$progress = this.$el.find('.progress-bar');
-    return this.$position = this.$el.find('.position-bar');
+    this.$position = this.$el.find('.position-bar');
+    return this.$seconds = this.$el.find('.seconds');
   };
 
   Player.prototype.updateText = function(title, album) {
@@ -1012,15 +1033,19 @@ App.Views.Player = (function(_super) {
   };
 
   Player.prototype.updatePlaying = function(position, duration) {
+    this.duration = duration;
+    this.$seconds.html(toHHMMSS(position / 1000));
     return this.$position.css('left', "" + ((position / duration) * 100) + "%");
   };
 
   Player.prototype.seek = function(e) {
-    var coord, estimate;
+    var coord;
 
     coord = e.pageX / $(window).width();
-    estimate = App.player.sound.durationEstimate;
-    return App.player.sound.setPosition(coord * estimate);
+    if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
+      return;
+    }
+    return App.player.sound.setPosition(coord * this.duration);
   };
 
   return Player;

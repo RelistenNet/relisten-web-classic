@@ -64,17 +64,12 @@
       ]
     }
   },
-  "subdomain": "tweezer",
-  "domains": [
-    "tweezer.io",
-    "www.tweezer.io"
-  ],
+  "subdomain": "ghost",
   "readmeFilename": "README.md",
   "gitHead": "54ebb3e322fd7c2e240852c35d4e9c01c8b75749",
   "main": "server.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/switz/ghost.git"
-  },
-  "license": "BSD"
+  }
 }
