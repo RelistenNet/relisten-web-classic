@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=progress></div>\n  </div>\n</div>\n";
+  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=progress-bar></div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -194,6 +194,8 @@ function program1(depth0,data) {
   buffer += "\n</ul>";
   return buffer;
   });
+var resize;
+
 window.App = {
   "Models": {},
   "Collections": {},
@@ -209,8 +211,13 @@ $(function() {
   $.getJSON('/api/v1/me/csrf', function(data) {
     return App.csrf = data.csrf;
   });
-  return Tweezer = new Application().initialize();
+  Tweezer = new Application().initialize();
+  return $(window).resize(resize);
 });
+
+resize = function() {
+  return $('.home-page .row-fluid').height($(window).height() - 100);
+};
 
 var Application;
 
@@ -236,7 +243,8 @@ Application = (function() {
     App.notify = new App.Views.Notifications();
     this.header = new App.Views.Header();
     this.footer = new App.Views.Footer();
-    return App.player = new App.Views.Player();
+    App.player = new App.Models.Player();
+    return App.playerView = new App.Views.Player();
   };
 
   Application.prototype.pushAnchors = function() {
@@ -526,6 +534,54 @@ var _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+App.Models.Player = (function(_super) {
+  __extends(Player, _super);
+
+  function Player() {
+    _ref = Player.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Player.prototype.localStorage = new Backbone.LocalStorage("NowPlaying");
+
+  Player.prototype.play = function(id) {
+    if (this.get('id')) {
+      soundManager.stop(this.get('id'));
+    }
+    this.set('id', id);
+    App.playerView.played.push(id);
+    this.sound = soundManager.createSound({
+      id: "" + id,
+      url: "http://74.104.117.66:8044/stream?player=74&id=" + id
+    });
+    this.sound.play({
+      whileloading: function() {
+        return App.playerView.updateProgress(this.bytesLoaded, this.bytesTotal);
+      }
+    });
+    return App.player.updateText();
+  };
+
+  Player.prototype.updateText = function() {
+    var id,
+      _this = this;
+
+    id = this.get('id');
+    if (id) {
+      return $.getJSON("/api/v1/song/" + id, function(song) {
+        return App.playerView.updateText(song.entry.title, song.entry.album);
+      });
+    }
+  };
+
+  return Player;
+
+})(App.Models.Model);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
 App.Models.User = (function(_super) {
   __extends(User, _super);
 
@@ -584,6 +640,26 @@ App.Collections.Folder = (function(_super) {
 
   Folder.prototype.initialize = function() {
     return this.add(phish);
+  };
+
+  return Folder;
+
+})(App.Collections.Collection);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Collections.Folder = (function(_super) {
+  __extends(Folder, _super);
+
+  function Folder() {
+    _ref = Folder.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Folder.prototype.url = function() {
+    return '/api/v1/folder/' + this.get('id');
   };
 
   return Folder;
@@ -700,6 +776,9 @@ App.Views.HomePage = (function(_super) {
     this.$el.html(this.template({
       loggedIn: App.user.loggedIn()
     }));
+    _.defer(function() {
+      return resize();
+    });
     return this;
   };
 
@@ -869,6 +948,8 @@ App.Views.Player = (function(_super) {
 
   Player.prototype.template = JST['player'];
 
+  Player.prototype.played = [];
+
   Player.prototype.events = {
     'click .pause': 'pause',
     'click .play': 'playButton',
@@ -889,43 +970,40 @@ App.Views.Player = (function(_super) {
   };
 
   Player.prototype.render = function() {
-    return this.$el.html(this.template());
+    this.$el.html(this.template());
+    App.player.updateText();
+    return this.$progress = this.$el.find('.progress-bar');
   };
 
-  Player.prototype.play = function(id) {
-    var _this = this;
-
-    if (App.currentlyPlaying) {
-      soundManager.stop(App.currentlyPlaying);
-    }
-    App.currentlyPlaying = id;
-    soundManager.createSound({
-      id: "" + id,
-      url: "http://74.104.117.66:8044/stream?player=74&id=" + id,
-      autoLoad: true,
-      autoPlay: true
-    });
-    return $.getJSON("/api/v1/song/" + id, function(song) {
-      _this.$el.find('h3').html(song.entry.title);
-      return _this.$el.find('h4').html(song.entry.album);
-    });
+  Player.prototype.updateText = function(title, album) {
+    this.$el.find('h3').html(title);
+    return this.$el.find('h4').html(album);
   };
 
   Player.prototype.pause = function() {
-    return soundManager.pause(App.currentlyPlaying);
+    return soundManager.pause(App.player.get('id'));
   };
 
   Player.prototype.playButton = function() {
-    return soundManager.play(App.currentlyPlaying);
+    var id;
+
+    id = App.player.get('id');
+    if (this.played.indexOf(id >= 0)) {
+      return soundManager.resume(id);
+    }
+    return App.player.play(id);
   };
 
   Player.prototype.playNext = function() {
-    console.log(App.currentlyPlaying);
-    return this.play(+App.currentlyPlaying + 1);
+    return App.player.play(+App.player.get('id') + 1);
   };
 
   Player.prototype.last = function() {
-    return this.play(+App.currentlyPlaying - 1);
+    return App.player.play(+App.player.get('id') - 1);
+  };
+
+  Player.prototype.updateProgress = function(loaded, total) {
+    return this.$progress.width("" + ((loaded / total) * 100) + "%");
   };
 
   return Player;

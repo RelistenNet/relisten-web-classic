@@ -11,3 +11,8 @@ $ ->
     App.csrf = data.csrf
   # Initialize App
   Tweezer = new Application().initialize()
+
+  $(window).resize resize
+
+resize = ->
+  $('.home-page .row-fluid').height $(window).height() - 100

@@ -5459,7 +5459,7 @@ header ul.right li a:hover,header ul.right li a:visited:hover,header ul.right li
 header ul.right li a span,header ul.right li a:visited span{font-size:.7em}
 header ul.right li a.plus,header ul.right li a:visited.plus{line-height:.8em}
 
-footer{height:50px;width:100%;position:absolute;bottom:0;text-align:center;}
+footer{height:50px;width:100%;position:absolute;bottom:0;text-align:center;display:none;}
 footer ul{height:50px;width:50%;margin:auto;}
 footer ul li{height:100%;list-style-type:none;margin:0;padding:0;float:left;}
 footer ul li a{color:#eee}
@@ -5471,7 +5471,7 @@ footer ul li a{color:#eee}
 .home-page .row-fluid .span4 ul{overflow-x:hidden;background-color:#f6f6f6;margin:0 2% 0 2%;top:53px;bottom:50px;width:95%;position:absolute;border-left:1px solid #aaa;border-right:1px solid #aaa;border-bottom:1px solid #aaa;}
 .home-page .row-fluid .span4 ul li{list-style:none;border-bottom:1px solid #aaa;cursor:pointer;font-size:.9em;position:relative;}
 .home-page .row-fluid .span4 ul li.footnotes p{padding:10px 0 0 5px}
-.home-page .row-fluid .span4 ul li > a{color:#555;height:100%;width:auto;padding:5px 0 5px 5px;text-decoration:none;display:block;-o-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
+.home-page .row-fluid .span4 ul li > a{color:#333;height:100%;width:auto;padding:5px 0 5px 5px;text-decoration:none;display:block;-o-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
 .home-page .row-fluid .span4 ul li > a:hover{background:#e6e6e6}
 .home-page .row-fluid .span4 ul li > a.blue{color:asihtosblue}
 .home-page .row-fluid .span4 ul li > a.selected,.home-page .row-fluid .span4 ul li > a.true,.home-page .row-fluid .span4 ul li > a.truetrue{background:asihtosblue;color:#fff}
@@ -5501,3 +5501,4 @@ footer ul li a{color:#eee}
 .player-container{position:fixed;height:80px;width:100%;bottom:0;left:0;}
 .player-container h3.title{position:absolute;top:0;left:20px;line-height:.5em;color:#333}
 .player-container h4.album{position:absolute;top:20px;left:20px;line-height:.5em;color:#333}
+.player-container .progress-bar{height:3px;width:1%;background:#000;position:fixed;bottom:0;left:0}

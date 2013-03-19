@@ -47,7 +47,7 @@ module.exports = (grunt) ->
         dest: "public/javascript/app.js"
 
       vendor:
-        src: ["vendor/scripts/jquery-1.8.3.js", "vendor/scripts/underscore-1.4.3.js", "vendor/scripts/backbone-0.9.9.js", "vendor/scripts/handlebars.js", "vendor/scripts/handlebars-helpers.js", "vendor/scripts/console-helper.js", "vendor/scripts/jquery.serializeToJSON.js", "vendor/scripts/sound-manager2.js"]
+        src: ["vendor/scripts/jquery-1.8.3.js", "vendor/scripts/underscore-1.4.3.js", "vendor/scripts/backbone-0.9.9.js", "vendor/scripts/backbone.localStorage.js", "vendor/scripts/handlebars.js", "vendor/scripts/handlebars-helpers.js", "vendor/scripts/console-helper.js", "vendor/scripts/jquery.serializeToJSON.js", "vendor/scripts/sound-manager2.js"]
         dest: "public/javascript/vendor.js"
 
 
