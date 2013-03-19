@@ -20,9 +20,11 @@ class App.Views.Player extends App.Views.View
     @$progress = @$el.find '.progress-bar'
     @$position = @$el.find '.position-bar'
     @$seconds = @$el.find '.seconds'
-  updateText: (title, album) ->
-    @$el.find('h3').html title
-    @$el.find('h4').html album
+  updateText: (obj) ->
+    { title, album, duration } = obj
+    @$el.find('h3').html title if title
+    @$el.find('h4').html album if album
+    @$el.find('.total').html toHHMMSS(duration / 1000) if duration
   pause: ->
     soundManager.pause App.player.get('id')
   playButton: ->

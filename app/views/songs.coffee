@@ -4,7 +4,7 @@ class App.Views.Songs extends App.Views.View
   initialize: ->
     return @render() unless @options.folder
 
-    @folder = new App.Models.Folder id: @options.folder
+    App.songsFolder = @folder = new App.Models.Folder id: @options.folder
     @listenTo @folder, 'change', @render
     @folder.fetch()
   render: ->

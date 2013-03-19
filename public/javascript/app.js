@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=seconds>00:00:00</div>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
+  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00:00</div>/<div class=total></div>\n    </div>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -597,25 +597,33 @@ App.Models.Player = (function(_super) {
       id: "" + id,
       url: "http://74.104.117.66:8044/stream?player=74&id=" + id
     });
-    this.sound.play({
+    this.updateText();
+    return this.sound.play({
       whileloading: function() {
         return App.playerView.updateProgress(this.bytesLoaded, this.bytesTotal);
       },
       whileplaying: function() {
-        return App.playerView.updatePlaying(this.position, this.duration);
+        App.playerView.updatePlaying(this.position, this.duration);
+        if (!this.loaded) {
+          return App.playerView.updateText({
+            duration: this.duration
+          });
+        }
       }
     });
-    return App.player.updateText();
   };
 
   Player.prototype.updateText = function() {
-    var id,
-      _this = this;
+    var id, song;
 
     id = this.get('id');
-    if (id) {
-      return $.getJSON("/api/v1/song/" + id, function(song) {
-        return App.playerView.updateText(song.entry.title, song.entry.album);
+    if (id && App.songsFolder) {
+      song = _.findWhere(App.songsFolder.get('children'), {
+        id: +id
+      });
+      return App.playerView.updateText({
+        title: song.title,
+        album: song.album
       });
     }
   };
@@ -1024,9 +1032,19 @@ App.Views.Player = (function(_super) {
     return this.$seconds = this.$el.find('.seconds');
   };
 
-  Player.prototype.updateText = function(title, album) {
-    this.$el.find('h3').html(title);
-    return this.$el.find('h4').html(album);
+  Player.prototype.updateText = function(obj) {
+    var album, duration, title;
+
+    title = obj.title, album = obj.album, duration = obj.duration;
+    if (title) {
+      this.$el.find('h3').html(title);
+    }
+    if (album) {
+      this.$el.find('h4').html(album);
+    }
+    if (duration) {
+      return this.$el.find('.total').html(toHHMMSS(duration / 1000));
+    }
   };
 
   Player.prototype.pause = function() {
@@ -1218,7 +1236,7 @@ App.Views.Songs = (function(_super) {
     if (!this.options.folder) {
       return this.render();
     }
-    this.folder = new App.Models.Folder({
+    App.songsFolder = this.folder = new App.Models.Folder({
       id: this.options.folder
     });
     this.listenTo(this.folder, 'change', this.render);
