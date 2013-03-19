@@ -1048,7 +1048,13 @@ App.Views.Player = (function(_super) {
   };
 
   Player.prototype.last = function() {
-    return App.player.play(+App.player.get('id') - 1);
+    var id;
+
+    id = +App.player.get('id') - 1;
+    if (App.player.sound.position > 10000) {
+      id++;
+    }
+    return App.player.play(id);
   };
 
   Player.prototype.updateProgress = function(loaded, total) {
@@ -1065,7 +1071,7 @@ App.Views.Player = (function(_super) {
     var coord;
 
     coord = e.pageX / $(window).width();
-    if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
+    if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord || e.pageX < 14) {
       return;
     }
     return App.player.sound.setPosition(coord * this.duration);

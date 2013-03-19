@@ -32,7 +32,10 @@ class App.Views.Player extends App.Views.View
   playNext: ->
     App.player.play +App.player.get('id') + 1
   last: ->
-    App.player.play +App.player.get('id') - 1
+    id = +App.player.get('id') - 1
+    if App.player.sound.position > 10000
+      id++
+    App.player.play id
   updateProgress: (loaded, total) ->
     @$progress.width "#{(loaded/total)*100}%"
   updatePlaying: (position, duration) ->
@@ -41,5 +44,5 @@ class App.Views.Player extends App.Views.View
     @$position.css 'left', "#{(position/duration)*100}%"
   seek: (e) ->
     coord = e.pageX / $(window).width()
-    return if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord
+    return if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord || e.pageX < 14
     App.player.sound.setPosition coord * @duration
