@@ -12,22 +12,42 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 this["JST"]["header"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, self=this;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
+  var buffer = "", stack1;
+  buffer += "\n    <li><a class=\"header-link\" href=\"/logout\">LOGOUT</a></li>\n    ";
+  stack1 = helpers['if'].call(depth0, depth0.playlistId, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n  ";
+  return buffer;
+  }
+function program2(depth0,data) {
   
-  return "\n    <li><a class=\"header-link\" href=\"/logout\">LOGOUT</a></li>\n    <li><a class=\"header-link\" href=\"/playlists\">PLAYLISTS</a></li>\n  ";
+  var buffer = "", stack1;
+  buffer += "\n      <li><a class=\"header-link\" href=\"/playlists/edit/";
+  if (stack1 = helpers.playlistId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.playlistId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">DONE</a></li>\n      <li><input class=playlist-title /></li>\n    ";
+  return buffer;
   }
 
-function program3(depth0,data) {
+function program4(depth0,data) {
+  
+  
+  return "\n      <li><a class=\"header-link\" href=\"/playlists\">PLAYLISTS</a></li>\n    ";
+  }
+
+function program6(depth0,data) {
   
   
   return "\n    <li><a class=\"login header-link\" href=\"/login\">LOGIN</a></li>\n    <li><a class=\"register header-link\" href=\"/register\">REGISTER</a></li>\n  ";
   }
 
   buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\">Spreadsheet<span>.phish</span></a></li>\n</ul>\n\n<ul class=\"right\">\n  ";
-  stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.program(6, program6, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</ul>\n";
   return buffer;
@@ -94,6 +114,42 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 
 
   return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
+  });
+
+this["JST"]["playlists-edit"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n  ";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\n";
+  return buffer;
+  }
+
+  buffer += "test\n";
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  return buffer;
+  });
+
+this["JST"]["playlists"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<header>\n  <ul>\n    <li><a href=\"/playlists/new\">+new</a></li>\n  </ul>\n</header>\n";
+  if (stack1 = helpers.playlists) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.playlists; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\n";
+  return buffer;
   });
 
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -165,7 +221,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 
 function program1(depth0,data) {
   
-  var buffer = "", stack1, options;
+  var buffer = "", stack1, stack2, options;
   buffer += "\n  <li>\n    <a href=\"/";
   if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
@@ -193,7 +249,15 @@ function program1(depth0,data) {
     + " <span>";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.toHHMMSS),stack1 ? stack1.call(depth0, depth0.duration, options) : helperMissing.call(depth0, "toHHMMSS", depth0.duration, options)))
-    + "</span></a>\n  </li>\n";
+    + "</span></a>\n    <div data-id=";
+  if (stack2 = helpers._id) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0._id; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + " data-song=\"";
+  if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\" class=add>+</div>\n  </li>\n";
   return buffer;
   }
 function program2(depth0,data) {
@@ -332,7 +396,7 @@ Application = (function() {
 
   Application.prototype.initViews = function() {
     App.notify = new App.Views.Notifications();
-    this.header = new App.Views.Header();
+    App.header = new App.Views.Header();
     this.footer = new App.Views.Footer();
     App.player = new App.Models.Player();
     return App.playerView = new App.Views.Player();
@@ -375,7 +439,10 @@ App.Router = (function(_super) {
   Router.prototype.routes = {
     '': 'index',
     'login': 'login',
-    'register': 'register'
+    'register': 'register',
+    'playlists': 'playlists',
+    'playlists/new': 'newPlaylist',
+    'playlists/edit/:id': 'editPlaylist'
   };
 
   Router.prototype.initialize = function() {
@@ -391,7 +458,7 @@ App.Router = (function(_super) {
 
     this.changeView(new App.Views.HomePage());
     if (App[n]) {
-      _ref1 = ['shows', 'songs'];
+      _ref1 = ['years', 'shows', 'songs'];
       for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
         n = _ref1[_i];
         App[n].close();
@@ -462,6 +529,21 @@ App.Router = (function(_super) {
 
   Router.prototype.register = function() {
     return this.changeView(new App.Views.RegisterPage());
+  };
+
+  Router.prototype.playlists = function() {
+    return this.changeView(new App.Views.PlaylistsPage());
+  };
+
+  Router.prototype.newPlaylist = function() {
+    this.index();
+    return App.newPlaylist = new App.Views.NewPlaylist();
+  };
+
+  Router.prototype.editPlaylist = function(id) {
+    return this.changeView(new App.Views.PlaylistsEdit({
+      playlistId: id
+    }), false);
   };
 
   Router.prototype.clearActive = function($current) {
@@ -752,6 +834,35 @@ var _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+App.Models.Playlist = (function(_super) {
+  __extends(Playlist, _super);
+
+  function Playlist() {
+    _ref = Playlist.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Playlist.prototype.idAttribute = '_id';
+
+  Playlist.prototype.url = function() {
+    var id;
+
+    id = this.get('_id');
+    return '/api/v1/playlist' + (id ? "/" + id : '');
+  };
+
+  Playlist.prototype.defaults = {
+    _songs: []
+  };
+
+  return Playlist;
+
+})(App.Models.Model);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
 App.Models.Shows = (function(_super) {
   __extends(Shows, _super);
 
@@ -921,6 +1032,26 @@ var _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+App.Collections.Playlists = (function(_super) {
+  __extends(Playlists, _super);
+
+  function Playlists() {
+    _ref = Playlists.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Playlists.prototype.url = '/api/v1/playlists';
+
+  Playlists.prototype.model = App.Models.Playlist;
+
+  return Playlists;
+
+})(App.Collections.Collection);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
 App.Views.View = (function(_super) {
   __extends(View, _super);
 
@@ -973,6 +1104,7 @@ App.Views.Footer = (function(_super) {
 })(App.Views.View);
 
 var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -980,7 +1112,7 @@ App.Views.Header = (function(_super) {
   __extends(Header, _super);
 
   function Header() {
-    _ref = Header.__super__.constructor.apply(this, arguments);
+    this.render = __bind(this.render, this);    _ref = Header.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -994,9 +1126,12 @@ App.Views.Header = (function(_super) {
     return Header.__super__.initialize.apply(this, arguments);
   };
 
-  Header.prototype.render = function() {
+  Header.prototype.render = function(playlistId) {
+    var _ref1;
+
     return this.$el.html(this.template({
-      loggedIn: App.user.loggedIn()
+      loggedIn: App.user.loggedIn(),
+      playlistId: (_ref1 = App.playlist) != null ? _ref1.get('_id') : void 0
     }));
   };
 
@@ -1024,6 +1159,7 @@ App.Views.HomePage = (function(_super) {
   HomePage.prototype.render = function() {
     this.checkErr();
     App.router.clearActive();
+    App.header.render();
     this.$el.html(this.template({
       loggedIn: App.user.loggedIn()
     }));
@@ -1087,6 +1223,31 @@ App.Views.LoginPage = (function(_super) {
   };
 
   return LoginPage;
+
+})(App.Views.View);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.NewPlaylist = (function(_super) {
+  __extends(NewPlaylist, _super);
+
+  function NewPlaylist() {
+    _ref = NewPlaylist.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  NewPlaylist.prototype.initialize = function() {
+    App.playlist = new App.Models.Playlist({
+      name: 'Untitled Playlist'
+    });
+    App.playlist.save();
+    $('.home-page').addClass('new-playlist');
+    return this.listenTo(App.playlist, 'change', App.header.render);
+  };
+
+  return NewPlaylist;
 
 })(App.Views.View);
 
@@ -1331,6 +1492,79 @@ App.Views.Player = (function(_super) {
 
 })(App.Views.View);
 
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.PlaylistsEdit = (function(_super) {
+  __extends(PlaylistsEdit, _super);
+
+  function PlaylistsEdit() {
+    _ref = PlaylistsEdit.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  PlaylistsEdit.prototype.className = 'playlists-edit-page';
+
+  PlaylistsEdit.prototype.template = JST['playlists-edit'];
+
+  PlaylistsEdit.prototype.initialize = function() {
+    if (!(App.playlist && App.playlist.get('_id') === this.options.playlistId)) {
+      App.playlist = new App.Models.Playlist({
+        _id: this.options.playlistId
+      });
+      App.playlist.fetch();
+      return this.listenTo(App.playlist, 'change', this.render);
+    }
+    App.playlist.save();
+    return this.render();
+  };
+
+  PlaylistsEdit.prototype.render = function() {
+    this.$el.html(this.template({
+      playlist: App.playlist.toJSON()
+    }));
+    return this;
+  };
+
+  return PlaylistsEdit;
+
+})(App.Views.View);
+
+var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.PlaylistsPage = (function(_super) {
+  __extends(PlaylistsPage, _super);
+
+  function PlaylistsPage() {
+    this.render = __bind(this.render, this);    _ref = PlaylistsPage.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  PlaylistsPage.prototype.className = 'playlists-page';
+
+  PlaylistsPage.prototype.template = JST['playlists'];
+
+  PlaylistsPage.prototype.initialize = function() {
+    App.playlists = new App.Collections.Playlists();
+    App.playlists.fetch();
+    return this.listenTo(App.playlists, 'change', this.render);
+  };
+
+  PlaylistsPage.prototype.render = function() {
+    this.$el.html(this.template({
+      playlists: App.playlists.toJSON()
+    }));
+    return this;
+  };
+
+  return PlaylistsPage;
+
+})(App.Views.View);
+
 var validateEmail, _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1463,6 +1697,10 @@ App.Views.Songs = (function(_super) {
 
   Songs.prototype.template = JST['songs'];
 
+  Songs.prototype.events = {
+    'click .add': 'addToPlaylist'
+  };
+
   Songs.prototype.initialize = function() {
     if (!(this.options.year || this.options.month || this.options.day)) {
       return this.render();
@@ -1483,6 +1721,18 @@ App.Views.Songs = (function(_super) {
       songs: this.folder ? this.folder.toJSON() : songs
     }));
     return this;
+  };
+
+  Songs.prototype.addToPlaylist = function(e) {
+    var $add, id, songs;
+
+    $add = $(e.target);
+    id = $add.attr('data-id');
+    songs = App.playlist.get('_songs');
+    songs.push(id);
+    App.playlist.set('_songs', songs);
+    App.playlist.save();
+    return App.notify.send('Song Added', $add.attr('data-song'));
   };
 
   return Songs;

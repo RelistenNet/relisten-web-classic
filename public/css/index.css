@@ -5452,9 +5452,11 @@ header ul.left li.home-container a.home{font-size:2em;line-height:1.5em;height:5
 header ul.left li.home-container a.home:hover{color:#f6f6f6;background:#0a64a4}
 header ul.left li.home-container a.home span{font-size:.5em}
 header ul.right{position:absolute;right:0;}
-header ul.right li{float:right;width:100px;height:100%;text-align:center;border-left:1px solid #ddd;}
+header ul.right li{float:right;height:100%;text-align:center;border-left:1px solid #ddd;}
 header ul.right li:hover,header ul.right li.active{border-left:1px solid #0a64a4}
-header ul.right li a,header ul.right li a:visited{color:#0a64a4;font-size:1.4em;line-height:2.7em;height:100%;width:100%;display:block;font-family:"HelveticaNeue-CondensedBold",Helvetica,Arial,sans-serif;}
+header ul.right li input{height:100%;min-width:200px;width:100%;display:block;background:#f6f6f6;font-size:2em;font-family:"HelveticaNeue-CondensedBold",Helvetica,Arial,sans-serif;}
+header ul.right li input:focus{border:1px solid #0a64a4;outline:0}
+header ul.right li a,header ul.right li a:visited{color:#0a64a4;font-size:1.4em;line-height:2.7em;height:100%;width:100px;display:block;font-family:"HelveticaNeue-CondensedBold",Helvetica,Arial,sans-serif;}
 header ul.right li a:hover,header ul.right li a:visited:hover,header ul.right li a.active,header ul.right li a:visited.active{color:#f6f6f6;background:#0a64a4;text-decoration:none}
 header ul.right li a span,header ul.right li a:visited span{font-size:.7em}
 header ul.right li a.plus,header ul.right li a:visited.plus{line-height:.8em}
@@ -5471,6 +5473,8 @@ footer ul li a{color:#eee}
 .home-page .row-fluid .span4 ul{overflow-x:hidden;background-color:#f6f6f6;margin:0 2% 0 2%;top:53px;bottom:50px;width:95%;position:absolute;border-left:1px solid #aaa;border-right:1px solid #aaa;border-bottom:1px solid #aaa;}
 .home-page .row-fluid .span4 ul li{list-style:none;border-bottom:1px solid #aaa;cursor:pointer;font-size:.9em;position:relative;}
 .home-page .row-fluid .span4 ul li.footnotes p{padding:10px 0 0 5px}
+.home-page .row-fluid .span4 ul li .add{position:absolute;right:20px;top:7px;font-size:2em;opacity:.4;filter:alpha(opacity=40);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";display:none;}
+.home-page .row-fluid .span4 ul li .add:hover{opacity:1;-ms-filter:none;filter:none}
 .home-page .row-fluid .span4 ul li > a{color:#333;height:100%;width:auto;padding:5px 0 5px 5px;text-decoration:none;display:block;-o-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
 .home-page .row-fluid .span4 ul li > a:hover{background:#e6e6e6}
 .home-page .row-fluid .span4 ul li > a.blue{color:asihtosblue}
@@ -5485,6 +5489,7 @@ footer ul li a{color:#eee}
 .home-page .row-fluid .span4 ul li form{margin:0;}
 .home-page .row-fluid .span4 ul li form input{margin:5px;width:93%;background:transparent;border:1px solid rgba(0,0,0,0.3)}
 .home-page .row-fluid .span4 ul li .error{font-size:3em;ne-height:1em;padding:10px;color:#d90f0f}
+.home-page.new-playlist .row-fluid .span4 ul li .add{display:block}
 
 .login-page,.register-page{text-align:center;}
 .login-page form,.register-page form{width:400px;margin:auto;text-align:left;}
@@ -5505,3 +5510,9 @@ footer ul li a{color:#eee}
 .player-container .info .time div{display:inline-block}
 .player-container .info .progress-bar{height:5px;width:1%;background:#000;position:absolute;bottom:0;left:0}
 .player-container .info .position-bar{width:2px;height:7px;background:#fff;position:absolute;left:0%;bottom:0}
+
+.playlists-page header{background:#f6f6f6;z-index:97;position:relative;border-left:1px solid #ccc;border-right:1px solid #ccc;width:100%;}
+.playlists-page header ul{width:100%;}
+.playlists-page header ul li{width:100px;height:100%;border-left:1px solid #ddd;text-align:center;float:right;}
+.playlists-page header ul li a,.playlists-page header ul li a:visited{color:#0a64a4;font-size:1.4em;line-height:2.7em;height:100%;width:100%;display:block;font-family:"HelveticaNeue-CondensedBold",Helvetica,Arial,sans-serif;}
+.playlists-page header ul li a:hover,.playlists-page header ul li a:visited:hover,.playlists-page header ul li a.active,.playlists-page header ul li a:visited.active{color:#f6f6f6;background:#0a64a4;text-decoration:none}

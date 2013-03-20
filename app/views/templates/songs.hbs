@@ -3,6 +3,7 @@
 {{#each songs._songs}}
   <li>
     <a href="/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{showVersion}}{{/if}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}} <span>{{toHHMMSS duration}}</span></a>
+    <div data-id={{_id}} data-song="{{title}}" class=add>+</div>
   </li>
 {{/each}}
 </ul>

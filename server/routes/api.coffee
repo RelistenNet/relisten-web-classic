@@ -6,6 +6,7 @@ User = mongoose.model 'User'
 Year = mongoose.model 'Year'
 Song = mongoose.model 'Song'
 Show = mongoose.model 'Show'
+Playlist = mongoose.model 'Playlist'
 
 { _ } = require 'underscore'
 
@@ -50,6 +51,27 @@ router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*
     version: +req.params[5] || 0
   , (err, song) ->
     res.json song || {}
+
+router.get '/playlists', (req, res) ->
+  Playlist.find (err, playlists) ->
+    res.json playlists
+
+router.get '/playlist/:id', (req, res) ->
+  Playlist.findById(req.params.id)
+    .populate('_songs')
+    .exec (err, playlist) ->
+      res.json playlist
+
+router.post '/playlist', (req, res) ->
+  playlist = new Playlist req.body
+  playlist.save()
+  res.json playlist
+
+router.put '/playlist', (req, res) ->
+  Playlist.findById req.body._id, (err, playlist) ->
+    playlist._songs = req.body._songs
+    playlist.save()
+    res.json playlist
 
 router.get '/me', (req, res) ->
   User

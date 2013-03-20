@@ -62,6 +62,17 @@ wavesblue = #0a64a4
           &.footnotes p
             padding 10px 0 0 5px
 
+          .add
+            position absolute
+            right 20px
+            top 7px
+            font-size 2em
+            opacity .4
+            display none
+
+            &:hover
+              opacity 1
+
           > a
             color #333
             height 100%
@@ -139,3 +150,8 @@ wavesblue = #0a64a4
             ne-height 1em
             padding 10px
             color #D90F0F
+
+  &.new-playlist
+    .row-fluid .span4 ul li
+      .add
+        display block

@@ -3,6 +3,9 @@ class App.Router extends Backbone.Router
     '': 'index'
     'login': 'login'
     'register': 'register'
+    'playlists': 'playlists'
+    'playlists/new': 'newPlaylist'
+    'playlists/edit/:id': 'editPlaylist'
     # Last route should catch all
     #':notFound': 'notFound'
   initialize: ->
@@ -14,7 +17,7 @@ class App.Router extends Backbone.Router
     @bind 'all', @_trackPageview
   index: ->
     @changeView(new App.Views.HomePage())
-    App[n].close() for n in ['shows', 'songs'] if App[n]
+    App[n].close() for n in ['years', 'shows', 'songs'] if App[n]
     App.years = new App.Views.Years()
     App.shows = new App.Views.Shows()
     App.songs = new App.Views.Songs()
@@ -42,6 +45,13 @@ class App.Router extends Backbone.Router
     @changeView(new App.Views.LoginPage())
   register: ->
     @changeView(new App.Views.RegisterPage())
+  playlists: ->
+    @changeView(new App.Views.PlaylistsPage())
+  newPlaylist: ->
+    @index()
+    App.newPlaylist = new App.Views.NewPlaylist()
+  editPlaylist: (id) ->
+    @changeView(new App.Views.PlaylistsEdit(playlistId: id), false)
   clearActive: ($current) ->
     $('header ul.right a').removeClass('active')
     if $current

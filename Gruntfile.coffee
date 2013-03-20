@@ -47,7 +47,7 @@ module.exports = (grunt) ->
         dest: "public/javascript/app.js"
 
       vendor:
-        src: ["vendor/scripts/jquery-1.8.3.js", "vendor/scripts/underscore-1.4.3.js", "vendor/scripts/backbone-0.9.9.js", "vendor/scripts/backbone.localStorage.js", "vendor/scripts/handlebars.js", "vendor/scripts/handlebars-helpers.js", "vendor/scripts/console-helper.js", "vendor/scripts/jquery.serializeToJSON.js", "vendor/scripts/sound-manager2.js"]
+        src: ["vendor/scripts/jquery-1.8.3.js", "vendor/scripts/underscore-1.4.3.js", "vendor/scripts/backbone-0.9.9.js", "vendor/scripts/backbone.localStorage.js", "vendor/scripts/handlebars.js", "vendor/scripts/handlebars-helpers.js", "vendor/scripts/console-helper.js", "vendor/scripts/jquery.serializeToJSON.js", "vendor/scripts/sound-manager2.js", "vendor/scripts/uuid.js"]
         dest: "public/javascript/vendor.js"
 
 
@@ -64,7 +64,7 @@ module.exports = (grunt) ->
     stylus:
       compile:
         files:
-          "public/css/index.css": ["app/views/styles/bootstrap.styl", "app/views/styles/application.styl", "app/views/styles/header.styl", "app/views/styles/footer.styl", "app/views/styles/home-page.styl", "app/views/styles/login-page.styl", "app/views/styles/player.styl"]
+          "public/css/index.css": ["app/views/styles/bootstrap.styl", "app/views/styles/application.styl", "app/views/styles/header.styl", "app/views/styles/footer.styl", "app/views/styles/home-page.styl", "app/views/styles/login-page.styl", "app/views/styles/player.styl", "app/views/styles/playlists.styl"]
 
     min:
       "public/javascript/tweezer.js": ["public/javascript/vendor.js", "public/javascript/app.js"]

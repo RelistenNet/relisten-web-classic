@@ -19,7 +19,7 @@ class Application
   # Instantiate common views
   initViews: ->
     App.notify = new App.Views.Notifications()
-    @header = new App.Views.Header()
+    App.header = new App.Views.Header()
     @footer = new App.Views.Footer()
     App.player = new App.Models.Player()
     App.playerView = new App.Views.Player()

@@ -5,7 +5,12 @@
 <ul class="right">
   {{#if loggedIn}}
     <li><a class="header-link" href="/logout">LOGOUT</a></li>
-    <li><a class="header-link" href="/playlists">PLAYLISTS</a></li>
+    {{#if playlistId}}
+      <li><a class="header-link" href="/playlists/edit/{{playlistId}}">DONE</a></li>
+      <li><input class=playlist-title /></li>
+    {{else}}
+      <li><a class="header-link" href="/playlists">PLAYLISTS</a></li>
+    {{/if}}
   {{else}}
     <li><a class="login header-link" href="/login">LOGIN</a></li>
     <li><a class="register header-link" href="/register">REGISTER</a></li>

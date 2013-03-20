@@ -4,6 +4,7 @@ class App.Views.Header extends App.Views.View
   template: JST['header']
   initialize: ->
     super
-  render: ->
+  render: (playlistId) =>
     @$el.html @template
       loggedIn: App.user.loggedIn()
+      playlistId: App.playlist?.get '_id'
