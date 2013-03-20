@@ -4,20 +4,24 @@ class App.Models.Player extends App.Models.Model
     soundManager.stop @get 'id' if @get 'id'
     @set 'id', id
     App.playerView.played.push id
-    @sound = soundManager.createSound
-      id: "#{id}"
-      url: "http://74.104.117.66:8044/stream?player=74&id=#{id}"
-    @sound.play
-      whileloading: ->
-        App.playerView.updateProgress @bytesLoaded, @bytesTotal
-      whileplaying: ->
-        App.playerView.updatePlaying @position, @duration
-        unless @loaded
-          App.playerView.updateText { @duration }
-      onfinish: ->
-        App.playerView.playNext()
-    @updateText()
-    @slideDown()
+    soundManager.onready =>
+      App.songsFolder = new App.Models.Songs App.songs.folder.toJSON() if App.songs.folder
+      @sound = soundManager.createSound
+        id: "#{id}"
+        url: "http://74.104.117.66:8044/stream?player=74&id=#{id}"
+      @sound.play
+        whileloading: ->
+          App.playerView.updateProgress @bytesLoaded, @bytesTotal
+        whileplaying: ->
+          App.playerView.updatePlaying @position, @duration
+          unless @loaded
+            App.playerView.updateText { @duration }
+        onplay: =>
+          @updateText()
+          @slideDown()
+        onfinish: ->
+          @stop()
+          App.playerView.playNext()
 
   updateText: ->
     id = @get 'id'

@@ -7,13 +7,14 @@ class App.Views.Player extends App.Views.View
     'click .play': 'playButton'
     'click .next': 'playNext'
     'click .last': 'last'
-    'click': 'seek'
+    'click .progress-bar': 'seek'
+    'mouseenter .progress-bar': 'hoverBar'
+    'mouseleave .progress-bar': 'leaveBar'
   initialize: ->
     soundManager.setup
       url: "/swf"
       useHTML5Audio: true
-      onready: =>
-        @render()
+    @render()
   render: ->
     @$el.html @template()
     App.player.updateText()
@@ -32,7 +33,15 @@ class App.Views.Player extends App.Views.View
     return soundManager.resume id if @played.indexOf id >= 0
     App.player.play id
   playNext: ->
-    App.player.play +App.player.get('id') + 1
+    songs = App.songsFolder.get '_songs'
+    id = App.player.get 'id'
+    ids = _.pluck songs, 'id'
+    idx = ids.indexOf id
+    idx = 0 if ++idx is ids.length
+    song = songs[idx]
+    version = if song.version then "/#{song.version}" else ''
+    showVersion = if song.showVersion then "-#{song.showVersion}" else ''
+    Backbone.history.navigate "/#{song.year}/#{song.month}/#{song.day}#{showVersion}/#{song.slug}#{version}", trigger: true
   last: ->
     id = +App.player.get('id') - 1
     if App.player.sound.position > 10000
@@ -48,3 +57,9 @@ class App.Views.Player extends App.Views.View
     coord = e.pageX / $(window).width()
     return if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord || e.pageX < 14
     App.player.sound.setPosition coord * @duration
+  hoverBar: ->
+    @$progress.stop().animate height: '7px', 300
+    @$position.stop().animate height: '7px', 300
+  leaveBar: ->
+    @$progress.stop().animate height: '5px', 300
+    @$position.stop().animate height: '5px', 300

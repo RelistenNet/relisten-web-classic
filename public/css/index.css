@@ -5500,9 +5500,9 @@ footer ul li a{color:#eee}
 
 .player-container{height:80px;width:100%;border-bottom:1px solid #aaa;background:#f6f6f6;position:relative;margin-top:-80px;z-index:98;-webkit-box-shadow:0 3px 2px -2px rgba(61,61,61,0.4);box-shadow:0 3px 2px -2px rgba(61,61,61,0.4);}
 .player-container .last,.player-container .pause,.player-container .play,.player-container .next{width:14px}
-.player-container .info{top:0;right:10px;position:absolute;text-align:right;width:100%;}
-.player-container .info h3.title{line-height:.5em;color:#333}
-.player-container .info h4.album{line-height:.5em;color:#333}
-.player-container .info .progress-bar{height:5px;width:1%;background:#000;position:fixed;bottom:0;left:0}
-.player-container .info .position-bar{width:2px;height:7px;background:#fff;position:fixed;left:0%;bottom:0}
+.player-container .info{top:0;position:absolute;text-align:right;width:100%;height:100%;}
+.player-container .info h3.title,.player-container .info h4.album{line-height:.5em;padding-right:10px;color:#333}
+.player-container .info .time{padding-right:10px;}
 .player-container .info .time div{display:inline-block}
+.player-container .info .progress-bar{height:5px;width:1%;background:#000;position:absolute;bottom:0;left:0}
+.player-container .info .position-bar{width:2px;height:7px;background:#fff;position:absolute;left:0%;bottom:0}

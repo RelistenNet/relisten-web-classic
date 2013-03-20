@@ -26,7 +26,7 @@ function program3(depth0,data) {
   return "\n    <li><a class=\"login header-link\" href=\"/login\">LOGIN</a></li>\n    <li><a class=\"register header-link\" href=\"/register\">REGISTER</a></li>\n  ";
   }
 
-  buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\">Ghost<span>.phish</span></a></li>\n</ul>\n\n<ul class=\"right\">\n  ";
+  buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\">Spreadsheet<span>.phish</span></a></li>\n</ul>\n\n<ul class=\"right\">\n  ";
   stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</ul>\n";
@@ -206,7 +206,7 @@ function program2(depth0,data) {
 function program4(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "-";
+  buffer += "/";
   if (stack1 = helpers.version) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.version; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1);
@@ -673,33 +673,43 @@ App.Models.Player = (function(_super) {
   Player.prototype.localStorage = new Backbone.LocalStorage("NowPlaying");
 
   Player.prototype.play = function(id) {
+    var _this = this;
+
     if (this.get('id')) {
       soundManager.stop(this.get('id'));
     }
     this.set('id', id);
     App.playerView.played.push(id);
-    this.sound = soundManager.createSound({
-      id: "" + id,
-      url: "http://74.104.117.66:8044/stream?player=74&id=" + id
-    });
-    this.sound.play({
-      whileloading: function() {
-        return App.playerView.updateProgress(this.bytesLoaded, this.bytesTotal);
-      },
-      whileplaying: function() {
-        App.playerView.updatePlaying(this.position, this.duration);
-        if (!this.loaded) {
-          return App.playerView.updateText({
-            duration: this.duration
-          });
-        }
-      },
-      onfinish: function() {
-        return App.playerView.playNext();
+    return soundManager.onready(function() {
+      if (App.songs.folder) {
+        App.songsFolder = new App.Models.Songs(App.songs.folder.toJSON());
       }
+      _this.sound = soundManager.createSound({
+        id: "" + id,
+        url: "http://74.104.117.66:8044/stream?player=74&id=" + id
+      });
+      return _this.sound.play({
+        whileloading: function() {
+          return App.playerView.updateProgress(this.bytesLoaded, this.bytesTotal);
+        },
+        whileplaying: function() {
+          App.playerView.updatePlaying(this.position, this.duration);
+          if (!this.loaded) {
+            return App.playerView.updateText({
+              duration: this.duration
+            });
+          }
+        },
+        onplay: function() {
+          _this.updateText();
+          return _this.slideDown();
+        },
+        onfinish: function() {
+          this.stop();
+          return App.playerView.playNext();
+        }
+      });
     });
-    this.updateText();
-    return this.slideDown();
   };
 
   Player.prototype.updateText = function() {
@@ -1187,19 +1197,17 @@ App.Views.Player = (function(_super) {
     'click .play': 'playButton',
     'click .next': 'playNext',
     'click .last': 'last',
-    'click': 'seek'
+    'click .progress-bar': 'seek',
+    'mouseenter .progress-bar': 'hoverBar',
+    'mouseleave .progress-bar': 'leaveBar'
   };
 
   Player.prototype.initialize = function() {
-    var _this = this;
-
-    return soundManager.setup({
+    soundManager.setup({
       url: "/swf",
-      useHTML5Audio: true,
-      onready: function() {
-        return _this.render();
-      }
+      useHTML5Audio: true
     });
+    return this.render();
   };
 
   Player.prototype.render = function() {
@@ -1240,7 +1248,21 @@ App.Views.Player = (function(_super) {
   };
 
   Player.prototype.playNext = function() {
-    return App.player.play(+App.player.get('id') + 1);
+    var id, ids, idx, showVersion, song, songs, version;
+
+    songs = App.songsFolder.get('_songs');
+    id = App.player.get('id');
+    ids = _.pluck(songs, 'id');
+    idx = ids.indexOf(id);
+    if (++idx === ids.length) {
+      idx = 0;
+    }
+    song = songs[idx];
+    version = song.version ? "/" + song.version : '';
+    showVersion = song.showVersion ? "-" + song.showVersion : '';
+    return Backbone.history.navigate("/" + song.year + "/" + song.month + "/" + song.day + showVersion + "/" + song.slug + version, {
+      trigger: true
+    });
   };
 
   Player.prototype.last = function() {
@@ -1271,6 +1293,24 @@ App.Views.Player = (function(_super) {
       return;
     }
     return App.player.sound.setPosition(coord * this.duration);
+  };
+
+  Player.prototype.hoverBar = function() {
+    this.$progress.stop().animate({
+      height: '7px'
+    }, 300);
+    return this.$position.stop().animate({
+      height: '7px'
+    }, 300);
+  };
+
+  Player.prototype.leaveBar = function() {
+    this.$progress.stop().animate({
+      height: '5px'
+    }, 300);
+    return this.$position.stop().animate({
+      height: '5px'
+    }, 300);
   };
 
   return Player;
@@ -1413,7 +1453,7 @@ App.Views.Songs = (function(_super) {
     if (!(this.options.year || this.options.month || this.options.day)) {
       return this.render();
     }
-    App.songsFolder = this.folder = new App.Models.Songs({
+    this.folder = new App.Models.Songs({
       year: this.options.year,
       month: this.options.month,
       day: this.options.day,
