@@ -116,6 +116,35 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
   });
 
+this["JST"]["playlist"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n    <li>";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " - ";
+  if (stack1 = helpers.album) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.album; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</li>\n  ";
+  return buffer;
+  }
+
+  buffer += "<h3>"
+    + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h3>\n\n<ul>\n  ";
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n</ul>";
+  return buffer;
+  });
+
 this["JST"]["playlists-edit"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
@@ -124,31 +153,70 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n  ";
+  buffer += "\n    <li><a href=\"/";
+  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\n";
+    + "</a> - ";
+  if (stack1 = helpers.album) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.album; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</li>\n  ";
   return buffer;
   }
 
-  buffer += "test\n";
+  buffer += "<h3>"
+    + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h3>\n\n<ul>\n  ";
   stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n</ul>";
   return buffer;
   });
 
 this["JST"]["playlists"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
-
-  buffer += "<header>\n  <ul>\n    <li><a href=\"/playlists/new\">+new</a></li>\n  </ul>\n</header>\n";
-  if (stack1 = helpers.playlists) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.playlists; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, options;
+  buffer += "\n    <div><a href=\"/playlist/";
+  if (stack1 = helpers._id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0._id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\n";
+    + "\">";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</a> - ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.length),stack1 ? stack1.call(depth0, depth0._songs, options) : helperMissing.call(depth0, "length", depth0._songs, options)))
+    + "</div>\n  ";
+  return buffer;
+  }
+
+  buffer += "<header>\n  <ul>\n    <li><a href=\"/playlists/new\">+new</a></li>\n  </ul>\n</header>\n\n<div>\n  ";
+  stack1 = helpers.each.call(depth0, depth0.playlists, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</div>\n";
   return buffer;
   });
 
@@ -373,6 +441,10 @@ Handlebars.registerHelper("toHHMMSS", function() {
   return new Handlebars.SafeString(toHHMMSS(this.duration));
 });
 
+Handlebars.registerHelper("length", function() {
+  return this._songs.length;
+});
+
 var Application;
 
 Application = (function() {
@@ -440,6 +512,7 @@ App.Router = (function(_super) {
     '': 'index',
     'login': 'login',
     'register': 'register',
+    'playlist/:id': 'playlist',
     'playlists': 'playlists',
     'playlists/new': 'newPlaylist',
     'playlists/edit/:id': 'editPlaylist'
@@ -482,7 +555,7 @@ App.Router = (function(_super) {
     }
   };
 
-  Router.prototype.show = function(year, month, day, version) {
+  Router.prototype.show = function(year, month, day, showVersion) {
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
@@ -494,7 +567,7 @@ App.Router = (function(_super) {
       year: year,
       month: month,
       day: day,
-      version: version
+      showVersion: showVersion
     });
   };
 
@@ -531,8 +604,14 @@ App.Router = (function(_super) {
     return this.changeView(new App.Views.RegisterPage());
   };
 
+  Router.prototype.playlist = function(id) {
+    return this.changeView(new App.Views.PlaylistPage({
+      playlistId: id
+    }));
+  };
+
   Router.prototype.playlists = function() {
-    return this.changeView(new App.Views.PlaylistsPage());
+    return this.changeView(new App.Views.PlaylistsPage(), false);
   };
 
   Router.prototype.newPlaylist = function() {
@@ -852,7 +931,8 @@ App.Models.Playlist = (function(_super) {
   };
 
   Playlist.prototype.defaults = {
-    _songs: []
+    _songs: [],
+    name: 'Untitled Playlist'
   };
 
   return Playlist;
@@ -1159,6 +1239,7 @@ App.Views.HomePage = (function(_super) {
   HomePage.prototype.render = function() {
     this.checkErr();
     App.router.clearActive();
+    App.playlist = null;
     App.header.render();
     this.$el.html(this.template({
       loggedIn: App.user.loggedIn()
@@ -1239,9 +1320,7 @@ App.Views.NewPlaylist = (function(_super) {
   }
 
   NewPlaylist.prototype.initialize = function() {
-    App.playlist = new App.Models.Playlist({
-      name: 'Untitled Playlist'
-    });
+    App.playlist = new App.Models.Playlist();
     App.playlist.save();
     $('.home-page').addClass('new-playlist');
     return this.listenTo(App.playlist, 'change', App.header.render);
@@ -1441,7 +1520,7 @@ App.Views.Player = (function(_super) {
     ids = _.pluck(songs, 'id');
     idx = ids.indexOf(id);
     if (--idx === 0) {
-      idx = ids.length;
+      idx = ids.length - 1;
     }
     song = songs[idx];
     version = song.version ? "/" + song.version : '';
@@ -1496,6 +1575,41 @@ var _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+App.Views.PlaylistPage = (function(_super) {
+  __extends(PlaylistPage, _super);
+
+  function PlaylistPage() {
+    _ref = PlaylistPage.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  PlaylistPage.prototype.className = 'playlist-page';
+
+  PlaylistPage.prototype.template = JST['playlist'];
+
+  PlaylistPage.prototype.initialize = function() {
+    this.playlist = new App.Models.Playlist({
+      _id: this.options.playlistId
+    });
+    this.listenTo(this.playlist, 'change', this.render);
+    return this.playlist.fetch();
+  };
+
+  PlaylistPage.prototype.render = function() {
+    this.$el.html(this.template({
+      playlist: this.playlist.toJSON()
+    }));
+    return this;
+  };
+
+  return PlaylistPage;
+
+})(App.Views.View);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
 App.Views.PlaylistsEdit = (function(_super) {
   __extends(PlaylistsEdit, _super);
 
@@ -1509,13 +1623,14 @@ App.Views.PlaylistsEdit = (function(_super) {
   PlaylistsEdit.prototype.template = JST['playlists-edit'];
 
   PlaylistsEdit.prototype.initialize = function() {
-    if (!(App.playlist && App.playlist.get('_id') === this.options.playlistId)) {
+    if (!App.playlist || App.playlist.get('_id') !== this.options.playlistId) {
       App.playlist = new App.Models.Playlist({
         _id: this.options.playlistId
       });
       App.playlist.fetch();
       return this.listenTo(App.playlist, 'change', this.render);
     }
+    App.playlist.set('name', this.$el.find('input').val());
     App.playlist.save();
     return this.render();
   };
@@ -1532,7 +1647,6 @@ App.Views.PlaylistsEdit = (function(_super) {
 })(App.Views.View);
 
 var _ref,
-  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -1540,7 +1654,7 @@ App.Views.PlaylistsPage = (function(_super) {
   __extends(PlaylistsPage, _super);
 
   function PlaylistsPage() {
-    this.render = __bind(this.render, this);    _ref = PlaylistsPage.__super__.constructor.apply(this, arguments);
+    _ref = PlaylistsPage.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -1549,14 +1663,14 @@ App.Views.PlaylistsPage = (function(_super) {
   PlaylistsPage.prototype.template = JST['playlists'];
 
   PlaylistsPage.prototype.initialize = function() {
-    App.playlists = new App.Collections.Playlists();
-    App.playlists.fetch();
-    return this.listenTo(App.playlists, 'change', this.render);
+    this.playlists || (this.playlists = new App.Collections.Playlists());
+    this.listenTo(this.playlists, 'reset', this.render);
+    return this.playlists.fetch();
   };
 
   PlaylistsPage.prototype.render = function() {
     this.$el.html(this.template({
-      playlists: App.playlists.toJSON()
+      playlists: this.playlists.toJSON()
     }));
     return this;
   };
@@ -1709,7 +1823,7 @@ App.Views.Songs = (function(_super) {
       year: this.options.year,
       month: this.options.month,
       day: this.options.day,
-      version: this.options.version
+      version: this.options.showVersion || 0
     });
     this.listenTo(this.folder, 'change', this.render);
     return this.folder.fetch();

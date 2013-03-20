@@ -3,6 +3,7 @@ class App.Router extends Backbone.Router
     '': 'index'
     'login': 'login'
     'register': 'register'
+    'playlist/:id': 'playlist'
     'playlists': 'playlists'
     'playlists/new': 'newPlaylist'
     'playlists/edit/:id': 'editPlaylist'
@@ -27,12 +28,12 @@ class App.Router extends Backbone.Router
       App.years = new App.Views.Years()
     App.shows = new App.Views.Shows { year }
     App.songs.$el.empty() if App.songs
-  show: (year, month, day, version) ->
+  show: (year, month, day, showVersion) ->
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
       App.shows = new App.Views.Shows { year }
-    App.songs = new App.Views.Songs { year, month, day, version }
+    App.songs = new App.Views.Songs { year, month, day, showVersion }
   song: (year, month, day, showVersion, slug, version) ->
     if App.initial
       @changeView(new App.Views.HomePage())
@@ -45,8 +46,10 @@ class App.Router extends Backbone.Router
     @changeView(new App.Views.LoginPage())
   register: ->
     @changeView(new App.Views.RegisterPage())
+  playlist: (id) ->
+    @changeView(new App.Views.PlaylistPage(playlistId: id))
   playlists: ->
-    @changeView(new App.Views.PlaylistsPage())
+    @changeView(new App.Views.PlaylistsPage(), false)
   newPlaylist: ->
     @index()
     App.newPlaylist = new App.Views.NewPlaylist()

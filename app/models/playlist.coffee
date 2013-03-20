@@ -5,3 +5,4 @@ class App.Models.Playlist extends App.Models.Model
     '/api/v1/playlist' + if id then "/#{id}" else ''
   defaults:
     _songs: []
+    name: 'Untitled Playlist'

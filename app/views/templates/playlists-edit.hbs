@@ -1,4 +1,7 @@
-test
-{{#each playlist._songs}}
-  {{title}}
-{{/each}}
+<h3>{{playlist.name}}</h3>
+
+<ul>
+  {{#each playlist._songs}}
+    <li><a href="/{{year}}/{{month}}/{{day}}/{{slug}}">{{title}}</a> - {{album}}</li>
+  {{/each}}
+</ul>

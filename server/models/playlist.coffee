@@ -1,7 +1,7 @@
 { Schema } = mongoose = require 'mongoose'
 
 playlistSchema = new Schema
-  title: String
+  name: String
   introduction: String
   body: [ String ]
   closing: String

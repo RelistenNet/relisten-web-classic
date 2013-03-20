@@ -53,8 +53,10 @@ router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*
     res.json song || {}
 
 router.get '/playlists', (req, res) ->
-  Playlist.find (err, playlists) ->
-    res.json playlists
+  Playlist.find()
+    #.populate('_songs')
+    .exec (err, playlists) ->
+      res.json playlists
 
 router.get '/playlist/:id', (req, res) ->
   Playlist.findById(req.params.id)
@@ -67,8 +69,8 @@ router.post '/playlist', (req, res) ->
   playlist.save()
   res.json playlist
 
-router.put '/playlist', (req, res) ->
-  Playlist.findById req.body._id, (err, playlist) ->
+router.put '/playlist/:id', (req, res) ->
+  Playlist.findById req.params.id, (err, playlist) ->
     playlist._songs = req.body._songs
     playlist.save()
     res.json playlist

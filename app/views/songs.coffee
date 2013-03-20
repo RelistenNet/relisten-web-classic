@@ -5,12 +5,11 @@ class App.Views.Songs extends App.Views.View
     'click .add': 'addToPlaylist'
   initialize: ->
     return @render() unless @options.year || @options.month || @options.day
-
     @folder = new App.Models.Songs
       year: @options.year
       month: @options.month
       day: @options.day
-      version: @options.version
+      version: @options.showVersion || 0
 
     @listenTo @folder, 'change', @render
     @folder.fetch()

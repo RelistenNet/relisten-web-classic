@@ -48,7 +48,7 @@ class App.Views.Player extends App.Views.View
     id = App.player.get 'id'
     ids = _.pluck songs, 'id'
     idx = ids.indexOf id
-    idx = ids.length if --idx is 0
+    idx = ids.length - 1 if --idx is 0
     song = songs[idx]
     version = if song.version then "/#{song.version}" else ''
     showVersion = if song.showVersion then "-#{song.showVersion}" else ''

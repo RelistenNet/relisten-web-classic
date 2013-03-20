@@ -35,3 +35,6 @@ toHHMMSS = (seconds) ->
 
 Handlebars.registerHelper "toHHMMSS", ->
   new Handlebars.SafeString toHHMMSS(@duration)
+
+Handlebars.registerHelper "length", ->
+  @_songs.length

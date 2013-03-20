@@ -3,4 +3,9 @@
     <li><a href="/playlists/new">+new</a></li>
   </ul>
 </header>
-{{playlists}}
+
+<div>
+  {{#each playlists}}
+    <div><a href="/playlist/{{_id}}">{{name}}</a> - {{length _songs}}</div>
+  {{/each}}
+</div>

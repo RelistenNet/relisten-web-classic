@@ -5503,8 +5503,8 @@ footer ul li a{color:#eee}
 .login-page form input[type=submit],.register-page form input[type=submit]{height:50px;width:100px;margin:0;background:#c9c9c9}
 
 .player-container{height:80px;width:100%;border-bottom:1px solid #aaa;background:#f6f6f6;position:relative;margin-top:-80px;z-index:98;-webkit-box-shadow:0 3px 2px -2px rgba(61,61,61,0.4);box-shadow:0 3px 2px -2px rgba(61,61,61,0.4);}
-.player-container .last,.player-container .pause,.player-container .play,.player-container .next{width:14px}
-.player-container .info{top:0;position:absolute;text-align:right;width:100%;height:100%;}
+.player-container .last,.player-container .pause,.player-container .play,.player-container .next{width:14px;position:relative;z-index:99}
+.player-container .info{top:0;right:0;position:absolute;text-align:right;width:100%;height:100%;}
 .player-container .info h3.title,.player-container .info h4.album{line-height:.5em;padding-right:10px;color:#333}
 .player-container .info .time{padding-right:10px;}
 .player-container .info .time div{display:inline-block}
