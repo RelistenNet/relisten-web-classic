@@ -265,10 +265,15 @@ window.App = {
 $(function() {
   var Tweezer;
 
-  $.getJSON('/api/v1/me/csrf', function(data) {
-    return App.csrf = data.csrf;
-  });
   Tweezer = new Application().initialize();
+  $(document).ajaxSend(function(e, xhr, options) {
+    var token;
+
+    token = csrf;
+    if (token && !_.isEmpty(user)) {
+      return xhr.setRequestHeader("X-CSRF-Token", token);
+    }
+  });
   return $(window).resize(resize);
 });
 

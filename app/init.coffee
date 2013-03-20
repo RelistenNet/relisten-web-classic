@@ -7,10 +7,13 @@ window.App =
   "utils": {}
 
 $ ->
-  $.getJSON '/api/v1/me/csrf', (data) ->
-    App.csrf = data.csrf
   # Initialize App
   Tweezer = new Application().initialize()
+
+  # Bind to every ajax send
+  $(document).ajaxSend (e, xhr, options) ->
+    token = csrf
+    xhr.setRequestHeader("X-CSRF-Token", token) if token and !_.isEmpty(user)
 
   $(window).resize resize
 
