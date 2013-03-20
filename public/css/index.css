@@ -5477,8 +5477,7 @@ footer ul li a{color:#eee}
 .home-page .row-fluid .span4 ul li > a.selected,.home-page .row-fluid .span4 ul li > a.true,.home-page .row-fluid .span4 ul li > a.truetrue{background:asihtosblue;color:#fff}
 .home-page .row-fluid .span4 ul li > a.clear{padding:0;width:auto;height:auto;display:inline-block}
 .home-page .row-fluid .span4 ul li > a.video-link{font-size:1.14em}
-.home-page .row-fluid .span4 ul li > a span.segue,.home-page .row-fluid .span4 ul li > a span.info{color:#555;font-size:.75em}
-.home-page .row-fluid .span4 ul li > a span.date{font-size:1.3em}
+.home-page .row-fluid .span4 ul li > a span{color:#555;font-size:.75em;margin-top:5px;text-align:right}
 .home-page .row-fluid .span4 ul li .report{color:#555;font-size:.91em;position:absolute;z-index:2;right:4px;bottom:10px;opacity:.7;filter:alpha(opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";}
 .home-page .row-fluid .span4 ul li .report:hover{opacity:1;-ms-filter:none;filter:none}
 .home-page .row-fluid .span4 ul li .report-actions{padding:5px;text-align:center;display:none;}

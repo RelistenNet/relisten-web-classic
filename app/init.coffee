@@ -29,3 +29,6 @@ toHHMMSS = (seconds) ->
   hourStr = if hours isnt "00" then hours + ":" else ""
   time = hourStr + minutes + ":" + seconds
   time
+
+Handlebars.registerHelper "toHHMMSS", ->
+  new Handlebars.SafeString toHHMMSS(@duration)

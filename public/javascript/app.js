@@ -161,11 +161,11 @@ function program2(depth0,data) {
 this["JST"]["songs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
-  var buffer = "", stack1;
+  var buffer = "", stack1, options;
   buffer += "\n  <li>\n    <a href=\"/";
   if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
@@ -190,7 +190,10 @@ function program1(depth0,data) {
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</a>\n  </li>\n";
+    + " <span>";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.toHHMMSS),stack1 ? stack1.call(depth0, depth0.duration, options) : helperMissing.call(depth0, "toHHMMSS", depth0.duration, options)))
+    + "</span></a>\n  </li>\n";
   return buffer;
   }
 function program2(depth0,data) {
@@ -296,6 +299,10 @@ toHHMMSS = function(seconds) {
   time = hourStr + minutes + ":" + seconds;
   return time;
 };
+
+Handlebars.registerHelper("toHHMMSS", function() {
+  return new Handlebars.SafeString(toHHMMSS(this.duration));
+});
 
 var Application;
 
@@ -669,8 +676,6 @@ App.Models.Player = (function(_super) {
     _ref = Player.__super__.constructor.apply(this, arguments);
     return _ref;
   }
-
-  Player.prototype.localStorage = new Backbone.LocalStorage("NowPlaying");
 
   Player.prototype.play = function(id) {
     var _this = this;

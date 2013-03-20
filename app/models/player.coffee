@@ -1,5 +1,4 @@
 class App.Models.Player extends App.Models.Model
-  localStorage: new Backbone.LocalStorage "NowPlaying"
   play: (id) ->
     soundManager.stop @get 'id' if @get 'id'
     @set 'id', id
