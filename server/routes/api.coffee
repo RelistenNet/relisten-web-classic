@@ -40,13 +40,14 @@ router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, (req, res)
   .exec (err, show) ->
     res.json show || {}
 
-router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/([a-zA-Z0-9\-]*)\/?([0-9])?\/?$/, (req, res) ->
+router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9])?\/?$/, (req, res) ->
   Song.findOne
     year: +req.params[0]
     month: +req.params[1]
     day: +req.params[2]
-    slug: req.params[3]
-    version: +req.params[4] || 0
+    showVersion: +req.params[3] || 0
+    slug: req.params[4]
+    version: +req.params[5] || 0
   , (err, song) ->
     res.json song || {}
 

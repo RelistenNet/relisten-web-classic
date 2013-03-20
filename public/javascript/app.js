@@ -129,12 +129,23 @@ function program1(depth0,data) {
     + "/";
   if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\">";
+  buffer += escapeExpression(stack1);
+  stack1 = helpers['if'].call(depth0, depth0.version, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "</a>\n  </li>\n";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "-";
+  if (stack1 = helpers.version) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.version; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1);
   return buffer;
   }
 
@@ -166,12 +177,14 @@ function program1(depth0,data) {
     + "/";
   if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "/";
+  buffer += escapeExpression(stack1);
+  stack1 = helpers['if'].call(depth0, depth0.showVersion, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "/";
   if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1);
-  stack1 = helpers['if'].call(depth0, depth0.version, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.version, {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
@@ -181,6 +194,16 @@ function program1(depth0,data) {
   return buffer;
   }
 function program2(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "-";
+  if (stack1 = helpers.showVersion) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.showVersion; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1);
+  return buffer;
+  }
+
+function program4(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "-";
@@ -343,7 +366,7 @@ App.Router = (function(_super) {
   Router.prototype.initialize = function() {
     this.route(/^([0-9]{4})\/?$/, 'year');
     this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, 'show');
-    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/([a-zA-Z0-9\-]*)\/?([0-9])?\/?$/, 'song');
+    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9])?\/?$/, 'song');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
   };
@@ -393,7 +416,7 @@ App.Router = (function(_super) {
     });
   };
 
-  Router.prototype.song = function(year, month, day, slug, version) {
+  Router.prototype.song = function(year, month, day, showVersion, slug, version) {
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
@@ -412,6 +435,7 @@ App.Router = (function(_super) {
       month: month,
       day: day,
       slug: slug,
+      showVersion: showVersion,
       version: version
     });
     return App.song.fetch();
@@ -730,14 +754,15 @@ App.Models.Song = (function(_super) {
   }
 
   Song.prototype.url = function() {
-    var day, month, slug, version, year;
+    var day, month, showVersion, slug, version, year;
 
     year = this.get('year');
     month = this.get('month');
     day = this.get('day');
+    showVersion = this.get('showVersion') || 0;
     slug = this.get('slug');
     version = this.get('version') || 0;
-    return "/api/v1/" + year + "/" + month + "/" + day + "/" + slug + "/" + version;
+    return "/api/v1/" + year + "/" + month + "/" + day + "-" + showVersion + "/" + slug + "/" + version;
   };
 
   Song.prototype.change = function() {

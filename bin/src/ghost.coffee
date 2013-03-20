@@ -82,11 +82,12 @@ getSongs = ->
             k.month = show.month
             k.day = show.day
             k.year = show.year
-            slug = slugs "#{k.title}"
+            slug = slugs("#{k.title}").replace /\-$/, ''
             i = _.reduce songs, (memo, val) ->
               return ++memo if val is slug
               memo
             k.version = i
+            k.showVersion = show.version
             k.slug = slug
             songs.push slug
             #console.log 'song saved', k.title

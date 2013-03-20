@@ -28,6 +28,7 @@ songSchema = new Schema
   year: Number
   slug: String
   version: Number, default: 0
+  showVersion: Number, default: 0
   _show: type: Schema.Types.ObjectId, ref: 'Show'
 
 Song = mongoose.model 'Song', songSchema

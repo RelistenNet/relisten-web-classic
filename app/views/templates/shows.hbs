@@ -2,7 +2,7 @@
 <ul>
 {{#each shows._shows}}
   <li>
-    <a href="/{{year}}/{{month}}/{{day}}">{{title}}</a>
+    <a href="/{{year}}/{{month}}/{{day}}{{#if version}}-{{version}}{{/if}}">{{title}}</a>
   </li>
 {{/each}}
 </ul>
