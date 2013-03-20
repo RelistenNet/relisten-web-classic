@@ -1,8 +1,8 @@
-<div class=ul-header>{{songs.name}}</div>
+<div class=ul-header>{{songs.album}}</div>
 <ul>
-{{#each songs.children}}
+{{#each songs._songs}}
   <li>
-    <a href="/song/{{id}}">{{title}}</a>
+    <a href="/{{year}}/{{month}}/{{day}}/{{slug}}{{#if version}}-{{version}}{{/if}}">{{title}}</a>
   </li>
 {{/each}}
 </ul>

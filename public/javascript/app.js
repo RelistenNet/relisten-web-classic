@@ -118,9 +118,17 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n  <li>\n    <a href=\"/show/";
-  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += "\n  <li>\n    <a href=\"/";
+  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
@@ -131,9 +139,9 @@ function program1(depth0,data) {
   }
 
   buffer += "<div class=ul-header>"
-    + escapeExpression(((stack1 = ((stack1 = depth0.shows),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + escapeExpression(((stack1 = ((stack1 = depth0.shows),stack1 == null || stack1 === false ? stack1 : stack1.year)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</div>\n<ul>\n";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.shows),stack1 == null || stack1 === false ? stack1 : stack1.children), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.shows),stack1 == null || stack1 === false ? stack1 : stack1._shows), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</ul>\n";
   return buffer;
@@ -147,22 +155,45 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n  <li>\n    <a href=\"/song/";
-  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += "\n  <li>\n    <a href=\"/";
+  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">";
+    + "/";
+  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1);
+  stack1 = helpers['if'].call(depth0, depth0.version, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "</a>\n  </li>\n";
   return buffer;
   }
+function program2(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "-";
+  if (stack1 = helpers.version) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.version; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1);
+  return buffer;
+  }
 
   buffer += "<div class=ul-header>"
-    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.album)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</div>\n<ul>\n";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.children), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</ul>\n";
   return buffer;
@@ -171,7 +202,7 @@ function program1(depth0,data) {
 this["JST"]["years"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
@@ -189,9 +220,9 @@ function program1(depth0,data) {
   }
 
   buffer += "<div class=ul-header>Choose a year</div>\n<ul>\n";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.years),stack1 == null || stack1 === false ? stack1 : stack1.children), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</ul>";
+  stack1 = helpers.each.call(depth0, depth0.years, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</ul>\n";
   return buffer;
   });
 var resize, toHHMMSS;
@@ -312,7 +343,7 @@ App.Router = (function(_super) {
   Router.prototype.initialize = function() {
     this.route(/^([0-9]{4})\/?$/, 'year');
     this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, 'show');
-    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'song');
+    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/([a-zA-Z0-9\-]*)\/?([0-9])?\/?$/, 'song');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
   };
@@ -341,7 +372,9 @@ App.Router = (function(_super) {
     App.shows = new App.Views.Shows({
       year: year
     });
-    return App.songs.$el.empty();
+    if (App.songs) {
+      return App.songs.$el.empty();
+    }
   };
 
   Router.prototype.show = function(year, month, day, version) {
@@ -360,12 +393,32 @@ App.Router = (function(_super) {
     });
   };
 
-  Router.prototype.login = function() {
-    return this.changeView(new App.Views.LoginPage());
+  Router.prototype.song = function(year, month, day, slug, version) {
+    if (App.initial) {
+      this.changeView(new App.Views.HomePage());
+      App.years = new App.Views.Years();
+      App.shows = new App.Views.Shows({
+        year: year
+      });
+      App.songs = new App.Views.Songs({
+        year: year,
+        month: month,
+        day: day,
+        version: version
+      });
+    }
+    App.song = new App.Models.Song({
+      year: year,
+      month: month,
+      day: day,
+      slug: slug,
+      version: version
+    });
+    return App.song.fetch();
   };
 
-  Router.prototype.song = function(id) {
-    return App.player.play(id);
+  Router.prototype.login = function() {
+    return this.changeView(new App.Views.LoginPage());
   };
 
   Router.prototype.register = function() {
@@ -403,7 +456,9 @@ App.Router = (function(_super) {
   Router.prototype._trackPageview = function() {
     var url;
 
-    App.initial = false;
+    if (App.initial) {
+      App.initial = false;
+    }
     url = Backbone.history.getFragment();
     return _gaq.push(['_trackPageview', "/" + url]);
   };
@@ -675,13 +730,18 @@ App.Models.Song = (function(_super) {
   }
 
   Song.prototype.url = function() {
-    var day, month, number, year;
+    var day, month, slug, version, year;
 
     year = this.get('year');
     month = this.get('month');
     day = this.get('day');
-    number = this.get('number');
-    return "/api/v1/" + year + "/" + month + "/" + day + "/" + number;
+    slug = this.get('slug');
+    version = this.get('version') || 0;
+    return "/api/v1/" + year + "/" + month + "/" + day + "/" + slug + "/" + version;
+  };
+
+  Song.prototype.change = function() {
+    return App.player.play(this.get('id'));
   };
 
   return Song;
@@ -706,7 +766,7 @@ App.Models.Songs = (function(_super) {
     year = this.get('year');
     month = this.get('month');
     day = this.get('day');
-    version = this.get('version');
+    version = this.get('version') || 0;
     return "/api/v1/" + year + "/" + month + "/" + day + "-" + version;
   };
 
@@ -1275,20 +1335,20 @@ App.Views.Shows = (function(_super) {
   Shows.prototype.template = JST['shows'];
 
   Shows.prototype.initialize = function() {
-    if (!this.options.folder) {
+    if (!this.options.year) {
       return this.render();
     }
-    this.folder = new App.Models.Year({
+    this.shows = new App.Models.Shows({
       year: this.options.year
     });
-    this.listenTo(this.folder, 'change', this.render);
-    return this.folder.fetch();
+    this.listenTo(this.shows, 'change', this.render);
+    return this.shows.fetch();
   };
 
   Shows.prototype.render = function() {
     App.router.clearActive();
     this.$el.html(this.template({
-      shows: this.folder ? this.folder.toJSON() : shows
+      shows: this.shows ? this.shows.toJSON() : shows
     }));
     return this;
   };
@@ -1314,13 +1374,14 @@ App.Views.Songs = (function(_super) {
   Songs.prototype.template = JST['songs'];
 
   Songs.prototype.initialize = function() {
-    if (!this.options.folder) {
+    if (!(this.options.year || this.options.month || this.options.day)) {
       return this.render();
     }
-    App.songsFolder = this.folder = new App.Models.Show({
+    App.songsFolder = this.folder = new App.Models.Songs({
       year: this.options.year,
       month: this.options.month,
-      day: this.options.day
+      day: this.options.day,
+      version: this.options.version
     });
     this.listenTo(this.folder, 'change', this.render);
     return this.folder.fetch();

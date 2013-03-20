@@ -2,12 +2,13 @@ class App.Views.Songs extends App.Views.View
   el: '.songs-container'
   template: JST['songs']
   initialize: ->
-    return @render() unless @options.folder
+    return @render() unless @options.year || @options.month || @options.day
 
-    App.songsFolder = @folder = new App.Models.Show
+    App.songsFolder = @folder = new App.Models.Songs
       year: @options.year
       month: @options.month
       day: @options.day
+      version: @options.version
 
     @listenTo @folder, 'change', @render
     @folder.fetch()

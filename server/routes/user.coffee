@@ -3,6 +3,9 @@ router = new express.Router()
 
 mongoose = require 'mongoose'
 User = mongoose.model 'User'
+Year = mongoose.model 'Year'
+Song = mongoose.model 'Song'
+Show = mongoose.model 'Show'
 
 async = require 'async'
 
@@ -91,14 +94,15 @@ login = (req, res, {email, password}) ->
 bootstrapData = (cb) ->
   async.parallel [
     (callback) ->
-      subsonic.folder 32, (err, folder) ->
-        callback null, folder
+      Year.find callback
     , (callback) ->
-      subsonic.folder 54, (err, folder) ->
-        callback null, folder
+      Year.findOne(year: 2012)
+        .populate('_shows')
+        .exec callback
     , (callback) ->
-      subsonic.folder 33640, (err, folder) ->
-        callback null, folder
+      Show.findOne({ year: 2012, month: 6, day: 7 })
+        .populate('_songs')
+        .exec callback
     ], cb
 
 module.exports = router

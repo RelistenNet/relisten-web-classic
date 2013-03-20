@@ -1,8 +1,8 @@
-<div class=ul-header>{{shows.name}}</div>
+<div class=ul-header>{{shows.year}}</div>
 <ul>
-{{#each shows.children}}
+{{#each shows._shows}}
   <li>
-    <a href="/show/{{id}}">{{title}}</a>
+    <a href="/{{year}}/{{month}}/{{day}}">{{title}}</a>
   </li>
 {{/each}}
 </ul>
