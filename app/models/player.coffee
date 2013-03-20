@@ -17,7 +17,7 @@ class App.Models.Player extends App.Models.Model
       onfinish: ->
         App.playerView.playNext()
     @updateText()
-    $('.player-container').animate 'margin-top': 0, 1000
+    @slideDown()
 
   updateText: ->
     id = @get 'id'
@@ -25,3 +25,9 @@ class App.Models.Player extends App.Models.Model
       App.playerView.updateText
         title: App.song.get 'title'
         album: App.song.get 'album'
+
+  slideDown: ->
+    $player = $('.player-container')
+    unless parseInt $player.css('margin-top') is 0
+      $player.animate 'margin-top': 0, 1000
+      $('.home-page .row-fluid').animate 'height': $(window).height() - 80, 1000

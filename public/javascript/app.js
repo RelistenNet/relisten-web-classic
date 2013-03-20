@@ -270,7 +270,10 @@ $(function() {
 });
 
 resize = function() {
-  return $('.home-page .row-fluid').height($(window).height() - 100);
+  var playerTop;
+
+  playerTop = parseInt($('.player-container').css('margin-top'));
+  return $('.home-page .row-fluid').height($(window).height() - playerTop);
 };
 
 toHHMMSS = function(seconds) {
@@ -696,9 +699,7 @@ App.Models.Player = (function(_super) {
       }
     });
     this.updateText();
-    return $('.player-container').animate({
-      'margin-top': 0
-    }, 1000);
+    return this.slideDown();
   };
 
   Player.prototype.updateText = function() {
@@ -710,6 +711,20 @@ App.Models.Player = (function(_super) {
         title: App.song.get('title'),
         album: App.song.get('album')
       });
+    }
+  };
+
+  Player.prototype.slideDown = function() {
+    var $player;
+
+    $player = $('.player-container');
+    if (!parseInt($player.css('margin-top') === 0)) {
+      $player.animate({
+        'margin-top': 0
+      }, 1000);
+      return $('.home-page .row-fluid').animate({
+        'height': $(window).height() - 80
+      }, 1000);
     }
   };
 
@@ -996,9 +1011,6 @@ App.Views.HomePage = (function(_super) {
     this.$el.html(this.template({
       loggedIn: App.user.loggedIn()
     }));
-    _.defer(function() {
-      return resize();
-    });
     return this;
   };
 

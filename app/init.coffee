@@ -15,7 +15,8 @@ $ ->
   $(window).resize resize
 
 resize = ->
-  $('.home-page .row-fluid').height $(window).height() - 100
+  playerTop = parseInt $('.player-container').css('margin-top')
+  $('.home-page .row-fluid').height $(window).height() - playerTop
 
 toHHMMSS = (seconds) ->
   sec_numb = parseInt(seconds)

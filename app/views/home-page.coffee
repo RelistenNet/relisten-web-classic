@@ -7,9 +7,6 @@ class App.Views.HomePage extends App.Views.View
     @$el.html @template
       loggedIn: App.user.loggedIn()
 
-    _.defer ->
-      resize()
-
     @
   checkErr: ->
     if window.location.search
