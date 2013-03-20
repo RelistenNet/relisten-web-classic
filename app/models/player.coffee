@@ -17,6 +17,7 @@ class App.Models.Player extends App.Models.Model
       onfinish: ->
         App.playerView.playNext()
     @updateText()
+    $('.player-container').animate 'margin-top': 0, 1000
 
   updateText: ->
     id = @get 'id'

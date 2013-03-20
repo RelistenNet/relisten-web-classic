@@ -695,7 +695,10 @@ App.Models.Player = (function(_super) {
         return App.playerView.playNext();
       }
     });
-    return this.updateText();
+    this.updateText();
+    return $('.player-container').animate({
+      'margin-top': 0
+    }, 1000);
   };
 
   Player.prototype.updateText = function() {
