@@ -186,7 +186,7 @@ function program1(depth0,data) {
     + "</h3>\n\n<ul>\n  ";
   stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</ul>";
+  buffer += "\n</ul>\n";
   return buffer;
   });
 
@@ -198,7 +198,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, options;
-  buffer += "\n    <div><a href=\"/playlist/";
+  buffer += "\n    <li><a href=\"/playlist/";
   if (stack1 = helpers._id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0._id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -206,17 +206,17 @@ function program1(depth0,data) {
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</a> - ";
+    + "</a><div class=count>";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.length),stack1 ? stack1.call(depth0, depth0._songs, options) : helperMissing.call(depth0, "length", depth0._songs, options)))
-    + "</div>\n  ";
+    + "</div></li>\n  ";
   return buffer;
   }
 
-  buffer += "<header>\n  <ul>\n    <li><a href=\"/playlists/new\">+new</a></li>\n  </ul>\n</header>\n\n<div>\n  ";
+  buffer += "<header>\n  <ul>\n    <li><a href=\"/playlists/new\">+new</a></li>\n  </ul>\n</header>\n\n<ul class=playlists>\n  ";
   stack1 = helpers.each.call(depth0, depth0.playlists, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n</div>\n";
+  buffer += "\n</ul>\n";
   return buffer;
   });
 
@@ -515,7 +515,7 @@ App.Router = (function(_super) {
     'playlist/:id': 'playlist',
     'playlists': 'playlists',
     'playlists/new': 'newPlaylist',
-    'playlists/edit/:id': 'editPlaylist'
+    'playlists/:id/edit': 'editPlaylist'
   };
 
   Router.prototype.initialize = function() {

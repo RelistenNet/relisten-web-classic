@@ -4,8 +4,8 @@
   </ul>
 </header>
 
-<div>
+<ul class=playlists>
   {{#each playlists}}
-    <div><a href="/playlist/{{_id}}">{{name}}</a> - {{length _songs}}</div>
+    <li><a href="/playlist/{{_id}}">{{name}}</a><div class=count>{{length _songs}}</div></li>
   {{/each}}
-</div>
+</ul>

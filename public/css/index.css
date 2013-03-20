@@ -5516,3 +5516,8 @@ footer ul li a{color:#eee}
 .playlists-page header ul li{width:100px;height:100%;border-left:1px solid #ddd;text-align:center;float:right;}
 .playlists-page header ul li a,.playlists-page header ul li a:visited{color:#0a64a4;font-size:1.4em;line-height:2.7em;height:100%;width:100%;display:block;font-family:"HelveticaNeue-CondensedBold",Helvetica,Arial,sans-serif;}
 .playlists-page header ul li a:hover,.playlists-page header ul li a:visited:hover,.playlists-page header ul li a.active,.playlists-page header ul li a:visited.active{color:#f6f6f6;background:#0a64a4;text-decoration:none}
+.playlists-page ul.playlists{margin:10px 0 0 0;}
+.playlists-page ul.playlists li{list-style-type:none;height:40px;width:90%;position:relative;border:1px solid #ccc;margin:5px auto;}
+.playlists-page ul.playlists li a{font-size:1.8em;line-height:1.6em;height:40px;display:block;text-decoration:none;}
+.playlists-page ul.playlists li a:hover{background:#0a64a4;color:#fff}
+.playlists-page ul.playlists li .count{position:absolute;right:10px;top:8px;font-size:1.5em;color:#666}

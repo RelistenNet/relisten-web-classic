@@ -6,7 +6,7 @@ class App.Router extends Backbone.Router
     'playlist/:id': 'playlist'
     'playlists': 'playlists'
     'playlists/new': 'newPlaylist'
-    'playlists/edit/:id': 'editPlaylist'
+    'playlists/:id/edit': 'editPlaylist'
     # Last route should catch all
     #':notFound': 'notFound'
   initialize: ->
