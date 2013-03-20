@@ -21,8 +21,6 @@ class App.Models.Player extends App.Models.Model
   updateText: ->
     id = @get 'id'
     if id
-      children = if App.songsFolder then App.songsFolder.get('children') else songs.children
-      song = _.findWhere children, { id: +id }
       App.playerView.updateText
-        title: song.title
-        album: song.album
+        title: App.song.get 'title'
+        album: App.song.get 'album'

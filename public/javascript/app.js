@@ -699,17 +699,13 @@ App.Models.Player = (function(_super) {
   };
 
   Player.prototype.updateText = function() {
-    var children, id, song;
+    var id;
 
     id = this.get('id');
     if (id) {
-      children = App.songsFolder ? App.songsFolder.get('children') : songs.children;
-      song = _.findWhere(children, {
-        id: +id
-      });
       return App.playerView.updateText({
-        title: song.title,
-        album: song.album
+        title: App.song.get('title'),
+        album: App.song.get('album')
       });
     }
   };
