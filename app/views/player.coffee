@@ -14,6 +14,7 @@ class App.Views.Player extends App.Views.View
     soundManager.setup
       url: "/swf"
       useHTML5Audio: true
+      preferFlash: false
     @render()
   render: ->
     @$el.html @template()
@@ -25,7 +26,7 @@ class App.Views.Player extends App.Views.View
     { title, album, duration } = obj
     @$el.find('h3').html title if title
     @$el.find('h4').html album if album
-    @$el.find('.total').html toHHMMSS(duration / 1000) if duration
+    @$el.find('.total').html toHHMMSS duration if duration
   pause: ->
     soundManager.pause App.player.get('id')
   playButton: ->
@@ -43,20 +44,24 @@ class App.Views.Player extends App.Views.View
     showVersion = if song.showVersion then "-#{song.showVersion}" else ''
     Backbone.history.navigate "/#{song.year}/#{song.month}/#{song.day}#{showVersion}/#{song.slug}#{version}", trigger: true
   last: ->
-    id = +App.player.get('id') - 1
-    if App.player.sound.position > 10000
-      id++
-    App.player.play id
+    songs = App.songsFolder.get '_songs'
+    id = App.player.get 'id'
+    ids = _.pluck songs, 'id'
+    idx = ids.indexOf id
+    idx = ids.length if --idx is 0
+    song = songs[idx]
+    version = if song.version then "/#{song.version}" else ''
+    showVersion = if song.showVersion then "-#{song.showVersion}" else ''
+    Backbone.history.navigate "/#{song.year}/#{song.month}/#{song.day}#{showVersion}/#{song.slug}#{version}", trigger: true
   updateProgress: (loaded, total) ->
     @$progress.width "#{(loaded/total)*100}%"
   updatePlaying: (position, duration) ->
-    @duration = duration
     @$seconds.html toHHMMSS(position / 1000)
     @$position.css 'left', "#{(position/duration)*100}%"
   seek: (e) ->
     coord = e.pageX / $(window).width()
     return if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord || e.pageX < 14
-    App.player.sound.setPosition coord * @duration
+    App.player.sound.setPosition coord * App.song.get('duration') * 1000
   hoverBar: ->
     @$progress.stop().animate height: '7px', 300
     @$position.stop().animate height: '7px', 300

@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>fish</div>/<div class=total>man</div>\n    </div>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
+  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -430,7 +430,7 @@ App.Router = (function(_super) {
         year: year,
         month: month,
         day: day,
-        version: version
+        showVersion: showVersion
       });
     }
     App.song = new App.Models.Song({
@@ -693,12 +693,7 @@ App.Models.Player = (function(_super) {
           return App.playerView.updateProgress(this.bytesLoaded, this.bytesTotal);
         },
         whileplaying: function() {
-          App.playerView.updatePlaying(this.position, this.duration);
-          if (!this.loaded) {
-            return App.playerView.updateText({
-              duration: this.duration
-            });
-          }
+          return App.playerView.updatePlaying(this.position, this.duration);
         },
         onplay: function() {
           _this.updateText();
@@ -719,7 +714,8 @@ App.Models.Player = (function(_super) {
     if (id) {
       return App.playerView.updateText({
         title: App.song.get('title'),
-        album: App.song.get('album')
+        album: App.song.get('album'),
+        duration: App.song.get('duration')
       });
     }
   };
@@ -1205,7 +1201,8 @@ App.Views.Player = (function(_super) {
   Player.prototype.initialize = function() {
     soundManager.setup({
       url: "/swf",
-      useHTML5Audio: true
+      useHTML5Audio: true,
+      preferFlash: false
     });
     return this.render();
   };
@@ -1229,7 +1226,7 @@ App.Views.Player = (function(_super) {
       this.$el.find('h4').html(album);
     }
     if (duration) {
-      return this.$el.find('.total').html(toHHMMSS(duration / 1000));
+      return this.$el.find('.total').html(toHHMMSS(duration));
     }
   };
 
@@ -1266,13 +1263,21 @@ App.Views.Player = (function(_super) {
   };
 
   Player.prototype.last = function() {
-    var id;
+    var id, ids, idx, showVersion, song, songs, version;
 
-    id = +App.player.get('id') - 1;
-    if (App.player.sound.position > 10000) {
-      id++;
+    songs = App.songsFolder.get('_songs');
+    id = App.player.get('id');
+    ids = _.pluck(songs, 'id');
+    idx = ids.indexOf(id);
+    if (--idx === 0) {
+      idx = ids.length;
     }
-    return App.player.play(id);
+    song = songs[idx];
+    version = song.version ? "/" + song.version : '';
+    showVersion = song.showVersion ? "-" + song.showVersion : '';
+    return Backbone.history.navigate("/" + song.year + "/" + song.month + "/" + song.day + showVersion + "/" + song.slug + version, {
+      trigger: true
+    });
   };
 
   Player.prototype.updateProgress = function(loaded, total) {
@@ -1280,7 +1285,6 @@ App.Views.Player = (function(_super) {
   };
 
   Player.prototype.updatePlaying = function(position, duration) {
-    this.duration = duration;
     this.$seconds.html(toHHMMSS(position / 1000));
     return this.$position.css('left', "" + ((position / duration) * 100) + "%");
   };
@@ -1292,7 +1296,7 @@ App.Views.Player = (function(_super) {
     if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord || e.pageX < 14) {
       return;
     }
-    return App.player.sound.setPosition(coord * this.duration);
+    return App.player.sound.setPosition(coord * App.song.get('duration') * 1000);
   };
 
   Player.prototype.hoverBar = function() {

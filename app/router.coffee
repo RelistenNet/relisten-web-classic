@@ -35,7 +35,7 @@ class App.Router extends Backbone.Router
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
       App.shows = new App.Views.Shows { year }
-      App.songs = new App.Views.Songs { year, month, day, version }
+      App.songs = new App.Views.Songs { year, month, day, showVersion }
     App.song = new App.Models.Song { year, month, day, slug, showVersion, version }
     App.song.fetch()
   login: ->

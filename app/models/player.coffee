@@ -14,8 +14,6 @@ class App.Models.Player extends App.Models.Model
           App.playerView.updateProgress @bytesLoaded, @bytesTotal
         whileplaying: ->
           App.playerView.updatePlaying @position, @duration
-          unless @loaded
-            App.playerView.updateText { @duration }
         onplay: =>
           @updateText()
           @slideDown()
@@ -29,6 +27,7 @@ class App.Models.Player extends App.Models.Model
       App.playerView.updateText
         title: App.song.get 'title'
         album: App.song.get 'album'
+        duration: App.song.get 'duration'
 
   slideDown: ->
     $player = $('.player-container')
