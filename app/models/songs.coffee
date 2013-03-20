@@ -3,4 +3,5 @@ class App.Models.Songs extends App.Models.Model
     year = @get 'year'
     month = @get 'month'
     day = @get 'day'
-    "/api/v1/#{year}/#{month}/#{day}"
+    version = @get 'version'
+    "/api/v1/#{year}/#{month}/#{day}-#{version}"

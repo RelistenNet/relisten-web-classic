@@ -311,7 +311,7 @@ App.Router = (function(_super) {
 
   Router.prototype.initialize = function() {
     this.route(/^([0-9]{4})\/?$/, 'year');
-    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'show');
+    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, 'show');
     this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'song');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
@@ -344,7 +344,7 @@ App.Router = (function(_super) {
     return App.songs.$el.empty();
   };
 
-  Router.prototype.show = function(year, month, day) {
+  Router.prototype.show = function(year, month, day, version) {
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
@@ -355,7 +355,8 @@ App.Router = (function(_super) {
     return App.songs = new App.Views.Songs({
       year: year,
       month: month,
-      day: day
+      day: day,
+      version: version
     });
   };
 
@@ -700,12 +701,13 @@ App.Models.Songs = (function(_super) {
   }
 
   Songs.prototype.url = function() {
-    var day, month, year;
+    var day, month, version, year;
 
     year = this.get('year');
     month = this.get('month');
     day = this.get('day');
-    return "/api/v1/" + year + "/" + month + "/" + day;
+    version = this.get('version');
+    return "/api/v1/" + year + "/" + month + "/" + day + "-" + version;
   };
 
   return Songs;

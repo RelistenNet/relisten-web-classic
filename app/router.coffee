@@ -7,7 +7,7 @@ class App.Router extends Backbone.Router
     #':notFound': 'notFound'
   initialize: ->
     @route /^([0-9]{4})\/?$/, 'year'
-    @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'show'
+    @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, 'show'
     @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'song'
 
     @$container = $('#page-container')
@@ -24,12 +24,12 @@ class App.Router extends Backbone.Router
       App.years = new App.Views.Years()
     App.shows = new App.Views.Shows { year }
     App.songs.$el.empty()
-  show: (year, month, day) ->
+  show: (year, month, day, version) ->
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
       App.shows = new App.Views.Shows { year }
-    App.songs = new App.Views.Songs { year, month, day }
+    App.songs = new App.Views.Songs { year, month, day, version }
   login: ->
     @changeView(new App.Views.LoginPage())
   song: (id) ->

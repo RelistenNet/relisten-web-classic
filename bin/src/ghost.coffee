@@ -3,6 +3,7 @@ program = require 'commander'
 async = require 'async'
 fs = require 'fs'
 _ = require 'underscore'
+slugs = require 'slugs'
 extractDate = require './extract_date'
 
 mongoose = require 'mongoose'
@@ -40,34 +41,61 @@ getYears = (id = 32) ->
       year = new Year f
       console.log f.title
       year.save()
-      subsonic.folder f.id, (err, folder) ->
-        dates = [0]
-        for j in folder.children
-          date = extractDate j.title
-          j.month = date.month if date
-          j.day = date.day if date
-          j.year = date.year if date
-          dateStr = "#{j.year}-#{j.month}-#{j.day}"
-          i = _.reduce dates, (memo, val) ->
-            return ++memo if val is dateStr
-            memo
-          dates.push dateStr
-          #console.log j.month, j.day, j.year
-          console.log 'fail', j.title unless j.month > 0 || j.day > 0
-          j.version = i
-          show = new Show j
-          show.save()
-          subsonic.folder j.id, (err, folder) ->
-            for k in folder.children
-              date = extractDate k.album
-              k.month = date.month if date
-              k.day = date.day if date
-              k.year = date.year if date
-              #console.log 'song saved', k.title
-              console.log 'fail', k.title unless k.month > 0 || k.day > 0
 
-              song = new Song k
-              song.save()
+getShows = ->
+  Year.find (err, years) ->
+    years.map (y) ->
+      Year.findById y._id, (err, year) ->
+        subsonic.folder y.id, (err, folder) ->
+          dates = [0]
+          return null unless folder.children.length
+          folder.children.map (j) ->
+            #console.log j.title
+            date = extractDate j.title
+            j.month = date.month if date
+            j.day = date.day if date
+            j.year = date.year if date
+            dateStr = "#{j.year}-#{j.month}-#{j.day}"
+            i = _.reduce dates, (memo, val) ->
+              return ++memo if val is dateStr
+              memo
+            dates.push dateStr
+            #console.log j.month, j.day, j.year
+            console.log 'fail', j.title unless j.month > 0 || j.day > 0
+            j.version = i
+            j._year = year._id
+            show = new Show j
+            year._shows.push show._id
+            year.save()
+            show.save()
+
+getSongs = ->
+  Show.find (err, shows) ->
+    shows.map (s) ->
+      Show.findById s._id, (err, show) ->
+        subsonic.folder s.id, (err, folder) ->
+          return null unless folder.children?.length
+          songs = [0]
+          folder.children.map (k) ->
+            return true unless k.album
+            date = extractDate k.album
+            k.month = show.month
+            k.day = show.day
+            k.year = show.year
+            slug = slugs "#{k.title}"
+            i = _.reduce songs, (memo, val) ->
+              return ++memo if val is slug
+              memo
+            k.version = i
+            k.slug = slug
+            songs.push slug
+            #console.log 'song saved', k.title
+            console.log 'fail', k.title unless k.month > 0 || k.day > 0
+            k._show = show._id
+            song = new Song k
+            show._songs.push song._id
+            show.save()
+            song.save()
 
 ## CLI ##
 
@@ -78,5 +106,15 @@ program
   .command('years [id]')
   .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
   .action(getYears)
+
+program
+  .command('shows [id]')
+  .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
+  .action(getShows)
+
+program
+  .command('songs [id]')
+  .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
+  .action(getSongs)
 
 program.parse process.argv

@@ -22,25 +22,33 @@ subsonic = new Subsonic
 # You can change this path in your index.coffee middleware
 
 router.get /^\/([0-9]{4})\/?$/, (req, res) ->
-  Show.find year: +req.params[0], (err, shows) ->
-    res.json shows
+  Year.findOne(
+    year: +req.params[0]
+  )
+  .populate('_shows', 'album artist coverArt day id month parent title year version')
+  .exec (err, year) ->
+    res.json year || {}
 
-router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, (req, res) ->
-  Song.find
+router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, (req, res) ->
+  Show.findOne(
     year: +req.params[0]
     month: +req.params[1]
     day: +req.params[2]
-  , (err, songs) ->
-    res.json songs
+    version: +req.params[3] || 0
+  )
+  .populate('_songs')
+  .exec (err, show) ->
+    res.json show || {}
 
-router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, (req, res) ->
+router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/([a-zA-Z0-9\-]*)\/?([0-9])?\/?$/, (req, res) ->
   Song.findOne
     year: +req.params[0]
     month: +req.params[1]
     day: +req.params[2]
-    number: +req.params[3]
+    slug: req.params[3]
+    version: +req.params[4] || 0
   , (err, song) ->
-    res.json song
+    res.json song || {}
 
 router.get '/me', (req, res) ->
   User
