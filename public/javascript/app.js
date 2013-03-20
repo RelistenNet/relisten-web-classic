@@ -17,7 +17,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   
-  return "\n    <li><a class=\"header-link\" href=\"/logout\">LOGOUT</a></li>\n  ";
+  return "\n    <li><a class=\"header-link\" href=\"/logout\">LOGOUT</a></li>\n    <li><a class=\"header-link\" href=\"/playlists\">PLAYLISTS</a></li>\n  ";
   }
 
 function program3(depth0,data) {

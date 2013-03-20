@@ -4,6 +4,7 @@ path = require 'path'
 fs = require 'fs'
 mongoose = require 'mongoose'
 nconf = require 'nconf'
+Mongo_Store = require('connect-mongo')(express)
 csrf = express.csrf()
 PORT = process.env.PORT || 3000
 
@@ -42,15 +43,15 @@ app.configure ->
   app.use express.methodOverride()
   app.use express.cookieParser()
   app.use express.session
-    # You should probably add some sort of store
-    # Use connect-mongo or connect-redis
     secret: 'this is your call, buddy'
+    store: new Mongo_Store
+      url: nconf.get('GHOST_URI')
   app.use (req, res, next) ->
     # Only use CSRF if user is logged in
-    #if req.session.userId
-    #  csrf req, res, next
-    #else
-    next()
+    if req.session.userId
+      csrf req, res, next
+    else
+      next()
   app.use app.router
   app.use require('./routes/user').middleware
   app.use '/api/v1', require('./routes/api').middleware

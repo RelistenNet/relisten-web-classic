@@ -24,15 +24,14 @@ router.get '/', (req, res, next) ->
     unless req.session && req.session.userId
       # If we're in development, then render via jade so we can set loggedIn
       # TODO: Find a more robust solution, this is slightly messy
-      if process.env.NODE_ENV is "development"
-        return res.render 'loggedIn',
-          user: {}
-          csrf: ''
-          isProduction: false
-          years: folders[0]
-          shows: folders[1]
-          songs: folders[2]
-      return next()
+      return next() unless process.env.NODE_ENV is "development"
+      return res.render 'loggedIn',
+        user: {}
+        csrf: ''
+        isProduction: false
+        years: folders[0]
+        shows: folders[1]
+        songs: folders[2]
     # If the user is logged in, then render the views/loggedIn.jade
     # This way, we can bootstrap the user and csrf objects on page load
     User

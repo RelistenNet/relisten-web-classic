@@ -20,7 +20,8 @@
     "async": "~0.2.6",
     "subsonic": "git://github.com/switz/subsonic.git",
     "nconf": "~0.6.7",
-    "slugs": "~0.1.2"
+    "slugs": "~0.1.2",
+    "connect-mongo": "~0.3.2"
   },
   "devDependencies": {
     "grunt-contrib-copy": "~0.4.0",
