@@ -26,11 +26,11 @@ function program1(depth0,data) {
 function program2(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n      <li><a class=\"header-link\" href=\"/playlists/edit/";
+  buffer += "\n      <li><a class=\"header-link\" href=\"/playlist/";
   if (stack1 = helpers.playlistId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.playlistId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">DONE</a></li>\n      <li><input class=playlist-title /></li>\n    ";
+    + "/edit\">DONE</a></li>\n    ";
   return buffer;
   }
 
@@ -124,36 +124,11 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n    <li>";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += "\n    <tr>\n      <td><p>";
+  if (stack1 = helpers.blur) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.blur; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " - ";
-  if (stack1 = helpers.album) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.album; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</li>\n  ";
-  return buffer;
-  }
-
-  buffer += "<h3>"
-    + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</h3>\n\n<ul>\n  ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</ul>";
-  return buffer;
-  });
-
-this["JST"]["playlists-edit"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
-
-function program1(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n    <li><a href=\"/";
+    + "</p></td>\n      <td><a href=\"/";
   if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -177,16 +152,61 @@ function program1(depth0,data) {
   if (stack1 = helpers.album) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.album; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</li>\n  ";
+    + "</td>\n    </tr>\n  ";
   return buffer;
   }
 
   buffer += "<h3>"
     + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</h3>\n\n<ul>\n  ";
+    + "</h3>\n\n<table>\n  ";
   stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</ul>\n";
+  buffer += "\n</table>\n";
+  return buffer;
+  });
+
+this["JST"]["playlists-edit"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n    <tr>\n      <td><textarea>test</textarea></td>\n      <td><a href=\"/";
+  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</a> - ";
+  if (stack1 = helpers.album) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.album; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n    </tr>\n  ";
+  return buffer;
+  }
+
+  buffer += "<h3>Edit Playlist</h3>\n\n<input class=name value=\""
+    + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" />\n\n<table>\n  ";
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n</table>\n\n<button class=save>Save</button>\n";
   return buffer;
   });
 
@@ -213,10 +233,37 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<header>\n  <ul>\n    <li><a href=\"/playlists/new\">+new</a></li>\n  </ul>\n</header>\n\n<ul class=playlists>\n  ";
+  buffer += "<header>\n  <ul>\n    <li><a href=\"/playlist/new\">+new</a></li>\n  </ul>\n</header>\n\n<ul class=playlists>\n  ";
   stack1 = helpers.each.call(depth0, depth0.playlists, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</ul>\n";
+  return buffer;
+  });
+
+this["JST"]["queue"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Handlebars.helpers; data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n    <li>";
+  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " - ";
+  if (stack1 = helpers.album) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.album; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</li>\n  ";
+  return buffer;
+  }
+
+  buffer += "<ul>\n  ";
+  stack1 = helpers.each.call(depth0, depth0.queue, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</ul>";
   return buffer;
   });
 
@@ -285,7 +332,7 @@ function program2(depth0,data) {
 this["JST"]["songs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -325,6 +372,14 @@ function program1(depth0,data) {
   if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
+    + "\" class=play>ᐅ</div>\n    <div data-id=";
+  if (stack2 = helpers._id) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0._id; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + " data-song=\"";
+  if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "\" class=add>+</div>\n  </li>\n";
   return buffer;
   }
@@ -350,10 +405,18 @@ function program4(depth0,data) {
 
   buffer += "<div class=ul-header>"
     + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.album)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</div>\n<ul>\n";
+    + "</div>\n<ul>\n  <li class=playAll>Play all</li>\n";
   stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</ul>\n";
+  buffer += "\n  <li><a href=\"http://phish.net/setlists/?d="
+    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.year)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "-";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.addZero),stack1 ? stack1.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.month), options) : helperMissing.call(depth0, "addZero", ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.month), options)))
+    + "-";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.addZero),stack1 ? stack1.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.day), options) : helperMissing.call(depth0, "addZero", ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.day), options)))
+    + "\" target=_blank>Open on Phish.net</a></li>\n</ul>\n";
   return buffer;
   });
 
@@ -383,7 +446,7 @@ function program1(depth0,data) {
   buffer += "\n</ul>\n";
   return buffer;
   });
-var resize, toHHMMSS;
+var addZero, resize, toHHMMSS;
 
 window.App = {
   "Models": {},
@@ -398,22 +461,23 @@ $(function() {
   var Tweezer;
 
   Tweezer = new Application().initialize();
-  $(document).ajaxSend(function(e, xhr, options) {
-    var token;
-
-    token = csrf;
-    if (token && !_.isEmpty(user)) {
-      return xhr.setRequestHeader("X-CSRF-Token", token);
-    }
-  });
   return $(window).resize(resize);
+});
+
+$(document).ajaxSend(function(e, xhr, options) {
+  var token;
+
+  token = csrf;
+  if (token && !_.isEmpty(user)) {
+    return xhr.setRequestHeader("X-CSRF-Token", token);
+  }
 });
 
 resize = function() {
   var playerTop;
 
   playerTop = parseInt($('.player-container').css('margin-top'));
-  return $('.home-page .row-fluid').height($(window).height() - playerTop);
+  return $('.home-page .row-fluid').height($(window).height() - playerTop - 250);
 };
 
 toHHMMSS = function(seconds) {
@@ -437,12 +501,23 @@ toHHMMSS = function(seconds) {
   return time;
 };
 
+addZero = function(num) {
+  if (String(num).length < 2) {
+    return String("0" + num);
+  }
+  return String(num);
+};
+
 Handlebars.registerHelper("toHHMMSS", function() {
   return new Handlebars.SafeString(toHHMMSS(this.duration));
 });
 
 Handlebars.registerHelper("length", function() {
   return this._songs.length;
+});
+
+Handlebars.registerHelper("addZero", function(num) {
+  return new Handlebars.SafeString(addZero(num));
 });
 
 var Application;
@@ -469,6 +544,7 @@ Application = (function() {
   Application.prototype.initViews = function() {
     App.notify = new App.Views.Notifications();
     App.header = new App.Views.Header();
+    App.queueView = new App.Views.Queue();
     this.footer = new App.Views.Footer();
     App.player = new App.Models.Player();
     return App.playerView = new App.Views.Player();
@@ -512,10 +588,10 @@ App.Router = (function(_super) {
     '': 'index',
     'login': 'login',
     'register': 'register',
-    'playlist/:id': 'playlist',
     'playlists': 'playlists',
-    'playlists/new': 'newPlaylist',
-    'playlists/:id/edit': 'editPlaylist'
+    'playlist/new': 'newPlaylist',
+    'playlist/:id': 'playlist',
+    'playlist/:id/edit': 'editPlaylist'
   };
 
   Router.prototype.initialize = function() {
@@ -527,16 +603,7 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.index = function() {
-    var n, _i, _len, _ref1;
-
     this.changeView(new App.Views.HomePage());
-    if (App[n]) {
-      _ref1 = ['years', 'shows', 'songs'];
-      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-        n = _ref1[_i];
-        App[n].close();
-      }
-    }
     App.years = new App.Views.Years();
     App.shows = new App.Views.Shows();
     return App.songs = new App.Views.Songs();
@@ -556,6 +623,9 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.show = function(year, month, day, showVersion) {
+    if (App.songs) {
+      App.songs.undelegateEvents();
+    }
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
@@ -593,7 +663,11 @@ App.Router = (function(_super) {
       showVersion: showVersion,
       version: version
     });
-    return App.song.fetch();
+    return App.song.fetch({
+      success: function() {
+        return App.song.change();
+      }
+    });
   };
 
   Router.prototype.login = function() {
@@ -852,9 +926,6 @@ App.Models.Player = (function(_super) {
     this.set('id', id);
     App.playerView.played.push(id);
     return soundManager.onready(function() {
-      if (App.songs.folder) {
-        App.songsFolder = new App.Models.Songs(App.songs.folder.toJSON());
-      }
       _this.sound = soundManager.createSound({
         id: "" + id,
         url: "http://74.104.117.66:8044/stream?player=74&id=" + id
@@ -900,7 +971,7 @@ App.Models.Player = (function(_super) {
         'margin-top': 0
       }, 1000);
       return $('.home-page .row-fluid').animate({
-        'height': $(window).height() - 80
+        'height': $(window).height() - 228
       }, 1000);
     }
   };
@@ -963,6 +1034,7 @@ App.Models.Shows = (function(_super) {
 })(App.Models.Model);
 
 var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -970,13 +1042,17 @@ App.Models.Song = (function(_super) {
   __extends(Song, _super);
 
   function Song() {
-    _ref = Song.__super__.constructor.apply(this, arguments);
+    this.change = __bind(this.change, this);    _ref = Song.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
   Song.prototype.url = function() {
-    var day, month, showVersion, slug, version, year;
+    var day, id, month, showVersion, slug, version, year;
 
+    id = this.get('_id');
+    if (id) {
+      return "/api/v1/song/" + id;
+    }
     year = this.get('year');
     month = this.get('month');
     day = this.get('day');
@@ -987,7 +1063,7 @@ App.Models.Song = (function(_super) {
   };
 
   Song.prototype.change = function() {
-    return App.player.play(this.get('id'));
+    return App.queue.push(this);
   };
 
   return Song;
@@ -1132,6 +1208,55 @@ var _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+App.Collections.Queue = (function(_super) {
+  __extends(Queue, _super);
+
+  function Queue() {
+    _ref = Queue.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Queue.prototype.model = App.Models.Song;
+
+  Queue.prototype.idx = 0;
+
+  Queue.prototype.initialize = function() {
+    var _this = this;
+
+    this.on('add', function() {
+      if (_this.length === 1) {
+        return _this.play();
+      }
+    });
+    return this.on('reset', function() {
+      if (_this.length > 0) {
+        _this.play();
+      }
+      return _this.idx = 0;
+    });
+  };
+
+  Queue.prototype.play = function() {
+    if (this.idx === this.length) {
+      this.idx = 0;
+    }
+    App.song = this.at(this.idx++);
+    return App.player.play(App.song.get('id'));
+  };
+
+  Queue.prototype.playLast = function() {
+    --this.idx;
+    return this.play();
+  };
+
+  return Queue;
+
+})(App.Collections.Collection);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
 App.Views.View = (function(_super) {
   __extends(View, _super);
 
@@ -1154,7 +1279,7 @@ App.Views.View = (function(_super) {
 
   View.prototype.close = function() {
     this.remove();
-    return this.unbind();
+    return this.undelegateEvents();
   };
 
   return View;
@@ -1206,12 +1331,10 @@ App.Views.Header = (function(_super) {
     return Header.__super__.initialize.apply(this, arguments);
   };
 
-  Header.prototype.render = function(playlistId) {
-    var _ref1;
-
+  Header.prototype.render = function(playlist) {
     return this.$el.html(this.template({
       loggedIn: App.user.loggedIn(),
-      playlistId: (_ref1 = App.playlist) != null ? _ref1.get('_id') : void 0
+      playlistId: playlist ? playlist.get('_id') : void 0
     }));
   };
 
@@ -1239,11 +1362,11 @@ App.Views.HomePage = (function(_super) {
   HomePage.prototype.render = function() {
     this.checkErr();
     App.router.clearActive();
-    App.playlist = null;
     App.header.render();
     this.$el.html(this.template({
       loggedIn: App.user.loggedIn()
     }));
+    resize();
     return this;
   };
 
@@ -1321,9 +1444,9 @@ App.Views.NewPlaylist = (function(_super) {
 
   NewPlaylist.prototype.initialize = function() {
     App.playlist = new App.Models.Playlist();
+    this.listenToOnce(App.playlist, 'change', App.header.render);
     App.playlist.save();
-    $('.home-page').addClass('new-playlist');
-    return this.listenTo(App.playlist, 'change', App.header.render);
+    return $('.home-page').addClass('new-playlist');
   };
 
   return NewPlaylist;
@@ -1442,7 +1565,7 @@ App.Views.Player = (function(_super) {
     'click .pause': 'pause',
     'click .play': 'playButton',
     'click .next': 'playNext',
-    'click .last': 'last',
+    'click .last': 'playLast',
     'click .progress-bar': 'seek',
     'mouseenter .progress-bar': 'hoverBar',
     'mouseleave .progress-bar': 'leaveBar'
@@ -1495,39 +1618,23 @@ App.Views.Player = (function(_super) {
   };
 
   Player.prototype.playNext = function() {
-    var id, ids, idx, showVersion, song, songs, version;
+    return App.queue.play();
+    /*
+    songs = App.queue.toJSON()
+    id = App.player.get 'id'
+    ids = _.pluck songs, 'id'
+    idx = ids.indexOf id
+    idx = 0 if ++idx is ids.length
+    song = songs[idx]
+    version = if song.version then "/#{song.version}" else ''
+    showVersion = if song.showVersion then "-#{song.showVersion}" else ''
+    Backbone.history.navigate "/#{song.year}/#{song.month}/#{song.day}#{showVersion}/#{song.slug}#{version}", trigger: true
+    */
 
-    songs = App.songsFolder.get('_songs');
-    id = App.player.get('id');
-    ids = _.pluck(songs, 'id');
-    idx = ids.indexOf(id);
-    if (++idx === ids.length) {
-      idx = 0;
-    }
-    song = songs[idx];
-    version = song.version ? "/" + song.version : '';
-    showVersion = song.showVersion ? "-" + song.showVersion : '';
-    return Backbone.history.navigate("/" + song.year + "/" + song.month + "/" + song.day + showVersion + "/" + song.slug + version, {
-      trigger: true
-    });
   };
 
-  Player.prototype.last = function() {
-    var id, ids, idx, showVersion, song, songs, version;
-
-    songs = App.songsFolder.get('_songs');
-    id = App.player.get('id');
-    ids = _.pluck(songs, 'id');
-    idx = ids.indexOf(id);
-    if (--idx === 0) {
-      idx = ids.length - 1;
-    }
-    song = songs[idx];
-    version = song.version ? "/" + song.version : '';
-    showVersion = song.showVersion ? "-" + song.showVersion : '';
-    return Backbone.history.navigate("/" + song.year + "/" + song.month + "/" + song.day + showVersion + "/" + song.slug + version, {
-      trigger: true
-    });
+  Player.prototype.playLast = function() {
+    return App.queue.playLast();
   };
 
   Player.prototype.updateProgress = function(loaded, total) {
@@ -1622,17 +1729,20 @@ App.Views.PlaylistsEdit = (function(_super) {
 
   PlaylistsEdit.prototype.template = JST['playlists-edit'];
 
+  PlaylistsEdit.prototype.events = {
+    'click .save': 'save'
+  };
+
   PlaylistsEdit.prototype.initialize = function() {
-    if (!App.playlist || App.playlist.get('_id') !== this.options.playlistId) {
-      App.playlist = new App.Models.Playlist({
-        _id: this.options.playlistId
-      });
-      App.playlist.fetch();
-      return this.listenTo(App.playlist, 'change', this.render);
+    if (App.playlist) {
+      App.playlist.save();
     }
-    App.playlist.set('name', this.$el.find('input').val());
-    App.playlist.save();
-    return this.render();
+    App.playlist = new App.Models.Playlist({
+      _id: this.options.playlistId
+    });
+    App.playlist.fetch();
+    this.listenToOnce(App.playlist, 'change', this.render);
+    return App.header.render(false);
   };
 
   PlaylistsEdit.prototype.render = function() {
@@ -1640,6 +1750,11 @@ App.Views.PlaylistsEdit = (function(_super) {
       playlist: App.playlist.toJSON()
     }));
     return this;
+  };
+
+  PlaylistsEdit.prototype.save = function() {
+    App.playlist.set('name', this.$el.find('input').val());
+    return App.playlist.save();
   };
 
   return PlaylistsEdit;
@@ -1665,7 +1780,9 @@ App.Views.PlaylistsPage = (function(_super) {
   PlaylistsPage.prototype.initialize = function() {
     this.playlists || (this.playlists = new App.Collections.Playlists());
     this.listenTo(this.playlists, 'reset', this.render);
-    return this.playlists.fetch();
+    return this.playlists.fetch({
+      reset: true
+    });
   };
 
   PlaylistsPage.prototype.render = function() {
@@ -1676,6 +1793,39 @@ App.Views.PlaylistsPage = (function(_super) {
   };
 
   return PlaylistsPage;
+
+})(App.Views.View);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.Queue = (function(_super) {
+  __extends(Queue, _super);
+
+  function Queue() {
+    _ref = Queue.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Queue.prototype.el = '.queue-container';
+
+  Queue.prototype.template = JST['queue'];
+
+  Queue.prototype.initialize = function() {
+    App.queue = new App.Collections.Queue();
+    this.listenTo(App.queue, 'add', this.render);
+    this.listenTo(App.queue, 'reset', this.render);
+    return this.render();
+  };
+
+  Queue.prototype.render = function() {
+    return this.$el.html(this.template({
+      queue: App.queue.toJSON()
+    }));
+  };
+
+  return Queue;
 
 })(App.Views.View);
 
@@ -1812,7 +1962,9 @@ App.Views.Songs = (function(_super) {
   Songs.prototype.template = JST['songs'];
 
   Songs.prototype.events = {
-    'click .add': 'addToPlaylist'
+    'click .add': 'addToPlaylist',
+    'click .play': 'play',
+    'click .playAll': 'playAll'
   };
 
   Songs.prototype.initialize = function() {
@@ -1835,6 +1987,25 @@ App.Views.Songs = (function(_super) {
       songs: this.folder ? this.folder.toJSON() : songs
     }));
     return this;
+  };
+
+  Songs.prototype.play = function(e) {
+    var $add, id, song;
+
+    $add = $(e.target);
+    id = $add.attr('data-id');
+    song = new App.Models.Song({
+      _id: id
+    });
+    return song.fetch({
+      success: function() {
+        return App.queue.reset(song);
+      }
+    });
+  };
+
+  Songs.prototype.playAll = function() {
+    return App.queue.reset(this.folder.get('_songs'));
   };
 
   Songs.prototype.addToPlaylist = function(e) {

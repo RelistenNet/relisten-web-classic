@@ -4,11 +4,10 @@ class App.Views.HomePage extends App.Views.View
   render: =>
     @checkErr()
     App.router.clearActive()
-    App.playlist = null
     App.header.render()
     @$el.html @template
       loggedIn: App.user.loggedIn()
-
+    resize()
     @
   checkErr: ->
     if window.location.search

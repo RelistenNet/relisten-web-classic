@@ -3,7 +3,7 @@
 blogSchema = new Schema
   title: String
   body: String
-  comments: [ type: Schema.Types.ObjectId, ref: 'Comment' ]
+  blurb: [ type: Schema.Types.ObjectId, ref: 'blurb' ]
   _songs: type: Schema.Types.ObjectId, ref: 'Song'
   _playlist: type: Schema.Types.ObjectId, ref: 'Playlist'
   _user: type: Schema.Types.ObjectId, ref: 'User'

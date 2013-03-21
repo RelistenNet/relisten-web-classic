@@ -3,10 +3,10 @@ class App.Router extends Backbone.Router
     '': 'index'
     'login': 'login'
     'register': 'register'
-    'playlist/:id': 'playlist'
     'playlists': 'playlists'
-    'playlists/new': 'newPlaylist'
-    'playlists/:id/edit': 'editPlaylist'
+    'playlist/new': 'newPlaylist'
+    'playlist/:id': 'playlist'
+    'playlist/:id/edit': 'editPlaylist'
     # Last route should catch all
     #':notFound': 'notFound'
   initialize: ->
@@ -18,7 +18,6 @@ class App.Router extends Backbone.Router
     @bind 'all', @_trackPageview
   index: ->
     @changeView(new App.Views.HomePage())
-    App[n].close() for n in ['years', 'shows', 'songs'] if App[n]
     App.years = new App.Views.Years()
     App.shows = new App.Views.Shows()
     App.songs = new App.Views.Songs()
@@ -29,6 +28,7 @@ class App.Router extends Backbone.Router
     App.shows = new App.Views.Shows { year }
     App.songs.$el.empty() if App.songs
   show: (year, month, day, showVersion) ->
+    App.songs.undelegateEvents() if App.songs
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
@@ -41,7 +41,9 @@ class App.Router extends Backbone.Router
       App.shows = new App.Views.Shows { year }
       App.songs = new App.Views.Songs { year, month, day, showVersion }
     App.song = new App.Models.Song { year, month, day, slug, showVersion, version }
-    App.song.fetch()
+    App.song.fetch
+      success: ->
+        App.song.change()
   login: ->
     @changeView(new App.Views.LoginPage())
   register: ->

@@ -6,7 +6,7 @@ class App.Views.Player extends App.Views.View
     'click .pause': 'pause'
     'click .play': 'playButton'
     'click .next': 'playNext'
-    'click .last': 'last'
+    'click .last': 'playLast'
     'click .progress-bar': 'seek'
     'mouseenter .progress-bar': 'hoverBar'
     'mouseleave .progress-bar': 'leaveBar'
@@ -34,7 +34,9 @@ class App.Views.Player extends App.Views.View
     return soundManager.resume id if @played.indexOf id >= 0
     App.player.play id
   playNext: ->
-    songs = App.songsFolder.get '_songs'
+    App.queue.play()
+    ###
+    songs = App.queue.toJSON()
     id = App.player.get 'id'
     ids = _.pluck songs, 'id'
     idx = ids.indexOf id
@@ -43,16 +45,9 @@ class App.Views.Player extends App.Views.View
     version = if song.version then "/#{song.version}" else ''
     showVersion = if song.showVersion then "-#{song.showVersion}" else ''
     Backbone.history.navigate "/#{song.year}/#{song.month}/#{song.day}#{showVersion}/#{song.slug}#{version}", trigger: true
-  last: ->
-    songs = App.songsFolder.get '_songs'
-    id = App.player.get 'id'
-    ids = _.pluck songs, 'id'
-    idx = ids.indexOf id
-    idx = ids.length - 1 if --idx is 0
-    song = songs[idx]
-    version = if song.version then "/#{song.version}" else ''
-    showVersion = if song.showVersion then "-#{song.showVersion}" else ''
-    Backbone.history.navigate "/#{song.year}/#{song.month}/#{song.day}#{showVersion}/#{song.slug}#{version}", trigger: true
+    ###
+  playLast: ->
+    App.queue.playLast()
   updateProgress: (loaded, total) ->
     @$progress.width "#{(loaded/total)*100}%"
   updatePlaying: (position, duration) ->

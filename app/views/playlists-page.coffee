@@ -4,7 +4,7 @@ class App.Views.PlaylistsPage extends App.Views.View
   initialize: ->
     @playlists ||= new App.Collections.Playlists()
     @listenTo @playlists, 'reset', @render
-    @playlists.fetch()
+    @playlists.fetch reset: true
   render: ->
     @$el.html @template
       playlists: @playlists.toJSON()

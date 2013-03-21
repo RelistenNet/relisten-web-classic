@@ -4,7 +4,6 @@ class App.Models.Player extends App.Models.Model
     @set 'id', id
     App.playerView.played.push id
     soundManager.onready =>
-      App.songsFolder = new App.Models.Songs App.songs.folder.toJSON() if App.songs.folder
       @sound = soundManager.createSound
         id: "#{id}"
         url: "http://74.104.117.66:8044/stream?player=74&id=#{id}"
@@ -32,4 +31,4 @@ class App.Models.Player extends App.Models.Model
     $player = $('.player-container')
     unless parseInt $player.css('margin-top') is 0
       $player.animate 'margin-top': 0, 1000
-      $('.home-page .row-fluid').animate 'height': $(window).height() - 80, 1000
+      $('.home-page .row-fluid').animate 'height': $(window).height() - 228, 1000

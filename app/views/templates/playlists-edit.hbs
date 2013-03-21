@@ -1,7 +1,14 @@
-<h3>{{playlist.name}}</h3>
+<h3>Edit Playlist</h3>
 
-<ul>
+<input class=name value="{{playlist.name}}" />
+
+<table>
   {{#each playlist._songs}}
-    <li><a href="/{{year}}/{{month}}/{{day}}/{{slug}}">{{title}}</a> - {{album}}</li>
+    <tr>
+      <td><textarea>test</textarea></td>
+      <td><a href="/{{year}}/{{month}}/{{day}}/{{slug}}">{{title}}</a> - {{album}}</td>
+    </tr>
   {{/each}}
-</ul>
+</table>
+
+<button class=save>Save</button>

@@ -3,6 +3,8 @@ class App.Views.Songs extends App.Views.View
   template: JST['songs']
   events:
     'click .add': 'addToPlaylist'
+    'click .play': 'play'
+    'click .playAll': 'playAll'
   initialize: ->
     return @render() unless @options.year || @options.month || @options.day
     @folder = new App.Models.Songs
@@ -19,6 +21,17 @@ class App.Views.Songs extends App.Views.View
       songs: if @folder then @folder.toJSON() else songs
 
     @
+
+  play: (e) ->
+    $add = $(e.target)
+    id = $add.attr 'data-id'
+    song = new App.Models.Song(_id: id)
+    song.fetch
+      success: ->
+        App.queue.reset song
+
+  playAll: ->
+    App.queue.reset @folder.get('_songs')
 
   addToPlaylist: (e) ->
     $add = $(e.target)

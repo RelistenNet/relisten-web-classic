@@ -1,7 +1,10 @@
 <h3>{{playlist.name}}</h3>
 
-<ul>
+<table>
   {{#each playlist._songs}}
-    <li>{{title}} - {{album}}</li>
+    <tr>
+      <td><p>{{blur}}</p></td>
+      <td><a href="/{{year}}/{{month}}/{{day}}/{{slug}}">{{title}}</a> - {{album}}</td>
+    </tr>
   {{/each}}
-</ul>
+</table>

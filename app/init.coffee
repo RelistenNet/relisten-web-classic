@@ -10,16 +10,16 @@ $ ->
   # Initialize App
   Tweezer = new Application().initialize()
 
-  # Bind to every ajax send
-  $(document).ajaxSend (e, xhr, options) ->
-    token = csrf
-    xhr.setRequestHeader("X-CSRF-Token", token) if token and !_.isEmpty(user)
-
   $(window).resize resize
+
+# Bind to every ajax send
+$(document).ajaxSend (e, xhr, options) ->
+  token = csrf
+  xhr.setRequestHeader("X-CSRF-Token", token) if token and !_.isEmpty(user)
 
 resize = ->
   playerTop = parseInt $('.player-container').css('margin-top')
-  $('.home-page .row-fluid').height $(window).height() - playerTop
+  $('.home-page .row-fluid').height $(window).height() - playerTop - 250
 
 toHHMMSS = (seconds) ->
   sec_numb = parseInt(seconds)
@@ -33,8 +33,16 @@ toHHMMSS = (seconds) ->
   time = hourStr + minutes + ":" + seconds
   time
 
+# If num.length < 2, then add a leading zero
+addZero = (num) ->
+  return String("0" + num) if String(num).length < 2
+  String num
+
 Handlebars.registerHelper "toHHMMSS", ->
   new Handlebars.SafeString toHHMMSS(@duration)
 
 Handlebars.registerHelper "length", ->
   @_songs.length
+
+Handlebars.registerHelper "addZero", (num) ->
+  new Handlebars.SafeString addZero(num)

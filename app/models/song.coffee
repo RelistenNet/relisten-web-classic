@@ -1,5 +1,7 @@
 class App.Models.Song extends App.Models.Model
   url: ->
+    id = @get '_id'
+    return "/api/v1/song/#{id}" if id
     year = @get 'year'
     month = @get 'month'
     day = @get 'day'
@@ -7,5 +9,5 @@ class App.Models.Song extends App.Models.Model
     slug = @get 'slug'
     version = @get('version') || 0
     "/api/v1/#{year}/#{month}/#{day}-#{showVersion}/#{slug}/#{version}"
-  change: ->
-    App.player.play @get 'id'
+  change: =>
+    App.queue.push @

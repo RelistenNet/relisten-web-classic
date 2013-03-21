@@ -7,4 +7,4 @@ class App.Views.View extends Backbone.View
       @$el.html @template()
   close: ->
     @remove()
-    @unbind()
+    @undelegateEvents()

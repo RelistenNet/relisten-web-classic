@@ -6,8 +6,7 @@
   {{#if loggedIn}}
     <li><a class="header-link" href="/logout">LOGOUT</a></li>
     {{#if playlistId}}
-      <li><a class="header-link" href="/playlists/edit/{{playlistId}}">DONE</a></li>
-      <li><input class=playlist-title /></li>
+      <li><a class="header-link" href="/playlist/{{playlistId}}/edit">DONE</a></li>
     {{else}}
       <li><a class="header-link" href="/playlists">PLAYLISTS</a></li>
     {{/if}}

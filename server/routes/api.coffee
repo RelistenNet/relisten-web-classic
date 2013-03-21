@@ -65,15 +65,36 @@ router.get '/playlist/:id', (req, res) ->
       res.json playlist
 
 router.post '/playlist', (req, res) ->
-  playlist = new Playlist req.body
+  p = req.body
+  p._user = req.session.userId
+  playlist = new Playlist p
   playlist.save()
   res.json playlist
 
 router.put '/playlist/:id', (req, res) ->
-  Playlist.findById req.params.id, (err, playlist) ->
-    playlist._songs = req.body._songs
-    playlist.save()
-    res.json playlist
+  User.findOne
+    _id: req.session.userId
+  , (err, user) ->
+    return res.json err: 'No user found' if err || _.isEmpty user
+    Playlist.findOne
+      _id: req.params.id
+      _user: user._id
+    , (err, playlist) ->
+      return res.json {} if err || _.isEmpty playlist
+      songIds = _.filter req.body._songs, (str) -> typeof str is 'string'
+      playlist._songs = playlist._songs.concat songIds
+      playlist.name = req.body.name
+      playlist.save()
+      # Need to populate
+      Playlist.findById(req.params.id)
+        .populate('_songs')
+        .exec (err, playlist) ->
+          res.json playlist
+
+router.get '/song/:id', (req, res) ->
+  Song.findById(req.params.id)
+    .exec (err, song) ->
+      res.json song
 
 router.get '/me', (req, res) ->
   User
