@@ -248,15 +248,42 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n    <li>";
+  buffer += "\n    <li><a href=\"/";
+  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1);
+  stack1 = helpers['if'].call(depth0, depth0.version, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\">";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " - ";
+    + "</a> - ";
   if (stack1 = helpers.album) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.album; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "</li>\n  ";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "/";
+  if (stack1 = helpers.version) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.version; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1);
   return buffer;
   }
 
@@ -605,8 +632,16 @@ App.Router = (function(_super) {
   Router.prototype.index = function() {
     this.changeView(new App.Views.HomePage());
     App.years = new App.Views.Years();
-    App.shows = new App.Views.Shows();
-    return App.songs = new App.Views.Songs();
+    App.shows = new App.Views.Shows({
+      year: 2012,
+      month: 6,
+      day: 7
+    });
+    return App.songs = new App.Views.Songs({
+      year: 2012,
+      month: 6,
+      day: 7
+    });
   };
 
   Router.prototype.year = function(year) {
@@ -642,6 +677,8 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.song = function(year, month, day, showVersion, slug, version) {
+    var song;
+
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
@@ -654,6 +691,16 @@ App.Router = (function(_super) {
         day: day,
         showVersion: showVersion
       });
+    }
+    if (song = App.queue.findWhere({
+      year: year,
+      month: month,
+      day: day,
+      slug: slug,
+      showVersion: showVersion,
+      version: version
+    })) {
+      return App.queue.play(song);
     }
     App.song = new App.Models.Song({
       year: year,
@@ -1216,6 +1263,8 @@ App.Collections.Queue = (function(_super) {
     return _ref;
   }
 
+  Queue.prototype.localStorage = new Backbone.LocalStorage("Queue");
+
   Queue.prototype.model = App.Models.Song;
 
   Queue.prototype.idx = 0;
@@ -1236,16 +1285,25 @@ App.Collections.Queue = (function(_super) {
     });
   };
 
-  Queue.prototype.play = function() {
-    if (this.idx === this.length) {
-      this.idx = 0;
+  Queue.prototype.play = function(song) {
+    if (song) {
+      App.song = this.at(song);
+      if (App.song) {
+        this.idx = this.indexOf(App.song);
+      }
+    } else {
+      if (this.idx === this.length) {
+        this.idx = 0;
+      }
+      App.song = this.at(this.idx++);
     }
-    App.song = this.at(this.idx++);
     return App.player.play(App.song.get('id'));
   };
 
   Queue.prototype.playLast = function() {
-    --this.idx;
+    if (this.idx-- === 0) {
+      this.idx = this.length - 1;
+    }
     return this.play();
   };
 

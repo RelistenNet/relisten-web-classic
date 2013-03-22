@@ -19,8 +19,8 @@ class App.Router extends Backbone.Router
   index: ->
     @changeView(new App.Views.HomePage())
     App.years = new App.Views.Years()
-    App.shows = new App.Views.Shows()
-    App.songs = new App.Views.Songs()
+    App.shows = new App.Views.Shows { year: 2012, month: 6, day: 7 }
+    App.songs = new App.Views.Songs { year: 2012, month: 6, day: 7 }
   year: (year) ->
     if App.initial
       @changeView(new App.Views.HomePage())
@@ -40,6 +40,7 @@ class App.Router extends Backbone.Router
       App.years = new App.Views.Years()
       App.shows = new App.Views.Shows { year }
       App.songs = new App.Views.Songs { year, month, day, showVersion }
+    return App.queue.play song if song = App.queue.findWhere { year, month, day, slug, showVersion, version }
     App.song = new App.Models.Song { year, month, day, slug, showVersion, version }
     App.song.fetch
       success: ->
