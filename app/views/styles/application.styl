@@ -15,6 +15,19 @@
   font-weight: 700;
   src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://themes.googleusercontent.com/licensed/font?kit=HkF_qI1x_noxlxhrhMQYEI_sLczJPRm2COowb5SrMT8) format('woff');
 }
+@import url(https://fonts.googleapis.com/css?family=Open\+Sans:400,600);
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/MTP_ySUJH_bn48VBG8sNSqRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+}
 
 wavesblue = #0a64a4
 
@@ -32,6 +45,7 @@ body
   font-family Helvetica, Arial, sans-serif
   height 100%
   overflow hidden
+  min-width 940px
 
   .container-fluid
     height 100%
@@ -39,6 +53,8 @@ body
     #page-container
       display none
       height 100%
+      overflow-y scroll
+      padding-bottom 200px
 
   ul#notifications
     position fixed

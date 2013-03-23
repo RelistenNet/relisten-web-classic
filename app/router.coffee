@@ -4,7 +4,6 @@ class App.Router extends Backbone.Router
     'login': 'login'
     'register': 'register'
     'playlists': 'playlists'
-    'playlist/new': 'newPlaylist'
     'playlist/:id': 'playlist'
     'playlist/:id/edit': 'editPlaylist'
     # Last route should catch all
@@ -53,9 +52,6 @@ class App.Router extends Backbone.Router
     @changeView(new App.Views.PlaylistPage(playlistId: id))
   playlists: ->
     @changeView(new App.Views.PlaylistsPage(), false)
-  newPlaylist: ->
-    @index()
-    App.newPlaylist = new App.Views.NewPlaylist()
   editPlaylist: (id) ->
     @changeView(new App.Views.PlaylistsEdit(playlistId: id), false)
   clearActive: ($current) ->

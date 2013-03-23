@@ -1,11 +1,11 @@
 class App.Models.Player extends App.Models.Model
   play: (id) ->
-    soundManager.stop @get 'id' if @get 'id'
+    soundManager.stop "phish#{stopId}" if stopId = @get 'id'
     @set 'id', id
     App.playerView.played.push id
     soundManager.onready =>
       @sound = soundManager.createSound
-        id: "#{id}"
+        id: "phish#{id}"
         url: "http://74.104.117.66:8044/stream?player=74&id=#{id}"
       @sound.play
         whileloading: ->

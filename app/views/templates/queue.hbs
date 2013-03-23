@@ -1,5 +1,9 @@
 <ul>
   {{#each queue}}
-    <li><a href="/{{year}}/{{month}}/{{day}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}}</a> - {{album}}</li>
+    <li><a class=song href="/{{year}}/{{month}}/{{day}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}}</a> <span>[<a href="/{{year}}/{{month}}/{{day}}">{{month}}/{{day}}/{{year}}</a>]</span></li>
   {{/each}}
 </ul>
+
+{{#if loggedIn}}
+  <button class=save>Save Playlist</button>
+{{/if}}

@@ -15,6 +15,7 @@ class App.Views.Player extends App.Views.View
       url: "/swf"
       useHTML5Audio: true
       preferFlash: false
+      debugMode: false
     @render()
   render: ->
     @$el.html @template()
@@ -28,24 +29,13 @@ class App.Views.Player extends App.Views.View
     @$el.find('h4').html album if album
     @$el.find('.total').html toHHMMSS duration if duration
   pause: ->
-    soundManager.pause App.player.get('id')
+    soundManager.pause "phish" + App.player.get('id')
   playButton: ->
     id = App.player.get('id')
-    return soundManager.resume id if @played.indexOf id >= 0
+    return soundManager.resume "phish#{id}" if @played.indexOf id >= 0
     App.player.play id
   playNext: ->
     App.queue.play()
-    ###
-    songs = App.queue.toJSON()
-    id = App.player.get 'id'
-    ids = _.pluck songs, 'id'
-    idx = ids.indexOf id
-    idx = 0 if ++idx is ids.length
-    song = songs[idx]
-    version = if song.version then "/#{song.version}" else ''
-    showVersion = if song.showVersion then "-#{song.showVersion}" else ''
-    Backbone.history.navigate "/#{song.year}/#{song.month}/#{song.day}#{showVersion}/#{song.slug}#{version}", trigger: true
-    ###
   playLast: ->
     App.queue.playLast()
   updateProgress: (loaded, total) ->

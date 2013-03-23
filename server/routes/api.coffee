@@ -65,11 +65,17 @@ router.get '/playlist/:id', (req, res) ->
       res.json playlist
 
 router.post '/playlist', (req, res) ->
+  return res.json err: 'No user found' unless req.session.userId
   p = req.body
   p._user = req.session.userId
   playlist = new Playlist p
-  playlist.save()
-  res.json playlist
+  playlist.save (err) ->
+    res.json err: err if err
+    Playlist.findById(playlist._id)
+      .populate('_songs')
+      .exec (err, playlist) ->
+        res.json err: err if err
+        res.json playlist
 
 router.put '/playlist/:id', (req, res) ->
   User.findOne

@@ -3,6 +3,7 @@ class App.Views.Songs extends App.Views.View
   template: JST['songs']
   events:
     'click .add': 'addToPlaylist'
+    'click .song': 'addToPlaylist'
     'click .play': 'play'
     'click .playAll': 'playAll'
   initialize: ->
@@ -23,9 +24,8 @@ class App.Views.Songs extends App.Views.View
     @
 
   play: (e) ->
-    $add = $(e.target)
-    id = $add.attr 'data-id'
-    song = new App.Models.Song(_id: id)
+    id = $(e.target).parent().attr 'data-id'
+    song = new App.Models.Song _id: id
     song.fetch
       success: ->
         App.queue.reset song
@@ -34,10 +34,11 @@ class App.Views.Songs extends App.Views.View
     App.queue.reset @folder.get('_songs')
 
   addToPlaylist: (e) ->
-    $add = $(e.target)
-    id = $add.attr 'data-id'
-    songs = App.playlist.get '_songs'
-    songs.push id
-    App.playlist.set '_songs', songs
-    App.playlist.save()
-    App.notify.send 'Song Added', $add.attr 'data-song'
+    $li = $(e.target).parent()
+    id = $li.attr 'data-id'
+    App.song = new App.Models.Song _id: id
+
+    App.song.fetch
+      success: -> App.song.change()
+
+    false

@@ -19,7 +19,7 @@ $(document).ajaxSend (e, xhr, options) ->
 
 resize = ->
   playerTop = parseInt $('.player-container').css('margin-top')
-  $('.home-page .row-fluid').height $(window).height() - playerTop - 250
+  $('.home-page .row-fluid').height $(window).height() - playerTop - 228
 
 toHHMMSS = (seconds) ->
   sec_numb = parseInt(seconds)
@@ -41,8 +41,8 @@ addZero = (num) ->
 Handlebars.registerHelper "toHHMMSS", ->
   new Handlebars.SafeString toHHMMSS(@duration)
 
-Handlebars.registerHelper "length", ->
-  @_songs.length
+Handlebars.registerHelper "length", (arr) ->
+  new Handlebars.SafeString arr.length
 
 Handlebars.registerHelper "addZero", (num) ->
   new Handlebars.SafeString addZero(num)

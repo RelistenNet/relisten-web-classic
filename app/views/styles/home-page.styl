@@ -1,6 +1,7 @@
 @import 'nib'
 
 wavesblue = #0a64a4
+asihtosblue = #008ab0
 
 .home-page
   color #333
@@ -84,7 +85,7 @@ wavesblue = #0a64a4
               opacity 1
 
           > a
-            color #333
+            color asihtosblue
             height 100%
             width auto
             padding 5px 0px 5px 5px
@@ -94,6 +95,8 @@ wavesblue = #0a64a4
             text-overflow ellipsis
             white-space nowrap
             overflow hidden
+            font-size 14px
+            font-family 'Open Sans'
 
             &:hover
               background #E6E6E6
@@ -160,10 +163,3 @@ wavesblue = #0a64a4
             ne-height 1em
             padding 10px
             color #D90F0F
-
-  &.new-playlist
-    .row-fluid .span4 ul li
-      .add
-        display block
-      .play
-        display none
