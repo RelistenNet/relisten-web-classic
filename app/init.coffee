@@ -46,3 +46,8 @@ Handlebars.registerHelper "length", (arr) ->
 
 Handlebars.registerHelper "addZero", (num) ->
   new Handlebars.SafeString addZero(num)
+
+Handlebars.registerHelper "ifEqual", (val1, val2, fn) ->
+  fn() if val1 is val2
+
+

@@ -1,6 +1,15 @@
 <ul>
   {{#each queue}}
-    <li><a class=song href="/{{year}}/{{month}}/{{day}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}}</a> <span>[<a href="/{{year}}/{{month}}/{{day}}">{{month}}/{{day}}/{{year}}</a>]</span></li>
+    <li>
+      <a class="song {{active}}" href="/{{year}}/{{month}}/{{longDay}}/{{longSlug}}">
+        {{title}}
+      </a>
+      <span>
+        [<a href="/{{year}}/{{month}}/{{longDay}}">
+          {{month}}/{{day}}/{{year}}
+        </a>]
+      </span>
+    </li>
   {{/each}}
 </ul>
 

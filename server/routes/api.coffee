@@ -100,6 +100,7 @@ router.put '/playlist/:id', (req, res) ->
 router.get '/song/:id', (req, res) ->
   Song.findById(req.params.id)
     .exec (err, song) ->
+      # virtual
       res.json song
 
 router.get '/me', (req, res) ->

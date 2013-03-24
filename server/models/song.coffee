@@ -29,6 +29,8 @@ songSchema = new Schema
   slug: String
   version: Number, default: 0
   showVersion: Number, default: 0
+  longSlug: String
+  longDay: String
   _show: type: Schema.Types.ObjectId, ref: 'Show'
 
 Song = mongoose.model 'Song', songSchema

@@ -5531,6 +5531,7 @@ footer{height:150px;width:100%;position:absolute;bottom:0;border-top:1px solid #
 
 .queue-container{height:100%;width:50%;position:absolute;bottom:0;left:0;overflow-y:scroll;}
 .queue-container ul li{list-style-type:none;}
+.queue-container ul li a.active{font-weight:bold}
 .queue-container ul li span{font-size:.8em;}
 .queue-container ul li span a{color:#333}
 .queue-container button{position:absolute;right:20px;bottom:20px;height:40px}

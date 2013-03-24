@@ -89,6 +89,7 @@ getSongs = ->
             k.version = i
             k.showVersion = show.version
             k.slug = slug
+            k.longSlug = slug + if version then '-' + version else ''
             songs.push slug
             #console.log 'song saved', k.title
             console.log 'fail', k.title unless k.month > 0 || k.day > 0
@@ -97,6 +98,19 @@ getSongs = ->
             show._songs.push song._id
             show.save()
             song.save()
+
+
+cleanSongs = ->
+  i = 0
+  Song.find (err, songs) ->
+    for song in songs
+      Song.findById song._id, (err, song) ->
+        song.longSlug = song.slug + if song.version then '/' + song.version else ''
+        song.longDay = song.day + if song.showVersion then '-' + song.showVersion else ''
+        song.save (err) ->
+          console.log err if err
+          console.log ++i
+
 
 ## CLI ##
 
@@ -117,5 +131,10 @@ program
   .command('songs [id]')
   .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
   .action(getSongs)
+
+program
+  .command('clean')
+  .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
+  .action(cleanSongs)
 
 program.parse process.argv

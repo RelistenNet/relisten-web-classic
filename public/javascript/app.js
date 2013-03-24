@@ -228,7 +228,11 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n    <li><a class=song href=\"/";
+  buffer += "\n    <li>\n      <a class=\"song ";
+  if (stack1 = helpers.active) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.active; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" href=\"/";
   if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -237,20 +241,18 @@ function program1(depth0,data) {
   else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "/";
-  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if (stack1 = helpers.longDay) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.longDay; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "/";
-  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1);
-  stack1 = helpers['if'].call(depth0, depth0.version, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">";
+  if (stack1 = helpers.longSlug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.longSlug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n        ";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</a> <span>[<a href=\"/";
+    + "\n      </a>\n      <span>\n        [<a href=\"/";
   if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -259,10 +261,10 @@ function program1(depth0,data) {
   else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "/";
-  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if (stack1 = helpers.longDay) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.longDay; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">";
+    + "\">\n          ";
   if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -274,20 +276,11 @@ function program1(depth0,data) {
   if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</a>]</span></li>\n  ";
-  return buffer;
-  }
-function program2(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "/";
-  if (stack1 = helpers.version) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.version; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1);
+    + "\n        </a>]\n      </span>\n    </li>\n  ";
   return buffer;
   }
 
-function program4(depth0,data) {
+function program3(depth0,data) {
   
   
   return "\n  <button class=save>Save Playlist</button>\n";
@@ -297,7 +290,7 @@ function program4(depth0,data) {
   stack1 = helpers.each.call(depth0, depth0.queue, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</ul>\n\n";
-  stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n";
   return buffer;
@@ -546,6 +539,12 @@ Handlebars.registerHelper("length", function(arr) {
 
 Handlebars.registerHelper("addZero", function(num) {
   return new Handlebars.SafeString(addZero(num));
+});
+
+Handlebars.registerHelper("ifEqual", function(val1, val2, fn) {
+  if (val1 === val2) {
+    return fn();
+  }
 });
 
 var Application;
@@ -1274,15 +1273,15 @@ App.Collections.Queue = (function(_super) {
       }
     });
     return this.on('reset', function() {
+      _this.idx = 0;
       if (_this.length > 0) {
-        _this.play();
+        return _this.play();
       }
-      return _this.idx = 0;
     });
   };
 
   Queue.prototype.play = function(song) {
-    var day, id, month, showVersion, showVersionStr, slug, songVersionStr, version, year, _ref1;
+    var id, longDay, longSlug, month, year, _ref1;
 
     if (song) {
       App.song = this.at(song);
@@ -1298,13 +1297,16 @@ App.Collections.Queue = (function(_super) {
     if (!App.song) {
       return false;
     }
-    _ref1 = App.song.toJSON(), id = _ref1.id, year = _ref1.year, month = _ref1.month, day = _ref1.day, showVersion = _ref1.showVersion, slug = _ref1.slug, version = _ref1.version;
+    this.invoke('set', {
+      active: ''
+    });
+    App.song.set('active', 'active');
+    _ref1 = App.song.toJSON(), id = _ref1.id, year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
     App.player.play(id);
-    showVersionStr = showVersion ? "-" + showVersion : '';
-    songVersionStr = version ? "/" + songVersion : '';
-    return Backbone.history.navigate("/" + year + "/" + month + "/" + day + showVersionStr + "/" + slug + songVersionStr, {
+    Backbone.history.navigate("/" + year + "/" + month + "/" + longDay + "/" + longSlug, {
       trigger: false
     });
+    return App.queueView.render();
   };
 
   Queue.prototype.playLast = function() {
@@ -1855,9 +1857,12 @@ App.Views.Queue = (function(_super) {
   };
 
   Queue.prototype.render = function() {
+    var _ref1;
+
     return this.$el.html(this.template({
       queue: App.queue.toJSON(),
-      loggedIn: App.user.loggedIn()
+      loggedIn: App.user.loggedIn(),
+      activeSlug: App.queue ? (_ref1 = App.queue.at(App.queue.idx - 1)) != null ? _ref1.get('longSlug') : void 0 : false
     }));
   };
 

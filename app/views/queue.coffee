@@ -13,6 +13,7 @@ class App.Views.Queue extends App.Views.View
     @$el.html @template
       queue: App.queue.toJSON()
       loggedIn: App.user.loggedIn()
+      activeSlug: if App.queue then App.queue.at(App.queue.idx - 1)?.get 'longSlug' else false
   savePlaylist: ->
     playlist = new App.Models.Playlist _songs: _.pluck(App.queue.toJSON(), '_id')
     playlist.save()
