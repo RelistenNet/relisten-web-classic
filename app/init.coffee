@@ -18,8 +18,7 @@ $(document).ajaxSend (e, xhr, options) ->
   xhr.setRequestHeader("X-CSRF-Token", token) if token and !_.isEmpty(user)
 
 resize = ->
-  playerTop = parseInt $('.player-container').css('margin-top')
-  $('.home-page .row-fluid').height $(window).height() - playerTop - 228
+  $('.home-page .row-fluid').height $(window).height() - 150 - ($('footer').css('bottom'))
 
 toHHMMSS = (seconds) ->
   sec_numb = parseInt(seconds)
@@ -50,4 +49,7 @@ Handlebars.registerHelper "addZero", (num) ->
 Handlebars.registerHelper "ifEqual", (val1, val2, fn) ->
   fn() if val1 is val2
 
+Handlebars.registerHelper "blurb", (arr, id) ->
+  blurb = _.where arr, _id: id if arr
+  new Handlebars.SafeString if blurb?.text then blurb.text else ''
 

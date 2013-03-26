@@ -2,7 +2,7 @@
   "author": "Daniel Saewitz",
   "name": "ghost",
   "description": "Backbone + Express + Coffee + Mongo",
-  "version": "0.0.1-27",
+  "version": "0.0.1-32",
   "engines": {
     "node": "0.8.x"
   },

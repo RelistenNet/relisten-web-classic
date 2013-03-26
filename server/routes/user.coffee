@@ -9,15 +9,6 @@ Show = mongoose.model 'Show'
 
 async = require 'async'
 
-nconf = require 'nconf'
-Subsonic = require 'subsonic'
-
-subsonic = new Subsonic
-  username: nconf.get('USERNAME')
-  password: nconf.get('PASSWORD')
-  application: 'spreadsheet'
-  server: nconf.get('SERVER')
-
 router.get '/', (req, res, next) ->
   bootstrapData (err, folders) ->
     # If user isn't logged in then next() so public/index.html is served

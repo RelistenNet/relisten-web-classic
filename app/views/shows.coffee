@@ -1,6 +1,8 @@
 class App.Views.Shows extends App.Views.View
   el: '.shows-container'
   template: JST['shows']
+  events:
+    'click a': 'activate'
   initialize: ->
     return @render() unless @options.year
 
@@ -12,4 +14,9 @@ class App.Views.Shows extends App.Views.View
     @$el.html @template
       shows: if @shows then @shows.toJSON() else shows
 
+    @$a = @$el.find('a').removeClass 'active'
+
     @
+  activate: (e) ->
+    @$a.removeClass 'active'
+    $(e.target).addClass 'active'

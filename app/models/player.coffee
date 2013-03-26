@@ -18,6 +18,7 @@ class App.Models.Player extends App.Models.Model
         onfinish: ->
           @stop()
           App.playerView.playNext()
+          App.queue.playing = false if App.queue.idx is App.queue.length
 
   updateText: ->
     id = @get 'id'
@@ -28,7 +29,7 @@ class App.Models.Player extends App.Models.Model
         duration: App.song.get 'duration'
 
   slideDown: ->
-    $player = $('.player-container')
-    unless parseInt $player.css('margin-top') is 0
-      $player.animate 'margin-top': 0, 1000
-      $('.home-page .row-fluid').animate 'height': $(window).height() - 228, 1000
+    $footer = $('footer')
+    unless parseInt $footer.css('bottom') is 0
+      $footer.animate 'bottom': 0, 1000
+      $('.home-page .row-fluid').animate 'height': $(window).height() - 150, 1000

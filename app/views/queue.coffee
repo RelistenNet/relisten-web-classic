@@ -4,6 +4,7 @@ class App.Views.Queue extends App.Views.View
   events:
     'click .save': 'savePlaylist'
     'click .song': 'play'
+    'click .delete': 'removeFromQueue'
   initialize: ->
     App.queue = new App.Collections.Queue()
     @listenTo App.queue, 'add', @render
@@ -23,4 +24,9 @@ class App.Views.Queue extends App.Views.View
     e.preventDefault()
     App.queue.idx = @$el.find('li').index $(e.target).parent()
     App.queue.play()
+  removeFromQueue: (e) ->
+     idx = @$el.find('.delete').index $(e.target)
+     App.queue.remove App.queue.at(idx)
+     App.queue.idx-- if idx < App.queue.idx
+     @render()
 

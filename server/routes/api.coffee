@@ -7,17 +7,11 @@ Year = mongoose.model 'Year'
 Song = mongoose.model 'Song'
 Show = mongoose.model 'Show'
 Playlist = mongoose.model 'Playlist'
+Blurb = mongoose.model 'Blurb'
 
 { _ } = require 'underscore'
 
 nconf = require 'nconf'
-Subsonic = require 'subsonic'
-
-subsonic = new Subsonic
-  username: nconf.get('USERNAME')
-  password: nconf.get('PASSWORD')
-  application: 'spreadsheet'
-  server: nconf.get('SERVER')
 
 # Everything added under this router will be prefaced by /api/v1
 # You can change this path in your index.coffee middleware
@@ -61,6 +55,7 @@ router.get '/playlists', (req, res) ->
 router.get '/playlist/:id', (req, res) ->
   Playlist.findById(req.params.id)
     .populate('_songs')
+    .populate('_blurbs')
     .exec (err, playlist) ->
       res.json playlist
 
@@ -73,6 +68,7 @@ router.post '/playlist', (req, res) ->
     res.json err: err if err
     Playlist.findById(playlist._id)
       .populate('_songs')
+      .populate('_blurbs')
       .exec (err, playlist) ->
         res.json err: err if err
         res.json playlist
@@ -94,6 +90,7 @@ router.put '/playlist/:id', (req, res) ->
       # Need to populate
       Playlist.findById(req.params.id)
         .populate('_songs')
+        .populate('_blurbs')
         .exec (err, playlist) ->
           res.json playlist
 
@@ -102,6 +99,33 @@ router.get '/song/:id', (req, res) ->
     .exec (err, song) ->
       # virtual
       res.json song
+
+router.put '/blurbs', (req, res) ->
+  User.findById req.session.userId, (err, user) ->
+    return res.json err: 'No user found' if err || _.isEmpty user
+    { playlistId } = req.body
+    Playlist.findOne
+      _id: playlistId
+      _user: user._id
+    , (err, playlist) ->
+      return res.json err: "You don't own this playlist" unless playlist
+      blurbs = req.body.arr
+
+      for blurb in blurbs
+        { text, songId } = blurb
+        Blurb.findOne { songId, playlistId }, (err, blurb) ->
+          if blurb
+            blurb.text = text
+          else
+            blurb = new Blurb { text, _song: songId, _playlist: playlistId, _user: req.session.userId }
+            playlist._blurbs.push blurb._id
+            playlist.save()
+
+          blurb.save()
+
+      res.json req.body
+
+
 
 router.get '/me', (req, res) ->
   User
@@ -115,13 +139,5 @@ router.get '/me', (req, res) ->
 router.get '/me/csrf', (req, res) ->
   res.json
     csrf: req.session._csrf
-
-router.get '/folder/:id', (req, res) ->
-  subsonic.folder req.params.id, (err, folder) ->
-    res.json folder
-
-router.get '/song/:id', (req, res) ->
-  subsonic.song req.params.id, (err, song) ->
-    res.json song
 
 module.exports = router

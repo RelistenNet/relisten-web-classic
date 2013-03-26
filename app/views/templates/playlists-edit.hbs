@@ -1,14 +1,18 @@
 <h3>Edit Playlist</h3>
 
-<input class=name value="{{playlist.name}}" />
 
-<table>
-  {{#each playlist._songs}}
-    <tr>
-      <td><textarea>test</textarea></td>
-      <td><a href="/{{year}}/{{month}}/{{day}}/{{slug}}">{{title}}</a> - {{album}}</td>
-    </tr>
-  {{/each}}
-</table>
+<form action=PUT action=/ name=playlist>
 
-<button class=save>Save</button>
+  <input name=name class=name value="{{playlist.name}}" />
+
+  <table>
+    {{#each playlist._songs}}
+      <tr>
+        <td><textarea name=blurb[text]>{{#blurb ../playlist._blurbs _id}}test{{/blurb}}</textarea><input type=hidden name=blurb[id] value={{_id}} /></td>
+        <td><a href="/{{year}}/{{month}}/{{longDay}}/{{longSlug}}">{{title}}</a> - {{album}}</td>
+      </tr>
+    {{/each}}
+  </table>
+
+  <button type=submit class=save>Save</button>
+  </form>

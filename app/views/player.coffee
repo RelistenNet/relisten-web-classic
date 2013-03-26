@@ -30,8 +30,10 @@ class App.Views.Player extends App.Views.View
     @$el.find('.total').html toHHMMSS duration if duration
   pause: ->
     soundManager.pause "phish" + App.player.get('id')
+    App.queue.playing = false
   playButton: ->
     id = App.player.get('id')
+    App.queue.playing = true
     return soundManager.resume "phish#{id}" if @played.indexOf id >= 0
     App.player.play id
   playNext: ->
@@ -44,7 +46,7 @@ class App.Views.Player extends App.Views.View
     @$seconds.html toHHMMSS(position / 1000)
     @$position.css 'left', "#{(position/duration)*100}%"
   seek: (e) ->
-    coord = e.pageX / $(window).width()
+    coord = (e.pageX - @$el.offset().left) / @$el.width()
     return if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord || e.pageX < 14
     App.player.sound.setPosition coord * App.song.get('duration') * 1000
   hoverBar: ->

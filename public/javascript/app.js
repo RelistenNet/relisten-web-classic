@@ -148,45 +148,58 @@ function program1(depth0,data) {
 this["JST"]["playlists-edit"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, stack2, self=this, helperMissing=helpers.helperMissing, functionType="function", escapeExpression=this.escapeExpression;
 
-function program1(depth0,data) {
+function program1(depth0,data,depth1) {
   
-  var buffer = "", stack1;
-  buffer += "\n    <tr>\n      <td><textarea>test</textarea></td>\n      <td><a href=\"/";
-  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  var buffer = "", stack1, stack2, options;
+  buffer += "\n      <tr>\n        <td><textarea name=blurb[text]>";
+  options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data};
+  stack2 = ((stack1 = helpers.blurb),stack1 ? stack1.call(depth0, ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options) : helperMissing.call(depth0, "blurb", ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "</textarea><input type=hidden name=blurb[id] value=";
+  if (stack2 = helpers._id) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0._id; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + " /></td>\n        <td><a href=\"/";
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
-  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.month) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.month; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
-  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.longDay) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.longDay; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
-  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.longSlug) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.longSlug; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "\">";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "</a> - ";
-  if (stack1 = helpers.album) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.album; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n    </tr>\n  ";
+  if (stack2 = helpers.album) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.album; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</td>\n      </tr>\n    ";
   return buffer;
   }
+function program2(depth0,data) {
+  
+  
+  return "test";
+  }
 
-  buffer += "<h3>Edit Playlist</h3>\n\n<input class=name value=\""
+  buffer += "<h3>Edit Playlist</h3>\n\n\n<form action=PUT action=/ name=playlist>\n\n  <input name=name class=name value=\""
     + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" />\n\n<table>\n  ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    + "\" />\n\n  <table>\n    ";
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</table>\n\n<button class=save>Save</button>\n";
+  buffer += "\n  </table>\n\n  <button type=submit class=save>Save</button>\n  </form>";
   return buffer;
   });
 
@@ -276,7 +289,7 @@ function program1(depth0,data) {
   if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\n        </a>]\n      </span>\n    </li>\n  ";
+    + "\n        </a>]\n      </span>\n      <span>[\n        <a href=\"javascript:\" class=delete>x</a>\n      ]</span>\n    </li>\n  ";
   return buffer;
   }
 
@@ -495,10 +508,7 @@ $(document).ajaxSend(function(e, xhr, options) {
 });
 
 resize = function() {
-  var playerTop;
-
-  playerTop = parseInt($('.player-container').css('margin-top'));
-  return $('.home-page .row-fluid').height($(window).height() - playerTop - 228);
+  return $('.home-page .row-fluid').height($(window).height() - 150 - ($('footer').css('bottom')));
 };
 
 toHHMMSS = function(seconds) {
@@ -545,6 +555,17 @@ Handlebars.registerHelper("ifEqual", function(val1, val2, fn) {
   if (val1 === val2) {
     return fn();
   }
+});
+
+Handlebars.registerHelper("blurb", function(arr, id) {
+  var blurb;
+
+  if (arr) {
+    blurb = _.where(arr, {
+      _id: id
+    });
+  }
+  return new Handlebars.SafeString((blurb != null ? blurb.text : void 0) ? blurb.text : '');
 });
 
 var Application;
@@ -985,7 +1006,10 @@ App.Models.Player = (function(_super) {
         },
         onfinish: function() {
           this.stop();
-          return App.playerView.playNext();
+          App.playerView.playNext();
+          if (App.queue.idx === App.queue.length) {
+            return App.queue.playing = false;
+          }
         }
       });
     });
@@ -1005,15 +1029,15 @@ App.Models.Player = (function(_super) {
   };
 
   Player.prototype.slideDown = function() {
-    var $player;
+    var $footer;
 
-    $player = $('.player-container');
-    if (!parseInt($player.css('margin-top') === 0)) {
-      $player.animate({
-        'margin-top': 0
+    $footer = $('footer');
+    if (!parseInt($footer.css('bottom') === 0)) {
+      $footer.animate({
+        'bottom': 0
       }, 1000);
       return $('.home-page .row-fluid').animate({
-        'height': $(window).height() - 228
+        'height': $(window).height() - 150
       }, 1000);
     }
   };
@@ -1264,11 +1288,13 @@ App.Collections.Queue = (function(_super) {
 
   Queue.prototype.idx = 0;
 
+  Queue.prototype.playing = false;
+
   Queue.prototype.initialize = function() {
     var _this = this;
 
     this.on('add', function() {
-      if (_this.length === 1) {
+      if ((_this.length === 1) || (_this.idx === _this.length - 1 && !_this.playing)) {
         return _this.play();
       }
     });
@@ -1294,6 +1320,7 @@ App.Collections.Queue = (function(_super) {
       }
       App.song = this.at(this.idx++);
     }
+    console.log(this.idx);
     if (!App.song) {
       return false;
     }
@@ -1303,6 +1330,7 @@ App.Collections.Queue = (function(_super) {
     App.song.set('active', 'active');
     _ref1 = App.song.toJSON(), id = _ref1.id, year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
     App.player.play(id);
+    this.playing = true;
     Backbone.history.navigate("/" + year + "/" + month + "/" + longDay + "/" + longSlug, {
       trigger: false
     });
@@ -1648,13 +1676,15 @@ App.Views.Player = (function(_super) {
   };
 
   Player.prototype.pause = function() {
-    return soundManager.pause("phish" + App.player.get('id'));
+    soundManager.pause("phish" + App.player.get('id'));
+    return App.queue.playing = false;
   };
 
   Player.prototype.playButton = function() {
     var id;
 
     id = App.player.get('id');
+    App.queue.playing = true;
     if (this.played.indexOf(id >= 0)) {
       return soundManager.resume("phish" + id);
     }
@@ -1681,7 +1711,7 @@ App.Views.Player = (function(_super) {
   Player.prototype.seek = function(e) {
     var coord;
 
-    coord = e.pageX / $(window).width();
+    coord = (e.pageX - this.$el.offset().left) / this.$el.width();
     if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord || e.pageX < 14) {
       return;
     }
@@ -1762,12 +1792,12 @@ App.Views.PlaylistsEdit = (function(_super) {
   PlaylistsEdit.prototype.template = JST['playlists-edit'];
 
   PlaylistsEdit.prototype.events = {
-    'click .save': 'save'
+    'submit form': 'saveBlurbs'
   };
 
   PlaylistsEdit.prototype.initialize = function() {
     if (App.playlist) {
-      App.playlist.save();
+      App.playlist.saveBlurbs();
     }
     App.playlist = new App.Models.Playlist({
       _id: this.options.playlistId
@@ -1784,9 +1814,40 @@ App.Views.PlaylistsEdit = (function(_super) {
     return this;
   };
 
-  PlaylistsEdit.prototype.save = function() {
-    App.playlist.set('name', this.$el.find('input').val());
-    return App.playlist.save();
+  PlaylistsEdit.prototype.saveBlurbs = function(e) {
+    var $text, $textarea, data, div, idx, playlistId, val, _ref1;
+
+    e.preventDefault();
+    playlistId = App.playlist.get('_id');
+    data = {
+      playlistId: playlistId,
+      arr: []
+    };
+    _ref1 = $textarea = $('textarea');
+    for (idx in _ref1) {
+      div = _ref1[idx];
+      $text = $(div);
+      val = typeof $text.val() === 'string' ? $text.val() : '';
+      data.arr.push({
+        text: val,
+        songId: $text.siblings('input').val()
+      });
+      if (idx === $textarea.length - 1) {
+        this.PUT(data);
+      }
+    }
+    return false;
+  };
+
+  PlaylistsEdit.prototype.PUT = function(data) {
+    return $.ajax({
+      type: 'PUT',
+      url: '/api/v1/blurbs',
+      data: data,
+      success: function(json) {
+        return console.log(json);
+      }
+    });
   };
 
   return PlaylistsEdit;
@@ -1846,7 +1907,8 @@ App.Views.Queue = (function(_super) {
 
   Queue.prototype.events = {
     'click .save': 'savePlaylist',
-    'click .song': 'play'
+    'click .song': 'play',
+    'click .delete': 'removeFromQueue'
   };
 
   Queue.prototype.initialize = function() {
@@ -1884,6 +1946,17 @@ App.Views.Queue = (function(_super) {
     e.preventDefault();
     App.queue.idx = this.$el.find('li').index($(e.target).parent());
     return App.queue.play();
+  };
+
+  Queue.prototype.removeFromQueue = function(e) {
+    var idx;
+
+    idx = this.$el.find('.delete').index($(e.target));
+    App.queue.remove(App.queue.at(idx));
+    if (idx < App.queue.idx) {
+      App.queue.idx--;
+    }
+    return this.render();
   };
 
   return Queue;
@@ -1983,6 +2056,10 @@ App.Views.Shows = (function(_super) {
 
   Shows.prototype.template = JST['shows'];
 
+  Shows.prototype.events = {
+    'click a': 'activate'
+  };
+
   Shows.prototype.initialize = function() {
     if (!this.options.year) {
       return this.render();
@@ -1999,7 +2076,13 @@ App.Views.Shows = (function(_super) {
     this.$el.html(this.template({
       shows: this.shows ? this.shows.toJSON() : shows
     }));
+    this.$a = this.$el.find('a').removeClass('active');
     return this;
+  };
+
+  Shows.prototype.activate = function(e) {
+    this.$a.removeClass('active');
+    return $(e.target).addClass('active');
   };
 
   return Shows;
@@ -2107,12 +2190,22 @@ App.Views.Years = (function(_super) {
 
   Years.prototype.template = JST['years'];
 
+  Years.prototype.events = {
+    'click a': 'activate'
+  };
+
   Years.prototype.render = function() {
     App.router.clearActive();
     this.$el.html(this.template({
       years: years
     }));
+    this.$a = this.$el.find('a');
     return this;
+  };
+
+  Years.prototype.activate = function(e) {
+    this.$a.removeClass('active');
+    return $(e.target).addClass('active');
   };
 
   return Years;

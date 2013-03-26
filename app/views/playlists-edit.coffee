@@ -2,9 +2,9 @@ class App.Views.PlaylistsEdit extends App.Views.View
   className: 'playlists-edit-page'
   template: JST['playlists-edit']
   events:
-    'click .save': 'save'
+    'submit form': 'saveBlurbs'
   initialize: ->
-    App.playlist.save() if App.playlist
+    App.playlist.saveBlurbs() if App.playlist
     App.playlist = new App.Models.Playlist _id: @options.playlistId
     #App.songsFolder.fetch() if App.songsFolder
     App.playlist.fetch()
@@ -15,6 +15,27 @@ class App.Views.PlaylistsEdit extends App.Views.View
       playlist: App.playlist.toJSON()
 
     @
-  save: ->
-    App.playlist.set 'name', @$el.find('input').val()
-    App.playlist.save()
+  saveBlurbs: (e) ->
+    e.preventDefault()
+
+    playlistId = App.playlist.get '_id'
+    data = { playlistId, arr: [] }
+
+    for idx, div of $textarea = $('textarea')
+      $text = $(div)
+      val = if typeof $text.val() is 'string' then $text.val() else ''
+
+      data.arr.push text: val, songId: $text.siblings('input').val()
+
+      # Loop is finished, @PUT
+      @PUT data if idx is $textarea.length - 1
+
+    false
+
+  PUT: (data) ->
+    $.ajax
+      type: 'PUT'
+      url: '/api/v1/blurbs'
+      data: data
+      success: (json) ->
+        console.log json
