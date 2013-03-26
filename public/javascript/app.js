@@ -99,47 +99,52 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 this["JST"]["playlist"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, stack2, self=this, helperMissing=helpers.helperMissing, functionType="function", escapeExpression=this.escapeExpression;
 
-function program1(depth0,data) {
+function program1(depth0,data,depth1) {
   
-  var buffer = "", stack1;
+  var buffer = "", stack1, stack2, options;
   buffer += "\n    <tr>\n      <td><p>";
-  if (stack1 = helpers.blur) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.blur; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</p></td>\n      <td><a href=\"/";
-  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data};
+  stack2 = ((stack1 = helpers.blurb),stack1 ? stack1.call(depth0, ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options) : helperMissing.call(depth0, "blurb", ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "</p></td>\n      <td><a href=\"/";
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
-  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.month) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.month; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
-  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.day) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.day; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
-  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.slug) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.slug; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "\">";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "</a> - ";
-  if (stack1 = helpers.album) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.album; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.album) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.album; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "</td>\n    </tr>\n  ";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = "";
   return buffer;
   }
 
   buffer += "<h3>"
     + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</h3>\n\n<table>\n  ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</table>\n";
   return buffer;
@@ -190,8 +195,8 @@ function program1(depth0,data,depth1) {
   }
 function program2(depth0,data) {
   
-  
-  return "test";
+  var buffer = "";
+  return buffer;
   }
 
   buffer += "<h3>Edit Playlist</h3>\n\n\n<form action=PUT action=/ name=playlist>\n\n  <input name=name class=name value=\""
@@ -561,8 +566,8 @@ Handlebars.registerHelper("blurb", function(arr, id) {
   var blurb;
 
   if (arr) {
-    blurb = _.where(arr, {
-      _id: id
+    blurb = _.findWhere(arr, {
+      _song: id
     });
   }
   return new Handlebars.SafeString((blurb != null ? blurb.text : void 0) ? blurb.text : '');
@@ -1320,7 +1325,6 @@ App.Collections.Queue = (function(_super) {
       }
       App.song = this.at(this.idx++);
     }
-    console.log(this.idx);
     if (!App.song) {
       return false;
     }
@@ -1796,9 +1800,6 @@ App.Views.PlaylistsEdit = (function(_super) {
   };
 
   PlaylistsEdit.prototype.initialize = function() {
-    if (App.playlist) {
-      App.playlist.saveBlurbs();
-    }
     App.playlist = new App.Models.Playlist({
       _id: this.options.playlistId
     });
@@ -1815,7 +1816,7 @@ App.Views.PlaylistsEdit = (function(_super) {
   };
 
   PlaylistsEdit.prototype.saveBlurbs = function(e) {
-    var $text, $textarea, data, div, idx, playlistId, val, _ref1;
+    var $textarea, PUT, data, playlistId;
 
     e.preventDefault();
     playlistId = App.playlist.get('_id');
@@ -1823,19 +1824,22 @@ App.Views.PlaylistsEdit = (function(_super) {
       playlistId: playlistId,
       arr: []
     };
-    _ref1 = $textarea = $('textarea');
-    for (idx in _ref1) {
-      div = _ref1[idx];
-      $text = $(div);
+    PUT = this.PUT;
+    $textarea = $('textarea');
+    $textarea.each(function(idx) {
+      var $text, val;
+
+      $text = $(this);
       val = typeof $text.val() === 'string' ? $text.val() : '';
+      console.log($text.val());
       data.arr.push({
         text: val,
         songId: $text.siblings('input').val()
       });
       if (idx === $textarea.length - 1) {
-        this.PUT(data);
+        return PUT(data);
       }
-    }
+    });
     return false;
   };
 
@@ -1845,7 +1849,9 @@ App.Views.PlaylistsEdit = (function(_super) {
       url: '/api/v1/blurbs',
       data: data,
       success: function(json) {
-        return console.log(json);
+        if (json) {
+          return App.notify.send('Saved', 'Your playlist has been saved');
+        }
       }
     });
   };

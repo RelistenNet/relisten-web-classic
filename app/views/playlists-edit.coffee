@@ -4,7 +4,6 @@ class App.Views.PlaylistsEdit extends App.Views.View
   events:
     'submit form': 'saveBlurbs'
   initialize: ->
-    App.playlist.saveBlurbs() if App.playlist
     App.playlist = new App.Models.Playlist _id: @options.playlistId
     #App.songsFolder.fetch() if App.songsFolder
     App.playlist.fetch()
@@ -21,14 +20,18 @@ class App.Views.PlaylistsEdit extends App.Views.View
     playlistId = App.playlist.get '_id'
     data = { playlistId, arr: [] }
 
-    for idx, div of $textarea = $('textarea')
-      $text = $(div)
+    PUT = @PUT
+
+    $textarea = $('textarea')
+    $textarea.each (idx) ->
+      $text = $(@)
       val = if typeof $text.val() is 'string' then $text.val() else ''
+      console.log $text.val()
 
       data.arr.push text: val, songId: $text.siblings('input').val()
 
       # Loop is finished, @PUT
-      @PUT data if idx is $textarea.length - 1
+      PUT data if idx is $textarea.length - 1
 
     false
 
@@ -38,4 +41,4 @@ class App.Views.PlaylistsEdit extends App.Views.View
       url: '/api/v1/blurbs'
       data: data
       success: (json) ->
-        console.log json
+        App.notify.send 'Saved', 'Your playlist has been saved' if json

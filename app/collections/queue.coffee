@@ -15,7 +15,7 @@ class App.Collections.Queue extends App.Collections.Collection
     else
       return App.playerView.pause() if @idx is @length
       App.song = @at @idx++
-    console.log @idx
+
     return false unless App.song
     @invoke 'set', active: ''
     App.song.set 'active', 'active'

@@ -50,6 +50,6 @@ Handlebars.registerHelper "ifEqual", (val1, val2, fn) ->
   fn() if val1 is val2
 
 Handlebars.registerHelper "blurb", (arr, id) ->
-  blurb = _.where arr, _id: id if arr
+  blurb = _.findWhere arr, _song: id if arr
   new Handlebars.SafeString if blurb?.text then blurb.text else ''
 

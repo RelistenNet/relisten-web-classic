@@ -8,7 +8,7 @@
   <table>
     {{#each playlist._songs}}
       <tr>
-        <td><textarea name=blurb[text]>{{#blurb ../playlist._blurbs _id}}test{{/blurb}}</textarea><input type=hidden name=blurb[id] value={{_id}} /></td>
+        <td><textarea name=blurb[text]>{{#blurb ../playlist._blurbs _id}}{{/blurb}}</textarea><input type=hidden name=blurb[id] value={{_id}} /></td>
         <td><a href="/{{year}}/{{month}}/{{longDay}}/{{longSlug}}">{{title}}</a> - {{album}}</td>
       </tr>
     {{/each}}

@@ -10,7 +10,7 @@ Playlist = mongoose.model 'Playlist'
 Blurb = mongoose.model 'Blurb'
 
 { _ } = require 'underscore'
-
+async = require 'async'
 nconf = require 'nconf'
 
 # Everything added under this router will be prefaced by /api/v1
@@ -109,21 +109,24 @@ router.put '/blurbs', (req, res) ->
       _user: user._id
     , (err, playlist) ->
       return res.json err: "You don't own this playlist" unless playlist
-      blurbs = req.body.arr
+      output = []
 
-      for blurb in blurbs
+      async.map req.body.arr, (blurb, callback) ->
         { text, songId } = blurb
-        Blurb.findOne { songId, playlistId }, (err, blurb) ->
+
+        Blurb.findOne { _song: songId, _playlist: playlistId }, (err, blurb) ->
           if blurb
             blurb.text = text
           else
-            blurb = new Blurb { text, _song: songId, _playlist: playlistId, _user: req.session.userId }
+            blurb = new Blurb { text: text, _song: songId, _playlist: playlistId, _user: req.session.userId }
             playlist._blurbs.push blurb._id
             playlist.save()
 
           blurb.save()
-
-      res.json req.body
+          callback null, blurb
+      , (err, arr) ->
+        return res.json err: err if err
+        res.json arr
 
 
 
