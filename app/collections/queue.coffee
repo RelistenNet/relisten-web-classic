@@ -20,7 +20,7 @@ class App.Collections.Queue extends App.Collections.Collection
     @invoke 'set', active: ''
     App.song.set 'active', 'active'
     { id, year, month, longDay, longSlug } = App.song.toJSON()
-    App.player.play id
+    App.player.play id, App.song.get('ms')
     @playing = true
     Backbone.history.navigate "/#{year}/#{month}/#{longDay}/#{longSlug}", trigger: false
     App.queueView.render()

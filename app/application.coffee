@@ -21,7 +21,7 @@ class Application
     App.notify = new App.Views.Notifications()
     App.header = new App.Views.Header()
     App.queueView = new App.Views.Queue()
-    @footer = new App.Views.Footer()
+    App.footer = new App.Views.Footer()
     App.player = new App.Models.Player()
     App.playerView = new App.Views.Player()
 

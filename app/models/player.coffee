@@ -1,5 +1,5 @@
 class App.Models.Player extends App.Models.Model
-  play: (id) ->
+  play: (id, ms) ->
     soundManager.stop "phish#{stopId}" if stopId = @get 'id'
     @set 'id', id
     App.playerView.played.push id
@@ -7,11 +7,12 @@ class App.Models.Player extends App.Models.Model
       @sound = soundManager.createSound
         id: "phish#{id}"
         url: "http://74.104.117.66:8044/stream?player=74&id=#{id}"
+        position: ms || 0
       @sound.play
         whileloading: ->
-          App.playerView.updateProgress @bytesLoaded, @bytesTotal
+          App.footer.updateProgress @bytesLoaded, @bytesTotal
         whileplaying: ->
-          App.playerView.updatePlaying @position, @duration
+          App.footer.updatePlaying @position, @duration
         onplay: =>
           @updateText()
           @slideDown()

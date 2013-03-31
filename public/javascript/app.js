@@ -3,10 +3,10 @@ this["JST"] = this["JST"] || {};
 this["JST"]["footer"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "";
+  
 
 
-  return buffer;
+  return "  <div class=progress-bar></div>\n  <div class=position-bar></div>";
   });
 
 this["JST"]["header"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n    <div class=progress-bar></div>\n    <div class=position-bar></div>\n  </div>\n</div>\n";
+  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["playlist"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -485,7 +485,7 @@ function program1(depth0,data) {
   buffer += "\n</ul>\n";
   return buffer;
   });
-var addZero, resize, toHHMMSS;
+var addZero, resize, timeToMS, toHHMMSS;
 
 window.App = {
   "Models": {},
@@ -544,6 +544,18 @@ addZero = function(num) {
   return String(num);
 };
 
+timeToMS = function(time) {
+  var min, sec;
+
+  if (!/m/.test(time)) {
+    return 0;
+  }
+  time = time.split('m');
+  min = +time[0];
+  sec = +time[1];
+  return ((min * 60) + sec) * 1000;
+};
+
 Handlebars.registerHelper("toHHMMSS", function() {
   return new Handlebars.SafeString(toHHMMSS(this.duration));
 });
@@ -598,7 +610,7 @@ Application = (function() {
     App.notify = new App.Views.Notifications();
     App.header = new App.Views.Header();
     App.queueView = new App.Views.Queue();
-    this.footer = new App.Views.Footer();
+    App.footer = new App.Views.Footer();
     App.player = new App.Models.Player();
     return App.playerView = new App.Views.Player();
   };
@@ -649,7 +661,7 @@ App.Router = (function(_super) {
   Router.prototype.initialize = function() {
     this.route(/^([0-9]{4})\/?$/, 'year');
     this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, 'show');
-    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9])?\/?$/, 'song');
+    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9])?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
   };
@@ -701,8 +713,8 @@ App.Router = (function(_super) {
     });
   };
 
-  Router.prototype.song = function(year, month, day, showVersion, slug, version) {
-    var song;
+  Router.prototype.song = function(year, month, day, showVersion, slug, version, time) {
+    var ms, song;
 
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
@@ -717,6 +729,7 @@ App.Router = (function(_super) {
         showVersion: showVersion
       });
     }
+    ms = timeToMS(time);
     if (song = App.queue.findWhere({
       year: year,
       month: month,
@@ -725,7 +738,7 @@ App.Router = (function(_super) {
       showVersion: showVersion,
       version: version
     })) {
-      return App.queue.play(song);
+      return App.queue.play(song, ms);
     }
     App.song = new App.Models.Song({
       year: year,
@@ -733,7 +746,8 @@ App.Router = (function(_super) {
       day: day,
       slug: slug,
       showVersion: showVersion,
-      version: version
+      version: version,
+      ms: ms
     });
     return App.song.fetch({
       success: function() {
@@ -783,6 +797,7 @@ App.Router = (function(_super) {
     }
     if (render) {
       view.render();
+      resize();
     }
     this.currentView = view;
     return this.$container.html(view.el).fadeIn('fast');
@@ -801,7 +816,7 @@ App.Router = (function(_super) {
       App.initial = false;
     }
     url = Backbone.history.getFragment();
-    return _gaq.push(['_trackPageview', "/" + url]);
+    return ga('send', 'pageview', "/" + url);
   };
 
   return Router;
@@ -984,7 +999,7 @@ App.Models.Player = (function(_super) {
     return _ref;
   }
 
-  Player.prototype.play = function(id) {
+  Player.prototype.play = function(id, ms) {
     var stopId,
       _this = this;
 
@@ -996,14 +1011,15 @@ App.Models.Player = (function(_super) {
     return soundManager.onready(function() {
       _this.sound = soundManager.createSound({
         id: "phish" + id,
-        url: "http://74.104.117.66:8044/stream?player=74&id=" + id
+        url: "http://74.104.117.66:8044/stream?player=74&id=" + id,
+        position: ms || 0
       });
       return _this.sound.play({
         whileloading: function() {
-          return App.playerView.updateProgress(this.bytesLoaded, this.bytesTotal);
+          return App.footer.updateProgress(this.bytesLoaded, this.bytesTotal);
         },
         whileplaying: function() {
-          return App.playerView.updatePlaying(this.position, this.duration);
+          return App.footer.updatePlaying(this.position, this.duration);
         },
         onplay: function() {
           _this.updateText();
@@ -1118,7 +1134,7 @@ App.Models.Song = (function(_super) {
   }
 
   Song.prototype.url = function() {
-    var day, id, month, showVersion, slug, version, year;
+    var day, id, month, ms, showVersion, slug, version, year;
 
     id = this.get('_id');
     if (id) {
@@ -1130,6 +1146,7 @@ App.Models.Song = (function(_super) {
     showVersion = this.get('showVersion') || 0;
     slug = this.get('slug');
     version = this.get('version') || 0;
+    ms = this.get('ms');
     return "/api/v1/" + year + "/" + month + "/" + day + "-" + showVersion + "/" + slug + "/" + version;
   };
 
@@ -1333,7 +1350,7 @@ App.Collections.Queue = (function(_super) {
     });
     App.song.set('active', 'active');
     _ref1 = App.song.toJSON(), id = _ref1.id, year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
-    App.player.play(id);
+    App.player.play(id, App.song.get('ms'));
     this.playing = true;
     Backbone.history.navigate("/" + year + "/" + month + "/" + longDay + "/" + longSlug, {
       trigger: false
@@ -1401,6 +1418,64 @@ App.Views.Footer = (function(_super) {
   Footer.prototype.el = 'footer';
 
   Footer.prototype.template = JST['footer'];
+
+  Footer.prototype.events = {
+    'mouseenter .progress-bar': 'hoverBar',
+    'mouseleave .progress-bar': 'leaveBar',
+    'click .progress-bar': 'seek',
+    'click .progress-container': 'seekAhead'
+  };
+
+  Footer.prototype.initialize = function() {
+    this.$progress = this.$el.find('.progress-bar');
+    return this.$position = this.$el.find('.position-bar');
+  };
+
+  Footer.prototype.hoverBar = function() {
+    this.$progress.stop().animate({
+      height: '7px'
+    }, 300);
+    return this.$position.stop().animate({
+      height: '7px'
+    }, 300);
+  };
+
+  Footer.prototype.leaveBar = function() {
+    this.$progress.stop().animate({
+      height: '5px'
+    }, 300);
+    return this.$position.stop().animate({
+      height: '5px'
+    }, 300);
+  };
+
+  Footer.prototype.updateProgress = function(loaded, total) {
+    return this.$progress.width("" + ((loaded / total) * 100) + "%");
+  };
+
+  Footer.prototype.updatePlaying = function(position, duration) {
+    App.playerView.$seconds.html(toHHMMSS(position / 1000));
+    return this.$position.css('left', "" + ((position / duration) * 100) + "%");
+  };
+
+  Footer.prototype.seek = function(e) {
+    var coord;
+
+    coord = e.pageX / $(window).width();
+    return App.player.sound.setPosition(coord * App.song.get('duration') * 1000);
+  };
+
+  Footer.prototype.seekAhead = function(e) {
+    var coord, position;
+
+    coord = e.pageX / $(window).width();
+    if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal > coord) {
+      return;
+    }
+    position = coord * App.song.get('duration') * 1000;
+    App.player.sound.destruct();
+    return App.player.play(App.song.get('id'), position);
+  };
 
   return Footer;
 
@@ -1640,10 +1715,7 @@ App.Views.Player = (function(_super) {
     'click .pause': 'pause',
     'click .play': 'playButton',
     'click .next': 'playNext',
-    'click .last': 'playLast',
-    'click .progress-bar': 'seek',
-    'mouseenter .progress-bar': 'hoverBar',
-    'mouseleave .progress-bar': 'leaveBar'
+    'click .last': 'playLast'
   };
 
   Player.prototype.initialize = function() {
@@ -1659,8 +1731,6 @@ App.Views.Player = (function(_super) {
   Player.prototype.render = function() {
     this.$el.html(this.template());
     App.player.updateText();
-    this.$progress = this.$el.find('.progress-bar');
-    this.$position = this.$el.find('.position-bar');
     return this.$seconds = this.$el.find('.seconds');
   };
 
@@ -1701,43 +1771,6 @@ App.Views.Player = (function(_super) {
 
   Player.prototype.playLast = function() {
     return App.queue.playLast();
-  };
-
-  Player.prototype.updateProgress = function(loaded, total) {
-    return this.$progress.width("" + ((loaded / total) * 100) + "%");
-  };
-
-  Player.prototype.updatePlaying = function(position, duration) {
-    this.$seconds.html(toHHMMSS(position / 1000));
-    return this.$position.css('left', "" + ((position / duration) * 100) + "%");
-  };
-
-  Player.prototype.seek = function(e) {
-    var coord;
-
-    coord = (e.pageX - this.$el.offset().left) / this.$el.width();
-    if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord || e.pageX < 14) {
-      return;
-    }
-    return App.player.sound.setPosition(coord * App.song.get('duration') * 1000);
-  };
-
-  Player.prototype.hoverBar = function() {
-    this.$progress.stop().animate({
-      height: '7px'
-    }, 300);
-    return this.$position.stop().animate({
-      height: '7px'
-    }, 300);
-  };
-
-  Player.prototype.leaveBar = function() {
-    this.$progress.stop().animate({
-      height: '5px'
-    }, 300);
-    return this.$position.stop().animate({
-      height: '5px'
-    }, 300);
   };
 
   return Player;
@@ -1816,12 +1849,14 @@ App.Views.PlaylistsEdit = (function(_super) {
   };
 
   PlaylistsEdit.prototype.saveBlurbs = function(e) {
-    var $textarea, PUT, data, playlistId;
+    var $textarea, PUT, data, playlistId, title;
 
     e.preventDefault();
     playlistId = App.playlist.get('_id');
+    title = this.$el.find('input.name').val();
     data = {
       playlistId: playlistId,
+      title: title,
       arr: []
     };
     PUT = this.PUT;

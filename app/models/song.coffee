@@ -8,6 +8,7 @@ class App.Models.Song extends App.Models.Model
     showVersion = @get('showVersion') || 0
     slug = @get 'slug'
     version = @get('version') || 0
+    ms = @get 'ms'
     "/api/v1/#{year}/#{month}/#{day}-#{showVersion}/#{slug}/#{version}"
   change: =>
     App.queue.push @

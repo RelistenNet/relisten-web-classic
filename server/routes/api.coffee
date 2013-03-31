@@ -111,6 +111,9 @@ router.put '/blurbs', (req, res) ->
       return res.json err: "You don't own this playlist" unless playlist
       output = []
 
+      playlist.name = req.body.title
+      playlist.save()
+
       async.map req.body.arr, (blurb, callback) ->
         { text, songId } = blurb
 

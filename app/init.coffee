@@ -37,6 +37,13 @@ addZero = (num) ->
   return String("0" + num) if String(num).length < 2
   String num
 
+timeToMS = (time) ->
+  return 0 unless /m/.test time
+  time = time.split 'm'
+  min = +time[0]
+  sec = +time[1]
+  ((min * 60) + sec) * 1000
+
 Handlebars.registerHelper "toHHMMSS", ->
   new Handlebars.SafeString toHHMMSS(@duration)
 

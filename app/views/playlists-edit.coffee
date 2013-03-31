@@ -18,7 +18,8 @@ class App.Views.PlaylistsEdit extends App.Views.View
     e.preventDefault()
 
     playlistId = App.playlist.get '_id'
-    data = { playlistId, arr: [] }
+    title = @$el.find('input.name').val()
+    data = { playlistId, title , arr: [] }
 
     PUT = @PUT
 

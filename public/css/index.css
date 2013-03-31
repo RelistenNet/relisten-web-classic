@@ -5464,7 +5464,10 @@ header ul.right li a:hover,header ul.right li a:visited:hover,header ul.right li
 header ul.right li a span,header ul.right li a:visited span{font-size:.7em}
 header ul.right li a.plus,header ul.right li a:visited.plus{line-height:.8em}
 
-footer{height:150px;width:100%;position:absolute;bottom:-150px;border-top:1px solid #aaa;background:#f6f6f6;z-index:99;-webkit-box-shadow:0 -3px 2px -2px rgba(61,61,61,0.4);-webkit-box-shadow:0 -3px 2px -2px rgba(61,61,61,0.4);box-shadow:0 -3px 2px -2px rgba(61,61,61,0.4)}
+footer{height:150px;width:100%;position:absolute;bottom:-150px;border-top:1px solid #aaa;background:#f6f6f6;z-index:99;-webkit-box-shadow:0 -3px 2px -2px rgba(61,61,61,0.4);-webkit-box-shadow:0 -3px 2px -2px rgba(61,61,61,0.4);box-shadow:0 -3px 2px -2px rgba(61,61,61,0.4);}
+footer .progress-container{background:#999;width:100%;position:absolute;height:5px;z-index:100;top:0;left:0;}
+footer .progress-container .progress-bar{height:5px;width:1%;background:#000;position:absolute;top:0}
+footer .progress-container .position-bar{width:2px;height:7px;background:#fff;position:absolute;z-index:101;top:0}
 
 .home-page{color:#333;height:100%;}
 .home-page .row-fluid{width:100%;height:100%;}
@@ -5505,12 +5508,10 @@ footer{height:150px;width:100%;position:absolute;bottom:-150px;border-top:1px so
 
 .player-container{height:100%;width:50%;border-bottom:1px solid #aaa;position:absolute;right:0;top:0;}
 .player-container .last,.player-container .pause,.player-container .play,.player-container .next{width:14px;position:relative;z-index:99}
-.player-container .info{top:0;right:0;position:absolute;text-align:right;width:100%;height:100%;}
+.player-container .info{top:10px;right:0;position:absolute;text-align:right;width:100%;height:100%;}
 .player-container .info h3.title,.player-container .info h4.album{line-height:.5em;padding-right:10px;color:#333}
 .player-container .info .time{padding-right:10px;}
 .player-container .info .time div{display:inline-block}
-.player-container .info .progress-bar{height:5px;width:1%;background:#000;position:absolute;bottom:0;left:0}
-.player-container .info .position-bar{width:2px;height:7px;background:#fff;position:absolute;left:0%;bottom:0}
 
 .playlists-page header{background:#f6f6f6;z-index:97;position:relative;border-left:1px solid #ccc;border-right:1px solid #ccc;width:100%;}
 .playlists-page header ul{width:100%;}

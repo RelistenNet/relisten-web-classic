@@ -11,7 +11,7 @@ class App.Router extends Backbone.Router
   initialize: ->
     @route /^([0-9]{4})\/?$/, 'year'
     @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, 'show'
-    @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9])?\/?$/, 'song'
+    @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9])?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song'
 
     @$container = $('#page-container')
     @bind 'all', @_trackPageview
@@ -33,14 +33,15 @@ class App.Router extends Backbone.Router
       App.years = new App.Views.Years()
       App.shows = new App.Views.Shows { year }
     App.songs = new App.Views.Songs { year, month, day, showVersion }
-  song: (year, month, day, showVersion, slug, version) ->
+  song: (year, month, day, showVersion, slug, version, time) ->
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
       App.shows = new App.Views.Shows { year }
       App.songs = new App.Views.Songs { year, month, day, showVersion }
-    return App.queue.play song if song = App.queue.findWhere { year, month, day, slug, showVersion, version }
-    App.song = new App.Models.Song { year, month, day, slug, showVersion, version }
+    ms = timeToMS time
+    return App.queue.play song, ms if song = App.queue.findWhere { year, month, day, slug, showVersion, version }
+    App.song = new App.Models.Song { year, month, day, slug, showVersion, version, ms }
     App.song.fetch
       success: ->
         App.song.change()
@@ -64,6 +65,7 @@ class App.Router extends Backbone.Router
 
     if render
       view.render()
+      resize()
 
     @currentView = view
     @$container.html(view.el).fadeIn('fast')
@@ -72,4 +74,4 @@ class App.Router extends Backbone.Router
   _trackPageview: ->
     App.initial = false if App.initial
     url = Backbone.history.getFragment()
-    _gaq.push(['_trackPageview', "/#{url}"])
+    ga('send', 'pageview', "/#{url}");
