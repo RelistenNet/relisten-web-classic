@@ -504,7 +504,6 @@ $(function() {
   return $(window).keydown(function(e) {
     var _ref, _ref1;
 
-    console.log(e.keyCode);
     if (e.keyCode === 32) {
       if (App.queue.playing) {
         return (_ref = App.playerView) != null ? _ref.pause() : void 0;
