@@ -33,4 +33,4 @@ class App.Models.Player extends App.Models.Model
     $footer = $('footer')
     unless parseInt $footer.css('bottom') is 0
       $footer.animate 'bottom': 0, 1000
-      $('.home-page .row-fluid').animate 'height': $(window).height() - 150, 1000
+      $('.home-page .row-fluid').animate 'height': $(window).height() - 100, 1000

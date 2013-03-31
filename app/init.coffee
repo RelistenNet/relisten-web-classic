@@ -12,22 +12,20 @@ $ ->
 
   $(window).resize resize
 
-# Bind to every ajax send
-$(document).ajaxSend (e, xhr, options) ->
-  token = csrf
-  xhr.setRequestHeader("X-CSRF-Token", token) if token and !_.isEmpty(user)
-
-  $(window).resize resize
-
   $(window).keydown (e) ->
     console.log e.keyCode
     #space
     if e.keyCode is 32
       if App.queue.playing then App.playerView?.pause() else App.playerView?.playButton()
 
+# Bind to every ajax send
+$(document).ajaxSend (e, xhr, options) ->
+  token = csrf
+  xhr.setRequestHeader("X-CSRF-Token", token) if token and !_.isEmpty(user)
+
 
 resize = ->
-  $('.home-page .row-fluid').height $(window).height() - ($('footer').css('bottom'))
+  $('.home-page .row-fluid').height $(window).height() - 100 - parseInt($('footer').css('bottom'))
 
 toHHMMSS = (seconds) ->
   sec_numb = parseInt(seconds)

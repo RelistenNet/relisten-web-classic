@@ -500,16 +500,6 @@ $(function() {
   var Tweezer;
 
   Tweezer = new Application().initialize();
-  return $(window).resize(resize);
-});
-
-$(document).ajaxSend(function(e, xhr, options) {
-  var token;
-
-  token = csrf;
-  if (token && !_.isEmpty(user)) {
-    xhr.setRequestHeader("X-CSRF-Token", token);
-  }
   $(window).resize(resize);
   return $(window).keydown(function(e) {
     var _ref, _ref1;
@@ -525,8 +515,17 @@ $(document).ajaxSend(function(e, xhr, options) {
   });
 });
 
+$(document).ajaxSend(function(e, xhr, options) {
+  var token;
+
+  token = csrf;
+  if (token && !_.isEmpty(user)) {
+    return xhr.setRequestHeader("X-CSRF-Token", token);
+  }
+});
+
 resize = function() {
-  return $('.home-page .row-fluid').height($(window).height() - ($('footer').css('bottom')));
+  return $('.home-page .row-fluid').height($(window).height() - 100 - parseInt($('footer').css('bottom')));
 };
 
 toHHMMSS = function(seconds) {
@@ -1071,7 +1070,7 @@ App.Models.Player = (function(_super) {
         'bottom': 0
       }, 1000);
       return $('.home-page .row-fluid').animate({
-        'height': $(window).height() - 150
+        'height': $(window).height() - 100
       }, 1000);
     }
   };
@@ -1433,32 +1432,39 @@ App.Views.Footer = (function(_super) {
   Footer.prototype.template = JST['footer'];
 
   Footer.prototype.events = {
-    'mouseenter .progress-bar': 'hoverBar',
-    'mouseleave .progress-bar': 'leaveBar',
+    'mouseenter .progress-container': 'hoverBar',
+    'mouseleave .progress-container': 'leaveBar',
     'click .progress-bar': 'seek',
     'click .progress-container': 'seekAhead'
   };
 
   Footer.prototype.initialize = function() {
     this.$progress = this.$el.find('.progress-bar');
+    this.$container = this.$el.find('.progress-container');
     return this.$position = this.$el.find('.position-bar');
   };
 
   Footer.prototype.hoverBar = function() {
     this.$progress.stop().animate({
-      height: '7px'
+      height: '10px'
+    }, 300);
+    this.$container.stop().animate({
+      height: '10px'
     }, 300);
     return this.$position.stop().animate({
-      height: '7px'
+      height: '10px'
     }, 300);
   };
 
   Footer.prototype.leaveBar = function() {
     this.$progress.stop().animate({
-      height: '5px'
+      height: '8px'
     }, 300);
-    return this.$position.stop().animate({
-      height: '5px'
+    this.$position.stop().animate({
+      height: '8px'
+    }, 300);
+    return this.$container.stop().animate({
+      height: '8px'
     }, 300);
   };
 
