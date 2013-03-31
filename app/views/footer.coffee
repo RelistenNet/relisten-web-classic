@@ -2,19 +2,22 @@ class App.Views.Footer extends App.Views.View
   el: 'footer'
   template: JST['footer']
   events:
-    'mouseenter .progress-bar': 'hoverBar'
-    'mouseleave .progress-bar': 'leaveBar'
+    'mouseenter .progress-container': 'hoverBar'
+    'mouseleave .progress-container': 'leaveBar'
     'click .progress-bar': 'seek'
     'click .progress-container': 'seekAhead'
   initialize: ->
     @$progress = @$el.find '.progress-bar'
+    @$container = @$el.find '.progress-container'
     @$position = @$el.find '.position-bar'
   hoverBar: ->
-    @$progress.stop().animate height: '7px', 300
-    @$position.stop().animate height: '7px', 300
+    @$progress.stop().animate height: '10px', 300
+    @$container.stop().animate height: '10px', 300
+    @$position.stop().animate height: '10px', 300
   leaveBar: ->
-    @$progress.stop().animate height: '5px', 300
-    @$position.stop().animate height: '5px', 300
+    @$progress.stop().animate height: '8px', 300
+    @$position.stop().animate height: '8px', 300
+    @$container.stop().animate height: '8px', 300
   updateProgress: (loaded, total) ->
     @$progress.width "#{(loaded/total)*100}%"
   updatePlaying: (position, duration) ->

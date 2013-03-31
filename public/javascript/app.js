@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n  </div>\n</div>\n";
+  return "<div class=player>\n  <div class=buttons>\n    <div class=\"bar bar-left\">\n      <div class=last></div>\n    </div>\n    <div class=pause></div>\n    <div class=\"bar bar-right\">\n      <div class=next></div>\n    </div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["playlist"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -493,7 +493,19 @@ $(function() {
   var Tweezer;
 
   Tweezer = new Application().initialize();
-  return $(window).resize(resize);
+  $(window).resize(resize);
+  return $(window).keydown(function(e) {
+    var _ref, _ref1;
+
+    console.log(e.keyCode);
+    if (e.keyCode === 32) {
+      if (App.queue.playing) {
+        return (_ref = App.playerView) != null ? _ref.pause() : void 0;
+      } else {
+        return (_ref1 = App.playerView) != null ? _ref1.playButton() : void 0;
+      }
+    }
+  });
 });
 
 $(document).ajaxSend(function(e, xhr, options) {
@@ -506,7 +518,7 @@ $(document).ajaxSend(function(e, xhr, options) {
 });
 
 resize = function() {
-  return $('.home-page .row-fluid').height($(window).height() - 150 - ($('footer').css('bottom')));
+  return $('.home-page .row-fluid').height($(window).height() - 100 - parseInt($('footer').css('bottom')));
 };
 
 toHHMMSS = function(seconds) {
@@ -1050,7 +1062,7 @@ App.Models.Player = (function(_super) {
         'bottom': 0
       }, 1000);
       return $('.home-page .row-fluid').animate({
-        'height': $(window).height() - 150
+        'height': $(window).height() - 100
       }, 1000);
     }
   };
@@ -1412,32 +1424,39 @@ App.Views.Footer = (function(_super) {
   Footer.prototype.template = JST['footer'];
 
   Footer.prototype.events = {
-    'mouseenter .progress-bar': 'hoverBar',
-    'mouseleave .progress-bar': 'leaveBar',
+    'mouseenter .progress-container': 'hoverBar',
+    'mouseleave .progress-container': 'leaveBar',
     'click .progress-bar': 'seek',
     'click .progress-container': 'seekAhead'
   };
 
   Footer.prototype.initialize = function() {
     this.$progress = this.$el.find('.progress-bar');
+    this.$container = this.$el.find('.progress-container');
     return this.$position = this.$el.find('.position-bar');
   };
 
   Footer.prototype.hoverBar = function() {
     this.$progress.stop().animate({
-      height: '7px'
+      height: '10px'
+    }, 300);
+    this.$container.stop().animate({
+      height: '10px'
     }, 300);
     return this.$position.stop().animate({
-      height: '7px'
+      height: '10px'
     }, 300);
   };
 
   Footer.prototype.leaveBar = function() {
     this.$progress.stop().animate({
-      height: '5px'
+      height: '8px'
     }, 300);
-    return this.$position.stop().animate({
-      height: '5px'
+    this.$position.stop().animate({
+      height: '8px'
+    }, 300);
+    return this.$container.stop().animate({
+      height: '8px'
     }, 300);
   };
 
