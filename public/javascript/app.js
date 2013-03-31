@@ -508,8 +508,20 @@ $(document).ajaxSend(function(e, xhr, options) {
 
   token = csrf;
   if (token && !_.isEmpty(user)) {
-    return xhr.setRequestHeader("X-CSRF-Token", token);
+    xhr.setRequestHeader("X-CSRF-Token", token);
   }
+  return $(window).keydown(function(e) {
+    var _ref, _ref1;
+
+    console.log(e.keyCode);
+    if (e.keyCode === 32) {
+      if (App.queue.playing) {
+        return (_ref = App.playerView) != null ? _ref.pause() : void 0;
+      } else {
+        return (_ref1 = App.playerView) != null ? _ref1.playButton() : void 0;
+      }
+    }
+  });
 });
 
 resize = function() {

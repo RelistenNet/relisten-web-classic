@@ -17,6 +17,13 @@ $(document).ajaxSend (e, xhr, options) ->
   token = csrf
   xhr.setRequestHeader("X-CSRF-Token", token) if token and !_.isEmpty(user)
 
+  $(window).keydown (e) ->
+    console.log e.keyCode
+    #space
+    if e.keyCode is 32
+      if App.queue.playing then App.playerView?.pause() else App.playerView?.playButton()
+
+
 resize = ->
   $('.home-page .row-fluid').height $(window).height() - 150 - ($('footer').css('bottom'))
 
