@@ -17,6 +17,8 @@ $(document).ajaxSend (e, xhr, options) ->
   token = csrf
   xhr.setRequestHeader("X-CSRF-Token", token) if token and !_.isEmpty(user)
 
+  $(window).resize resize
+
   $(window).keydown (e) ->
     console.log e.keyCode
     #space
@@ -25,7 +27,7 @@ $(document).ajaxSend (e, xhr, options) ->
 
 
 resize = ->
-  $('.home-page .row-fluid').height $(window).height() - 150 - ($('footer').css('bottom'))
+  $('.home-page .row-fluid').height $(window).height() - ($('footer').css('bottom'))
 
 toHHMMSS = (seconds) ->
   sec_numb = parseInt(seconds)

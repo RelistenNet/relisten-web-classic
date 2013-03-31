@@ -6,17 +6,62 @@
   right 0
   top 0
 
-  .last, .pause, .play, .next
-    width 14px
+  .buttons
+    width 300px
     position relative
-    z-index 99
+    height 20px
+    clear both
+    padding 20px
+
+    .bar-left, .play, .pause, .bar-right
+      z-index 99
+      float left
+      margin 0 20px
+
+
+    .bar
+      height 24px
+      width 22px
+
+      div
+        width 0
+        height 0
+        border-top 12.5px solid transparent
+        border-bottom 12.5px solid transparent
+
+    .bar-left
+      border-left 3px solid black
+
+      .last
+        border-right 20px solid black
+
+
+    .pause
+      width 18px
+      height 24px
+      border-right 5px solid black
+      border-left 5px solid black
+      margin 0
+
+    .play
+      width 0
+      height 0
+      border-top 12.5px solid transparent
+      border-bottom 12.5px solid transparent
+      border-left 20px solid black
+
+    .bar-right
+      border-right 3px solid black
+
+      .next
+        border-left 20px solid black
 
   .info
     top 10px
     right 0
     position absolute
     text-align right
-    width 100%
+    width 70%
     height 100%
 
     h3.title, h4.album

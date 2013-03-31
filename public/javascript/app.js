@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=buttons>\n    <div class=last><i class=icon-step-backward></i></div>\n    <div class=pause><i class=icon-pause></i></div>\n    <div class=play><i class=icon-play></i></div>\n    <div class=next><i class=icon-step-forward></i></div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n  </div>\n</div>\n";
+  return "<div class=player>\n  <div class=buttons>\n    <div class=\"bar bar-left\">\n      <div class=last></div>\n    </div>\n    <div class=pause></div>\n    <div class=\"bar bar-right\">\n      <div class=next></div>\n    </div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["playlist"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -510,6 +510,7 @@ $(document).ajaxSend(function(e, xhr, options) {
   if (token && !_.isEmpty(user)) {
     xhr.setRequestHeader("X-CSRF-Token", token);
   }
+  $(window).resize(resize);
   return $(window).keydown(function(e) {
     var _ref, _ref1;
 
@@ -525,7 +526,7 @@ $(document).ajaxSend(function(e, xhr, options) {
 });
 
 resize = function() {
-  return $('.home-page .row-fluid').height($(window).height() - 150 - ($('footer').css('bottom')));
+  return $('.home-page .row-fluid').height($(window).height() - ($('footer').css('bottom')));
 };
 
 toHHMMSS = function(seconds) {
