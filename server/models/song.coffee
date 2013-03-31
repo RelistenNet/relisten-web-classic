@@ -16,7 +16,7 @@ songSchema = new Schema
   album: String
   track: String
   bitrate: String
-  length: String
+  duration: String
   format: String
   original: String
   md5: String

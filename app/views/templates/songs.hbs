@@ -3,7 +3,7 @@
   <li class=playAll>Play all</li>
   {{#each songs._songs}}
     <li data-id={{_id}} data-song="{{title}}">
-      <a class=song href="/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{showVersion}}{{/if}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}} <span>0:00</span></a>
+      <a class=song href="/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{showVersion}}{{/if}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}} <span>{{duration}}</span></a>
       <div class=play>ᐅ</div>
       <div class=add>+</div>
     </li>

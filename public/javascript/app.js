@@ -351,12 +351,8 @@ function program1(depth0,data) {
   stack1 = helpers['if'].call(depth0, depth0.version, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\">";
-  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if (stack1 = helpers.album) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.album; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "</a>\n  </li>\n";
   return buffer;
@@ -420,7 +416,11 @@ function program1(depth0,data) {
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " <span>0:00</span></a>\n      <div class=play>ᐅ</div>\n      <div class=add>+</div>\n    </li>\n  ";
+    + " <span>";
+  if (stack1 = helpers.duration) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.duration; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</span></a>\n      <div class=play>ᐅ</div>\n      <div class=add>+</div>\n    </li>\n  ";
   return buffer;
   }
 function program2(depth0,data) {
@@ -1737,7 +1737,7 @@ App.Views.Player = (function(_super) {
       this.$el.find('h4').html(album);
     }
     if (duration) {
-      return this.$el.find('.total').html(toHHMMSS(duration));
+      return this.$el.find('.total').html(duration);
     }
   };
 

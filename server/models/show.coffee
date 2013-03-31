@@ -6,6 +6,7 @@ showSchema = new Schema
   year: Number
   version: Number
   title: String
+  album: String
   server: String
   dir: String
   identifier: String

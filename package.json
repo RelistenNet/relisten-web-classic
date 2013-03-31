@@ -1,8 +1,8 @@
 {
   "author": "Daniel Saewitz",
-  "name": "ghost",
+  "name": "gdspreadsheet",
   "description": "Backbone + Express + Coffee + Mongo",
-  "version": "0.0.1-39",
+  "version": "0.0.1-44",
   "engines": {
     "node": "0.8.x"
   },
@@ -22,7 +22,7 @@
     "nconf": "~0.6.7",
     "slugs": "~0.1.2",
     "connect-mongo": "~0.3.2",
-    "archive.org": "0.0.1"
+    "archive.org": "0.0.4"
   },
   "devDependencies": {
     "grunt-contrib-copy": "~0.4.0",
@@ -38,12 +38,11 @@
     "grunt-contrib-watch": "~0.3.1",
     "commander": "~1.1.1"
   },
-  "subdomain": "ghostbar",
+  "subdomain": "gdbar",
   "readmeFilename": "README.md",
-  "gitHead": "54ebb3e322fd7c2e240852c35d4e9c01c8b75749",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/switz/ghost.git"
+    "url": "git://github.com/switz/gdspreadsheet.git"
   }
 }

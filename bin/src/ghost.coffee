@@ -49,6 +49,9 @@ getShows = ->
             return null unless folder.response.docs.length
             dates = [0]
             folder.response.docs.map (j) ->
+              return unless j.format
+              if j.format.indexOf('VBR MP3') is -1
+                return console.log j.format
               #console.log j.title
               date = extractDate j.title
               j.month = date.month if date
@@ -85,6 +88,9 @@ getSongs = ->
             songs = [0]
             _.each _.pairs(folder.files), (arr) -> arr[1].file = arr[0]
             files = _.where folder.files, format: 'VBR MP3'
+            unless files.length
+              show.remove()
+              return console.log _.pluck folder.files, 'format'
             files.map (k) ->
               return true unless k.title
               k.month = show.month
@@ -97,6 +103,7 @@ getSongs = ->
               k.version = i
               k.showVersion = show.version
               k.slug = slug
+              k.duration = k.length
               k.longSlug = slug + if k.version then '/' + k.version else ''
               k.longDay = k.day + if k.showVersion then '-' + k.showVersion else ''
               songs.push slug
@@ -107,13 +114,14 @@ getSongs = ->
               song = new Song k
               show._songs.push song._id
               show.server = folder.server
+              show.album = k.album
               show.dir = folder.dir
               show.save()
               song.save()
               console.log show.year unless output[show.year]
               console.log 'done' if _.size(output) is years.length - 1 and !output[show.year]
               output[show.year] = true
-        , Math.random * 50000
+        , Math.random * 1000000
 
 
 cleanSongs = ->
@@ -162,4 +170,8 @@ program
   .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
   .action(gd)
 
+# Infinite stack trace
+Error.stackTraceLimit = Infinity
+
 program.parse process.argv
+
