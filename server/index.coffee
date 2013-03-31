@@ -12,9 +12,9 @@ nconf.argv()
   .env()
   .file(__dirname + '/../config.json')
   .defaults
-    GHOST_URI: 'mongodb://localhost/ghost'
+    GD_URI: 'mongodb://localhost/gdspreadsheet'
 
-mongoose.connect nconf.get('GHOST_URI'), (err) ->
+mongoose.connect nconf.get('GD_URI'), (err) ->
   throw err if err
   console.log 'Connected to database'
 
@@ -45,7 +45,7 @@ app.configure ->
   app.use express.session
     secret: 'this is your call, buddy'
     store: new Mongo_Store
-      url: nconf.get('GHOST_URI')
+      url: nconf.get('GD_URI')
   app.use (req, res, next) ->
     # Only use CSRF if user is logged in
     if req.session.userId

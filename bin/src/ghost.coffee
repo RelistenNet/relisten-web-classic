@@ -9,95 +9,111 @@ extractDate = require './extract_date'
 mongoose = require 'mongoose'
 
 nconf = require 'nconf'
-Subsonic = require 'subsonic'
+archive = require 'archive.org'
 
 nconf.argv()
   .env()
   .file(__dirname + '/../../config.json')
   .defaults
-    GHOST_URI: 'mongodb://localhost/ghost'
+    GD_URI: 'mongodb://localhost/gdspreadsheet'
 
-mongoose.connect nconf.get('GHOST_URI')
+mongoose.connect nconf.get('GD_URI')
 
 # Bootstrap models
 modelsPath = __dirname + '/../../server/models'
 fs.readdirSync(modelsPath).forEach (file) ->
   require "#{modelsPath}/#{file}"
 
-subsonic = new Subsonic
-  username: nconf.get('USERNAME')
-  password: nconf.get('PASSWORD')
-  application: 'spreadsheet'
-  server: nconf.get('SERVER')
-
 Year = mongoose.model 'Year'
 Show = mongoose.model 'Show'
 Song = mongoose.model 'Song'
 
-getYears = (id = 32) ->
-  subsonic.folder id, (err, folder) ->
-    for f in folder.children
-      f.year = parseInt f.title if parseInt f.title
-      year = new Year f
-      console.log f.title
-      year.save()
+years = [1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995]
+
+getYears = ->
+  for f in years
+    console.log f
+    year = new Year year: f
+    year.save()
 
 getShows = ->
   Year.find (err, years) ->
+    output = {}
     years.map (y) ->
       Year.findById y._id, (err, year) ->
-        subsonic.folder y.id, (err, folder) ->
-          dates = [0]
-          return null unless folder.children.length
-          folder.children.map (j) ->
-            #console.log j.title
-            date = extractDate j.title
-            j.month = date.month if date
-            j.day = date.day if date
-            j.year = date.year if date
-            dateStr = "#{j.year}-#{j.month}-#{j.day}"
-            i = _.reduce dates, (memo, val) ->
-              return ++memo if val is dateStr
-              memo
-            dates.push dateStr
-            #console.log j.month, j.day, j.year
-            console.log 'fail', j.title unless j.month > 0 || j.day > 0
-            j.version = i
-            j._year = year._id
-            show = new Show j
-            year._shows.push show._id
-            year.save()
-            show.save()
+        setTimeout ->
+          archive.search
+            q: "collection:GratefulDead date:[#{year.year} TO #{year.year+1}]"
+            rows: 1000
+          , (err, folder) ->
+            return null unless folder.response.docs.length
+            dates = [0]
+            folder.response.docs.map (j) ->
+              #console.log j.title
+              date = extractDate j.title
+              j.month = date.month if date
+              j.day = date.day if date
+              j.year = date.year if date
+              dateStr = "#{j.year}-#{j.month}-#{j.day}"
+              i = _.reduce dates, (memo, val) ->
+                return ++memo if val is dateStr
+                memo
+              dates.push dateStr
+              #console.log j.month, j.day, j.year
+              console.log 'fail', j.title unless j.month > 0 || j.day > 0
+              j.version = i
+              j._year = year._id
+              show = new Show j
+              year._shows.push show._id
+              year.save()
+              show.save()
+              console.log year.year unless output[year.year]
+              console.log 'done' if _.size(output) is years.length - 1 and !output[show.year]
+              output[year.year] = true
+
+
+        , Math.random() * 20000
 
 getSongs = ->
+  output = []
   Show.find (err, shows) ->
     shows.map (s) ->
       Show.findById s._id, (err, show) ->
-        subsonic.folder s.id, (err, folder) ->
-          return null unless folder.children?.length
-          songs = [0]
-          folder.children.map (k) ->
-            return true unless k.album
-            date = extractDate k.album
-            k.month = show.month
-            k.day = show.day
-            k.year = show.year
-            slug = slugs("#{k.title}").replace /\-$/, ''
-            i = _.reduce songs, (memo, val) ->
-              return ++memo if val is slug
-              memo
-            k.version = i
-            k.showVersion = show.version
-            k.slug = slug
-            k.longSlug = slug + if version then '-' + version else ''
-            songs.push slug
-            #console.log 'song saved', k.title
-            console.log 'fail', k.title unless k.month > 0 || k.day > 0
-            k._show = show._id
-            song = new Song k
-            show._songs.push song._id
-            show.save()
-            song.save()
+        setTimeout ->
+          archive.item show.identifier, (err, folder) ->
+            return console.log 'null' unless _.size folder.files
+            songs = [0]
+            _.each _.pairs(folder.files), (arr) -> arr[1].file = arr[0]
+            files = _.where folder.files, format: 'VBR MP3'
+            files.map (k) ->
+              return true unless k.title
+              k.month = show.month
+              k.day = show.day
+              k.year = show.year
+              slug = slugs("#{k.title}").replace /\-$/, ''
+              i = _.reduce songs, (memo, val) ->
+                return ++memo if val is slug
+                memo
+              k.version = i
+              k.showVersion = show.version
+              k.slug = slug
+              k.longSlug = slug + if k.version then '/' + k.version else ''
+              k.longDay = k.day + if k.showVersion then '-' + k.showVersion else ''
+              songs.push slug
+              #console.log 'song saved', k.title
+              console.log 'fail', k.title unless k.month > 0 || k.day > 0
+              k._show = show._id
+              k.url = 'http://' + folder.server + folder.dir + k.file
+              song = new Song k
+              show._songs.push song._id
+              show.server = folder.server
+              show.dir = folder.dir
+              show.save()
+              song.save()
+              console.log show.year unless output[show.year]
+              console.log 'done' if _.size(output) is years.length - 1 and !output[show.year]
+              output[show.year] = true
+        , Math.random * 50000
 
 
 cleanSongs = ->
@@ -110,6 +126,10 @@ cleanSongs = ->
         song.save (err) ->
           console.log err if err
           console.log ++i
+
+gd = ->
+  archive.search { q: 'collection:GratefulDead', rows: 15 }, (err, dead) ->
+    console.log dead.response.docs[0]
 
 
 ## CLI ##
@@ -136,5 +156,10 @@ program
   .command('clean')
   .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
   .action(cleanSongs)
+
+program
+  .command('gd')
+  .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
+  .action(gd)
 
 program.parse process.argv

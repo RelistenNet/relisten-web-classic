@@ -29,8 +29,7 @@ class App.Views.Player extends App.Views.View
   playButton: ->
     id = App.player.get('id')
     App.queue.playing = true
-    return soundManager.resume "phish#{id}" if @played.indexOf id >= 0
-    App.player.play id
+    soundManager.resume "phish#{id}" if @played.indexOf id >= 0
   playNext: ->
     App.queue.play()
   playLast: ->

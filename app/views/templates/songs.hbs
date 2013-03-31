@@ -1,12 +1,11 @@
-<div class=ul-header>{{songs.album}}</div>
+<div class=ul-header>{{songs.title}}</div>
 <ul>
   <li class=playAll>Play all</li>
-{{#each songs._songs}}
-  <li data-id={{_id}} data-song="{{title}}">
-    <a class=song href="/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{showVersion}}{{/if}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}} <span>{{toHHMMSS duration}}</span></a>
-    <div class=play>ᐅ</div>
-    <div class=add>+</div>
-  </li>
-{{/each}}
-  <li><a href="http://phish.net/setlists/?d={{songs.year}}-{{addZero songs.month}}-{{addZero songs.day}}" target=_blank>Open on Phish.net</a></li>
+  {{#each songs._songs}}
+    <li data-id={{_id}} data-song="{{title}}">
+      <a class=song href="/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{showVersion}}{{/if}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}} <span>0:00</span></a>
+      <div class=play>ᐅ</div>
+      <div class=add>+</div>
+    </li>
+  {{/each}}
 </ul>

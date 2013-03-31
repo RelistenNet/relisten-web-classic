@@ -29,4 +29,4 @@ class App.Views.Footer extends App.Views.View
     return if App.player.sound.bytesLoaded / App.player.sound.bytesTotal > coord
     position = coord * App.song.get('duration') * 1000
     App.player.sound.destruct()
-    App.player.play App.song.get('id'), position
+    App.player.play position

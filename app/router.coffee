@@ -42,9 +42,7 @@ class App.Router extends Backbone.Router
     ms = timeToMS time
     return App.queue.play song, ms if song = App.queue.findWhere { year, month, day, slug, showVersion, version }
     App.song = new App.Models.Song { year, month, day, slug, showVersion, version, ms }
-    App.song.fetch
-      success: ->
-        App.song.change()
+    App.song.fetch success: App.song.change
   login: ->
     @changeView(new App.Views.LoginPage())
   register: ->

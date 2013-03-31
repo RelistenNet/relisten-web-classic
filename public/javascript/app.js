@@ -351,8 +351,12 @@ function program1(depth0,data) {
   stack1 = helpers['if'].call(depth0, depth0.version, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\">";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/";
+  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "</a>\n  </li>\n";
   return buffer;
@@ -379,12 +383,12 @@ function program2(depth0,data) {
 this["JST"]["songs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
-  var buffer = "", stack1, options;
-  buffer += "\n  <li data-id=";
+  var buffer = "", stack1;
+  buffer += "\n    <li data-id=";
   if (stack1 = helpers._id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0._id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -392,7 +396,7 @@ function program1(depth0,data) {
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">\n    <a class=song href=\"/";
+    + "\">\n      <a class=song href=\"/";
   if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -416,10 +420,7 @@ function program1(depth0,data) {
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " <span>";
-  options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.toHHMMSS),stack1 ? stack1.call(depth0, depth0.duration, options) : helperMissing.call(depth0, "toHHMMSS", depth0.duration, options)))
-    + "</span></a>\n    <div class=play>ᐅ</div>\n    <div class=add>+</div>\n  </li>\n";
+    + " <span>0:00</span></a>\n      <div class=play>ᐅ</div>\n      <div class=add>+</div>\n    </li>\n  ";
   return buffer;
   }
 function program2(depth0,data) {
@@ -443,19 +444,11 @@ function program4(depth0,data) {
   }
 
   buffer += "<div class=ul-header>"
-    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.album)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</div>\n<ul>\n  <li class=playAll>Play all</li>\n";
+    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</div>\n<ul>\n  <li class=playAll>Play all</li>\n  ";
   stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n  <li><a href=\"http://phish.net/setlists/?d="
-    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.year)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "-";
-  options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.addZero),stack1 ? stack1.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.month), options) : helperMissing.call(depth0, "addZero", ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.month), options)))
-    + "-";
-  options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.addZero),stack1 ? stack1.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.day), options) : helperMissing.call(depth0, "addZero", ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.day), options)))
-    + "\" target=_blank>Open on Phish.net</a></li>\n</ul>\n";
+  buffer += "\n</ul>\n";
   return buffer;
   });
 
@@ -468,12 +461,12 @@ function program1(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n  <li>\n    <a href=\"/";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "\">";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "</a>\n  </li>\n";
   return buffer;
@@ -750,9 +743,7 @@ App.Router = (function(_super) {
       ms: ms
     });
     return App.song.fetch({
-      success: function() {
-        return App.song.change();
-      }
+      success: App.song.change
     });
   };
 
@@ -999,19 +990,20 @@ App.Models.Player = (function(_super) {
     return _ref;
   }
 
-  Player.prototype.play = function(id, ms) {
-    var stopId,
+  Player.prototype.play = function(ms) {
+    var id, stopId,
       _this = this;
 
+    id = App.song.get('_id');
     if (stopId = this.get('id')) {
       soundManager.stop("phish" + stopId);
     }
-    this.set('id', id);
+    this.set('id', App.song.get('_id'));
     App.playerView.played.push(id);
     return soundManager.onready(function() {
       _this.sound = soundManager.createSound({
         id: "phish" + id,
-        url: "http://74.104.117.66:8044/stream?player=74&id=" + id,
+        url: App.song.get('url'),
         position: ms || 0
       });
       return _this.sound.play({
@@ -1329,7 +1321,7 @@ App.Collections.Queue = (function(_super) {
   };
 
   Queue.prototype.play = function(song) {
-    var id, longDay, longSlug, month, year, _ref1;
+    var longDay, longSlug, month, year, _ref1;
 
     if (song) {
       App.song = this.at(song);
@@ -1349,8 +1341,8 @@ App.Collections.Queue = (function(_super) {
       active: ''
     });
     App.song.set('active', 'active');
-    _ref1 = App.song.toJSON(), id = _ref1.id, year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
-    App.player.play(id, App.song.get('ms'));
+    _ref1 = App.song.toJSON(), year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
+    App.player.play(App.song.get('ms'));
     this.playing = true;
     Backbone.history.navigate("/" + year + "/" + month + "/" + longDay + "/" + longSlug, {
       trigger: false
@@ -1474,7 +1466,7 @@ App.Views.Footer = (function(_super) {
     }
     position = coord * App.song.get('duration') * 1000;
     App.player.sound.destruct();
-    return App.player.play(App.song.get('id'), position);
+    return App.player.play(position);
   };
 
   return Footer;
@@ -1762,7 +1754,6 @@ App.Views.Player = (function(_super) {
     if (this.played.indexOf(id >= 0)) {
       return soundManager.resume("phish" + id);
     }
-    return App.player.play(id);
   };
 
   Player.prototype.playNext = function() {
