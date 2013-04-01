@@ -27,7 +27,6 @@ class App.Router extends Backbone.Router
     App.shows = new App.Views.Shows { year }
     App.songs.$el.empty() if App.songs
   show: (year, month, day, showVersion) ->
-    console.log 'hi'
     App.songs.undelegateEvents() if App.songs
     if App.initial
       @changeView(new App.Views.HomePage())
@@ -35,18 +34,17 @@ class App.Router extends Backbone.Router
     App.shows = new App.Views.Shows { year } unless App.shows?.shows.get('year') is +year
     App.songs = new App.Views.Songs { year, month, day, showVersion }
   song: (year, month, day, showVersion, slug, version, time) ->
-    console.log 'hi'
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
+      App.songs = new App.Views.Songs { year, month, day, showVersion }
     App.shows = new App.Views.Shows { year } unless App.shows?.shows.get('year') is +year
-    folder = _.pick(App.songs.folder.toJSON(), 'year', 'month', 'day', 'showVersion') if App.songs
-    console.log folder, { year, month, day, showVersion }
-    App.songs = new App.Views.Songs { year, month, day, showVersion } unless _.isEqual folder, { year, month, day, showVersion }
     ms = timeToMS time
     return App.queue.play song, ms if song = App.queue.findWhere { year, month, day, slug, showVersion, version }
     App.song = new App.Models.Song { year, month, day, slug, showVersion, version, ms }
-    App.song.fetch success: App.song.change
+    App.song.fetch
+      success: ->
+        App.song.change()
   login: ->
     @changeView(new App.Views.LoginPage())
   register: ->

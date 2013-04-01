@@ -708,7 +708,6 @@ App.Router = (function(_super) {
   Router.prototype.show = function(year, month, day, showVersion) {
     var _ref1;
 
-    console.log('hi');
     if (App.songs) {
       App.songs.undelegateEvents();
     }
@@ -730,38 +729,21 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.song = function(year, month, day, showVersion, slug, version, time) {
-    var folder, ms, song, _ref1;
+    var ms, song, _ref1;
 
-    console.log('hi');
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
-    }
-    if (((_ref1 = App.shows) != null ? _ref1.shows.get('year') : void 0) !== +year) {
-      App.shows = new App.Views.Shows({
-        year: year
-      });
-    }
-    if (App.songs) {
-      folder = _.pick(App.songs.folder.toJSON(), 'year', 'month', 'day', 'showVersion');
-    }
-    console.log(folder, {
-      year: year,
-      month: month,
-      day: day,
-      showVersion: showVersion
-    });
-    if (!_.isEqual(folder, {
-      year: year,
-      month: month,
-      day: day,
-      showVersion: showVersion
-    })) {
       App.songs = new App.Views.Songs({
         year: year,
         month: month,
         day: day,
         showVersion: showVersion
+      });
+    }
+    if (((_ref1 = App.shows) != null ? _ref1.shows.get('year') : void 0) !== +year) {
+      App.shows = new App.Views.Shows({
+        year: year
       });
     }
     ms = timeToMS(time);
@@ -785,7 +767,9 @@ App.Router = (function(_super) {
       ms: ms
     });
     return App.song.fetch({
-      success: App.song.change
+      success: function() {
+        return App.song.change();
+      }
     });
   };
 
