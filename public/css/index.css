@@ -5432,9 +5432,9 @@ position: fixed;
 @font-face{font-family:'Open Sans';font-style:normal;font-weight:400;src:local('Open Sans'),local('OpenSans'),url("http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff") format('woff')}
 @font-face{font-family:'Open Sans';font-style:normal;font-weight:600;src:local('Open Sans Semibold'),local('OpenSans-Semibold'),url("https://themes.googleusercontent.com/static/fonts/opensans/v6/MTP_ySUJH_bn48VBG8sNSqRDOzjiPcYnFooOUGCOsRk.woff") format('woff')}
 *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
-html{height:100%}
-body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;height:100%;overflow:hidden;min-width:940px;}
-body .container-fluid{height:100%;}
+html{height:100%;min-width:940px;width:100%;overflow-y:hidden}
+body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;height:100%;width:100%;overflow-y:hidden;}
+body .container-fluid{height:100%;overflow:none;}
 body .container-fluid #page-container{display:none;height:100%;overflow-y:scroll}
 body ul#notifications{position:fixed;top:50px;right:0;padding:20px;z-index:99;}
 body ul#notifications li{background:#fff;list-style-type:none;color:#333;width:300px;-webkit-border-radius:5px;border-radius:5px;border:3px solid #eee;margin:10px;}
@@ -5464,8 +5464,8 @@ header ul.right li a:hover,header ul.right li a:visited:hover,header ul.right li
 header ul.right li a span,header ul.right li a:visited span{font-size:.7em}
 header ul.right li a.plus,header ul.right li a:visited.plus{line-height:.8em}
 
-footer{height:100px;width:100%;position:absolute;bottom:-150px;background:#f6f6f6;z-index:99;}
-footer .progress-container{background:#666;width:100%;position:absolute;height:8px;z-index:100;top:0;left:0;}
+footer{height:100px;min-width:940px;width:100%;position:absolute;bottom:-150px;background:#f6f6f6;z-index:99;overflow:hidden;}
+footer .progress-container{background:#666;width:100%;position:absolute;height:8px;z-index:100;top:0;left:0;cursor:pointer;}
 footer .progress-container .progress-bar{height:8px;width:1%;background:#000;position:absolute;top:0}
 footer .progress-container .position-bar{width:3px;height:7px;background:#eee;position:absolute;z-index:101;top:0}
 
@@ -5508,7 +5508,7 @@ footer .progress-container .position-bar{width:3px;height:7px;background:#eee;po
 
 .player-container{height:100%;width:50%;border-bottom:1px solid #aaa;position:absolute;right:0;top:0;}
 .player-container .buttons{width:300px;position:absolute;height:20px;clear:both;top:50%;margin-top:-15px;}
-.player-container .buttons .bar-left,.player-container .buttons .play,.player-container .buttons .pause,.player-container .buttons .bar-right{z-index:99;float:left;margin:0 20px}
+.player-container .buttons .bar-left,.player-container .buttons .play,.player-container .buttons .pause,.player-container .buttons .bar-right{z-index:99;float:left;margin:0 20px;cursor:pointer}
 .player-container .buttons .bar{height:24px;width:25px;}
 .player-container .buttons .bar div{width:0;height:0;border-top:12.5px solid transparent;border-bottom:12.5px solid transparent}
 .player-container .buttons .bar-left{border-left:5px solid #333;}
@@ -5521,7 +5521,7 @@ footer .progress-container .position-bar{width:3px;height:7px;background:#eee;po
 .player-container .info h3.title,.player-container .info h4.album{line-height:.5em;padding-right:10px;color:#333}
 .player-container .info .time{padding-right:10px;}
 .player-container .info .time div{display:inline-block}
-.player-container .volume-container{position:absolute;right:0;bottom:0;height:80%;width:8px;border-left:1px solid #333;border-top:1px solid #333;}
+.player-container .volume-container{position:absolute;right:0;bottom:0;height:80%;width:8px;border-left:1px solid #333;border-top:1px solid #333;cursor:pointer;}
 .player-container .volume-container .volume{height:100%;width:100%;background:#777;position:absolute;bottom:0;left:0}
 
 .playlists-page header{background:#f6f6f6;z-index:97;position:relative;border-left:1px solid #ccc;border-right:1px solid #ccc;width:100%;}

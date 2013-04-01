@@ -7,7 +7,9 @@ class App.Views.Player extends App.Views.View
     'click .play': 'playButton'
     'click .next': 'playNext'
     'click .last': 'playLast'
-    'click .volume-container': 'volume'
+    'mousedown .volume-container': 'volume'
+    'mouseup': 'clickUp'
+    'mousemove .volume-container': 'volumeMove'
   initialize: ->
     soundManager.setup
       url: "/swf"
@@ -41,6 +43,13 @@ class App.Views.Player extends App.Views.View
   playLast: ->
     App.queue.playLast()
   volume: (e) =>
-    vol = 100 - (e.pageY - @$volumeContainer.offset().top) / @$volumeContainer.height() * 100
+    @setVolume e.pageY
+    @dragging = true
+  clickUp: (e) =>
+    @dragging = false
+  volumeMove: (e) =>
+    @setVolume e.pageY if @dragging
+  setVolume: (pageY) =>
+    vol = 100 - (pageY - @$volumeContainer.offset().top) / @$volumeContainer.height() * 100
     App.player.sound.setVolume vol
     @$volume.height "#{vol}%"
