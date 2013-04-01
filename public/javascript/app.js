@@ -1437,6 +1437,7 @@ App.Views.View = (function(_super) {
 })(Backbone.View);
 
 var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -1444,7 +1445,7 @@ App.Views.Footer = (function(_super) {
   __extends(Footer, _super);
 
   function Footer() {
-    _ref = Footer.__super__.constructor.apply(this, arguments);
+    this.mouseUp = __bind(this.mouseUp, this);    _ref = Footer.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -1456,8 +1457,8 @@ App.Views.Footer = (function(_super) {
     'mouseenter .progress-container': 'hoverBar',
     'mousemove .progress-container': 'moveBar',
     'mouseleave .progress-container': 'leaveBar',
-    'click .progress-bar': 'seek',
-    'click .progress-container': 'seekAhead'
+    'mousedown .progress-container': 'seekDown',
+    'mouseup': 'mouseUp'
   };
 
   Footer.prototype.initialize = function() {
@@ -1482,7 +1483,10 @@ App.Views.Footer = (function(_super) {
     var time;
 
     time = toHHMMSS(this._clickToMs(e.pageX) / 1000);
-    return App.playerView.$seconds.html(time);
+    App.playerView.$seconds.html(time);
+    if (this.dragging) {
+      return this.seek(e.pageX);
+    }
   };
 
   Footer.prototype.leaveBar = function() {
@@ -1509,16 +1513,29 @@ App.Views.Footer = (function(_super) {
     return this.$position.css('left', "" + ((position / duration) * 100) + "%");
   };
 
-  Footer.prototype.seek = function(e) {
-    var coord;
-
-    coord = e.pageX / $(window).width();
-    return App.player.sound.setPosition(coord * App.song.get('duration') * 1000);
+  Footer.prototype.seekDown = function(e) {
+    this.seek(e.pageX);
+    return this.dragging = true;
   };
 
-  Footer.prototype.seekAhead = function(e) {
-    App.player.sound.destruct();
-    return App.player.play(App.song.get('id'), this._clickToMs(e.pageX));
+  Footer.prototype.mouseUp = function(e) {
+    var coord;
+
+    if (this.dragging) {
+      coord = e.pageX / $(window).width();
+      if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
+        App.player.sound.destruct();
+        App.player.play(App.song.get('id'), this._clickToMs(e.pageX));
+      }
+    }
+    return this.dragging = false;
+  };
+
+  Footer.prototype.seek = function(pageX) {
+    var coord;
+
+    coord = pageX / $(window).width();
+    return App.player.sound.setPosition(coord * App.song.get('duration') * 1000);
   };
 
   Footer.prototype._clickToMs = function(pageX) {
@@ -1753,6 +1770,9 @@ App.Views.Player = (function(_super) {
   __extends(Player, _super);
 
   function Player() {
+    this.setVolume = __bind(this.setVolume, this);
+    this.volumeMove = __bind(this.volumeMove, this);
+    this.clickUp = __bind(this.clickUp, this);
     this.volume = __bind(this.volume, this);    _ref = Player.__super__.constructor.apply(this, arguments);
     return _ref;
   }
@@ -1768,7 +1788,9 @@ App.Views.Player = (function(_super) {
     'click .play': 'playButton',
     'click .next': 'playNext',
     'click .last': 'playLast',
-    'click .volume-container': 'volume'
+    'mousedown .volume-container': 'volume',
+    'mouseup': 'clickUp',
+    'mousemove .volume-container': 'volumeMove'
   };
 
   Player.prototype.initialize = function() {
@@ -1831,9 +1853,24 @@ App.Views.Player = (function(_super) {
   };
 
   Player.prototype.volume = function(e) {
+    this.setVolume(e.pageY);
+    return this.dragging = true;
+  };
+
+  Player.prototype.clickUp = function(e) {
+    return this.dragging = false;
+  };
+
+  Player.prototype.volumeMove = function(e) {
+    if (this.dragging) {
+      return this.setVolume(e.pageY);
+    }
+  };
+
+  Player.prototype.setVolume = function(pageY) {
     var vol;
 
-    vol = 100 - (e.pageY - this.$volumeContainer.offset().top) / this.$volumeContainer.height() * 100;
+    vol = 100 - (pageY - this.$volumeContainer.offset().top) / this.$volumeContainer.height() * 100;
     App.player.sound.setVolume(vol);
     return this.$volume.height("" + vol + "%");
   };
