@@ -37,4 +37,9 @@ class App.Views.Footer extends App.Views.View
     App.player.play @_clickToMs(e.pageX)
   _clickToMs: (pageX) ->
     coord = pageX / $(window).width()
-    coord * App.song.get('duration') * 1000
+    duration = 0
+    # Convert 3:45 to seconds
+    for i, num of App.song.get('duration').split(":").reverse()
+      duration += num * Math.pow 60, i
+    coord * duration * 1000
+

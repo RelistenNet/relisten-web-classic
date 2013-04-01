@@ -5521,6 +5521,8 @@ footer .progress-container .position-bar{width:3px;height:7px;background:#eee;po
 .player-container .info h3.title,.player-container .info h4.album{line-height:.5em;padding-right:10px;color:#333}
 .player-container .info .time{padding-right:10px;}
 .player-container .info .time div{display:inline-block}
+.player-container .volume-container{position:absolute;right:0;bottom:0;height:80%;width:8px;border-left:1px solid #333;border-top:1px solid #333;}
+.player-container .volume-container .volume{height:100%;width:100%;background:#777;position:absolute;bottom:0;left:0}
 
 .playlists-page header{background:#f6f6f6;z-index:97;position:relative;border-left:1px solid #ccc;border-right:1px solid #ccc;width:100%;}
 .playlists-page header ul{width:100%;}

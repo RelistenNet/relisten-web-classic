@@ -7,6 +7,7 @@ class App.Views.Player extends App.Views.View
     'click .play': 'playButton'
     'click .next': 'playNext'
     'click .last': 'playLast'
+    'click .volume-container': 'volume'
   initialize: ->
     soundManager.setup
       url: "/swf"
@@ -18,6 +19,8 @@ class App.Views.Player extends App.Views.View
     @$el.html @template()
     App.player.updateText()
     @$seconds = @$el.find '.seconds'
+    @$volumeContainer = @$el.find '.volume-container'
+    @$volume = @$volumeContainer.find '.volume'
   updateText: (obj) ->
     { title, album, duration } = obj
     @$el.find('h3').html title if title
@@ -37,3 +40,7 @@ class App.Views.Player extends App.Views.View
     App.queue.play()
   playLast: ->
     App.queue.playLast()
+  volume: (e) =>
+    vol = 100 - (e.pageY - @$volumeContainer.offset().top) / @$volumeContainer.height() * 100
+    App.player.sound.setVolume vol
+    @$volume.height "#{vol}%"

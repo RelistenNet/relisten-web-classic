@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=buttons>\n    <div class=\"bar bar-left\">\n      <div class=last></div>\n    </div>\n    <div class=pause></div>\n    <div class=\"bar bar-right\">\n      <div class=next></div>\n    </div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n  </div>\n</div>\n";
+  return "<div class=player>\n  <div class=buttons>\n    <div class=\"bar bar-left\">\n      <div class=last></div>\n    </div>\n    <div class=pause></div>\n    <div class=\"bar bar-right\">\n      <div class=next></div>\n    </div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n  </div>\n  <div class=volume-container>\n    <div class=volume></div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["playlist"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -699,12 +699,16 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.show = function(year, month, day, showVersion) {
+    var _ref1;
+
     if (App.songs) {
       App.songs.undelegateEvents();
     }
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
+    }
+    if (((_ref1 = App.shows) != null ? _ref1.shows.get('year') : void 0) !== +year) {
       App.shows = new App.Views.Shows({
         year: year
       });
@@ -718,14 +722,26 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.song = function(year, month, day, showVersion, slug, version, time) {
-    var ms, song;
+    var folder, ms, song, _ref1;
 
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
+    }
+    if (((_ref1 = App.shows) != null ? _ref1.shows.get('year') : void 0) !== +year) {
       App.shows = new App.Views.Shows({
         year: year
       });
+    }
+    if (App.songs) {
+      folder = _.pick(App.songs.folder.toJSON(), 'year', 'month', 'day', 'showVersion');
+    }
+    if (!_.isEqual(folder, {
+      year: year,
+      month: month,
+      day: day,
+      showVersion: showVersion
+    })) {
       App.songs = new App.Views.Songs({
         year: year,
         month: month,
@@ -1488,18 +1504,20 @@ App.Views.Footer = (function(_super) {
 
   Footer.prototype.seekAhead = function(e) {
     App.player.sound.destruct();
-<<<<<<< HEAD
-    return App.player.play(position);
-=======
-    return App.player.play(App.song.get('id'), this._clickToMs(e.pageX));
+    return App.player.play(this._clickToMs(e.pageX));
   };
 
   Footer.prototype._clickToMs = function(pageX) {
-    var coord;
+    var coord, duration, i, num, _ref1;
 
     coord = pageX / $(window).width();
-    return coord * App.song.get('duration') * 1000;
->>>>>>> f7b96f4be199de03e7a10ed2041c7e840fb47a10
+    duration = 0;
+    _ref1 = App.song.get('duration').split(":").reverse();
+    for (i in _ref1) {
+      num = _ref1[i];
+      duration += num * Math.pow(60, i);
+    }
+    return coord * duration * 1000;
   };
 
   return Footer;
@@ -1719,6 +1737,7 @@ App.Views.Notifications = (function(_super) {
 })(App.Views.View);
 
 var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -1726,7 +1745,7 @@ App.Views.Player = (function(_super) {
   __extends(Player, _super);
 
   function Player() {
-    _ref = Player.__super__.constructor.apply(this, arguments);
+    this.volume = __bind(this.volume, this);    _ref = Player.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -1740,7 +1759,8 @@ App.Views.Player = (function(_super) {
     'click .pause': 'pause',
     'click .play': 'playButton',
     'click .next': 'playNext',
-    'click .last': 'playLast'
+    'click .last': 'playLast',
+    'click .volume-container': 'volume'
   };
 
   Player.prototype.initialize = function() {
@@ -1756,7 +1776,9 @@ App.Views.Player = (function(_super) {
   Player.prototype.render = function() {
     this.$el.html(this.template());
     App.player.updateText();
-    return this.$seconds = this.$el.find('.seconds');
+    this.$seconds = this.$el.find('.seconds');
+    this.$volumeContainer = this.$el.find('.volume-container');
+    return this.$volume = this.$volumeContainer.find('.volume');
   };
 
   Player.prototype.updateText = function(obj) {
@@ -1789,6 +1811,7 @@ App.Views.Player = (function(_super) {
     if (this.played.indexOf(id >= 0)) {
       return soundManager.resume("phish" + id);
     }
+    return App.player.play(id);
   };
 
   Player.prototype.playNext = function() {
@@ -1797,6 +1820,14 @@ App.Views.Player = (function(_super) {
 
   Player.prototype.playLast = function() {
     return App.queue.playLast();
+  };
+
+  Player.prototype.volume = function(e) {
+    var vol;
+
+    vol = 100 - (e.pageY - this.$volumeContainer.offset().top) / this.$volumeContainer.height() * 100;
+    App.player.sound.setVolume(vol);
+    return this.$volume.height("" + vol + "%");
   };
 
   return Player;
