@@ -5432,9 +5432,9 @@ position: fixed;
 @font-face{font-family:'Open Sans';font-style:normal;font-weight:400;src:local('Open Sans'),local('OpenSans'),url("http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff") format('woff')}
 @font-face{font-family:'Open Sans';font-style:normal;font-weight:600;src:local('Open Sans Semibold'),local('OpenSans-Semibold'),url("https://themes.googleusercontent.com/static/fonts/opensans/v6/MTP_ySUJH_bn48VBG8sNSqRDOzjiPcYnFooOUGCOsRk.woff") format('woff')}
 *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
-html{height:100%}
-body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;height:100%;overflow:hidden;min-width:940px;}
-body .container-fluid{height:100%;}
+html{height:100%;min-width:940px;width:100%;overflow-y:hidden}
+body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;height:100%;width:100%;}
+body .container-fluid{height:100%;overflow:none;}
 body .container-fluid #page-container{display:none;height:100%;overflow-y:scroll}
 body ul#notifications{position:fixed;top:50px;right:0;padding:20px;z-index:99;}
 body ul#notifications li{background:#fff;list-style-type:none;color:#333;width:300px;-webkit-border-radius:5px;border-radius:5px;border:3px solid #eee;margin:10px;}
@@ -5464,7 +5464,7 @@ header ul.right li a:hover,header ul.right li a:visited:hover,header ul.right li
 header ul.right li a span,header ul.right li a:visited span{font-size:.7em}
 header ul.right li a.plus,header ul.right li a:visited.plus{line-height:.8em}
 
-footer{height:100px;width:100%;position:absolute;bottom:-150px;background:#f6f6f6;z-index:99;}
+footer{height:100px;min-width:940px;width:100%;position:absolute;bottom:-150px;background:#f6f6f6;z-index:99;}
 footer .progress-container{background:#666;width:100%;position:absolute;height:8px;z-index:100;top:0;left:0;}
 footer .progress-container .progress-bar{height:8px;width:1%;background:#000;position:absolute;top:0}
 footer .progress-container .position-bar{width:3px;height:7px;background:#eee;position:absolute;z-index:101;top:0}
