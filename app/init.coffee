@@ -13,7 +13,6 @@ $ ->
   $(window).resize resize
 
   $(window).keydown (e) ->
-    console.log e.keyCode
     #space
     if e.keyCode is 32
       if App.queue.playing then App.playerView?.pause() else App.playerView?.playButton()

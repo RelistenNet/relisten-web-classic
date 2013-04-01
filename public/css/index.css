@@ -5465,9 +5465,9 @@ header ul.right li a span,header ul.right li a:visited span{font-size:.7em}
 header ul.right li a.plus,header ul.right li a:visited.plus{line-height:.8em}
 
 footer{height:100px;width:100%;position:absolute;bottom:-150px;background:#f6f6f6;z-index:99;}
-footer .progress-container{background:#777;width:100%;position:absolute;height:8px;z-index:100;top:0;left:0;}
+footer .progress-container{background:#666;width:100%;position:absolute;height:8px;z-index:100;top:0;left:0;}
 footer .progress-container .progress-bar{height:8px;width:1%;background:#000;position:absolute;top:0}
-footer .progress-container .position-bar{width:2px;height:7px;background:#fff;position:absolute;z-index:101;top:0}
+footer .progress-container .position-bar{width:3px;height:7px;background:#eee;position:absolute;z-index:101;top:0}
 
 .home-page{color:#333;height:100%;}
 .home-page .row-fluid{width:100%;height:100%;}
@@ -5507,16 +5507,16 @@ footer .progress-container .position-bar{width:2px;height:7px;background:#fff;po
 .login-page form input[type=submit],.register-page form input[type=submit]{height:50px;width:100px;margin:0;background:#c9c9c9}
 
 .player-container{height:100%;width:50%;border-bottom:1px solid #aaa;position:absolute;right:0;top:0;}
-.player-container .buttons{width:300px;position:relative;height:20px;clear:both;padding:20px;}
+.player-container .buttons{width:300px;position:absolute;height:20px;clear:both;top:50%;margin-top:-15px;}
 .player-container .buttons .bar-left,.player-container .buttons .play,.player-container .buttons .pause,.player-container .buttons .bar-right{z-index:99;float:left;margin:0 20px}
-.player-container .buttons .bar{height:24px;width:22px;}
+.player-container .buttons .bar{height:24px;width:25px;}
 .player-container .buttons .bar div{width:0;height:0;border-top:12.5px solid transparent;border-bottom:12.5px solid transparent}
-.player-container .buttons .bar-left{border-left:3px solid #000;}
-.player-container .buttons .bar-left .last{border-right:20px solid #000}
-.player-container .buttons .pause{width:18px;height:24px;border-right:5px solid #000;border-left:5px solid #000;margin:0}
-.player-container .buttons .play{width:0;height:0;border-top:12.5px solid transparent;border-bottom:12.5px solid transparent;border-left:20px solid #000}
-.player-container .buttons .bar-right{border-right:3px solid #000;}
-.player-container .buttons .bar-right .next{border-left:20px solid #000}
+.player-container .buttons .bar-left{border-left:5px solid #333;}
+.player-container .buttons .bar-left .last{border-right:20px solid #333}
+.player-container .buttons .pause{width:20px;height:24px;border-right:6px solid #333;border-left:6px solid #333;margin:0}
+.player-container .buttons .play{width:0;height:0;border-top:12.5px solid transparent;border-bottom:12.5px solid transparent;border-left:20px solid #333;margin:0}
+.player-container .buttons .bar-right{border-right:5px solid #333;}
+.player-container .buttons .bar-right .next{border-left:20px solid #333}
 .player-container .info{top:10px;right:0;position:absolute;text-align:right;width:70%;height:100%;}
 .player-container .info h3.title,.player-container .info h4.album{line-height:.5em;padding-right:10px;color:#333}
 .player-container .info .time{padding-right:10px;}
@@ -5533,7 +5533,7 @@ footer .progress-container .position-bar{width:2px;height:7px;background:#fff;po
 .playlists-page ul.playlists li a:hover{background:#0a64a4;color:#fff}
 .playlists-page ul.playlists li .count{position:absolute;right:10px;top:8px;font-size:1.5em;color:#666}
 
-.playlists-edit-page table,.playlist-page table{width:100%;}
+.playlists-edit-page table,.playlist-page table{width:100%;margin:auto;}
 .playlists-edit-page table tbody,.playlist-page table tbody{width:100%;}
 .playlists-edit-page table tbody tr,.playlist-page table tbody tr{width:100%;height:90px;}
 .playlists-edit-page table tbody tr td,.playlist-page table tbody tr td{width:50%;}

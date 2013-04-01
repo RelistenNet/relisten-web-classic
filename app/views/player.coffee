@@ -26,10 +26,13 @@ class App.Views.Player extends App.Views.View
   pause: ->
     soundManager.pause "phish" + App.player.get('id')
     App.queue.playing = false
+    $('footer .pause').removeClass('pause').addClass 'play'
   playButton: ->
     id = App.player.get('id')
     App.queue.playing = true
-    soundManager.resume "phish#{id}" if @played.indexOf id >= 0
+    $('footer .play').removeClass('play').addClass 'pause'
+    return soundManager.resume "phish#{id}" if @played.indexOf id >= 0
+    App.player.play id
   playNext: ->
     App.queue.play()
   playLast: ->
