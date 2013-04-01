@@ -5433,7 +5433,7 @@ position: fixed;
 @font-face{font-family:'Open Sans';font-style:normal;font-weight:600;src:local('Open Sans Semibold'),local('OpenSans-Semibold'),url("https://themes.googleusercontent.com/static/fonts/opensans/v6/MTP_ySUJH_bn48VBG8sNSqRDOzjiPcYnFooOUGCOsRk.woff") format('woff')}
 *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 html{height:100%;min-width:940px;width:100%;overflow-y:hidden}
-body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;height:100%;width:100%;}
+body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;height:100%;width:100%;overflow-y:hidden;}
 body .container-fluid{height:100%;overflow:none;}
 body .container-fluid #page-container{display:none;height:100%;overflow-y:scroll}
 body ul#notifications{position:fixed;top:50px;right:0;padding:20px;z-index:99;}
