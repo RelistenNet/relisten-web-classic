@@ -26,9 +26,7 @@ class App.Views.Songs extends App.Views.View
   play: (e) ->
     id = $(e.target).parent().attr 'data-id'
     song = new App.Models.Song _id: id
-    song.fetch
-      success: ->
-        App.queue.reset song
+    song.fetch success: -> App.queue.reset song
 
   playAll: ->
     App.queue.reset @folder.get('_songs')
