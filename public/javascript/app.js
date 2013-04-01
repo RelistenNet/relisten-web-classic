@@ -1432,6 +1432,7 @@ App.Views.Footer = (function(_super) {
 
   Footer.prototype.events = {
     'mouseenter .progress-container': 'hoverBar',
+    'mousemove .progress-container': 'moveBar',
     'mouseleave .progress-container': 'leaveBar',
     'click .progress-bar': 'seek',
     'click .progress-container': 'seekAhead'
@@ -1443,7 +1444,7 @@ App.Views.Footer = (function(_super) {
     return this.$position = this.$el.find('.position-bar');
   };
 
-  Footer.prototype.hoverBar = function() {
+  Footer.prototype.hoverBar = function(e) {
     this.$progress.stop().animate({
       height: '10px'
     }, 300);
@@ -1455,6 +1456,13 @@ App.Views.Footer = (function(_super) {
     }, 300);
   };
 
+  Footer.prototype.moveBar = function(e) {
+    var time;
+
+    time = toHHMMSS(this._clickToMs(e.pageX) / 1000);
+    return App.playerView.$seconds.html(time);
+  };
+
   Footer.prototype.leaveBar = function() {
     this.$progress.stop().animate({
       height: '8px'
@@ -1462,9 +1470,10 @@ App.Views.Footer = (function(_super) {
     this.$position.stop().animate({
       height: '8px'
     }, 300);
-    return this.$container.stop().animate({
+    this.$container.stop().animate({
       height: '8px'
     }, 300);
+    return this.$container.off('mousemove');
   };
 
   Footer.prototype.updateProgress = function(loaded, total) {
@@ -1472,7 +1481,9 @@ App.Views.Footer = (function(_super) {
   };
 
   Footer.prototype.updatePlaying = function(position, duration) {
-    App.playerView.$seconds.html(toHHMMSS(position / 1000));
+    if (!this.$container.is(":hover")) {
+      App.playerView.$seconds.html(toHHMMSS(position / 1000));
+    }
     return this.$position.css('left', "" + ((position / duration) * 100) + "%");
   };
 
@@ -1484,15 +1495,15 @@ App.Views.Footer = (function(_super) {
   };
 
   Footer.prototype.seekAhead = function(e) {
-    var coord, position;
-
-    coord = e.pageX / $(window).width();
-    if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal > coord) {
-      return;
-    }
-    position = coord * App.song.get('duration') * 1000;
     App.player.sound.destruct();
-    return App.player.play(App.song.get('id'), position);
+    return App.player.play(App.song.get('id'), this._clickToMs(e.pageX));
+  };
+
+  Footer.prototype._clickToMs = function(pageX) {
+    var coord;
+
+    coord = pageX / $(window).width();
+    return coord * App.song.get('duration') * 1000;
   };
 
   return Footer;
@@ -1769,7 +1780,8 @@ App.Views.Player = (function(_super) {
 
   Player.prototype.pause = function() {
     soundManager.pause("phish" + App.player.get('id'));
-    return App.queue.playing = false;
+    App.queue.playing = false;
+    return $('footer .pause').removeClass('pause').addClass('play');
   };
 
   Player.prototype.playButton = function() {
@@ -1777,6 +1789,7 @@ App.Views.Player = (function(_super) {
 
     id = App.player.get('id');
     App.queue.playing = true;
+    $('footer .play').removeClass('play').addClass('pause');
     if (this.played.indexOf(id >= 0)) {
       return soundManager.resume("phish" + id);
     }
