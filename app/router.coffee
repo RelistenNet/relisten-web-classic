@@ -45,9 +45,10 @@ class App.Router extends Backbone.Router
     @finishSong()
 
   finishSong: =>
-    App.queue.on 'reset', =>
-      ms = timeToMS @time
-      App.song = App.queue.findWhere { @slug, version: @version || 0 }
+    self = @
+    App.queue.on 'reset', ->
+      ms = timeToMS self.time
+      App.song = App.queue.findWhere { slug: self.slug, version: +self.version || 0 }
       App.queue.play App.song, ms
       App.queue.off 'reset'
     App.queue.reset App.songs.folder.get('_songs')

@@ -774,15 +774,16 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.finishSong = function() {
-    var _this = this;
+    var self;
 
+    self = this;
     App.queue.on('reset', function() {
       var ms;
 
-      ms = timeToMS(_this.time);
+      ms = timeToMS(self.time);
       App.song = App.queue.findWhere({
-        slug: _this.slug,
-        version: _this.version || 0
+        slug: self.slug,
+        version: +self.version || 0
       });
       App.queue.play(App.song, ms);
       return App.queue.off('reset');
