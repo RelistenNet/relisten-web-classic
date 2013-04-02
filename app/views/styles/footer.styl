@@ -3,11 +3,12 @@
 wavesblue = #01688A
 
 footer
-  height 100px
+  height 0
   min-width 940px
   width 100%
   position absolute
-  bottom -150px
+  bottom 0
+  left 0
   //border-top 1px solid #AAA
   background #F6F6F6
   z-index 99
@@ -39,3 +40,56 @@ footer
       position absolute
       z-index 101
       top 0
+
+  .buttons
+    width 185px
+    height 60px
+    clear both
+    margin 35px auto auto auto
+    position relative
+    z-index 100
+
+    .bar-left, .play, .pause, .bar-right
+      z-index 99
+      float left
+      margin 0 20px
+      cursor pointer
+
+
+    .bar
+      height 36px
+      width 37px
+
+      div
+        width 0
+        height 0
+        border-top 18.75px solid transparent
+        border-bottom 18.75px solid transparent
+
+    .bar-left
+      border-left 7px solid #333
+
+      .last
+        border-right 30px solid #333
+
+
+    .pause
+      width 30px
+      height 36px
+      border-right 9px solid #333
+      border-left 9px solid #333
+      margin 0
+
+    .play
+      width 0
+      height 0
+      border-top 18.75px solid transparent
+      border-bottom 18.75px solid transparent
+      border-left 30px solid #333
+      margin 0
+
+    .bar-right
+      border-right 7px solid #333
+
+      .next
+        border-left 30px solid #333

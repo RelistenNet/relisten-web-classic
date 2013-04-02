@@ -5464,10 +5464,20 @@ header ul.right li a:hover,header ul.right li a:visited:hover,header ul.right li
 header ul.right li a span,header ul.right li a:visited span{font-size:.7em}
 header ul.right li a.plus,header ul.right li a:visited.plus{line-height:.8em}
 
-footer{height:100px;min-width:940px;width:100%;position:absolute;bottom:-150px;background:#f6f6f6;z-index:99;overflow:hidden;}
+footer{height:0;min-width:940px;width:100%;position:absolute;bottom:0;left:0;background:#f6f6f6;z-index:99;overflow:hidden;}
 footer .progress-container{background:#666;width:100%;position:absolute;height:8px;z-index:100;top:0;left:0;cursor:pointer;}
 footer .progress-container .progress-bar{height:8px;width:1%;background:#000;position:absolute;top:0}
 footer .progress-container .position-bar{width:3px;height:7px;background:#eee;position:absolute;z-index:101;top:0}
+footer .buttons{width:185px;height:60px;clear:both;margin:35px auto auto auto;position:relative;z-index:100;}
+footer .buttons .bar-left,footer .buttons .play,footer .buttons .pause,footer .buttons .bar-right{z-index:99;float:left;margin:0 20px;cursor:pointer}
+footer .buttons .bar{height:36px;width:37px;}
+footer .buttons .bar div{width:0;height:0;border-top:18.75px solid transparent;border-bottom:18.75px solid transparent}
+footer .buttons .bar-left{border-left:7px solid #333;}
+footer .buttons .bar-left .last{border-right:30px solid #333}
+footer .buttons .pause{width:30px;height:36px;border-right:9px solid #333;border-left:9px solid #333;margin:0}
+footer .buttons .play{width:0;height:0;border-top:18.75px solid transparent;border-bottom:18.75px solid transparent;border-left:30px solid #333;margin:0}
+footer .buttons .bar-right{border-right:7px solid #333;}
+footer .buttons .bar-right .next{border-left:30px solid #333}
 
 .home-page{color:#333;height:100%;}
 .home-page .row-fluid{width:100%;height:100%;}
@@ -5476,9 +5486,9 @@ footer .progress-container .position-bar{width:3px;height:7px;background:#eee;po
 .home-page .row-fluid .span4 ul{overflow-x:hidden;background-color:#f6f6f6;margin:0 2% 0 2%;top:53px;bottom:50px;width:95%;position:absolute;border-left:1px solid #aaa;border-right:1px solid #aaa;border-bottom:1px solid #aaa;}
 .home-page .row-fluid .span4 ul li{list-style:none;border-bottom:1px solid #aaa;cursor:pointer;font-size:.9em;position:relative;}
 .home-page .row-fluid .span4 ul li.footnotes p{padding:10px 0 0 5px}
-.home-page .row-fluid .span4 ul li .play{position:absolute;right:20px;top:7px;font-size:1.5em;opacity:.4;filter:alpha(opacity=40);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";}
+.home-page .row-fluid .span4 ul li .play{position:absolute;right:20px;top:7px;font-size:1.5em;opacity:.4;filter:alpha(opacity=40);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";display:none;}
 .home-page .row-fluid .span4 ul li .play:hover{opacity:1;-ms-filter:none;filter:none}
-.home-page .row-fluid .span4 ul li .add{position:absolute;right:20px;top:7px;font-size:2em;opacity:.4;filter:alpha(opacity=40);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";display:none;}
+.home-page .row-fluid .span4 ul li .add{position:absolute;right:15px;top:4px;font-size:2em;opacity:.4;filter:alpha(opacity=40);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";}
 .home-page .row-fluid .span4 ul li .add:hover{opacity:1;-ms-filter:none;filter:none}
 .home-page .row-fluid .span4 ul li > a{color:#008ab0;height:100%;width:auto;padding:5px 0 5px 5px;text-decoration:none;display:block;-o-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14px;font-family:'Open Sans';}
 .home-page .row-fluid .span4 ul li > a:hover{background:#e6e6e6}
@@ -5507,22 +5517,12 @@ footer .progress-container .position-bar{width:3px;height:7px;background:#eee;po
 .login-page form input[type=submit],.register-page form input[type=submit]{height:50px;width:100px;margin:0;background:#c9c9c9}
 
 .player-container{height:100%;width:50%;border-bottom:1px solid #aaa;position:absolute;right:0;top:0;}
-.player-container .buttons{width:300px;position:absolute;height:20px;clear:both;top:50%;margin-top:-15px;}
-.player-container .buttons .bar-left,.player-container .buttons .play,.player-container .buttons .pause,.player-container .buttons .bar-right{z-index:99;float:left;margin:0 20px;cursor:pointer}
-.player-container .buttons .bar{height:24px;width:25px;}
-.player-container .buttons .bar div{width:0;height:0;border-top:12.5px solid transparent;border-bottom:12.5px solid transparent}
-.player-container .buttons .bar-left{border-left:5px solid #333;}
-.player-container .buttons .bar-left .last{border-right:20px solid #333}
-.player-container .buttons .pause{width:20px;height:24px;border-right:6px solid #333;border-left:6px solid #333;margin:0}
-.player-container .buttons .play{width:0;height:0;border-top:12.5px solid transparent;border-bottom:12.5px solid transparent;border-left:20px solid #333;margin:0}
-.player-container .buttons .bar-right{border-right:5px solid #333;}
-.player-container .buttons .bar-right .next{border-left:20px solid #333}
-.player-container .info{top:10px;right:0;position:absolute;text-align:right;width:70%;height:100%;}
+.player-container .info{top:15px;right:22px;position:absolute;text-align:right;width:70%;height:100%;}
 .player-container .info h3.title,.player-container .info h4.album{line-height:.5em;padding-right:10px;color:#333}
 .player-container .info .time{padding-right:10px;}
 .player-container .info .time div{display:inline-block}
-.player-container .volume-container{position:absolute;right:0;bottom:0;height:80%;width:8px;border-left:1px solid #333;border-top:1px solid #333;cursor:pointer;}
-.player-container .volume-container .volume{height:100%;width:100%;background:#777;position:absolute;bottom:0;left:0}
+.player-container .volume-container{position:absolute;right:5px;bottom:0;height:80%;width:8px;border-left:1px solid #333;border-top:1px solid #333;border-right:1px solid #333;cursor:pointer;}
+.player-container .volume-container .volume{height:100%;width:100%;background:#333;position:absolute;bottom:0;left:0}
 
 .playlists-page header{background:#f6f6f6;z-index:97;position:relative;border-left:1px solid #ccc;border-right:1px solid #ccc;width:100%;}
 .playlists-page header ul{width:100%;}

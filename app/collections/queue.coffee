@@ -8,22 +8,24 @@ class App.Collections.Queue extends App.Collections.Collection
     @on 'reset', =>
       @idx = 0
       @play() if @length > 0
-  play: (song) ->
+  play: (song) =>
     if song
-      App.song = @at song
       @idx = @indexOf App.song if App.song
     else
-      return App.playerView.pause() if @idx is @length
-      App.song = @at @idx++
+      return App.footer.pause() if @idx is @length
+      App.song = @at @idx
 
     return false unless App.song
     @invoke 'set', active: ''
     App.song.set 'active', 'active'
+
     { year, month, longDay, longSlug } = App.song.toJSON()
     App.player.play App.song.get('ms')
+
     @playing = true
-    Backbone.history.navigate "/#{year}/#{month}/#{longDay}/#{longSlug}", trigger: false
+    #Backbone.history.navigate "/#{year}/#{month}/#{longDay}/#{longSlug}", trigger: false
     App.queueView.render()
+    ++@idx
   playLast: ->
     @idx = @idx - 2
     @idx = 0 if @idx < 0

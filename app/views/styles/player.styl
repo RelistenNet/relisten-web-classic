@@ -6,62 +6,9 @@
   right 0
   top 0
 
-  .buttons
-    width 300px
-    position absolute
-    height 20px
-    clear both
-    top 50%
-    margin-top -15px
-
-    .bar-left, .play, .pause, .bar-right
-      z-index 99
-      float left
-      margin 0 20px
-      cursor pointer
-
-
-    .bar
-      height 24px
-      width 25px
-
-      div
-        width 0
-        height 0
-        border-top 12.5px solid transparent
-        border-bottom 12.5px solid transparent
-
-    .bar-left
-      border-left 5px solid #333
-
-      .last
-        border-right 20px solid #333
-
-
-    .pause
-      width 20px
-      height 24px
-      border-right 6px solid #333
-      border-left 6px solid #333
-      margin 0
-
-    .play
-      width 0
-      height 0
-      border-top 12.5px solid transparent
-      border-bottom 12.5px solid transparent
-      border-left 20px solid #333
-      margin 0
-
-    .bar-right
-      border-right 5px solid #333
-
-      .next
-        border-left 20px solid #333
-
   .info
-    top 10px
-    right 0
+    top 15px
+    right 22px
     position absolute
     text-align right
     width 70%
@@ -79,18 +26,19 @@
 
   .volume-container
     position absolute
-    right 0
+    right 5px
     bottom 0
     height 80%
     width 8px
     border-left 1px solid #333
     border-top 1px solid #333
+    border-right 1px solid #333
     cursor pointer
 
     .volume
       height 100%
       width 100%
-      background #777
+      background #333
       position absolute
       bottom 0
       left 0

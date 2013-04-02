@@ -26,25 +26,32 @@ class App.Router extends Backbone.Router
       App.years = new App.Views.Years()
     App.shows = new App.Views.Shows { year }
     App.songs.$el.empty() if App.songs
-  show: (year, month, day, showVersion) ->
+  show: (@year, @month, @day, @showVersion) ->
     App.songs.undelegateEvents() if App.songs
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
     App.shows = new App.Views.Shows { year } unless App.shows?.shows.get('year') is +year
-    App.songs = new App.Views.Songs { year, month, day, showVersion }
-  song: (year, month, day, showVersion, slug, version, time) ->
+    App.songs = new App.Views.Songs { @year, @month, @day, @showVersion }
+  song: (@year, @month, @day, @showVersion, @slug, @version, @time) ->
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
-      App.songs = new App.Views.Songs { year, month, day, showVersion }
+      App.shows = new App.Views.Shows { year }
+      App.songs = new App.Views.Songs { @year, @month, @day, @showVersion }
+      return App.songs.listenToOnce App.songs.folder, 'change', @finishSong
+
     App.shows = new App.Views.Shows { year } unless App.shows?.shows.get('year') is +year
-    ms = timeToMS time
-    return App.queue.play song, ms if song = App.queue.findWhere { year, month, day, slug, showVersion, version }
-    App.song = new App.Models.Song { year, month, day, slug, showVersion, version, ms }
-    App.song.fetch
-      success: ->
-        App.song.change()
+    @finishSong()
+
+  finishSong: =>
+    self = @
+    App.queue.on 'reset', ->
+      ms = timeToMS self.time
+      App.song = App.queue.findWhere { slug: self.slug, version: +self.version || 0 }
+      App.queue.play App.song, ms
+      App.queue.off 'reset'
+    App.queue.reset App.songs.folder.get('_songs')
   login: ->
     @changeView(new App.Views.LoginPage())
   register: ->

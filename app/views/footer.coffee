@@ -7,6 +7,10 @@ class App.Views.Footer extends App.Views.View
     'mouseleave .progress-container': 'leaveBar'
     'mousedown .progress-container': 'seekDown'
     'mouseup': 'mouseUp'
+    'click .pause': 'pause'
+    'click .play': 'playButton'
+    'click .next': 'playNext'
+    'click .last': 'playLast'
   initialize: ->
     @$progress = @$el.find '.progress-bar'
     @$container = @$el.find '.progress-container'
@@ -43,6 +47,22 @@ class App.Views.Footer extends App.Views.View
   seek: (pageX) ->
     coord = pageX / $(window).width()
     App.player.sound.setPosition coord * @_timeStrToSec(App.song.get('duration')) * 1000
+
+  pause: ->
+    soundManager.pause "phish" + App.player.get('id')
+    App.queue.playing = false
+    $('footer .pause').removeClass('pause').addClass 'play'
+  playButton: ->
+    id = App.player.get('id')
+    App.queue.playing = true
+    $('footer .play').removeClass('play').addClass 'pause'
+    return soundManager.resume "phish#{id}" if App.playerView.played.indexOf id >= 0
+    App.player.play()
+  playNext: ->
+    App.queue.play()
+  playLast: ->
+    App.queue.playLast()
+
   _clickToMs: (pageX) ->
     coord = pageX / $(window).width()
     coord * @_timeStrToSec(App.song.get('duration')) * 1000

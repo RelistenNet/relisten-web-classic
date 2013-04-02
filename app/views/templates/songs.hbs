@@ -1,6 +1,6 @@
 <div class=ul-header>{{songs.title}}</div>
 <ul>
-  <li class=playAll>Play all</li>
+  <li class=add-all>Add all</li>
   {{#each songs._songs}}
     <li data-id={{_id}} data-song="{{title}}">
       <a class=song href="/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{showVersion}}{{/if}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}} <span>{{duration}}</span></a>
