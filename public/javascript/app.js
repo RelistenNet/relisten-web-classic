@@ -6,7 +6,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "  <div class=progress-bar></div>\n  <div class=position-bar></div>";
+  return "<div class=progress-bar></div>\n<div class=position-bar></div>\n";
   });
 
 this["JST"]["header"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -93,7 +93,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<div class=player>\n  <div class=buttons>\n    <div class=\"bar bar-left\">\n      <div class=last></div>\n    </div>\n    <div class=pause></div>\n    <div class=\"bar bar-right\">\n      <div class=next></div>\n    </div>\n  </div>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n  </div>\n  <div class=volume-container>\n    <div class=volume></div>\n  </div>\n</div>\n";
+  return "<div class=player>\n  <div class=info>\n    <h3 class=title></h3>\n    <h4 class=album></h4>\n    <div class=time>\n      <div class=seconds>00:00</div>/<div class=total>00:00</div>\n    </div>\n  </div>\n  <div class=volume-container>\n    <div class=volume></div>\n  </div>\n</div>\n";
   });
 
 this["JST"]["playlist"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -506,9 +506,9 @@ $(function() {
 
     if (e.keyCode === 32) {
       if (App.queue.playing) {
-        return (_ref = App.playerView) != null ? _ref.pause() : void 0;
+        return (_ref = App.footer) != null ? _ref.pause() : void 0;
       } else {
-        return (_ref1 = App.playerView) != null ? _ref1.playButton() : void 0;
+        return (_ref1 = App.footer) != null ? _ref1.playButton() : void 0;
       }
     }
   });
@@ -1044,7 +1044,7 @@ App.Models.Player = (function(_super) {
         },
         onfinish: function() {
           this.stop();
-          App.playerView.playNext();
+          App.footer.playNext();
           if (App.queue.idx === App.queue.length) {
             return App.queue.playing = false;
           }
@@ -1070,9 +1070,9 @@ App.Models.Player = (function(_super) {
     var $footer;
 
     $footer = $('footer');
-    if (!parseInt($footer.css('bottom') === 0)) {
+    if ($footer.height() !== 100) {
       $footer.animate({
-        'bottom': 0
+        'height': 100
       }, 1000);
       return $('.home-page .row-fluid').animate({
         'height': $(window).height() - 100
@@ -1355,7 +1355,7 @@ App.Collections.Queue = (function(_super) {
       }
     } else {
       if (this.idx === this.length) {
-        return App.playerView.pause();
+        return App.footer.pause();
       }
       App.song = this.at(this.idx++);
     }
@@ -1442,7 +1442,11 @@ App.Views.Footer = (function(_super) {
     'mousemove .progress-container': 'moveBar',
     'mouseleave .progress-container': 'leaveBar',
     'mousedown .progress-container': 'seekDown',
-    'mouseup': 'mouseUp'
+    'mouseup': 'mouseUp',
+    'click .pause': 'pause',
+    'click .play': 'playButton',
+    'click .next': 'playNext',
+    'click .last': 'playLast'
   };
 
   Footer.prototype.initialize = function() {
@@ -1520,6 +1524,32 @@ App.Views.Footer = (function(_super) {
 
     coord = pageX / $(window).width();
     return App.player.sound.setPosition(coord * App.song.get('duration') * 1000);
+  };
+
+  Footer.prototype.pause = function() {
+    soundManager.pause("phish" + App.player.get('id'));
+    App.queue.playing = false;
+    return $('footer .pause').removeClass('pause').addClass('play');
+  };
+
+  Footer.prototype.playButton = function() {
+    var id;
+
+    id = App.player.get('id');
+    App.queue.playing = true;
+    $('footer .play').removeClass('play').addClass('pause');
+    if (App.playerView.played.indexOf(id >= 0)) {
+      return soundManager.resume("phish" + id);
+    }
+    return App.player.play(id);
+  };
+
+  Footer.prototype.playNext = function() {
+    return App.queue.play();
+  };
+
+  Footer.prototype.playLast = function() {
+    return App.queue.playLast();
   };
 
   Footer.prototype._clickToMs = function(pageX) {
@@ -1768,10 +1798,6 @@ App.Views.Player = (function(_super) {
   Player.prototype.played = [];
 
   Player.prototype.events = {
-    'click .pause': 'pause',
-    'click .play': 'playButton',
-    'click .next': 'playNext',
-    'click .last': 'playLast',
     'mousedown .volume-container': 'volume',
     'mouseup': 'clickUp',
     'mousemove .volume-container': 'volumeMove'
@@ -1808,32 +1834,6 @@ App.Views.Player = (function(_super) {
     if (duration) {
       return this.$el.find('.total').html(toHHMMSS(duration));
     }
-  };
-
-  Player.prototype.pause = function() {
-    soundManager.pause("phish" + App.player.get('id'));
-    App.queue.playing = false;
-    return $('footer .pause').removeClass('pause').addClass('play');
-  };
-
-  Player.prototype.playButton = function() {
-    var id;
-
-    id = App.player.get('id');
-    App.queue.playing = true;
-    $('footer .play').removeClass('play').addClass('pause');
-    if (this.played.indexOf(id >= 0)) {
-      return soundManager.resume("phish" + id);
-    }
-    return App.player.play(id);
-  };
-
-  Player.prototype.playNext = function() {
-    return App.queue.play();
-  };
-
-  Player.prototype.playLast = function() {
-    return App.queue.playLast();
   };
 
   Player.prototype.volume = function(e) {

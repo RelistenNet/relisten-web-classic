@@ -3,10 +3,6 @@ class App.Views.Player extends App.Views.View
   template: JST['player']
   played: []
   events:
-    'click .pause': 'pause'
-    'click .play': 'playButton'
-    'click .next': 'playNext'
-    'click .last': 'playLast'
     'mousedown .volume-container': 'volume'
     'mouseup': 'clickUp'
     'mousemove .volume-container': 'volumeMove'
@@ -28,20 +24,6 @@ class App.Views.Player extends App.Views.View
     @$el.find('h3').html title if title
     @$el.find('h4').html album if album
     @$el.find('.total').html toHHMMSS duration if duration
-  pause: ->
-    soundManager.pause "phish" + App.player.get('id')
-    App.queue.playing = false
-    $('footer .pause').removeClass('pause').addClass 'play'
-  playButton: ->
-    id = App.player.get('id')
-    App.queue.playing = true
-    $('footer .play').removeClass('play').addClass 'pause'
-    return soundManager.resume "phish#{id}" if @played.indexOf id >= 0
-    App.player.play id
-  playNext: ->
-    App.queue.play()
-  playLast: ->
-    App.queue.playLast()
   volume: (e) =>
     @setVolume e.pageY
     @dragging = true

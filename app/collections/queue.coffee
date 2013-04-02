@@ -13,7 +13,7 @@ class App.Collections.Queue extends App.Collections.Collection
       App.song = @at song
       @idx = @indexOf App.song if App.song
     else
-      return App.playerView.pause() if @idx is @length
+      return App.footer.pause() if @idx is @length
       App.song = @at @idx++
 
     return false unless App.song

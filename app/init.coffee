@@ -15,7 +15,7 @@ $ ->
   $(window).keydown (e) ->
     #space
     if e.keyCode is 32
-      if App.queue.playing then App.playerView?.pause() else App.playerView?.playButton()
+      if App.queue.playing then App.footer?.pause() else App.footer?.playButton()
 
 # Bind to every ajax send
 $(document).ajaxSend (e, xhr, options) ->
