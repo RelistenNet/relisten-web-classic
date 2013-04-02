@@ -20,7 +20,7 @@ router.get /^\/([0-9]{4})\/?$/, (req, res) ->
   Year.findOne(
     year: +req.params[0]
   )
-  .populate('_shows', 'album artist coverArt day id month parent title year version')
+  .populate('_shows', 'album artist coverArt day id month parent title year version', null, sort: 'month day version')
   .exec (err, year) ->
     res.json year || {}
 
