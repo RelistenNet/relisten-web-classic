@@ -42,7 +42,7 @@ class App.Views.Footer extends App.Views.View
       coord = e.pageX / $(window).width()
       if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord
         App.player.sound.destruct()
-        App.player.play App.song.get('id'), @_clickToMs(e.pageX)
+        App.player.play  @_clickToMs(e.pageX)
     @dragging = false
   seek: (pageX) ->
     coord = pageX / $(window).width()
@@ -57,7 +57,7 @@ class App.Views.Footer extends App.Views.View
     App.queue.playing = true
     $('footer .play').removeClass('play').addClass 'pause'
     return soundManager.resume "phish#{id}" if App.playerView.played.indexOf id >= 0
-    App.player.play id
+    App.player.play()
   playNext: ->
     App.queue.play()
   playLast: ->

@@ -5486,9 +5486,9 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .home-page .row-fluid .span4 ul{overflow-x:hidden;background-color:#f6f6f6;margin:0 2% 0 2%;top:53px;bottom:50px;width:95%;position:absolute;border-left:1px solid #aaa;border-right:1px solid #aaa;border-bottom:1px solid #aaa;}
 .home-page .row-fluid .span4 ul li{list-style:none;border-bottom:1px solid #aaa;cursor:pointer;font-size:.9em;position:relative;}
 .home-page .row-fluid .span4 ul li.footnotes p{padding:10px 0 0 5px}
-.home-page .row-fluid .span4 ul li .play{position:absolute;right:20px;top:7px;font-size:1.5em;opacity:.4;filter:alpha(opacity=40);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";}
+.home-page .row-fluid .span4 ul li .play{position:absolute;right:20px;top:7px;font-size:1.5em;opacity:.4;filter:alpha(opacity=40);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";display:none;}
 .home-page .row-fluid .span4 ul li .play:hover{opacity:1;-ms-filter:none;filter:none}
-.home-page .row-fluid .span4 ul li .add{position:absolute;right:20px;top:7px;font-size:2em;opacity:.4;filter:alpha(opacity=40);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";display:none;}
+.home-page .row-fluid .span4 ul li .add{position:absolute;right:15px;top:4px;font-size:2em;opacity:.4;filter:alpha(opacity=40);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";}
 .home-page .row-fluid .span4 ul li .add:hover{opacity:1;-ms-filter:none;filter:none}
 .home-page .row-fluid .span4 ul li > a{color:#008ab0;height:100%;width:auto;padding:5px 0 5px 5px;text-decoration:none;display:block;-o-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:14px;font-family:'Open Sans';}
 .home-page .row-fluid .span4 ul li > a:hover{background:#e6e6e6}
@@ -5522,7 +5522,7 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .player-container .info .time{padding-right:10px;}
 .player-container .info .time div{display:inline-block}
 .player-container .volume-container{position:absolute;right:5px;bottom:0;height:80%;width:8px;border-left:1px solid #333;border-top:1px solid #333;border-right:1px solid #333;cursor:pointer;}
-.player-container .volume-container .volume{height:100%;width:100%;background:#555;position:absolute;bottom:0;left:0}
+.player-container .volume-container .volume{height:100%;width:100%;background:#333;position:absolute;bottom:0;left:0}
 
 .playlists-page header{background:#f6f6f6;z-index:97;position:relative;border-left:1px solid #ccc;border-right:1px solid #ccc;width:100%;}
 .playlists-page header ul{width:100%;}

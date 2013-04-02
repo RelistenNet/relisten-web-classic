@@ -444,7 +444,7 @@ function program4(depth0,data) {
 
   buffer += "<div class=ul-header>"
     + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.album)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</div>\n<ul>\n  <li class=playAll>Play all</li>\n";
+    + "</div>\n<ul>\n  <li class=add-all>Add all</li>\n";
   stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n  <li><a href=\"http://phish.net/setlists/?d="
@@ -504,12 +504,20 @@ $(function() {
   return $(window).keydown(function(e) {
     var _ref, _ref1;
 
+    if ($("input,textarea").is(":focus")) {
+      return;
+    }
     if (e.keyCode === 32) {
       if (App.queue.playing) {
-        return (_ref = App.footer) != null ? _ref.pause() : void 0;
+        if ((_ref = App.footer) != null) {
+          _ref.pause();
+        }
       } else {
-        return (_ref1 = App.footer) != null ? _ref1.playButton() : void 0;
+        if ((_ref1 = App.footer) != null) {
+          _ref1.playButton();
+        }
       }
+      return e.preventDefault();
     }
   });
 });
@@ -656,7 +664,8 @@ App.Router = (function(_super) {
   __extends(Router, _super);
 
   function Router() {
-    this.changeView = __bind(this.changeView, this);    _ref = Router.__super__.constructor.apply(this, arguments);
+    this.changeView = __bind(this.changeView, this);
+    this.finishSong = __bind(this.finishSong, this);    _ref = Router.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -708,6 +717,10 @@ App.Router = (function(_super) {
   Router.prototype.show = function(year, month, day, showVersion) {
     var _ref1;
 
+    this.year = year;
+    this.month = month;
+    this.day = day;
+    this.showVersion = showVersion;
     if (App.songs) {
       App.songs.undelegateEvents();
     }
@@ -721,56 +734,60 @@ App.Router = (function(_super) {
       });
     }
     return App.songs = new App.Views.Songs({
-      year: year,
-      month: month,
-      day: day,
-      showVersion: showVersion
+      year: this.year,
+      month: this.month,
+      day: this.day,
+      showVersion: this.showVersion
     });
   };
 
   Router.prototype.song = function(year, month, day, showVersion, slug, version, time) {
-    var ms, song, _ref1;
+    var _ref1;
 
+    this.year = year;
+    this.month = month;
+    this.day = day;
+    this.showVersion = showVersion;
+    this.slug = slug;
+    this.version = version;
+    this.time = time;
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
-      App.songs = new App.Views.Songs({
-        year: year,
-        month: month,
-        day: day,
-        showVersion: showVersion
+      App.shows = new App.Views.Shows({
+        year: year
       });
+      App.songs = new App.Views.Songs({
+        year: this.year,
+        month: this.month,
+        day: this.day,
+        showVersion: this.showVersion
+      });
+      return App.songs.listenToOnce(App.songs.folder, 'change', this.finishSong);
     }
     if (((_ref1 = App.shows) != null ? _ref1.shows.get('year') : void 0) !== +year) {
       App.shows = new App.Views.Shows({
         year: year
       });
     }
-    ms = timeToMS(time);
-    if (song = App.queue.findWhere({
-      year: year,
-      month: month,
-      day: day,
-      slug: slug,
-      showVersion: showVersion,
-      version: version
-    })) {
-      return App.queue.play(song, ms);
-    }
-    App.song = new App.Models.Song({
-      year: year,
-      month: month,
-      day: day,
-      slug: slug,
-      showVersion: showVersion,
-      version: version,
-      ms: ms
+    return this.finishSong();
+  };
+
+  Router.prototype.finishSong = function() {
+    var _this = this;
+
+    App.queue.on('reset', function() {
+      var ms;
+
+      ms = timeToMS(_this.time);
+      App.song = App.queue.findWhere({
+        slug: _this.slug,
+        version: _this.version || 0
+      });
+      App.queue.play(App.song, ms);
+      return App.queue.off('reset');
     });
-    return App.song.fetch({
-      success: function() {
-        return App.song.change();
-      }
-    });
+    return App.queue.reset(App.songs.folder.get('_songs'));
   };
 
   Router.prototype.login = function() {
@@ -1005,6 +1022,7 @@ App.Models.Folder = (function(_super) {
 })(App.Models.Model);
 
 var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -1012,14 +1030,15 @@ App.Models.Player = (function(_super) {
   __extends(Player, _super);
 
   function Player() {
-    _ref = Player.__super__.constructor.apply(this, arguments);
+    this.play = __bind(this.play, this);    _ref = Player.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
-  Player.prototype.play = function(id, ms) {
-    var stopId,
+  Player.prototype.play = function(ms) {
+    var id, stopId,
       _this = this;
 
+    id = App.song.get('id');
     if (stopId = this.get('id')) {
       soundManager.stop("phish" + stopId);
     }
@@ -1310,6 +1329,7 @@ App.Collections.Playlists = (function(_super) {
 })(App.Collections.Collection);
 
 var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -1317,7 +1337,7 @@ App.Collections.Queue = (function(_super) {
   __extends(Queue, _super);
 
   function Queue() {
-    _ref = Queue.__super__.constructor.apply(this, arguments);
+    this.play = __bind(this.play, this);    _ref = Queue.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -1346,10 +1366,9 @@ App.Collections.Queue = (function(_super) {
   };
 
   Queue.prototype.play = function(song) {
-    var id, longDay, longSlug, month, year, _ref1;
+    var ms;
 
     if (song) {
-      App.song = this.at(song);
       if (App.song) {
         this.idx = this.indexOf(App.song);
       }
@@ -1357,7 +1376,7 @@ App.Collections.Queue = (function(_super) {
       if (this.idx === this.length) {
         return App.footer.pause();
       }
-      App.song = this.at(this.idx++);
+      App.song = this.at(this.idx);
     }
     if (!App.song) {
       return false;
@@ -1366,13 +1385,11 @@ App.Collections.Queue = (function(_super) {
       active: ''
     });
     App.song.set('active', 'active');
-    _ref1 = App.song.toJSON(), id = _ref1.id, year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
-    App.player.play(id, App.song.get('ms'));
+    ms = App.song.get('ms');
+    App.player.play(ms);
     this.playing = true;
-    Backbone.history.navigate("/" + year + "/" + month + "/" + longDay + "/" + longSlug, {
-      trigger: false
-    });
-    return App.queueView.render();
+    App.queueView.render();
+    return ++this.idx;
   };
 
   Queue.prototype.playLast = function() {
@@ -1513,7 +1530,7 @@ App.Views.Footer = (function(_super) {
       coord = e.pageX / $(window).width();
       if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
         App.player.sound.destruct();
-        App.player.play(App.song.get('id'), this._clickToMs(e.pageX));
+        App.player.play(this._clickToMs(e.pageX));
       }
     }
     return this.dragging = false;
@@ -1541,7 +1558,7 @@ App.Views.Footer = (function(_super) {
     if (App.playerView.played.indexOf(id >= 0)) {
       return soundManager.resume("phish" + id);
     }
-    return App.player.play(id);
+    return App.player.play();
   };
 
   Footer.prototype.playNext = function() {
@@ -2234,9 +2251,8 @@ App.Views.Songs = (function(_super) {
 
   Songs.prototype.events = {
     'click .add': 'addToPlaylist',
-    'click .song': 'addToPlaylist',
     'click .play': 'play',
-    'click .playAll': 'playAll'
+    'click .add-all': 'addAll'
   };
 
   Songs.prototype.initialize = function() {
@@ -2275,8 +2291,25 @@ App.Views.Songs = (function(_super) {
     });
   };
 
-  Songs.prototype.playAll = function() {
-    return App.queue.reset(this.folder.get('_songs'));
+  Songs.prototype.addAll = function() {
+    if (App.queue.length === 0) {
+      App.queue.reset(this.folder.get('_songs'));
+    }
+    return App.queue.add(this.folder.get('_songs'));
+  };
+
+  Songs.prototype.addShowToPlaylist = function(e) {
+    var $li, id, longDay, longSlug, month, songs, year, _ref1;
+
+    $li = $(e.target).parent();
+    id = $li.attr('data-id');
+    songs = this.folder.get('_songs');
+    App.queue.reset(songs);
+    App.song = new App.Models.Song(_.findWhere(songs, {
+      _id: id
+    }));
+    _ref1 = App.song.toJSON(), id = _ref1.id, year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
+    return this.playing = true;
   };
 
   Songs.prototype.addToPlaylist = function(e) {

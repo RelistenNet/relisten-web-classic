@@ -3,9 +3,9 @@ class App.Views.Songs extends App.Views.View
   template: JST['songs']
   events:
     'click .add': 'addToPlaylist'
-    'click .song': 'addToPlaylist'
+    #'click .song': 'addShowToPlaylist'
     'click .play': 'play'
-    'click .playAll': 'playAll'
+    'click .add-all': 'addAll'
   initialize: ->
     return @render() unless @options.year || @options.month || @options.day
     @folder = new App.Models.Songs
@@ -28,9 +28,18 @@ class App.Views.Songs extends App.Views.View
     song = new App.Models.Song _id: id
     song.fetch success: -> App.queue.reset song
 
-  playAll: ->
-    App.queue.reset @folder.get('_songs')
-
+  addAll: ->
+    App.queue.reset @folder.get('_songs') if App.queue.length is 0
+    App.queue.add @folder.get('_songs')
+  addShowToPlaylist: (e) ->
+    $li = $(e.target).parent()
+    id = $li.attr('data-id')
+    songs = @folder.get('_songs')
+    App.queue.reset songs
+    App.song = new App.Models.Song _.findWhere songs, _id: id
+    { id, year, month, longDay, longSlug } = App.song.toJSON()
+    @playing = true
+    #Backbone.history.navigate "/#{year}/#{month}/#{longDay}/#{longSlug}", trigger: true
   addToPlaylist: (e) ->
     $li = $(e.target).parent()
     id = $li.attr 'data-id'
