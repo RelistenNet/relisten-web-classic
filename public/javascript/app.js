@@ -419,7 +419,7 @@ function program1(depth0,data) {
     + " <span>";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.toHHMMSS),stack1 ? stack1.call(depth0, depth0.duration, options) : helperMissing.call(depth0, "toHHMMSS", depth0.duration, options)))
-    + "</span></a>\n    <div class=play>ᐅ</div>\n    <div class=add>+</div>\n  </li>\n";
+    + "</span></a>\n    <div class=play>ᐅ</div>\n    <div title=\"Add To Queue\" class=add>+</div>\n  </li>\n";
   return buffer;
   }
 function program2(depth0,data) {

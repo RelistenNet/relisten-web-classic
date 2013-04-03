@@ -5541,8 +5541,8 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .playlists-edit-page table tbody tr td,.playlist-page table tbody tr td{width:50%;}
 .playlists-edit-page table tbody tr td textarea,.playlist-page table tbody tr td textarea{height:80px;width:100%}
 
-.queue-container{height:100%;width:50%;position:absolute;bottom:0;left:0;overflow-y:scroll;}
-.queue-container ul{padding:8px 0 0 0;}
+.queue-container{height:100%;width:50%;position:absolute;bottom:0;left:0;}
+.queue-container ul{padding:8px 0 0 0;overflow-y:scroll;height:100%;width:80%;}
 .queue-container ul li{list-style-type:none;}
 .queue-container ul li a.active{font-weight:bold}
 .queue-container ul li span{font-size:.8em;}
