@@ -1042,14 +1042,13 @@ App.Models.Player = (function(_super) {
   }
 
   Player.prototype.play = function(ms) {
-    var id, stopId,
+    var id,
       _this = this;
 
-    id = App.song.get('id');
-    if (stopId = this.get('id')) {
-      soundManager.stop("phish" + stopId);
+    if (this.sound) {
+      this.sound.destruct();
     }
-    this.set('id', id);
+    this.set('id', id = App.song.get('id'));
     App.playerView.played.push(id);
     return soundManager.onready(function() {
       _this.sound = soundManager.createSound({
@@ -1373,6 +1372,8 @@ App.Collections.Queue = (function(_super) {
   };
 
   Queue.prototype.play = function(song, ms) {
+    var longDay, longSlug, month, year, _ref1;
+
     if (song) {
       if (App.song) {
         this.idx = this.indexOf(App.song);
@@ -1392,16 +1393,25 @@ App.Collections.Queue = (function(_super) {
     App.song.set('active', 'active');
     App.player.play(ms);
     this.playing = true;
-    App.queueView.render();
+    _ref1 = App.song.toJSON(), year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
+    if (!("/" + year + "/" + month + "/" + longDay + "/" + longSlug).match(window.location.pathname)) {
+      Backbone.history.navigate("/" + year + "/" + month + "/" + longDay + "/" + longSlug, {
+        trigger: false
+      });
+    }
+    App.queueView.render(App.queueView.$el.find('ul').scrollTop());
     return ++this.idx;
   };
 
   Queue.prototype.playLast = function() {
-    this.idx = this.idx - 2;
+    if (App.player.sound.position > 10000) {
+      return App.player.sound.setPosition(0);
+    }
+    this.idx -= 2;
     if (this.idx < 0) {
       this.idx = 0;
     }
-    return this.play();
+    return this.play(null, 0);
   };
 
   return Queue;
@@ -1566,7 +1576,7 @@ App.Views.Footer = (function(_super) {
   };
 
   Footer.prototype.playNext = function() {
-    return App.queue.play();
+    return App.queue.play(null, 0);
   };
 
   Footer.prototype.playLast = function() {
@@ -2066,14 +2076,27 @@ App.Views.Queue = (function(_super) {
     return this.render();
   };
 
-  Queue.prototype.render = function() {
-    var _ref1;
+  Queue.prototype.render = function(scrollTop) {
+    var $active, $ul, song, top;
 
-    return this.$el.html(this.template({
+    song = App.queue.at(App.queue.idx - 1);
+    this.$el.html(this.template({
       queue: App.queue.toJSON(),
       loggedIn: App.user.loggedIn(),
-      activeSlug: App.queue ? (_ref1 = App.queue.at(App.queue.idx - 1)) != null ? _ref1.get('longSlug') : void 0 : false
+      activeSlug: App.queue ? song != null ? song.get('longSlug') : void 0 : false
     }));
+    $ul = this.$el.find('ul');
+    if (scrollTop) {
+      $ul.scrollTop(scrollTop);
+    }
+    $active = $ul.find('.active');
+    if (!$active.length) {
+      return;
+    }
+    top = $active.position().top;
+    return $ul.animate({
+      scrollTop: top + $ul.scrollTop() - 30
+    }, 1250);
   };
 
   Queue.prototype.savePlaylist = function() {
@@ -2189,6 +2212,7 @@ App.Views.RegisterPage = (function(_super) {
 })(App.Views.View);
 
 var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -2196,7 +2220,7 @@ App.Views.Shows = (function(_super) {
   __extends(Shows, _super);
 
   function Shows() {
-    _ref = Shows.__super__.constructor.apply(this, arguments);
+    this.activate = __bind(this.activate, this);    _ref = Shows.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -2337,6 +2361,7 @@ App.Views.Songs = (function(_super) {
 })(App.Views.View);
 
 var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -2344,7 +2369,7 @@ App.Views.Years = (function(_super) {
   __extends(Years, _super);
 
   function Years() {
-    _ref = Years.__super__.constructor.apply(this, arguments);
+    this.activate = __bind(this.activate, this);    _ref = Years.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 

@@ -1,9 +1,9 @@
 class App.Models.Player extends App.Models.Model
   play: (ms) =>
-    id = App.song.get 'id'
-    soundManager.stop "phish#{stopId}" if stopId = @get 'id'
-    @set 'id', id
+    @sound.destruct() if @sound
+    @set 'id', id = App.song.get 'id'
     App.playerView.played.push id
+
     soundManager.onready =>
       @sound = soundManager.createSound
         id: "phish#{id}"
