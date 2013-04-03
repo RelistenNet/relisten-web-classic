@@ -2186,6 +2186,7 @@ App.Views.RegisterPage = (function(_super) {
 })(App.Views.View);
 
 var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -2193,7 +2194,7 @@ App.Views.Shows = (function(_super) {
   __extends(Shows, _super);
 
   function Shows() {
-    _ref = Shows.__super__.constructor.apply(this, arguments);
+    this.activate = __bind(this.activate, this);    _ref = Shows.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
