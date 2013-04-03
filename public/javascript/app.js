@@ -1372,9 +1372,7 @@ App.Collections.Queue = (function(_super) {
     });
   };
 
-  Queue.prototype.play = function(song) {
-    var ms;
-
+  Queue.prototype.play = function(song, ms) {
     if (song) {
       if (App.song) {
         this.idx = this.indexOf(App.song);
@@ -1392,7 +1390,6 @@ App.Collections.Queue = (function(_super) {
       active: ''
     });
     App.song.set('active', 'active');
-    ms = App.song.get('ms');
     App.player.play(ms);
     this.playing = true;
     App.queueView.render();
