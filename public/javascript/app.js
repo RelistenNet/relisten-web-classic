@@ -1357,9 +1357,7 @@ App.Collections.Queue = (function(_super) {
     });
   };
 
-  Queue.prototype.play = function(song) {
-    var longDay, longSlug, month, year, _ref1;
-
+  Queue.prototype.play = function(song, ms) {
     if (song) {
       if (App.song) {
         this.idx = this.indexOf(App.song);
@@ -1377,8 +1375,7 @@ App.Collections.Queue = (function(_super) {
       active: ''
     });
     App.song.set('active', 'active');
-    _ref1 = App.song.toJSON(), year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
-    App.player.play(App.song.get('ms'));
+    App.player.play(ms);
     this.playing = true;
     App.queueView.render();
     return ++this.idx;
