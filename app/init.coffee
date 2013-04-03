@@ -17,7 +17,15 @@ $ ->
     #space
     if e.keyCode is 32
       if App.queue.playing then App.footer?.pause() else App.footer?.playButton()
-      e.preventDefault()
+    #arrow left
+    else if e.keyCode is 37
+      App.footer.playLast()
+    #arrow right
+    else if e.keyCode is 39
+      App.footer.playNext()
+    else
+      return true
+    e.preventDefault()
 
 # Bind to every ajax send
 $(document).ajaxSend (e, xhr, options) ->
