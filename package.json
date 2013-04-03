@@ -22,7 +22,7 @@
     "nconf": "~0.6.7",
     "slugs": "~0.1.2",
     "connect-mongo": "~0.3.2",
-    "archive.org": "0.0.4"
+    "archive.org": "0.0.7"
   },
   "devDependencies": {
     "grunt-contrib-copy": "~0.4.0",

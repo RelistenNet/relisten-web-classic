@@ -379,11 +379,11 @@ function program2(depth0,data) {
 this["JST"]["songs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
-  var buffer = "", stack1;
+  var buffer = "", stack1, options;
   buffer += "\n    <li data-id=";
   if (stack1 = helpers._id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0._id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
@@ -417,9 +417,8 @@ function program1(depth0,data) {
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + " <span>";
-  if (stack1 = helpers.duration) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.duration; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.toHHMMSS),stack1 ? stack1.call(depth0, depth0.duration, options) : helperMissing.call(depth0, "toHHMMSS", depth0.duration, options)))
     + "</span></a>\n      <div class=play>ᐅ</div>\n      <div title=\"Add To Queue\" class=add>+</div>\n    </li>\n  ";
   return buffer;
   }
@@ -541,16 +540,10 @@ toHHMMSS = function(seconds) {
   hours = Math.floor(sec_numb / 3600);
   minutes = Math.floor((sec_numb - (hours * 3600)) / 60);
   seconds = sec_numb - (hours * 3600) - (minutes * 60);
-  if (hours < 10) {
-    hours = "0" + hours;
-  }
-  if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
   if (seconds < 10) {
     seconds = "0" + seconds;
   }
-  hourStr = hours !== "00" ? hours + ":" : "";
+  hourStr = hours ? hours + ":" : "";
   time = hourStr + minutes + ":" + seconds;
   return time;
 };
@@ -1860,7 +1853,7 @@ App.Views.Player = (function(_super) {
       this.$el.find('h4').html(album);
     }
     if (duration) {
-      return this.$el.find('.total').html(duration);
+      return this.$el.find('.total').html(toHHMMSS(duration));
     }
   };
 

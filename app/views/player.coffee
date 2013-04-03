@@ -23,7 +23,7 @@ class App.Views.Player extends App.Views.View
     { title, album, duration } = obj
     @$el.find('h3').html title if title
     @$el.find('h4').html album if album
-    @$el.find('.total').html duration if duration
+    @$el.find('.total').html toHHMMSS duration if duration
   volume: (e) =>
     @setVolume e.pageY
     @dragging = true

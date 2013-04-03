@@ -41,10 +41,10 @@ toHHMMSS = (seconds) ->
   hours = Math.floor(sec_numb / 3600)
   minutes = Math.floor((sec_numb - (hours * 3600)) / 60)
   seconds = sec_numb - (hours * 3600) - (minutes * 60)
-  hours = "0" + hours  if hours < 10
-  minutes = "0" + minutes  if minutes < 10
+  #hours = "0" + hours  if hours < 10
+  #minutes = "0" + minutes  if minutes < 10
   seconds = "0" + seconds  if seconds < 10
-  hourStr = if hours isnt "00" then hours + ":" else ""
+  hourStr = if hours then hours + ":" else ""
   time = hourStr + minutes + ":" + seconds
   time
 

@@ -46,16 +46,17 @@ getShows = ->
             q: "collection:GratefulDead date:[#{year.year}-01-01 TO #{year.year}-12-31]"
             rows: 1000
           , (err, folder) ->
+            return console.log err if err
             return null unless folder.response.docs.length
             dates = [0]
             folder.response.docs.map (j) ->
-              return console.log j.format if j.format?.indexOf('VBR MP3') is -1
-              return console.log 'no date', j.date unless j.date
-              j.date = new Date j.date
-              j.month = j.date.getMonth() + 1
-              j.day = j.date.getDay()
+              return console.log 'format mismatch' if j.format?.indexOf('VBR MP3') is -1
+              date = extractDate j.title
+              return console.log 'no date', date, j.title unless date.month and date.day
+              j.month = date.month if date.month
+              j.day = date.day if date.day
+              j.year = year.year
               return console.log "Year didn't match:", j, year.year, j.year, j.title unless j.year is year.year
-              j.year = j.date.getFullYear()
               dateStr = "#{j.year}-#{j.month}-#{j.day}"
               j.date = new Date "#{j.month}/#{j.day}/#{j.year}"
               j.id = j.identifier
@@ -86,6 +87,7 @@ getSongs = ->
       Show.findById s._id, (err, show) ->
         setTimeout ->
           archive.item show.id, (err, folder) ->
+            return console.log err if err
             return console.log 'null' unless _.size folder.files
             songs = [0]
             _.each _.pairs(folder.files), (arr) -> arr[1].file = arr[0]
@@ -124,7 +126,7 @@ getSongs = ->
               console.log show.year unless output[show.year]
               console.log 'done' if _.size(output) is years.length - 1 and !output[show.year]
               output[show.year] = true
-        , Math.random * 1500000
+        , Math.random * 2000
 
 
 cleanSongs = ->
