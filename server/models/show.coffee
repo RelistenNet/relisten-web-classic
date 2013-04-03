@@ -4,6 +4,7 @@ showSchema = new Schema
   month: Number
   day: Number
   year: Number
+  date: Date
   version: Number
   title: String
   album: String

@@ -20,7 +20,7 @@ router.get /^\/([0-9]{4})\/?$/, (req, res) ->
   Year.findOne(
     year: +req.params[0]
   )
-  .populate('_shows')
+  .populate('_shows', '', null, sort: 'date')
   .exec (err, year) ->
     res.json year || {}
 

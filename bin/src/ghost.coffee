@@ -135,6 +135,17 @@ cleanSongs = ->
           console.log err if err
           console.log ++i
 
+cleanShows = ->
+  i = 0
+  Show.find (err, shows) ->
+    for show in shows
+      Show.findById show._id, (err, show) ->
+        console.log show
+        show.date = new Date "#{show.month}/#{show.day}/#{show.year}"
+        show.save (err) ->
+          console.log err if err
+          console.log ++i
+
 gd = ->
   archive.search { q: 'collection:GratefulDead', rows: 15 }, (err, dead) ->
     console.log dead.response.docs[0]
@@ -164,6 +175,11 @@ program
   .command('clean')
   .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
   .action(cleanSongs)
+
+program
+  .command('cleanShows')
+  .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
+  .action(cleanShows)
 
 program
   .command('gd')
