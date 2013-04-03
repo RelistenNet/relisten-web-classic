@@ -510,8 +510,14 @@ $(function() {
           _ref1.playButton();
         }
       }
-      return e.preventDefault();
+    } else if (e.keyCode === 37) {
+      App.footer.playLast();
+    } else if (e.keyCode === 39) {
+      App.footer.playNext();
+    } else {
+      return true;
     }
+    return e.preventDefault();
   });
 });
 
