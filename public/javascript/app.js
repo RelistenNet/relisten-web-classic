@@ -420,7 +420,7 @@ function program1(depth0,data) {
   if (stack1 = helpers.duration) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.duration; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</span></a>\n      <div class=play>ᐅ</div>\n      <div class=add>+</div>\n    </li>\n  ";
+    + "</span></a>\n      <div class=play>ᐅ</div>\n      <div title=\"Add To Queue\" class=add>+</div>\n    </li>\n  ";
   return buffer;
   }
 function program2(depth0,data) {

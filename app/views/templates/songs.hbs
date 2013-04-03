@@ -5,7 +5,7 @@
     <li data-id={{_id}} data-song="{{title}}">
       <a class=song href="/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{showVersion}}{{/if}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}} <span>{{duration}}</span></a>
       <div class=play>ᐅ</div>
-      <div class=add>+</div>
+      <div title="Add To Queue" class=add>+</div>
     </li>
   {{/each}}
 </ul>

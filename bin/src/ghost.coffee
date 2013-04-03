@@ -40,24 +40,26 @@ getShows = ->
   Year.find (err, years) ->
     output = {}
     years.map (y) ->
-      Year.findById y._id, (err, year) ->
-        setTimeout ->
+      setTimeout ->
+        Year.findById y._id, (err, year) ->
           archive.search
-            q: "collection:GratefulDead date:[#{year.year} TO #{year.year+1}]"
+            q: "collection:GratefulDead date:[#{year.year}-01-01 TO #{year.year}-12-31]"
             rows: 1000
           , (err, folder) ->
             return null unless folder.response.docs.length
             dates = [0]
             folder.response.docs.map (j) ->
-              return unless j.format
-              if j.format.indexOf('VBR MP3') is -1
-                return console.log j.format
-              #console.log j.title
-              date = extractDate j.title
-              j.month = date.month if date
-              j.day = date.day if date
-              j.year = date.year if date
+              return console.log j.format if j.format?.indexOf('VBR MP3') is -1
+              return console.log 'no date', j.date unless j.date
+              j.date = new Date j.date
+              j.month = j.date.getMonth() + 1
+              j.day = j.date.getDay()
+              return console.log "Year didn't match:", j, year.year, j.year, j.title unless j.year is year.year
+              j.year = j.date.getFullYear()
               dateStr = "#{j.year}-#{j.month}-#{j.day}"
+              j.date = new Date "#{j.month}/#{j.day}/#{j.year}"
+              j.id = j.identifier
+              j.col = j.collection
               i = _.reduce dates, (memo, val) ->
                 return ++memo if val is dateStr
                 memo
@@ -75,7 +77,7 @@ getShows = ->
               output[year.year] = true
 
 
-        , Math.random() * 20000
+      , Math.random() * 20000
 
 getSongs = ->
   output = []
@@ -83,7 +85,7 @@ getSongs = ->
     shows.map (s) ->
       Show.findById s._id, (err, show) ->
         setTimeout ->
-          archive.item show.identifier, (err, folder) ->
+          archive.item show.id, (err, folder) ->
             return console.log 'null' unless _.size folder.files
             songs = [0]
             _.each _.pairs(folder.files), (arr) -> arr[1].file = arr[0]
@@ -103,7 +105,8 @@ getSongs = ->
               k.version = i
               k.showVersion = show.version
               k.slug = slug
-              k.duration = k.length
+              k.duration = timeStrToSec k.length
+              return unless k.duration > 0
               k.longSlug = slug + if k.version then '/' + k.version else ''
               k.longDay = k.day + if k.showVersion then '-' + k.showVersion else ''
               songs.push slug
@@ -121,7 +124,7 @@ getSongs = ->
               console.log show.year unless output[show.year]
               console.log 'done' if _.size(output) is years.length - 1 and !output[show.year]
               output[show.year] = true
-        , Math.random * 1000000
+        , Math.random * 1500000
 
 
 cleanSongs = ->
@@ -150,6 +153,14 @@ gd = ->
   archive.search { q: 'collection:GratefulDead', rows: 15 }, (err, dead) ->
     console.log dead.response.docs[0]
 
+
+timeStrToSec = (str) ->
+  return 0 unless str
+  duration = 0
+  # Convert 3:45 to seconds
+  for i, num of str.split(":").reverse()
+    duration += num * Math.pow 60, i
+  duration
 
 ## CLI ##
 
