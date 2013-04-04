@@ -692,7 +692,7 @@ App.Router = (function(_super) {
   Router.prototype.initialize = function() {
     this.route(/^([0-9]{4})\/?$/, 'year');
     this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, 'show');
-    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9])?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song');
+    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
   };

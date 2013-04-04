@@ -102,6 +102,7 @@ getSongs = ->
 
 cleanSongs = ->
   i = 0
+  console.log 'hi'
   Song.find (err, songs) ->
     for song in songs
       Song.findById(song._id)
