@@ -21,9 +21,14 @@ class App.Collections.Queue extends App.Collections.Collection
 
     App.player.play ms
     @playing = true
-    App.queueView.render()
+    { year, month, longDay, longSlug } = App.song.toJSON()
+    # If not on the URL already, go ahead!
+    unless "/#{year}/#{month}/#{longDay}/#{longSlug}".match window.location.pathname
+      Backbone.history.navigate "/#{year}/#{month}/#{longDay}/#{longSlug}", trigger: false
+    App.queueView.render App.queueView.$el.find('ul').scrollTop()
     ++@idx
   playLast: ->
-    @idx = @idx - 2
+    return App.player.sound.setPosition 0 if App.player.sound.position > 10000
+    @idx -= 2
     @idx = 0 if @idx < 0
-    @play()
+    @play null, 0

@@ -12,6 +12,6 @@ class App.Views.Years extends App.Views.View
     @$a = @$el.find 'a'
 
     @
-  activate: (e) ->
+  activate: (e) =>
     @$a.removeClass 'active'
     $(e.target).addClass 'active'

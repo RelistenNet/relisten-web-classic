@@ -59,7 +59,7 @@ class App.Views.Footer extends App.Views.View
     return soundManager.resume "phish#{id}" if App.playerView.played.indexOf id >= 0
     App.player.play()
   playNext: ->
-    App.queue.play()
+    App.queue.play null, 0
   playLast: ->
     App.queue.playLast()
 

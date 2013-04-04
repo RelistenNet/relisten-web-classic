@@ -1,9 +1,9 @@
 class App.Models.Player extends App.Models.Model
-  play: (ms) ->
-    id = App.song.get '_id'
-    soundManager.stop "phish#{stopId}" if stopId = @get 'id'
-    @set 'id', id
+  play: (ms) =>
+    @sound.destruct() if @sound
+    @set 'id', id = App.song.get '_id'
     App.playerView.played.push id
+
     soundManager.onready =>
       @sound = soundManager.createSound
         id: "phish#{id}"
@@ -23,8 +23,7 @@ class App.Models.Player extends App.Models.Model
           App.queue.playing = false if App.queue.idx is App.queue.length
 
   updateText: ->
-    id = @get 'id'
-    if id
+    if @get 'id'
       App.playerView.updateText
         title: App.song.get 'title'
         album: App.song.get 'album'
