@@ -710,14 +710,8 @@ App.Router = (function(_super) {
   Router.prototype.index = function() {
     this.changeView(new App.Views.HomePage());
     App.years = new App.Views.Years();
-    App.shows = new App.Views.Shows({
-      year: 1977
-    });
-    return App.songs = new App.Views.Songs({
-      year: 1977,
-      month: 5,
-      day: 8
-    });
+    App.shows = new App.Views.Shows();
+    return App.songs = new App.Views.Songs();
   };
 
   Router.prototype.year = function(year) {

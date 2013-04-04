@@ -86,11 +86,11 @@ bootstrapData = (cb) ->
     (callback) ->
       Year.find callback
     , (callback) ->
-      Year.findOne(year: 2012)
+      Year.findOne(year: 1977)
         .populate('_shows')
         .exec callback
     , (callback) ->
-      Show.findOne({ year: 2012, month: 6, day: 7 })
+      Show.findOne({ year: 1977, month: 5, day: 8 })
         .populate('_songs')
         .exec callback
     ], cb

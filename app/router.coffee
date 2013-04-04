@@ -19,8 +19,8 @@ class App.Router extends Backbone.Router
   index: ->
     @changeView(new App.Views.HomePage())
     App.years = new App.Views.Years()
-    App.shows = new App.Views.Shows { year: 1977 }
-    App.songs = new App.Views.Songs { year: 1977, month: 5, day: 8 }
+    App.shows = new App.Views.Shows()
+    App.songs = new App.Views.Songs()
 
   year: (year) ->
     if App.initial
