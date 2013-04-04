@@ -24,7 +24,7 @@ router.get /^\/([0-9]{4})\/?$/, (req, res) ->
   .exec (err, year) ->
     res.json year || {}
 
-router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, (req, res) ->
+router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, (req, res) ->
   Show.findOne(
     year: +req.params[0]
     month: +req.params[1]
@@ -35,7 +35,7 @@ router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, (req, res)
   .exec (err, show) ->
     res.json show || {}
 
-router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\/?$/, (req, res) ->
+router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\/?$/, (req, res) ->
   Song.findOne
     year: +req.params[0]
     month: +req.params[1]
