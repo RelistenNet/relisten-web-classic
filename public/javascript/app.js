@@ -17,7 +17,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   
-  return "\n    <li><a class=\"header-link\" href=\"/logout\">LOGOUT</a></li>\n    <li><a class=\"header-link\" href=\"/playlists\">PLAYLISTS</a></li>\n  ";
+  return "\n    <li><a class=\"header-link\" href=\"/logout\">LOGOUT</a></li>\n  ";
   }
 
 function program3(depth0,data) {
@@ -29,7 +29,7 @@ function program3(depth0,data) {
   buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\">Spreadsheet<span>.phish</span></a></li>\n</ul>\n\n<ul class=\"right\">\n  ";
   stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n</ul>\n";
+  buffer += "\n    <li><a class=\"header-link\" href=\"/playlists\">PLAYLISTS</a></li>\n</ul>\n";
   return buffer;
   });
 

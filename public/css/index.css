@@ -5524,7 +5524,7 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .player-container .volume-container{position:absolute;right:5px;bottom:0;height:80%;width:8px;border-left:1px solid #333;border-top:1px solid #333;border-right:1px solid #333;cursor:pointer;}
 .player-container .volume-container .volume{height:100%;width:100%;background:#333;position:absolute;bottom:0;left:0}
 
-.playlists-page header{background:#f6f6f6;z-index:97;position:relative;border-left:1px solid #ccc;border-right:1px solid #ccc;width:100%;}
+.playlists-page header{background:#f6f6f6;z-index:97;position:relative;border-left:1px solid #ccc;border-right:1px solid #ccc;width:100%;display:none;}
 .playlists-page header ul{width:100%;}
 .playlists-page header ul li{width:100px;height:100%;border-left:1px solid #ddd;text-align:center;float:right;}
 .playlists-page header ul li a,.playlists-page header ul li a:visited{color:#0a64a4;font-size:1.4em;line-height:2.7em;height:100%;width:100%;display:block;font-family:"HelveticaNeue-CondensedBold",Helvetica,Arial,sans-serif;}

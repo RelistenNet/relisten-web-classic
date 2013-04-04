@@ -104,12 +104,15 @@ cleanSongs = ->
   i = 0
   Song.find (err, songs) ->
     for song in songs
-      Song.findById song._id, (err, song) ->
-        song.longSlug = song.slug + if song.version then '/' + song.version else ''
-        song.longDay = song.day + if song.showVersion then '-' + song.showVersion else ''
-        song.save (err) ->
-          console.log err if err
-          console.log ++i
+      Song.findById(song._id)
+        .populate('_show')
+        .exec (err, song) ->
+          console.log song
+          song.id = song.show.id + song.longSlug
+          return console.log song.id, 'test'
+          song.save (err) ->
+            console.log err if err
+            console.log ++i
 
 
 ## CLI ##

@@ -13,7 +13,7 @@ songSchema = new Schema
   isVideo: Boolean
   size: Number
   transcodedSuffix: String
-  id: Number
+  id: String
   transcodedContentType: String
   title: String
   duration: Number
