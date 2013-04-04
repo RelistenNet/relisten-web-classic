@@ -94,6 +94,7 @@ module.exports = (grunt) ->
             "app/views/styles/login-page.styl",
             "app/views/styles/player.styl",
             "app/views/styles/playlists.styl",
+            "app/views/styles/playlist.styl",
             "app/views/styles/edit-playlist.styl",
             "app/views/styles/queue.styl"
           ]

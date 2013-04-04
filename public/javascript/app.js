@@ -108,7 +108,13 @@ function program1(depth0,data,depth1) {
   options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data};
   stack2 = ((stack1 = helpers.blurb),stack1 ? stack1.call(depth0, ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options) : helperMissing.call(depth0, "blurb", ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "</p></td>\n      <td><a href=\"/";
+  buffer += "</p></td>\n      <td class=second><a data-id=\"";
+  if (stack2 = helpers._id) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0._id; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\" href=\"/playlist/"
+    + escapeExpression(((stack1 = ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/";
   if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
@@ -166,7 +172,7 @@ function program1(depth0,data,depth1) {
   if (stack2 = helpers._id) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0._id; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + " /></td>\n        <td><a href=\"/";
+    + " /></td>\n        <td class=second><a href=\"/";
   if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
@@ -199,11 +205,11 @@ function program2(depth0,data) {
   return buffer;
   }
 
-  buffer += "<h3>Edit Playlist</h3>\n\n\n<form action=PUT action=/ name=playlist>\n\n  <input name=name class=name value=\""
+  buffer += "<h3>Edit Playlist</h3>\n\n\n<form action=PUT action=/ name=playlist>\n  <div class=name-container>\n    <input name=name class=name value=\""
     + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\" /> - <a href=\"/playlist/"
     + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\">View Playlist</a>\n\n  <table>\n    ";
+    + "\">View Playlist</a>\n  </div>\n\n  <table>\n    ";
   stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n  </table>\n\n  <button type=submit class=save>Save</button>\n  </form>";
@@ -543,7 +549,7 @@ $(document).ajaxSend(function(e, xhr, options) {
 });
 
 resize = function() {
-  return $('.home-page .row-fluid').height($(window).height() - $('footer').height());
+  return $('.page-container').height($(window).height() - $('footer').height());
 };
 
 toHHMMSS = function(seconds) {
@@ -693,6 +699,7 @@ App.Router = (function(_super) {
     this.route(/^([0-9]{4})\/?$/, 'year');
     this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/?$/, 'show');
     this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song');
+    this.route(/^playlist\/([0-9a-f]{24})\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'playlistSong');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
   };
@@ -705,12 +712,11 @@ App.Router = (function(_super) {
       month: 6,
       day: 7
     });
-    App.songs = new App.Views.Songs({
+    return App.songs = new App.Views.Songs({
       year: 2012,
       month: 6,
       day: 7
     });
-    return resize();
   };
 
   Router.prototype.year = function(year) {
@@ -819,6 +825,56 @@ App.Router = (function(_super) {
 
   Router.prototype.playlists = function() {
     return this.changeView(new App.Views.PlaylistsPage(), false);
+  };
+
+  Router.prototype.playlistSong = function(id, year, month, day, showVersion, slug, version, time) {
+    var _this = this;
+
+    this.year = year;
+    this.month = month;
+    this.day = day;
+    this.showVersion = showVersion;
+    this.slug = slug;
+    this.version = version;
+    this.time = time;
+    if (App.initial) {
+      this.changeView(new App.Views.PlaylistPage({
+        playlistId: id
+      }));
+      return App.playlist.on('change', function() {
+        _this.finishPlaylistSong({
+          year: +_this.year,
+          month: +_this.month,
+          day: +_this.day,
+          showVersion: +_this.showVersion,
+          slug: _this.slug,
+          version: +_this.version
+        }, _this.time);
+        return App.playlist.off('change');
+      });
+    }
+    return this.finishPlaylistSong({
+      year: +this.year,
+      month: +this.month,
+      day: +this.day,
+      showVersion: +this.showVersion,
+      slug: this.slug,
+      version: +this.version
+    }, this.time);
+  };
+
+  Router.prototype.finishPlaylistSong = function(obj, time) {
+    var _this = this;
+
+    App.queue.on('reset', function() {
+      var ms;
+
+      ms = timeToMS(time);
+      App.song = App.queue.findWhere(obj);
+      App.queue.play(App.song, ms);
+      return App.queue.off('reset');
+    });
+    return App.queue.reset(App.playlist.get('_songs'));
   };
 
   Router.prototype.editPlaylist = function(id) {
@@ -1409,7 +1465,8 @@ App.Collections.Queue = (function(_super) {
     App.player.play(ms);
     App.player.set('playing', true);
     _ref1 = App.song.toJSON(), year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
-    if (!("/" + year + "/" + month + "/" + longDay + "/" + longSlug).match(window.location.pathname)) {
+    console.log(window.location.pathname.match("/" + year + "/" + month + "/" + longDay + "/" + longSlug));
+    if (!window.location.pathname.match("/" + year + "/" + month + "/" + longDay + "/" + longSlug)) {
       url = "/" + year + "/" + month + "/" + longDay + "/" + longSlug;
       Backbone.history.navigate(url, {
         trigger: false
@@ -1925,17 +1982,21 @@ App.Views.PlaylistPage = (function(_super) {
 
   PlaylistPage.prototype.template = JST['playlist'];
 
+  PlaylistPage.prototype.events = {
+    'click .song': 'play'
+  };
+
   PlaylistPage.prototype.initialize = function() {
-    this.playlist = new App.Models.Playlist({
+    App.playlist = new App.Models.Playlist({
       _id: this.options.playlistId
     });
-    this.listenTo(this.playlist, 'change', this.render);
-    return this.playlist.fetch();
+    this.listenTo(App.playlist, 'change', this.render);
+    return App.playlist.fetch();
   };
 
   PlaylistPage.prototype.render = function() {
     this.$el.html(this.template({
-      playlist: this.playlist.toJSON()
+      playlist: App.playlist.toJSON()
     }));
     return this;
   };
