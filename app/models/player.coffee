@@ -41,4 +41,4 @@ class App.Models.Player extends App.Models.Model
     $footer = $('footer')
     unless $footer.height() is 100
       $footer.animate 'height': 100, 1000
-      $('.home-page .row-fluid').animate 'height': $(window).height() - 100, 1000
+      $('.page-container').animate 'height': $(window).height() - 100, 1000
