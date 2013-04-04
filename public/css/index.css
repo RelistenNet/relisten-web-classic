@@ -5459,7 +5459,7 @@ header ul.right li{float:right;height:100%;text-align:center;border-left:1px sol
 header ul.right li:hover,header ul.right li.active{border-left:1px solid #0a64a4}
 header ul.right li input{height:100%;min-width:200px;width:100%;display:block;background:#f6f6f6;font-size:2em;font-family:"HelveticaNeue-CondensedBold",Helvetica,Arial,sans-serif;}
 header ul.right li input:focus{border:1px solid #0a64a4;outline:0}
-header ul.right li a,header ul.right li a:visited{color:#0a64a4;font-size:1.4em;line-height:2.7em;height:100%;width:100px;display:block;font-family:"HelveticaNeue-CondensedBold",Helvetica,Arial,sans-serif;}
+header ul.right li a,header ul.right li a:visited{color:#0a64a4;font-size:1.4em;line-height:2.7em;height:100%;width:120px;display:block;font-family:"HelveticaNeue-CondensedBold",Helvetica,Arial,sans-serif;}
 header ul.right li a:hover,header ul.right li a:visited:hover,header ul.right li a.active,header ul.right li a:visited.active{color:#f6f6f6;background:#0a64a4;text-decoration:none}
 header ul.right li a span,header ul.right li a:visited span{font-size:.7em}
 header ul.right li a.plus,header ul.right li a:visited.plus{line-height:.8em}
