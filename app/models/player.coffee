@@ -1,4 +1,12 @@
 class App.Models.Player extends App.Models.Model
+  defaults:
+    playing: false
+  initialize: ->
+    @on 'change:playing', (player, playing) ->
+      if playing
+        $('footer .play').removeClass('play').addClass 'pause'
+      else
+        $('footer .pause').removeClass('pause').addClass 'play'
   play: (ms) =>
     @sound.destruct() if @sound
     @set 'id', id = App.song.get 'id'
@@ -20,7 +28,7 @@ class App.Models.Player extends App.Models.Model
         onfinish: ->
           @stop()
           App.footer.playNext()
-          App.queue.playing = false if App.queue.idx is App.queue.length
+          App.player.set 'playing', false if App.queue.idx is App.queue.length
 
   updateText: ->
     id = @get 'id'

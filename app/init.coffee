@@ -16,7 +16,7 @@ $ ->
     return if $("input,textarea").is(":focus")
     #space
     if e.keyCode is 32
-      if App.queue.playing then App.footer?.pause() else App.footer?.playButton()
+      if App.player.get 'playing' then App.footer?.pause() else App.footer?.playButton()
     #arrow left
     else if e.keyCode is 37
       App.footer.playLast()
@@ -34,7 +34,7 @@ $(document).ajaxSend (e, xhr, options) ->
 
 
 resize = ->
-  $('.home-page .row-fluid').height $(window).height() - 100 - parseInt($('footer').css('bottom'))
+  $('.home-page .row-fluid').height $(window).height() - $('footer').height()
 
 toHHMMSS = (seconds) ->
   sec_numb = parseInt(seconds)

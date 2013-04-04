@@ -201,7 +201,9 @@ function program2(depth0,data) {
 
   buffer += "<h3>Edit Playlist</h3>\n\n\n<form action=PUT action=/ name=playlist>\n\n  <input name=name class=name value=\""
     + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" />\n\n  <table>\n    ";
+    + "\" /> - <a href=\"/playlist/"
+    + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">View Playlist</a>\n\n  <table>\n    ";
   stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n  </table>\n\n  <button type=submit class=save>Save</button>\n  </form>";
@@ -241,11 +243,11 @@ function program1(depth0,data) {
 this["JST"]["queue"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
 function program1(depth0,data) {
   
-  var buffer = "", stack1;
+  var buffer = "", stack1, stack2, options;
   buffer += "\n    <li>\n      <a class=\"song ";
   if (stack1 = helpers.active) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.active; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
@@ -270,44 +272,47 @@ function program1(depth0,data) {
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\n      </a>\n      <span>\n        [<a href=\"/";
-  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+    + "\n      </a>\n      <span>[        <a href=\"javascript:\" class=delete>x</a>\n      ]</span>\n      <span>\n        [";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.toHHMMSS),stack1 ? stack1.call(depth0, depth0.duration, options) : helperMissing.call(depth0, "toHHMMSS", depth0.duration, options)))
+    + "]\n      </span>\n      <span>\n        [<a href=\"/";
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
-  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.month) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.month; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
-  if (stack1 = helpers.longDay) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.longDay; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\">\n          ";
-  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.longDay) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.longDay; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\">";
+  if (stack2 = helpers.month) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.month; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
-  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.day) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.day; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
-  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "\n        </a>]\n      </span>\n      <span>[\n        <a href=\"javascript:\" class=delete>x</a>\n      ]</span>\n    </li>\n  ";
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</a>]\n      </span>\n    </li>\n  ";
   return buffer;
   }
 
 function program3(depth0,data) {
   
   
-  return "\n  <button class=save>Save Playlist</button>\n";
+  return "\n  <button class=save>Save Queue</button>\n";
   }
 
   buffer += "<ul>\n  ";
   stack1 = helpers.each.call(depth0, depth0.queue, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n</ul>\n\n";
+  buffer += "\n</ul>\n\n<button class=clear>Clear Queue</button>\n";
   stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n";
@@ -508,7 +513,7 @@ $(function() {
       return;
     }
     if (e.keyCode === 32) {
-      if (App.queue.playing) {
+      if (App.player.get('playing')) {
         if ((_ref = App.footer) != null) {
           _ref.pause();
         }
@@ -538,7 +543,7 @@ $(document).ajaxSend(function(e, xhr, options) {
 });
 
 resize = function() {
-  return $('.home-page .row-fluid').height($(window).height() - 100 - parseInt($('footer').css('bottom')));
+  return $('.home-page .row-fluid').height($(window).height() - $('footer').height());
 };
 
 toHHMMSS = function(seconds) {
@@ -700,11 +705,12 @@ App.Router = (function(_super) {
       month: 6,
       day: 7
     });
-    return App.songs = new App.Views.Songs({
+    App.songs = new App.Views.Songs({
       year: 2012,
       month: 6,
       day: 7
     });
+    return resize();
   };
 
   Router.prototype.year = function(year) {
@@ -1041,6 +1047,20 @@ App.Models.Player = (function(_super) {
     return _ref;
   }
 
+  Player.prototype.defaults = {
+    playing: false
+  };
+
+  Player.prototype.initialize = function() {
+    return this.on('change:playing', function(player, playing) {
+      if (playing) {
+        return $('footer .play').removeClass('play').addClass('pause');
+      } else {
+        return $('footer .pause').removeClass('pause').addClass('play');
+      }
+    });
+  };
+
   Player.prototype.play = function(ms) {
     var id,
       _this = this;
@@ -1071,7 +1091,7 @@ App.Models.Player = (function(_super) {
           this.stop();
           App.footer.playNext();
           if (App.queue.idx === App.queue.length) {
-            return App.queue.playing = false;
+            return App.player.set('playing', false);
           }
         }
       });
@@ -1353,26 +1373,21 @@ App.Collections.Queue = (function(_super) {
 
   Queue.prototype.idx = 0;
 
-  Queue.prototype.playing = false;
-
   Queue.prototype.initialize = function() {
     var _this = this;
 
     this.on('add', function() {
-      if ((_this.length === 1) || (_this.idx === _this.length - 1 && !_this.playing)) {
+      if ((_this.length === 1) || (_this.idx === _this.length - 1 && !App.player.get('playing'))) {
         return _this.play();
       }
     });
     return this.on('reset', function() {
-      _this.idx = 0;
-      if (_this.length > 0) {
-        return _this.play();
-      }
+      return _this.idx = 0;
     });
   };
 
   Queue.prototype.play = function(song, ms) {
-    var longDay, longSlug, month, year, _ref1;
+    var longDay, longSlug, month, url, year, _ref1;
 
     if (song) {
       if (App.song) {
@@ -1392,12 +1407,14 @@ App.Collections.Queue = (function(_super) {
     });
     App.song.set('active', 'active');
     App.player.play(ms);
-    this.playing = true;
+    App.player.set('playing', true);
     _ref1 = App.song.toJSON(), year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
     if (!("/" + year + "/" + month + "/" + longDay + "/" + longSlug).match(window.location.pathname)) {
-      Backbone.history.navigate("/" + year + "/" + month + "/" + longDay + "/" + longSlug, {
+      url = "/" + year + "/" + month + "/" + longDay + "/" + longSlug;
+      Backbone.history.navigate(url, {
         trigger: false
       });
+      ga('send', 'pageview', "" + url);
     }
     App.queueView.render(App.queueView.$el.find('ul').scrollTop());
     return ++this.idx;
@@ -1559,16 +1576,14 @@ App.Views.Footer = (function(_super) {
 
   Footer.prototype.pause = function() {
     soundManager.pause("phish" + App.player.get('id'));
-    App.queue.playing = false;
-    return $('footer .pause').removeClass('pause').addClass('play');
+    return App.player.set('playing', false);
   };
 
   Footer.prototype.playButton = function() {
     var id;
 
     id = App.player.get('id');
-    App.queue.playing = true;
-    $('footer .play').removeClass('play').addClass('pause');
+    App.player.set('playing', true);
     if (App.playerView.played.indexOf(id >= 0)) {
       return soundManager.resume("phish" + id);
     }
@@ -2066,7 +2081,8 @@ App.Views.Queue = (function(_super) {
   Queue.prototype.events = {
     'click .save': 'savePlaylist',
     'click .song': 'play',
-    'click .delete': 'removeFromQueue'
+    'click .delete': 'removeFromQueue',
+    'click .clear': 'clearQueue'
   };
 
   Queue.prototype.initialize = function() {
@@ -2127,6 +2143,11 @@ App.Views.Queue = (function(_super) {
     if (idx < App.queue.idx) {
       App.queue.idx--;
     }
+    return this.render();
+  };
+
+  Queue.prototype.clearQueue = function() {
+    App.queue.reset();
     return this.render();
   };
 
@@ -2248,7 +2269,8 @@ App.Views.Shows = (function(_super) {
     this.$el.html(this.template({
       shows: this.shows ? this.shows.toJSON() : shows
     }));
-    this.$a = this.$el.find('a').removeClass('active');
+    this.$a = this.$el.find('a');
+    this.$a.removeClass('active');
     return this;
   };
 

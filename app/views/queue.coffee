@@ -5,6 +5,7 @@ class App.Views.Queue extends App.Views.View
     'click .save': 'savePlaylist'
     'click .song': 'play'
     'click .delete': 'removeFromQueue'
+    'click .clear': 'clearQueue'
   initialize: ->
     App.queue = new App.Collections.Queue()
     @listenTo App.queue, 'add', @render
@@ -38,4 +39,7 @@ class App.Views.Queue extends App.Views.View
      App.queue.remove App.queue.at(idx)
      App.queue.idx-- if idx < App.queue.idx
      @render()
+  clearQueue: ->
+    App.queue.reset()
+    @render()
 

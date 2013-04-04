@@ -20,6 +20,7 @@ class App.Router extends Backbone.Router
     App.years = new App.Views.Years()
     App.shows = new App.Views.Shows { year: 2012, month: 6, day: 7 }
     App.songs = new App.Views.Songs { year: 2012, month: 6, day: 7 }
+    resize()
   year: (year) ->
     if App.initial
       @changeView(new App.Views.HomePage())
