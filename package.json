@@ -2,7 +2,7 @@
   "author": "Daniel Saewitz",
   "name": "gdspreadsheet",
   "description": "Backbone + Express + Coffee + Mongo",
-  "version": "0.0.1-52",
+  "version": "0.0.1-53",
   "engines": {
     "node": "0.8.x"
   },
