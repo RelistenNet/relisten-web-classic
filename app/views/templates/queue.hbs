@@ -4,18 +4,19 @@
       <a class="song {{active}}" href="/{{year}}/{{month}}/{{longDay}}/{{longSlug}}">
         {{title}}
       </a>
-      <span>
-        [<a href="/{{year}}/{{month}}/{{longDay}}">
-          {{month}}/{{day}}/{{year}}
-        </a>]
-      </span>
-      <span>[
-        <a href="javascript:" class=delete>x</a>
+      <span>[        <a href="javascript:" class=delete>x</a>
       ]</span>
+      <span>
+        [{{toHHMMSS duration}}]
+      </span>
+      <span>
+        [<a href="/{{year}}/{{month}}/{{longDay}}">{{month}}/{{day}}/{{year}}</a>]
+      </span>
     </li>
   {{/each}}
 </ul>
 
+<button class=clear>Clear Queue</button>
 {{#if loggedIn}}
-  <button class=save>Save Playlist</button>
+  <button class=save>Save Queue</button>
 {{/if}}

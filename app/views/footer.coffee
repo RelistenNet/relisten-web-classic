@@ -50,12 +50,10 @@ class App.Views.Footer extends App.Views.View
 
   pause: ->
     soundManager.pause "phish" + App.player.get('id')
-    App.queue.playing = false
-    $('footer .pause').removeClass('pause').addClass 'play'
+    App.player.set 'playing', false
   playButton: ->
     id = App.player.get('id')
-    App.queue.playing = true
-    $('footer .play').removeClass('play').addClass 'pause'
+    App.player.set 'playing', true
     return soundManager.resume "phish#{id}" if App.playerView.played.indexOf id >= 0
     App.player.play()
   playNext: ->

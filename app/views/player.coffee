@@ -13,6 +13,7 @@ class App.Views.Player extends App.Views.View
       preferFlash: false
       debugMode: false
     @render()
+
   render: ->
     @$el.html @template()
     App.player.updateText()

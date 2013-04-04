@@ -5434,7 +5434,7 @@ position: fixed;
 *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 html{height:100%;min-width:940px;width:100%;overflow-y:hidden}
 body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;height:100%;width:100%;overflow-y:hidden;}
-body .container-fluid{height:100%;overflow:none;}
+body .container-fluid{height:100%;width:100%;overflow:none;padding:0;}
 body .container-fluid #page-container{display:none;height:100%;overflow-y:scroll}
 body ul#notifications{position:fixed;top:50px;right:0;padding:20px;z-index:99;}
 body ul#notifications li{background:#fff;list-style-type:none;color:#333;width:300px;-webkit-border-radius:5px;border-radius:5px;border:3px solid #eee;margin:10px;}
@@ -5535,16 +5535,19 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .playlists-page ul.playlists li a:hover{background:#0a64a4;color:#fff}
 .playlists-page ul.playlists li .count{position:absolute;right:10px;top:8px;font-size:1.5em;color:#666}
 
-.playlists-edit-page table,.playlist-page table{width:100%;margin:auto;}
-.playlists-edit-page table tbody,.playlist-page table tbody{width:100%;}
-.playlists-edit-page table tbody tr,.playlist-page table tbody tr{width:100%;height:90px;}
-.playlists-edit-page table tbody tr td,.playlist-page table tbody tr td{width:50%;}
-.playlists-edit-page table tbody tr td textarea,.playlist-page table tbody tr td textarea{height:80px;width:100%}
+.playlists-edit-page,.playlist-page{padding-bottom:50px;}
+.playlists-edit-page form table,.playlist-page form table{width:100%;margin:auto;}
+.playlists-edit-page form table tbody,.playlist-page form table tbody{width:100%;}
+.playlists-edit-page form table tbody tr,.playlist-page form table tbody tr{width:100%;height:90px;}
+.playlists-edit-page form table tbody tr td,.playlist-page form table tbody tr td{width:50%;}
+.playlists-edit-page form table tbody tr td textarea,.playlist-page form table tbody tr td textarea{height:80px;width:100%}
 
-.queue-container{height:100%;width:50%;position:absolute;bottom:0;left:0;}
-.queue-container ul{padding:8px 0 0 0;overflow-y:scroll;height:100%;width:80%;}
+.queue-container{height:100%;width:40%;position:absolute;bottom:0;left:0;}
+.queue-container ul{padding:8px 0 0 0;overflow-y:scroll;height:100%;width:100%;}
 .queue-container ul li{list-style-type:none;}
 .queue-container ul li a.active{font-weight:bold}
 .queue-container ul li span{font-size:.8em;}
 .queue-container ul li span a{color:#333}
-.queue-container button{position:absolute;right:20px;bottom:20px;height:40px}
+.queue-container button{position:absolute;right:20px;height:30px;width:100px;}
+.queue-container button.save{bottom:10px}
+.queue-container button.clear{bottom:50px}

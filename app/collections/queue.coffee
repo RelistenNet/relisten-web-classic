@@ -2,12 +2,11 @@ class App.Collections.Queue extends App.Collections.Collection
   localStorage: new Backbone.LocalStorage "Queue"
   model: App.Models.Song
   idx: 0
-  playing: false
   initialize: ->
-    @on 'add', => @play() if (@length is 1) || (@idx is @length - 1 and !@playing)
+    @on 'add', => @play() if (@length is 1) || (@idx is @length - 1 and !App.player.get('playing'))
     @on 'reset', =>
       @idx = 0
-      @play() if @length > 0
+
   play: (song, ms) =>
     if song
       @idx = @indexOf App.song if App.song
@@ -20,11 +19,13 @@ class App.Collections.Queue extends App.Collections.Collection
     App.song.set 'active', 'active'
 
     App.player.play ms
-    @playing = true
+    App.player.set 'playing', true
     { year, month, longDay, longSlug } = App.song.toJSON()
     # If not on the URL already, go ahead!
     unless "/#{year}/#{month}/#{longDay}/#{longSlug}".match window.location.pathname
-      Backbone.history.navigate "/#{year}/#{month}/#{longDay}/#{longSlug}", trigger: false
+      url = "/#{year}/#{month}/#{longDay}/#{longSlug}"
+      Backbone.history.navigate url, trigger: false
+      ga('send', 'pageview', "#{url}")
     App.queueView.render App.queueView.$el.find('ul').scrollTop()
     ++@idx
   playLast: ->

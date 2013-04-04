@@ -14,7 +14,8 @@ class App.Views.Shows extends App.Views.View
     @$el.html @template
       shows: if @shows then @shows.toJSON() else shows
 
-    @$a = @$el.find('a').removeClass 'active'
+    @$a = @$el.find('a')
+    @$a.removeClass 'active'
 
     @
   activate: (e) =>
