@@ -34,7 +34,7 @@ $(document).ajaxSend (e, xhr, options) ->
 
 
 resize = ->
-  $('.home-page .row-fluid').height $(window).height() - $('footer').height()
+  $('.page-container').height $(window).height() - $('footer').height()
 
 toHHMMSS = (seconds) ->
   sec_numb = parseInt(seconds)

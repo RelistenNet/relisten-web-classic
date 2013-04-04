@@ -12,6 +12,7 @@ class App.Router extends Backbone.Router
     @route /^([0-9]{4})\/?$/, 'year'
     @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show'
     @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song'
+    @route /^playlist\/([0-9a-f]{24})\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'playlistSong'
 
     @$container = $('#page-container')
     @bind 'all', @_trackPageview
@@ -20,7 +21,7 @@ class App.Router extends Backbone.Router
     App.years = new App.Views.Years()
     App.shows = new App.Views.Shows { year: 1977 }
     App.songs = new App.Views.Songs { year: 1977, month: 5, day: 8 }
-    resize()
+
   year: (year) ->
     if App.initial
       @changeView(new App.Views.HomePage())
@@ -61,6 +62,22 @@ class App.Router extends Backbone.Router
     @changeView(new App.Views.PlaylistPage(playlistId: id))
   playlists: ->
     @changeView(new App.Views.PlaylistsPage(), false)
+  playlistSong: (id, @year, @month, @day, @showVersion, @slug, @version, @time) ->
+    if App.initial
+      @changeView(new App.Views.PlaylistPage(playlistId: id))
+      return App.playlist.on 'change', =>
+        @finishPlaylistSong { year: +@year, month: +@month, day: +@day, showVersion: +@showVersion, @slug, version: +@version }, @time
+        App.playlist.off 'change'
+    @finishPlaylistSong { year: +@year, month: +@month, day: +@day, showVersion: +@showVersion, @slug, version: +@version }, @time
+
+  finishPlaylistSong: (obj, time) ->
+    App.queue.on 'reset', =>
+      ms = timeToMS time
+      App.song = App.queue.findWhere obj
+      App.queue.play App.song, ms
+      App.queue.off 'reset'
+    App.queue.reset App.playlist.get('_songs')
+
   editPlaylist: (id) ->
     @changeView(new App.Views.PlaylistsEdit(playlistId: id), false)
   clearActive: ($current) ->
