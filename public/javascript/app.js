@@ -99,13 +99,22 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 this["JST"]["playlist"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, self=this, helperMissing=helpers.helperMissing, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
-function program1(depth0,data,depth1) {
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "<a href=/playlist/"
+    + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/edit>Edit playlist</a>";
+  return buffer;
+  }
+
+function program3(depth0,data,depth1) {
   
   var buffer = "", stack1, stack2, options;
   buffer += "\n    <tr>\n      <td><p>";
-  options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data};
   stack2 = ((stack1 = helpers.blurb),stack1 ? stack1.call(depth0, ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options) : helperMissing.call(depth0, "blurb", ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "</p></td>\n      <td class=second><a data-id=\"";
@@ -141,7 +150,7 @@ function program1(depth0,data,depth1) {
     + "</td>\n    </tr>\n  ";
   return buffer;
   }
-function program2(depth0,data) {
+function program4(depth0,data) {
   
   var buffer = "";
   return buffer;
@@ -149,8 +158,14 @@ function program2(depth0,data) {
 
   buffer += "<h3>"
     + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</h3>\n\n<table>\n  ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
+    + "</h3> ";
+  options = {hash:{
+    'compare': (((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._user))
+  },inverse:self.noop,fn:self.program(1, program1, data),data:data};
+  stack2 = ((stack1 = helpers.if_eq),stack1 ? stack1.call(depth0, depth0.userId, options) : helperMissing.call(depth0, "if_eq", depth0.userId, options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n\n<table>\n  ";
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.programWithDepth(program3, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</table>\n";
   return buffer;
@@ -1465,7 +1480,6 @@ App.Collections.Queue = (function(_super) {
     App.player.play(ms);
     App.player.set('playing', true);
     _ref1 = App.song.toJSON(), year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
-    console.log(window.location.pathname.match("/" + year + "/" + month + "/" + longDay + "/" + longSlug));
     if (!window.location.pathname.match("/" + year + "/" + month + "/" + longDay + "/" + longSlug)) {
       url = "/" + year + "/" + month + "/" + longDay + "/" + longSlug;
       Backbone.history.navigate(url, {
@@ -1996,7 +2010,8 @@ App.Views.PlaylistPage = (function(_super) {
 
   PlaylistPage.prototype.render = function() {
     this.$el.html(this.template({
-      playlist: App.playlist.toJSON()
+      playlist: App.playlist.toJSON(),
+      userId: App.user.get('_id')
     }));
     return this;
   };
@@ -2059,7 +2074,6 @@ App.Views.PlaylistsEdit = (function(_super) {
 
       $text = $(this);
       val = typeof $text.val() === 'string' ? $text.val() : '';
-      console.log($text.val());
       data.arr.push({
         text: val,
         songId: $text.siblings('input').val()

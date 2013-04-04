@@ -10,5 +10,6 @@ class App.Views.PlaylistPage extends App.Views.View
   render: ->
     @$el.html @template
       playlist: App.playlist.toJSON()
+      userId: App.user.get '_id'
 
     @

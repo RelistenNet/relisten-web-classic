@@ -22,7 +22,6 @@ class App.Collections.Queue extends App.Collections.Collection
     App.player.set 'playing', true
     { year, month, longDay, longSlug } = App.song.toJSON()
     # If not on the URL already, go ahead!
-    console.log window.location.pathname.match "/#{year}/#{month}/#{longDay}/#{longSlug}"
     unless window.location.pathname.match "/#{year}/#{month}/#{longDay}/#{longSlug}"
       url = "/#{year}/#{month}/#{longDay}/#{longSlug}"
       Backbone.history.navigate url, trigger: false

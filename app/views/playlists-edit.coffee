@@ -27,7 +27,6 @@ class App.Views.PlaylistsEdit extends App.Views.View
     $textarea.each (idx) ->
       $text = $(@)
       val = if typeof $text.val() is 'string' then $text.val() else ''
-      console.log $text.val()
 
       data.arr.push text: val, songId: $text.siblings('input').val()
 
