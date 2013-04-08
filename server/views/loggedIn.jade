@@ -26,7 +26,7 @@ block content
     , shows = !{JSON.stringify(shows)}
     , songs = !{JSON.stringify(songs)}
   if isProduction
-    script(type='text/javascript',src='/javascript/app.min.js')
+    script(type='text/javascript',src='https://listentothegd.s3.amazonaws.com/gd.min.js')
   else
     script(type='text/javascript',src='/javascript/vendor.js')
     script(type='text/javascript',src='/javascript/app.js')

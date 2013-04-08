@@ -72,12 +72,14 @@ module.exports = (grunt) ->
         dest: "public/javascript/vendor.js"
 
 
-    # This task uses the MinCSS Node.js project to take all your CSS files in
+    # This task uses the cssmin Node.js project to take all your CSS files in
     # order and concatenate them into a single CSS file named index.css.  It
     # also minifies all the CSS as well.  This is named index.css, because we
     # only want to load one stylesheet in index.html.
-    mincss:
-      "public/css/index.css": ["public/css/index.css"]
+    cssmin:
+      app:
+        files:
+          "public/css/index.css": ["public/css/index.css"]
 
 
     # The stylus task is used to compile Stylus stylesheets into a single
@@ -96,11 +98,14 @@ module.exports = (grunt) ->
             "app/views/styles/playlists.styl",
             "app/views/styles/playlist.styl",
             "app/views/styles/edit-playlist.styl",
-            "app/views/styles/queue.styl"
+            "app/views/styles/queue.styl",
+            "app/views/styles/about.styl"
           ]
 
-    min:
-      "public/javascript/tweezer.js": ["public/javascript/vendor.js", "public/javascript/app.js"]
+    uglify:
+      app:
+        files:
+          "production/gd.min.js": ["public/javascript/vendor.js", "public/javascript/app.js"]
 
 
     # The watch task can be used to monitor the filesystem and execute
@@ -131,9 +136,6 @@ module.exports = (grunt) ->
           src: ["public/css/*"]
           dest: "production/"
         ,
-          src: ["public/javascript/app.min.js"]
-          dest: "production/"
-        ,
           src: ["public/img/*"]
           dest: "production/img/"
         ,
@@ -147,10 +149,11 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-handlebars"
   grunt.loadNpmTasks "grunt-contrib-stylus"
   grunt.loadNpmTasks "grunt-contrib-copy"
-  grunt.loadNpmTasks "grunt-contrib-mincss"
+  grunt.loadNpmTasks "grunt-contrib-cssmin"
   grunt.loadNpmTasks "grunt-contrib-watch"
+  grunt.loadNpmTasks "grunt-contrib-uglify"
 
 
   grunt.registerTask "compile", ["coffee", "handlebars", "concat", "stylus", "clean"]
   grunt.registerTask "compile:coffee", ["coffee", "handlebars", "concat", "clean"]
-  grunt.registerTask "production", ["coffee", "handlebars", "concat", "min", "stylus", "mincss", "clean", "copy"]
+  grunt.registerTask "production", ["coffee", "handlebars", "concat", "uglify", "stylus", "cssmin", "clean", "copy"]

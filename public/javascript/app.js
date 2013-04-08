@@ -6,7 +6,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----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-----END PKCS7-----\n\">\n<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n</form>\n\n<p>Bitcoins: 18cKZYerWvB77UnywGTvrMbpVrfLpuuiXi</p>\n";
+  return "<p>\n  Welcome to this internet experiment.\n</p>\n\n<p>\n  If you haven't figured it out already, you can stream nearly every <a href=\"http://en.wikipedia.org/wiki/Grateful_Dead\">Grateful Dead</a> show here.\n</p>\n\n<p>\n  This site just launched very recently. Please use it as you'd like, but keep in mind it is still very young. If you run into a bug, please send a quick email with your browser and operating system, along with a straightforward explanation as to what happened to <a href=\"mailto:postmaster@listentothe.gd\">postmaster@listentothe.gd</a>. Comments and suggestions are also always welcome.\n</p>\n\n<br>\n<br>\n\n<p>\n  If you'd like to donate, all of the proceeds will go towards the running of this site and others like it. Any extra funds will be donated to Archive.org and The Mockingbird Foundation.\n</p>\n\n<br>\n\n<p>\n<center>\n<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----MIIHFgYJKoZIhvcNAQcEoIIHBzCCBwMCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAh11KAHoBFTbiDh9MoFT1ZNklv3yVRAL/xI1WXNO58Prr3sP48LaQYUJIxnO6IumOfvZ4qzAqQe9uwof1Wj6u6F4t2bIX2j2nUTl8oSRFKQBXEp6T+ttXZBX8tF9+mZjhjYp1C6b+LbiBWbnR+aK0S2pQzOqN/6CQSy3neg8pwGTELMAkGBSsOAwIaBQAwgZMGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIU6sIpVoDyTSAcIOU0s5Gg4xrtR3i2/Ax0+7UTc/7+aWmJ5TYVvhwjRaqwmmL9grTmRpbtC1Lco+OTBzpIXXTpI3599m0nzlVwwf/AQ+pFGeqiyy3k5CU4jH01Hp3ahhlOilbNOzM063eIT5fTdPomG8nD5kR9SSwBjegggOHMIIDgzCCAuygAwIBAgIBADANBgkqhkiG9w0BAQUFADCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wHhcNMDQwMjEzMTAxMzE1WhcNMzUwMjEzMTAxMzE1WjCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMFHTt38RMxLXJyO2SmS+Ndl72T7oKJ4u4uw+6awntALWh03PewmIJuzbALScsTS4sZoS1fKciBGoh11gIfHzylvkdNe/hJl66/RGqrj5rFb08sAABNTzDTiqqNpJeBsYs/c2aiGozptX2RlnBktH+SUNpAajW724Nv2Wvhif6sFAgMBAAGjge4wgeswHQYDVR0OBBYEFJaffLvGbxe9WT9S1wob7BDWZJRrMIG7BgNVHSMEgbMwgbCAFJaffLvGbxe9WT9S1wob7BDWZJRroYGUpIGRMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbYIBADAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAIFfOlaagFrl71+jq6OKidbWFSE+Q4FqROvdgIONth+8kSK//Y/4ihuE4Ymvzn5ceE3S/iBSQQMjyvb+s2TWbQYDwcp129OPIbD9epdr4tJOUNiSojw7BHwYRiPh58S1xGlFgHFXwrEBb3dgNbMUa+u4qectsMAXpVHnD9wIyfmHMYIBmjCCAZYCAQEwgZQwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tAgEAMAkGBSsOAwIaBQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xMzA0MDQwNzQwMTVaMCMGCSqGSIb3DQEJBDEWBBTyqz+PT/+DcoUfNIN7gCq1nPjwgDANBgkqhkiG9w0BAQEFAASBgEkz4EmW0MS+MfKFaWfUN2+tspQovr6tlWNmYEj/wBNAhbErRLcVURKVGooF+JI1JtVZkklT2NtPSva2hinpGH1NRGWvlbRYF3vZlhktJhbkwpnOUUlS/IkmmW8Bp8Zsq+duCzC74aC5AM+Qsn6DGxzDELp4qxCWLlaVQlW9KXBp-----END PKCS7-----\n\">\n<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n</form>\n</center>\n</p>\n\n<p><center>Bitcoin: 1FQRjYy5hqzeDD5DWThGNzfyy1E2PoNdMC</center></p>\n\n<p>\n  This site complies with the Grateful Dead's <a href=\"http://web.archive.org/web/20050324025618/http://dead.net/hotline_info/NEW_DOCUMENTS/mp3.html\">taping policy</a> along with Archive.org's <a href=\"https://archive.org/post/261115/hotlinking-allowed\">policy</a>.\n</p>\n\n<p>\n  <i>\n    The Grateful Dead and our managing organizations have long encouraged the purely non-commercial exchange of music taped at our concerts and those of our individual members. That a new medium of distribution has arisen - digital audio files being traded over the Internet - does not change our policy in this regard. Our stipulations regarding digital distribution are merely extensions of those long-standing principles and they are as follow:\n</i>\n</p>\n\n<p>\n  <i>\n    No commercial gain may be sought by websites offering digital files of our music, whether through advertising, exploiting databases compiled from their traffic, or any other means.\nAll participants in such digital exchange acknowledge and respect the copyrights of the performers, writers and publishers of the music.\n</i>\n</p>\n<p>\n  <i>\n    This notice should be clearly posted on all sites engaged in this activity.\n    We reserve the ability to withdraw our sanction of non-commercial digital music should circumstances arise that compromise our ability to protect and steward the integrity of our work.\n</i>\n</p>\n";
   });
 
 this["JST"]["footer"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -35,10 +35,10 @@ function program3(depth0,data) {
   return "\n    <li><a class=\"login header-link\" href=\"/login\">LOGIN</a></li>\n    <li><a class=\"register header-link\" href=\"/register\">REGISTER</a></li>\n  ";
   }
 
-  buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\">Spreadsheet<span>.phish</span></a></li>\n</ul>\n\n<ul class=\"right\">\n  ";
+  buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\">ListenToThe<span>.GD</span></a></li>\n</ul>\n\n<ul class=\"right\">\n  ";
   stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <li><a class=\"header-link\" href=\"/playlists\">PLAYLISTS</a></li>\n</ul>\n";
+  buffer += "\n    <li><a class=\"header-link\" href=\"/playlists\">PLAYLISTS</a></li>\n    <li><a class=\"header-link\" href=\"/about\">ABOUT</a></li>\n</ul>\n";
   return buffer;
   });
 
@@ -700,6 +700,7 @@ App.Router = (function(_super) {
 
   Router.prototype.routes = {
     '': 'index',
+    'about': 'about',
     'login': 'login',
     'register': 'register',
     'playlists': 'playlists',
@@ -720,7 +721,8 @@ App.Router = (function(_super) {
     this.changeView(new App.Views.HomePage());
     App.years = new App.Views.Years();
     App.shows = new App.Views.Shows();
-    return App.songs = new App.Views.Songs();
+    App.songs = new App.Views.Songs();
+    return document.title = 'Listen to the Grateful Dead';
   };
 
   Router.prototype.year = function(year) {
@@ -732,13 +734,12 @@ App.Router = (function(_super) {
       year: year
     });
     if (App.songs) {
-      return App.songs.$el.empty();
+      App.songs.$el.empty();
     }
+    return document.title = "" + year + " | Listen to the Grateful Dead";
   };
 
   Router.prototype.show = function(year, month, day, showVersion) {
-    var _ref1;
-
     this.year = year;
     this.month = month;
     this.day = day;
@@ -750,22 +751,21 @@ App.Router = (function(_super) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
     }
-    if (((_ref1 = App.shows) != null ? _ref1.shows.get('year') : void 0) !== +year) {
+    if (!(App.shows && App.shows.shows && App.shows.shows.get('year') === +this.year)) {
       App.shows = new App.Views.Shows({
-        year: year
+        year: this.year
       });
     }
-    return App.songs = new App.Views.Songs({
+    App.songs = new App.Views.Songs({
       year: this.year,
       month: this.month,
       day: this.day,
       showVersion: this.showVersion
     });
+    return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | Listen to the Grateful Dead";
   };
 
   Router.prototype.song = function(year, month, day, showVersion, slug, version, time) {
-    var _ref1;
-
     this.year = year;
     this.month = month;
     this.day = day;
@@ -777,7 +777,7 @@ App.Router = (function(_super) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
       App.shows = new App.Views.Shows({
-        year: year
+        year: this.year
       });
       App.songs = new App.Views.Songs({
         year: this.year,
@@ -787,9 +787,9 @@ App.Router = (function(_super) {
       });
       return App.songs.listenToOnce(App.songs.folder, 'change', this.finishSong);
     }
-    if (((_ref1 = App.shows) != null ? _ref1.shows.get('year') : void 0) !== +year) {
+    if (!(App.shows && App.shows.shows && App.shows.shows.get('year') === +this.year)) {
       App.shows = new App.Views.Shows({
-        year: year
+        year: this.year
       });
     }
     return this.finishSong();
@@ -807,28 +807,38 @@ App.Router = (function(_super) {
         slug: self.slug,
         version: +self.version || 0
       });
+      document.title = "" + (App.song.get('title')) + " | " + self.year + "/" + self.month + "/" + self.day + " | Listen to the Grateful Dead";
       App.queue.play(App.song, ms);
       return App.queue.off('reset');
     });
     return App.queue.reset(App.songs.folder.get('_songs'));
   };
 
+  Router.prototype.about = function() {
+    this.changeView(new App.Views.AboutPage());
+    return document.title = 'About | Listen to the Grateful Dead';
+  };
+
   Router.prototype.login = function() {
-    return this.changeView(new App.Views.LoginPage());
+    this.changeView(new App.Views.LoginPage());
+    return document.title = 'Login | Listen to the Grateful Dead';
   };
 
   Router.prototype.register = function() {
-    return this.changeView(new App.Views.RegisterPage());
+    this.changeView(new App.Views.RegisterPage());
+    return document.title = 'Register | Listen to the Grateful Dead';
   };
 
   Router.prototype.playlist = function(id) {
-    return this.changeView(new App.Views.PlaylistPage({
+    this.changeView(new App.Views.PlaylistPage({
       playlistId: id
     }));
+    return document.title = 'Playlist | Listen to the Grateful Dead';
   };
 
   Router.prototype.playlists = function() {
-    return this.changeView(new App.Views.PlaylistsPage(), false);
+    this.changeView(new App.Views.PlaylistsPage(), false);
+    return document.title = 'Playlists | Listen to the Grateful Dead';
   };
 
   Router.prototype.playlistSong = function(id, year, month, day, showVersion, slug, version, time) {
@@ -1176,7 +1186,7 @@ App.Models.Player = (function(_super) {
       $footer.animate({
         'height': 100
       }, 1000);
-      return $('.home-page .row-fluid').animate({
+      return $('.page-container').animate({
         'height': $(window).height() - 100
       }, 1000);
     }
@@ -1444,7 +1454,7 @@ App.Collections.Queue = (function(_super) {
   };
 
   Queue.prototype.play = function(song, ms) {
-    var longDay, longSlug, month, url, year, _ref1;
+    var day, longDay, longSlug, month, title, url, year, _ref1;
 
     if (song) {
       if (App.song) {
@@ -1465,9 +1475,11 @@ App.Collections.Queue = (function(_super) {
     App.song.set('active', 'active');
     App.player.play(ms);
     App.player.set('playing', true);
-    _ref1 = App.song.toJSON(), year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
+    _ref1 = App.song.toJSON(), year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug, day = _ref1.day, title = _ref1.title;
     if (!window.location.pathname.match("/" + year + "/" + month + "/" + longDay + "/" + longSlug)) {
+      document.title = "" + title + " ";
       url = "/" + year + "/" + month + "/" + longDay + "/" + longSlug;
+      document.title = "" + title + " | " + year + "/" + month + "/" + day + " | Listen to the Grateful Dead";
       Backbone.history.navigate(url, {
         trigger: false
       });
@@ -1524,6 +1536,31 @@ App.Views.View = (function(_super) {
   return View;
 
 })(Backbone.View);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.AboutPage = (function(_super) {
+  __extends(AboutPage, _super);
+
+  function AboutPage() {
+    _ref = AboutPage.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  AboutPage.prototype.className = 'about-page';
+
+  AboutPage.prototype.template = JST['about'];
+
+  AboutPage.prototype.render = function() {
+    this.$el.html(this.template());
+    return this;
+  };
+
+  return AboutPage;
+
+})(App.Views.View);
 
 var _ref,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -2380,6 +2417,7 @@ App.Views.Songs = (function(_super) {
 
   Songs.prototype.initialize = function() {
     if (!(this.options.year || this.options.month || this.options.day)) {
+      this.folder = new App.Models.Songs(songs);
       return this.render();
     }
     this.folder = new App.Models.Songs({

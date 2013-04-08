@@ -137,8 +137,7 @@ cleanSongs = ->
       Song.findById(song._id)
         .populate('_show')
         .exec (err, song) ->
-          console.log song
-          song.id = song.show.id + song.longSlug
+          song.id = song._show.id + song.longSlug
           return console.log song.id, 'test'
           song.save (err) ->
             console.log err if err
@@ -149,7 +148,7 @@ cleanShows = ->
   Show.find (err, shows) ->
     for show in shows
       Show.findById show._id, (err, show) ->
-        console.log show
+        return console.log show
         show.date = new Date "#{show.month}/#{show.day}/#{show.year}"
         show.save (err) ->
           console.log err if err
@@ -161,8 +160,8 @@ gd = ->
 
 
 timeStrToSec = (str) ->
-  return 0 unless str
   duration = 0
+  return duration unless str
   # Convert 3:45 to seconds
   for i, num of str.split(":").reverse()
     duration += num * Math.pow 60, i
@@ -207,4 +206,10 @@ program
 Error.stackTraceLimit = Infinity
 
 program.parse process.argv
+
+
+## Mongo scripts
+# Update song id from show.id + '##' + song.longSlug
+# db.songs.find().forEach(function(song) {   show = db.shows.findOne({_id:song._show});   db.songs.update({_id: song._id},{$set:{id:show.id + '::' + song.longSlug}}); });
+##
 

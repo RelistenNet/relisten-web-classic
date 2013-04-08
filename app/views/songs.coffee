@@ -7,7 +7,9 @@ class App.Views.Songs extends App.Views.View
     'click .play': 'play'
     'click .add-all': 'addAll'
   initialize: ->
-    return @render() unless @options.year || @options.month || @options.day
+    unless @options.year || @options.month || @options.day
+      @folder = new App.Models.Songs songs
+      return @render()
     @folder = new App.Models.Songs
       year: @options.year
       month: @options.month

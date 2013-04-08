@@ -1,6 +1,7 @@
 class App.Router extends Backbone.Router
   routes:
     '': 'index'
+    'about': 'about'
     'login': 'login'
     'register': 'register'
     'playlists': 'playlists'
@@ -21,29 +22,31 @@ class App.Router extends Backbone.Router
     App.years = new App.Views.Years()
     App.shows = new App.Views.Shows()
     App.songs = new App.Views.Songs()
-
+    document.title = 'Listen to the Grateful Dead'
   year: (year) ->
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
     App.shows = new App.Views.Shows { year }
     App.songs.$el.empty() if App.songs
+    document.title = "#{year} | Listen to the Grateful Dead"
   show: (@year, @month, @day, @showVersion) ->
     App.songs.undelegateEvents() if App.songs
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
-    App.shows = new App.Views.Shows { year } unless App.shows?.shows.get('year') is +year
+    App.shows = new App.Views.Shows { @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
     App.songs = new App.Views.Songs { @year, @month, @day, @showVersion }
+    document.title = "#{@year}/#{@month}/#{@day} | Listen to the Grateful Dead"
   song: (@year, @month, @day, @showVersion, @slug, @version, @time) ->
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
-      App.shows = new App.Views.Shows { year }
+      App.shows = new App.Views.Shows { @year }
       App.songs = new App.Views.Songs { @year, @month, @day, @showVersion }
       return App.songs.listenToOnce App.songs.folder, 'change', @finishSong
 
-    App.shows = new App.Views.Shows { year } unless App.shows?.shows.get('year') is +year
+    App.shows = new App.Views.Shows { @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
     @finishSong()
 
   finishSong: =>
@@ -51,17 +54,25 @@ class App.Router extends Backbone.Router
     App.queue.on 'reset', ->
       ms = timeToMS self.time
       App.song = App.queue.findWhere { slug: self.slug, version: +self.version || 0 }
+      document.title = "#{App.song.get('title')} | #{self.year}/#{self.month}/#{self.day} | Listen to the Grateful Dead"
       App.queue.play App.song, ms
       App.queue.off 'reset'
     App.queue.reset App.songs.folder.get('_songs')
+  about: ->
+    @changeView(new App.Views.AboutPage())
+    document.title = 'About | Listen to the Grateful Dead'
   login: ->
     @changeView(new App.Views.LoginPage())
+    document.title = 'Login | Listen to the Grateful Dead'
   register: ->
     @changeView(new App.Views.RegisterPage())
+    document.title = 'Register | Listen to the Grateful Dead'
   playlist: (id) ->
     @changeView(new App.Views.PlaylistPage(playlistId: id))
+    document.title = 'Playlist | Listen to the Grateful Dead'
   playlists: ->
     @changeView(new App.Views.PlaylistsPage(), false)
+    document.title = 'Playlists | Listen to the Grateful Dead'
   playlistSong: (id, @year, @month, @day, @showVersion, @slug, @version, @time) ->
     if App.initial
       @changeView(new App.Views.PlaylistPage(playlistId: id))

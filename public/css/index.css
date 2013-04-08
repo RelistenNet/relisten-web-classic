@@ -5434,7 +5434,7 @@ position: fixed;
 *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 html{height:100%;min-width:940px;width:100%;overflow-y:hidden}
 body{background:#f8f8f8;color:#333;font-family:Helvetica,Arial,sans-serif;height:100%;width:100%;overflow-y:hidden;}
-body .container-fluid{height:100%;width:100%;overflow:none;padding:0;}
+body .container-fluid{height:100%;width:100%;padding:0;}
 body .container-fluid #page-container{display:none;height:100%;overflow-y:scroll}
 body ul#notifications{position:fixed;top:50px;right:0;padding:20px;z-index:99;}
 body ul#notifications li{background:#fff;list-style-type:none;color:#333;width:300px;-webkit-border-radius:5px;border-radius:5px;border:3px solid #eee;margin:10px;}
@@ -5453,7 +5453,7 @@ header ul.left li a:hover{text-decoration:none}
 header ul.left li.home-container{font-family:'Lato';font-style:italic;font-weight:700;font-size:1.2em;}
 header ul.left li.home-container a.home{font-size:2em;line-height:1.5em;height:50px;color:#0a64a4;display:block;padding:0 10px 0 10px;}
 header ul.left li.home-container a.home:hover{color:#f6f6f6;background:#0a64a4}
-header ul.left li.home-container a.home span{font-size:.5em}
+header ul.left li.home-container a.home span{font-size:.7em}
 header ul.right{position:absolute;right:0;}
 header ul.right li{float:right;height:100%;text-align:center;border-left:1px solid #ddd;}
 header ul.right li:hover,header ul.right li.active{border-left:1px solid #0a64a4}
@@ -5562,3 +5562,5 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .queue-container button{position:absolute;right:20px;height:30px;width:100px;}
 .queue-container button.save{bottom:10px}
 .queue-container button.clear{bottom:50px}
+
+.about-page{width:800px;margin:auto;padding:50px 0}

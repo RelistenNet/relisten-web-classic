@@ -84,13 +84,13 @@ login = (req, res, {email, password}) ->
 bootstrapData = (cb) ->
   async.parallel [
     (callback) ->
-      Year.find callback
+      Year.find {}, 'year', callback
     , (callback) ->
       Year.findOne(year: 1977)
-        .populate('_shows')
+        .populate('_shows', 'album year month day version longDay')
         .exec callback
     , (callback) ->
-      Show.findOne({ year: 1977, month: 5, day: 8 })
+      Show.findOne({ year: 1977, month: 5, day: 8 }, '_songs title')
         .populate('_songs')
         .exec callback
     ], cb
