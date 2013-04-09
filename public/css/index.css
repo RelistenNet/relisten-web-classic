@@ -5467,7 +5467,7 @@ header ul.right li a.plus,header ul.right li a:visited.plus{line-height:.8em}
 footer{height:0;min-width:940px;width:100%;position:absolute;bottom:0;left:0;background:#f6f6f6;z-index:99;overflow:hidden;}
 footer .progress-container{background:#666;width:100%;position:absolute;height:8px;z-index:100;top:0;left:0;cursor:pointer;}
 footer .progress-container .progress-bar{height:8px;width:1%;background:#000;position:absolute;top:0}
-footer .progress-container .position-bar{width:3px;height:7px;background:#eee;position:absolute;z-index:101;top:0}
+footer .progress-container .position-bar{width:3px;height:8px;background:#eee;position:absolute;z-index:101;top:0}
 footer .buttons{width:185px;height:60px;clear:both;margin:35px auto auto auto;position:relative;z-index:100;}
 footer .buttons .bar-left,footer .buttons .play,footer .buttons .pause,footer .buttons .bar-right{z-index:99;float:left;margin:0 20px;cursor:pointer}
 footer .buttons .bar{height:36px;width:37px;}
@@ -5496,6 +5496,7 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .home-page .row-fluid .span4 ul li > a.active{background:#008ab0;color:#fff}
 .home-page .row-fluid .span4 ul li > a.clear{padding:0;width:auto;height:auto;display:inline-block}
 .home-page .row-fluid .span4 ul li > a.video-link{font-size:1.14em}
+.home-page .row-fluid .span4 ul li > a.archive{color:#333}
 .home-page .row-fluid .span4 ul li > a span{color:#555;font-size:.75em;margin-top:5px;text-align:right;pointer-events:none}
 .home-page .row-fluid .span4 ul li .report{color:#555;font-size:.91em;position:absolute;z-index:2;right:4px;bottom:10px;opacity:.7;filter:alpha(opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";}
 .home-page .row-fluid .span4 ul li .report:hover{opacity:1;-ms-filter:none;filter:none}
@@ -5535,16 +5536,16 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .playlists-page ul.playlists li a:hover{background:#0a64a4;color:#fff}
 .playlists-page ul.playlists li .count{position:absolute;right:10px;top:8px;font-size:1.5em;color:#666}
 
-.playlist-page{padding-bottom:150px;}
+.playlist-page{padding-bottom:150px;overflow-y:auto;overflow-x:hidden;}
 .playlist-page .name-container{margin:auto;width:400px;padding:5px 5px 30px 5px}
 .playlist-page table{width:100%;margin:auto;}
 .playlist-page table tbody{width:100%;}
-.playlist-page table tbody tr{width:100%;height:90px;}
+.playlist-page table tbody tr{width:100%;height:90px;border-bottom:1px solid #ccc;}
 .playlist-page table tbody tr td{width:50%;}
 .playlist-page table tbody tr td p{width:80%;text-align:left;margin:auto;overflow-y:scroll}
 .playlist-page table tbody tr td.second{text-align:left}
 
-.playlists-edit-page{padding-bottom:150px;}
+.playlists-edit-page{padding-bottom:150px;overflow-y:auto;overflow-x:hidden;}
 .playlists-edit-page form .name-container{margin:auto;width:400px;padding:5px 5px 30px 5px}
 .playlists-edit-page form table{width:100%;margin:auto;}
 .playlists-edit-page form table tbody{width:100%;}
@@ -5554,13 +5555,15 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .playlists-edit-page form table tbody tr td textarea{height:80px;width:80%}
 
 .queue-container{height:100%;width:40%;position:absolute;bottom:0;left:0;}
-.queue-container ul{padding:8px 0 0 0;overflow-y:scroll;height:100%;width:100%;}
+.queue-container ul{padding:8px 0 0 0;margin:0 5px;overflow-y:scroll;height:100%;width:100%;}
 .queue-container ul li{list-style-type:none;}
 .queue-container ul li a.active{font-weight:bold}
 .queue-container ul li span{font-size:.8em;}
 .queue-container ul li span a{color:#333}
-.queue-container button{position:absolute;right:20px;height:30px;width:100px;}
+.queue-container button{position:absolute;right:20px;height:30px;width:100px;display:none;}
 .queue-container button.save{bottom:10px}
 .queue-container button.clear{bottom:50px}
+.queue-container:hover button{display:block}
 
-.about-page{width:800px;margin:auto;padding:50px 0}
+.about-page{width:800px;margin:auto;padding:30px 0;}
+.about-page p.big{font-size:1.5em}

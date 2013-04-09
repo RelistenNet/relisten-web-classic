@@ -1,11 +1,12 @@
 <ul>
   {{#each queue}}
     <li>
+      <span>[
+        <a href="javascript:" class=delete>x</a>
+      ]</span>
       <a class="song {{active}}" href="/{{year}}/{{month}}/{{longDay}}/{{longSlug}}">
         {{title}}
       </a>
-      <span>[        <a href="javascript:" class=delete>x</a>
-      ]</span>
       <span>
         [{{toHHMMSS duration}}]
       </span>

@@ -4,7 +4,7 @@
   {{#each playlist._songs}}
     <tr>
       <td><p>{{#blurb ../playlist._blurbs _id}}{{/blurb}}</p></td>
-      <td class=second><a data-id="{{_id}}" href="/playlist/{{../playlist._id}}/{{year}}/{{month}}/{{day}}/{{slug}}">{{title}}</a> - {{album}}</td>
+      <td class=second><a data-id="{{_id}}" href="/playlist/{{../playlist._id}}/{{year}}/{{month}}/{{longDay}}/{{longSlug}}">{{title}}</a> - {{album}}</td>
     </tr>
   {{/each}}
 </table>

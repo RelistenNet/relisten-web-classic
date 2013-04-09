@@ -7,6 +7,7 @@
 
   ul
     padding 8px 0 0 0
+    margin 0 5px
     overflow-y scroll
     height 100%
     width 100%
@@ -29,8 +30,13 @@
     right 20px
     height 30px
     width 100px
+    display none
 
     &.save
       bottom 10px
     &.clear
       bottom 50px
+
+  &:hover
+    button
+      display block

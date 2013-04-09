@@ -110,4 +110,6 @@ class App.Router extends Backbone.Router
   _trackPageview: ->
     App.initial = false if App.initial
     url = Backbone.history.getFragment()
+    return if @lastUrl is url
+    @lastUrl = url
     ga('send', 'pageview', "/#{url}");

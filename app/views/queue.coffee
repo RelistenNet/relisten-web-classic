@@ -11,20 +11,21 @@ class App.Views.Queue extends App.Views.View
     @listenTo App.queue, 'add', @render
     @listenTo App.queue, 'reset', @render
     @render()
-  render: (scrollTop) ->
+  render: (scrollTop, dontAnimateScroll) ->
     song = App.queue.at(App.queue.idx - 1)
     @$el.html @template
       queue: App.queue.toJSON()
       loggedIn: App.user.loggedIn()
       activeSlug: if App.queue then song?.get 'longSlug' else false
 
-    $ul = @$el.find 'ul'
-    $ul.scrollTop scrollTop if scrollTop
-    $active = $ul.find('.active')
+    @$ul = @$el.find 'ul'
+    @$ul.scrollTop scrollTop if scrollTop
+    return if dontAnimateScroll
+    $active = @$ul.find('.active')
     return unless $active.length
     top = $active.position().top
 
-    $ul.animate scrollTop: top + $ul.scrollTop() - 30, 1250
+    @$ul.animate scrollTop: top + @$ul.scrollTop() - 30, 1250
   savePlaylist: ->
     playlist = new App.Models.Playlist _songs: _.pluck(App.queue.toJSON(), '_id')
     playlist.save()
@@ -38,7 +39,7 @@ class App.Views.Queue extends App.Views.View
      idx = @$el.find('.delete').index $(e.target)
      App.queue.remove App.queue.at(idx)
      App.queue.idx-- if idx < App.queue.idx
-     @render()
+     @render @$ul.scrollTop(), true
   clearQueue: ->
     App.queue.reset()
     @render()

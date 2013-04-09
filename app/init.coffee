@@ -34,7 +34,8 @@ $(document).ajaxSend (e, xhr, options) ->
 
 
 resize = ->
-  $('.page-container').height $(window).height() - $('footer').height()
+  $('.page-container').height($(window).height() - $('footer').height())
+    .css 'overflow', 'auto'
 
 toHHMMSS = (seconds) ->
   sec_numb = parseInt(seconds)

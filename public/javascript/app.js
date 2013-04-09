@@ -6,7 +6,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   
 
 
-  return "<p>\n  Welcome to this internet experiment.\n</p>\n\n<p>\n  If you haven't figured it out already, you can stream nearly every <a href=\"http://en.wikipedia.org/wiki/Grateful_Dead\">Grateful Dead</a> show here.\n</p>\n\n<p>\n  This site just launched very recently. Please use it as you'd like, but keep in mind it is still very young. If you run into a bug, please send a quick email with your browser and operating system, along with a straightforward explanation as to what happened to <a href=\"mailto:postmaster@listentothe.gd\">postmaster@listentothe.gd</a>. Comments and suggestions are also always welcome.\n</p>\n\n<br>\n<br>\n\n<p>\n  If you'd like to donate, all of the proceeds will go towards the running of this site and others like it. Any extra funds will be donated to Archive.org and The Mockingbird Foundation.\n</p>\n\n<br>\n\n<p>\n<center>\n<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----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-----END PKCS7-----\n\">\n<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n</form>\n</center>\n</p>\n\n<p><center>Bitcoin: 1FQRjYy5hqzeDD5DWThGNzfyy1E2PoNdMC</center></p>\n\n<p>\n  This site complies with the Grateful Dead's <a href=\"http://web.archive.org/web/20050324025618/http://dead.net/hotline_info/NEW_DOCUMENTS/mp3.html\">taping policy</a> along with Archive.org's <a href=\"https://archive.org/post/261115/hotlinking-allowed\">policy</a>.\n</p>\n\n<p>\n  <i>\n    The Grateful Dead and our managing organizations have long encouraged the purely non-commercial exchange of music taped at our concerts and those of our individual members. That a new medium of distribution has arisen - digital audio files being traded over the Internet - does not change our policy in this regard. Our stipulations regarding digital distribution are merely extensions of those long-standing principles and they are as follow:\n</i>\n</p>\n\n<p>\n  <i>\n    No commercial gain may be sought by websites offering digital files of our music, whether through advertising, exploiting databases compiled from their traffic, or any other means.\nAll participants in such digital exchange acknowledge and respect the copyrights of the performers, writers and publishers of the music.\n</i>\n</p>\n<p>\n  <i>\n    This notice should be clearly posted on all sites engaged in this activity.\n    We reserve the ability to withdraw our sanction of non-commercial digital music should circumstances arise that compromise our ability to protect and steward the integrity of our work.\n</i>\n</p>\n";
+  return "<p>\n  Welcome to this internet experiment.\n</p>\n\n<br>\n\n<p class=big>\n  \"Screw this wall of text. I just want to email you\": <a href=\"mailto:postmaster@listentothe.gd\">postmaster@listentothe.gd</a>\n</p>\n\n<br>\n\n<p>\n  If you haven't figured it out already, you can stream nearly every <a href=\"http://en.wikipedia.org/wiki/Grateful_Dead\">Grateful Dead</a> show here.\n</p>\n\n<p>\n  This site just launched very recently. Please use it as you'd like, but keep in mind it is still very young. If you run into a bug, please send a quick email with your browser and operating system, along with a straightforward explanation as to what happened to <a href=\"mailto:postmaster@listentothe.gd\">postmaster@listentothe.gd</a>. Comments and suggestions are also always welcome.\n</p>\n\n<br>\n<br>\n\n<p>\n  If you'd like to donate, all of the proceeds will go towards the running of this site and others like it. Any extra funds will be donated to Archive.org and The Mockingbird Foundation.\n</p>\n\n<br>\n\n<p>\n<center>\n<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_blank\">\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----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-----END PKCS7-----\n\">\n<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n</form>\n</center>\n</p>\n\n<p><center>Bitcoin: 1FQRjYy5hqzeDD5DWThGNzfyy1E2PoNdMC</center></p>\n\n<br>\n<br>\n\n<p>\n  This site complies with the Grateful Dead's <a href=\"http://web.archive.org/web/20050324025618/http://dead.net/hotline_info/NEW_DOCUMENTS/mp3.html\">taping policy</a> along with Archive.org's <a href=\"https://archive.org/post/261115/hotlinking-allowed\">policy</a>.\n</p>\n\n<p>\n  <i>\n    The Grateful Dead and our managing organizations have long encouraged the purely non-commercial exchange of music taped at our concerts and those of our individual members. That a new medium of distribution has arisen - digital audio files being traded over the Internet - does not change our policy in this regard. Our stipulations regarding digital distribution are merely extensions of those long-standing principles and they are as follow:\n</i>\n</p>\n\n<p>\n  <i>\n    No commercial gain may be sought by websites offering digital files of our music, whether through advertising, exploiting databases compiled from their traffic, or any other means.\nAll participants in such digital exchange acknowledge and respect the copyrights of the performers, writers and publishers of the music.\n</i>\n</p>\n<p>\n  <i>\n    This notice should be clearly posted on all sites engaged in this activity.\n    We reserve the ability to withdraw our sanction of non-commercial digital music should circumstances arise that compromise our ability to protect and steward the integrity of our work.\n</i>\n</p>\n";
   });
 
 this["JST"]["footer"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -141,12 +141,12 @@ function program3(depth0,data,depth1) {
   else { stack2 = depth0.month; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
     + "/";
-  if (stack2 = helpers.day) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.day; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  if (stack2 = helpers.longDay) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.longDay; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
     + "/";
-  if (stack2 = helpers.slug) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.slug; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  if (stack2 = helpers.longSlug) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.longSlug; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
     + "\">";
   if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
@@ -278,7 +278,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, stack2, options;
-  buffer += "\n    <li>\n      <a class=\"song ";
+  buffer += "\n    <li>\n      <span>[\n        <a href=\"javascript:\" class=delete>x</a>\n      ]</span>\n      <a class=\"song ";
   if (stack1 = helpers.active) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.active; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -302,7 +302,7 @@ function program1(depth0,data) {
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\n      </a>\n      <span>[        <a href=\"javascript:\" class=delete>x</a>\n      ]</span>\n      <span>\n        [";
+    + "\n      </a>\n      <span>\n        [";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.toHHMMSS),stack1 ? stack1.call(depth0, depth0.duration, options) : helperMissing.call(depth0, "toHHMMSS", depth0.duration, options)))
     + "]\n      </span>\n      <span>\n        [<a href=\"/";
@@ -478,11 +478,15 @@ function program4(depth0,data) {
   }
 
   buffer += "<div class=ul-header>"
-    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.month)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/"
+    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.day)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</div>\n<ul>\n  <li class=add-all>Add all</li>\n  ";
   stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n  <li>"
+  buffer += "\n  <li><a class=archive href=\"https://archive.org/details/"
+    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" target=_blank>View on Archive.org</a></li>\n  <li>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.source)),stack1 == null || stack1 === false ? stack1 : stack1[0])),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</li>\n</ul>\n";
   return buffer;
@@ -567,7 +571,7 @@ $(document).ajaxSend(function(e, xhr, options) {
 });
 
 resize = function() {
-  return $('.page-container').height($(window).height() - $('footer').height());
+  return $('.page-container').height($(window).height() - $('footer').height()).css('overflow', 'auto');
 };
 
 toHHMMSS = function(seconds) {
@@ -933,6 +937,10 @@ App.Router = (function(_super) {
       App.initial = false;
     }
     url = Backbone.history.getFragment();
+    if (this.lastUrl === url) {
+      return;
+    }
+    this.lastUrl = url;
     return ga('send', 'pageview', "/" + url);
   };
 
@@ -1179,16 +1187,18 @@ App.Models.Player = (function(_super) {
   };
 
   Player.prototype.slideDown = function() {
-    var $footer;
+    var $container, $footer;
 
     $footer = $('footer');
     if ($footer.height() !== 100) {
       $footer.animate({
         'height': 100
       }, 1000);
-      return $('.page-container').animate({
+      return $container = $('.page-container').animate({
         'height': $(window).height() - 100
-      }, 1000);
+      }, 1000, function() {
+        return $container.css('overflow', 'auto');
+      });
     }
   };
 
@@ -1477,7 +1487,6 @@ App.Collections.Queue = (function(_super) {
     App.player.set('playing', true);
     _ref1 = App.song.toJSON(), year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug, day = _ref1.day, title = _ref1.title;
     if (!window.location.pathname.match("/" + year + "/" + month + "/" + longDay + "/" + longSlug)) {
-      document.title = "" + title + " ";
       url = "/" + year + "/" + month + "/" + longDay + "/" + longSlug;
       document.title = "" + title + " | " + year + "/" + month + "/" + day + " | Listen to the Grateful Dead";
       Backbone.history.navigate(url, {
@@ -1594,7 +1603,8 @@ App.Views.Footer = (function(_super) {
   Footer.prototype.initialize = function() {
     this.$progress = this.$el.find('.progress-bar');
     this.$container = this.$el.find('.progress-container');
-    return this.$position = this.$el.find('.position-bar');
+    this.$position = this.$el.find('.position-bar');
+    return this.$window = $(window);
   };
 
   Footer.prototype.hoverBar = function(e) {
@@ -1651,21 +1661,25 @@ App.Views.Footer = (function(_super) {
   Footer.prototype.mouseUp = function(e) {
     var coord;
 
-    if (this.dragging) {
-      coord = e.pageX / $(window).width();
-      if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
-        App.player.sound.destruct();
-        App.player.play(this._clickToMs(e.pageX));
-      }
+    if (!this.dragging) {
+      return;
     }
-    return this.dragging = false;
+    coord = e.pageX / this.$window.width();
+    if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
+      App.player.sound.destruct();
+      return App.player.play(this._clickToMs(e.pageX));
+    }
   };
 
   Footer.prototype.seek = function(pageX) {
     var coord;
 
-    coord = pageX / $(window).width();
-    return App.player.sound.setPosition(coord * this._timeStrToSec(App.song.get('duration')) * 1000);
+    coord = pageX / this.$window.width();
+    if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
+      App.player.sound.destruct();
+      return App.player.play(this._clickToMs(pageX));
+    }
+    return App.player.sound.setPosition(coord * App.song.get('duration') * 1000);
   };
 
   Footer.prototype.pause = function() {
@@ -1695,20 +1709,8 @@ App.Views.Footer = (function(_super) {
   Footer.prototype._clickToMs = function(pageX) {
     var coord;
 
-    coord = pageX / $(window).width();
-    return coord * this._timeStrToSec(App.song.get('duration')) * 1000;
-  };
-
-  Footer.prototype._timeStrToSec = function(str) {
-    var duration, i, num, _ref1;
-
-    duration = 0;
-    _ref1 = str.split(":").reverse();
-    for (i in _ref1) {
-      num = _ref1[i];
-      duration += num * Math.pow(60, i);
-    }
-    return duration;
+    coord = pageX / this.$window.width();
+    return coord * App.song.get('duration') * 1000;
   };
 
   return Footer;
@@ -2202,8 +2204,8 @@ App.Views.Queue = (function(_super) {
     return this.render();
   };
 
-  Queue.prototype.render = function(scrollTop) {
-    var $active, $ul, song, top;
+  Queue.prototype.render = function(scrollTop, dontAnimateScroll) {
+    var $active, song, top;
 
     song = App.queue.at(App.queue.idx - 1);
     this.$el.html(this.template({
@@ -2211,17 +2213,20 @@ App.Views.Queue = (function(_super) {
       loggedIn: App.user.loggedIn(),
       activeSlug: App.queue ? song != null ? song.get('longSlug') : void 0 : false
     }));
-    $ul = this.$el.find('ul');
+    this.$ul = this.$el.find('ul');
     if (scrollTop) {
-      $ul.scrollTop(scrollTop);
+      this.$ul.scrollTop(scrollTop);
     }
-    $active = $ul.find('.active');
+    if (dontAnimateScroll) {
+      return;
+    }
+    $active = this.$ul.find('.active');
     if (!$active.length) {
       return;
     }
     top = $active.position().top;
-    return $ul.animate({
-      scrollTop: top + $ul.scrollTop() - 30
+    return this.$ul.animate({
+      scrollTop: top + this.$ul.scrollTop() - 30
     }, 1250);
   };
 
@@ -2253,7 +2258,7 @@ App.Views.Queue = (function(_super) {
     if (idx < App.queue.idx) {
       App.queue.idx--;
     }
-    return this.render();
+    return this.render(this.$ul.scrollTop(), true);
   };
 
   Queue.prototype.clearQueue = function() {
@@ -2365,6 +2370,7 @@ App.Views.Shows = (function(_super) {
 
   Shows.prototype.initialize = function() {
     if (!this.options.year) {
+      this.shows = new App.Models.Shows(shows);
       return this.render();
     }
     this.shows = new App.Models.Shows({

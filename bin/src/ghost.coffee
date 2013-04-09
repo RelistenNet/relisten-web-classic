@@ -211,5 +211,17 @@ program.parse process.argv
 ## Mongo scripts
 # Update song id from show.id + '##' + song.longSlug
 # db.songs.find().forEach(function(song) {   show = db.shows.findOne({_id:song._show});   db.songs.update({_id: song._id},{$set:{id:show.id + '::' + song.longSlug}}); });
+#
+#
+# db.songs.find().forEach(function (song) {
+#     show = db.shows.findOne({_id:song._show});
+#     db.songs.update({
+#         _id: song._id
+#     }, {
+#         $set: {
+#             url: 'https://www.archive.org/download/' + show.id + '/' + song.file
+#         }
+#     });
+# });
 ##
 

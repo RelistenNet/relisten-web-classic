@@ -1,6 +1,9 @@
 !!! 5
 head
-    link(href='/css/index.css', rel='stylesheet')
+    if isProduction
+      link(href='https://listentothegd.s3.amazonaws.com/index.css', rel='stylesheet')
+    else
+      link(href='/css/index.css', rel='stylesheet')
     meta(charset='utf-8')
     title Listen to the Grateful Dead
   body

@@ -1,4 +1,4 @@
-<div class=ul-header>{{songs.title}}</div>
+<div class=ul-header>{{songs.month}}/{{songs.day}}</div>
 <ul>
   <li class=add-all>Add all</li>
   {{#each songs._songs}}
@@ -8,5 +8,6 @@
       <div title="Add To Queue" class=add>+</div>
     </li>
   {{/each}}
+  <li><a class=archive href="https://archive.org/details/{{songs.id}}" target=_blank>View on Archive.org</a></li>
   <li>{{songs.source.[0]}}</li>
 </ul>

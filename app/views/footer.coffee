@@ -15,6 +15,7 @@ class App.Views.Footer extends App.Views.View
     @$progress = @$el.find '.progress-bar'
     @$container = @$el.find '.progress-container'
     @$position = @$el.find '.position-bar'
+    @$window = $(window)
   hoverBar: (e) ->
     @$progress.stop().animate height: '10px', 300
     @$container.stop().animate height: '10px', 300
@@ -38,15 +39,17 @@ class App.Views.Footer extends App.Views.View
     @seek e.pageX
     @dragging = true
   mouseUp: (e) =>
-    if @dragging
-      coord = e.pageX / $(window).width()
-      if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord
-        App.player.sound.destruct()
-        App.player.play @_clickToMs(e.pageX)
-    @dragging = false
+    return unless @dragging
+    coord = e.pageX / @$window.width()
+    if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord
+      App.player.sound.destruct()
+      App.player.play @_clickToMs(e.pageX)
   seek: (pageX) ->
-    coord = pageX / $(window).width()
-    App.player.sound.setPosition coord * @_timeStrToSec(App.song.get('duration')) * 1000
+    coord = pageX / @$window.width()
+    if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord
+      App.player.sound.destruct()
+      return App.player.play @_clickToMs(pageX)
+    App.player.sound.setPosition coord * App.song.get('duration') * 1000
 
   pause: ->
     soundManager.pause "phish" + App.player.get('id')
@@ -62,12 +65,5 @@ class App.Views.Footer extends App.Views.View
     App.queue.playLast()
 
   _clickToMs: (pageX) ->
-    coord = pageX / $(window).width()
-    coord * @_timeStrToSec(App.song.get('duration')) * 1000
-  _timeStrToSec: (str) ->
-    duration = 0
-    # Convert 3:45 to seconds
-    for i, num of str.split(":").reverse()
-      duration += num * Math.pow 60, i
-    duration
-
+    coord = pageX / @$window.width()
+    coord * App.song.get('duration') * 1000

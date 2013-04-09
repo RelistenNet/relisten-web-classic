@@ -41,4 +41,5 @@ class App.Models.Player extends App.Models.Model
     $footer = $('footer')
     unless $footer.height() is 100
       $footer.animate 'height': 100, 1000
-      $('.page-container').animate 'height': $(window).height() - 100, 1000
+      $container = $('.page-container').animate 'height': $(window).height() - 100, 1000, ->
+        $container.css 'overflow', 'auto'

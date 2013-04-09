@@ -4,7 +4,9 @@ class App.Views.Shows extends App.Views.View
   events:
     'click a': 'activate'
   initialize: ->
-    return @render() unless @options.year
+    unless @options.year
+      @shows = new App.Models.Shows shows
+      return @render()
 
     @shows = new App.Models.Shows year: @options.year
     @listenTo @shows, 'change', @render

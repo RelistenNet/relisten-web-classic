@@ -79,7 +79,7 @@ module.exports = (grunt) ->
     cssmin:
       app:
         files:
-          "public/css/index.css": ["public/css/index.css"]
+          "production/index.css": ["public/css/index.css"]
 
 
     # The stylus task is used to compile Stylus stylesheets into a single
@@ -133,9 +133,6 @@ module.exports = (grunt) ->
     copy:
       production:
         files: [
-          src: ["public/css/*"]
-          dest: "production/"
-        ,
           src: ["public/img/*"]
           dest: "production/img/"
         ,
@@ -156,4 +153,4 @@ module.exports = (grunt) ->
 
   grunt.registerTask "compile", ["coffee", "handlebars", "concat", "stylus", "clean"]
   grunt.registerTask "compile:coffee", ["coffee", "handlebars", "concat", "clean"]
-  grunt.registerTask "production", ["coffee", "handlebars", "concat", "uglify", "stylus", "cssmin", "clean", "copy"]
+  grunt.registerTask "production", ["coffee", "handlebars", "concat", "stylus", "clean", "copy", "cssmin", "uglify"]
