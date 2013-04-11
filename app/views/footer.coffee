@@ -44,6 +44,7 @@ class App.Views.Footer extends App.Views.View
     if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord
       App.player.sound.destruct()
       App.player.play @_clickToMs(e.pageX)
+    @dragging = false
   seek: (pageX) ->
     coord = pageX / @$window.width()
     if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord

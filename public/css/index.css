@@ -5445,9 +5445,9 @@ body ul#notifications li div h3{line-height:1em}
 .clear{clear:both}
 
 header{height:50px;width:100%;border-bottom:1px solid #aaa;background:#eee;position:relative;z-index:99;-webkit-box-shadow:0 3px 2px -2px rgba(61,61,61,0.4);-webkit-box-shadow:0 3px 2px -2px rgba(61,61,61,0.4);box-shadow:0 3px 2px -2px rgba(61,61,61,0.4);}
-header ul{height:50px;width:80%;margin:0;}
+header ul{height:50px;width:60%;margin:0;}
 header ul li{height:100%;list-style-type:none;margin:0;padding:0}
-header ul.left{position:absolute;left:0;max-width:20%;}
+header ul.left{position:absolute;left:0;max-width:40%;}
 header ul.left li{float:left;}
 header ul.left li a:hover{text-decoration:none}
 header ul.left li.home-container{font-family:'Lato';font-style:italic;font-weight:700;font-size:1.2em;}

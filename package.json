@@ -2,7 +2,7 @@
   "author": "Daniel Saewitz",
   "name": "gdspreadsheet",
   "description": "Backbone + Express + Coffee + Mongo",
-  "version": "0.0.1-98",
+  "version": "0.0.1-107",
   "engines": {
     "node": "0.8.x"
   },
@@ -43,7 +43,9 @@
   "subdomain": "gdbar",
   "domains": [
     "listentothe.gd",
-    "www.listentothe.gd"
+    "www.listentothe.gd",
+    "listentothedead.com",
+    "www.listentothedead.com"
   ],
   "readmeFilename": "README.md",
   "main": "server.js",
