@@ -7,7 +7,7 @@ class App.Models.Player extends App.Models.Model
         $('footer .play').removeClass('play').addClass 'pause'
       else
         $('footer .pause').removeClass('pause').addClass 'play'
-  play: (ms) =>
+  play: (ms = 0) =>
     @sound.destruct() if @sound
     @set 'id', id = App.song.get '_id'
     App.playerView.played.push id
@@ -16,8 +16,10 @@ class App.Models.Player extends App.Models.Model
       @sound = soundManager.createSound
         id: "phish#{id}"
         url: App.song.get 'url'
-        position: ms || 0
+        position: ms
       @sound.play
+        ondataerror: ->
+          console.log 'error mate'
         whileloading: ->
           App.footer.updateProgress @bytesLoaded, @bytesTotal
         whileplaying: ->

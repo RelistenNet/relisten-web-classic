@@ -1143,6 +1143,9 @@ App.Models.Player = (function(_super) {
     var id,
       _this = this;
 
+    if (ms == null) {
+      ms = 0;
+    }
     if (this.sound) {
       this.sound.destruct();
     }
@@ -1152,9 +1155,12 @@ App.Models.Player = (function(_super) {
       _this.sound = soundManager.createSound({
         id: "phish" + id,
         url: App.song.get('url'),
-        position: ms || 0
+        position: ms
       });
       return _this.sound.play({
+        ondataerror: function() {
+          return console.log('error mate');
+        },
         whileloading: function() {
           return App.footer.updateProgress(this.bytesLoaded, this.bytesTotal);
         },
@@ -1273,7 +1279,7 @@ App.Models.Song = (function(_super) {
   }
 
   Song.prototype.url = function() {
-    var day, id, month, ms, showVersion, slug, version, year;
+    var day, id, month, showVersion, slug, year;
 
     id = this.get('_id');
     if (id) {
@@ -1283,10 +1289,8 @@ App.Models.Song = (function(_super) {
     month = this.get('month');
     day = this.get('day');
     showVersion = this.get('showVersion') || 0;
-    slug = this.get('slug');
-    version = this.get('version') || 0;
-    ms = this.get('ms');
-    return "/api/v1/" + year + "/" + month + "/" + day + "-" + showVersion + "/" + slug + "/" + version;
+    slug = this.get('longSlug');
+    return "/api/v1/" + year + "/" + month + "/" + day + "-" + showVersion + "/" + slug;
   };
 
   Song.prototype.change = function() {
@@ -1444,8 +1448,6 @@ App.Collections.Queue = (function(_super) {
     return _ref;
   }
 
-  Queue.prototype.localStorage = new Backbone.LocalStorage("Queue");
-
   Queue.prototype.model = App.Models.Song;
 
   Queue.prototype.idx = 0;
@@ -1454,11 +1456,13 @@ App.Collections.Queue = (function(_super) {
     var _this = this;
 
     this.on('add', function() {
+      console.log('add');
       if ((_this.length === 1) || (_this.idx === _this.length - 1 && !App.player.get('playing'))) {
         return _this.play();
       }
     });
     return this.on('reset', function() {
+      console.log('reset');
       return _this.idx = 0;
     });
   };
@@ -1489,9 +1493,6 @@ App.Collections.Queue = (function(_super) {
     if (!window.location.pathname.match("/" + year + "/" + month + "/" + longDay + "/" + longSlug)) {
       url = "/" + year + "/" + month + "/" + longDay + "/" + longSlug;
       document.title = "" + title + " | " + year + "/" + month + "/" + day + " | Listen to the Grateful Dead";
-      Backbone.history.navigate(url, {
-        trigger: false
-      });
       ga('send', 'pageview', "" + url);
     }
     App.queueView.render(App.queueView.$el.find('ul').scrollTop());
@@ -2467,7 +2468,7 @@ App.Views.Songs = (function(_super) {
   };
 
   Songs.prototype.addShowToPlaylist = function(e) {
-    var $li, id, longDay, longSlug, month, songs, year, _ref1;
+    var $li, id, songs;
 
     $li = $(e.target).parent();
     id = $li.attr('data-id');
@@ -2476,8 +2477,7 @@ App.Views.Songs = (function(_super) {
     App.song = new App.Models.Song(_.findWhere(songs, {
       _id: id
     }));
-    _ref1 = App.song.toJSON(), id = _ref1.id, year = _ref1.year, month = _ref1.month, longDay = _ref1.longDay, longSlug = _ref1.longSlug;
-    return this.playing = true;
+    return this.playing = !!"in the band";
   };
 
   Songs.prototype.addToPlaylist = function(e) {
@@ -2488,6 +2488,7 @@ App.Views.Songs = (function(_super) {
     App.song = new App.Models.Song({
       _id: id
     });
+    console.log('test');
     App.song.fetch({
       success: function() {
         return App.song.change();

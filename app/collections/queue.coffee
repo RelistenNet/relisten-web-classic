@@ -1,10 +1,13 @@
 class App.Collections.Queue extends App.Collections.Collection
-  localStorage: new Backbone.LocalStorage "Queue"
+  #localStorage: new Backbone.LocalStorage "Queue"
   model: App.Models.Song
   idx: 0
   initialize: ->
-    @on 'add', => @play() if (@length is 1) || (@idx is @length - 1 and !App.player.get('playing'))
+    @on 'add', =>
+      console.log 'add'
+      @play() if (@length is 1) || (@idx is @length - 1 and !App.player.get('playing'))
     @on 'reset', =>
+      console.log 'reset'
       @idx = 0
 
   play: (song, ms) =>
@@ -25,7 +28,7 @@ class App.Collections.Queue extends App.Collections.Collection
     unless window.location.pathname.match "/#{year}/#{month}/#{longDay}/#{longSlug}"
       url = "/#{year}/#{month}/#{longDay}/#{longSlug}"
       document.title = "#{title} | #{year}/#{month}/#{day} | Listen to the Grateful Dead"
-      Backbone.history.navigate url, trigger: false
+      #Backbone.history.navigate url, trigger: false
       ga('send', 'pageview', "#{url}")
     App.queueView.render App.queueView.$el.find('ul').scrollTop()
     ++@idx

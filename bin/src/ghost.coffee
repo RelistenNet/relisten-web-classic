@@ -79,54 +79,57 @@ getShows = ->
 
 
       , Math.random() * 20000
-
+counter = 0
 getSongs = ->
-  output = []
   Show.find (err, shows) ->
-    shows.map (s) ->
+    async.each shows, (s, cb) ->
       Show.findById s._id, (err, show) ->
-        setTimeout ->
-          archive.item show.id, (err, folder) ->
-            return console.log err if err
-            return console.log 'null' unless _.size folder.files
-            songs = [0]
-            _.each _.pairs(folder.files), (arr) -> arr[1].file = arr[0]
-            files = _.where folder.files, format: 'VBR MP3'
-            unless files.length
-              show.remove()
-              return console.log _.pluck folder.files, 'format'
-            files.map (k) ->
-              return true unless k.title
-              k.month = show.month
-              k.day = show.day
-              k.year = show.year
-              slug = slugs("#{k.title}").replace /\-$/, ''
-              i = _.reduce songs, (memo, val) ->
-                return ++memo if val is slug
-                memo
-              k.version = i
-              k.showVersion = show.version
-              k.slug = slug
-              k.duration = timeStrToSec k.length
-              return unless k.duration > 0
-              k.longSlug = slug + if k.version then '/' + k.version else ''
-              k.longDay = k.day + if k.showVersion then '-' + k.showVersion else ''
-              songs.push slug
-              #console.log 'song saved', k.title
-              console.log 'fail', k.title unless k.month > 0 || k.day > 0
-              k._show = show._id
-              k.url = 'http://' + folder.server + folder.dir + k.file
-              song = new Song k
-              show._songs.push song._id
+        return cb() if err
+        archive.item show.id, (err, folder) ->
+          return cb() if err
+          return cb() unless _.size folder.files
+          songs = [0]
+          _.each _.pairs(folder.files), (arr) -> arr[1].file = arr[0]
+          files = _.where folder.files, format: 'VBR MP3'
+          unless files.length
+            show.remove()
+            return cb()
+          async.each files, (k, callback) ->
+            return true unless k.title
+            k.month = show.month
+            k.day = show.day
+            k.year = show.year
+            slug = slugs("#{k.title}").replace /(--)|\-+$/g, ''
+            i = _.reduce songs, (memo, val) ->
+              return ++memo if val is slug
+              memo
+            k.version = i
+            k.showVersion = show.version
+            k.slug = slug
+            k.duration = timeStrToSec k.length
+            return callback() unless k.duration > 0
+            k.longSlug = slug + if k.version then '/' + k.version else ''
+            k.longDay = k.day + if k.showVersion then '-' + k.showVersion else ''
+            songs.push slug
+            #console.log 'song saved', k.title
+            console.log 'fail', k.title unless k.month > 0 || k.day > 0
+            k._show = show._id
+            k.url = '//archive.org/download/' + show.id + k.file
+            k.id = show.id + '::' + k.longSlug
+
+            Song.findOneAndUpdate { year: k.year, month: k.month, longDay: k.longDay, showVersion: k.showVersion, longSlug: k.longSlug }, k, { upsert: true }, (err, song) ->
+              show._songs.push song._id unless show._songs.indexOf song._id is -1
               show.server = folder.server
               show.album = k.album
               show.dir = folder.dir
               show.save()
-              song.save()
-              console.log show.year unless output[show.year]
-              console.log 'done' if _.size(output) is years.length - 1 and !output[show.year]
-              output[show.year] = true
-        , Math.random * 2000
+              callback()
+          , (err) ->
+            console.log 'done show', show.year, show.month, show.day, show.version, 'count:', ++counter
+            cb err
+    , (err) ->
+      console.log err if err
+      console.log 'DONE!!'
 
 
 cleanSongs = ->

@@ -32,7 +32,6 @@ $(document).ajaxSend (e, xhr, options) ->
   token = csrf
   xhr.setRequestHeader("X-CSRF-Token", token) if token and !_.isEmpty(user)
 
-
 resize = ->
   $('.page-container').height($(window).height() - $('footer').height())
     .css 'overflow', 'auto'
