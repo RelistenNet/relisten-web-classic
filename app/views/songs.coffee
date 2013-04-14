@@ -46,7 +46,6 @@ class App.Views.Songs extends App.Views.View
     $li = $(e.target).parent()
     id = $li.attr 'data-id'
     App.song = new App.Models.Song _id: id
-    console.log 'test'
     App.song.fetch
       success: -> App.song.change()
 

@@ -3,12 +3,8 @@ class App.Collections.Queue extends App.Collections.Collection
   model: App.Models.Song
   idx: 0
   initialize: ->
-    @on 'add', =>
-      console.log 'add'
-      @play() if (@length is 1) || (@idx is @length - 1 and !App.player.get('playing'))
-    @on 'reset', =>
-      console.log 'reset'
-      @idx = 0
+    @on 'add', => @play() if (@length is 1) || (@idx is @length - 1 and !App.player.get('playing'))
+    @on 'reset', => @idx = 0
 
   play: (song, ms) =>
     if song

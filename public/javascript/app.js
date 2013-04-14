@@ -1458,13 +1458,11 @@ App.Collections.Queue = (function(_super) {
     var _this = this;
 
     this.on('add', function() {
-      console.log('add');
       if ((_this.length === 1) || (_this.idx === _this.length - 1 && !App.player.get('playing'))) {
         return _this.play();
       }
     });
     return this.on('reset', function() {
-      console.log('reset');
       return _this.idx = 0;
     });
   };
@@ -2493,7 +2491,6 @@ App.Views.Songs = (function(_super) {
     App.song = new App.Models.Song({
       _id: id
     });
-    console.log('test');
     App.song.fetch({
       success: function() {
         return App.song.change();
