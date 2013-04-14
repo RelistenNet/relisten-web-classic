@@ -70,7 +70,7 @@ getShows = ->
             Song.findOneAndUpdate { id: j.id }, j, { }, (err, show) ->
               console.log err if err
               return callback() if err || !show
-              year._shows.push show._id if year._shows.indexOf show._id is -1
+              year._shows.push show._id if year._shows.indexOf(show._id) is -1
               year.save()
               callback()
           , (err) ->
@@ -117,7 +117,7 @@ getSongs = ->
             k.month = show.month
             k.day = show.day
             k.year = show.year
-            slug = slugs("#{k.title}").replace /(--)|\-+$/g, ''
+            slug = slugs("#{k.title}").replace /\-$/, ''
             i = _.reduce songs, (memo, val) ->
               return ++memo if val is slug
               memo
@@ -139,7 +139,8 @@ getSongs = ->
 
             Song.findOneAndUpdate { year: k.year, month: k.month, longDay: k.longDay, showVersion: k.showVersion, longSlug: k.longSlug }, k, { }, (err, song) ->
               return callback() if err || !song
-              show._songs.push song._id if show._songs.indexOf song._id is -1
+              console.log show._songs.indexOf(song._id), song if show._songs.indexOf(song._id) is -1
+              show._songs.push song._id if show._songs.indexOf(song._id) is -1
               show.album = k.album
               show.save()
               callback()

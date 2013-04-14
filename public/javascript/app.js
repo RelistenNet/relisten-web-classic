@@ -1140,7 +1140,7 @@ App.Models.Player = (function(_super) {
   };
 
   Player.prototype.play = function(ms) {
-    var id,
+    var canPlayOgg, id, url,
       _this = this;
 
     if (ms == null) {
@@ -1151,10 +1151,14 @@ App.Models.Player = (function(_super) {
     }
     this.set('id', id = App.song.get('_id'));
     App.playerView.played.push(id);
+    canPlayOgg = soundManager.canPlayMIME('audio/ogg');
+    if (!(canPlayOgg && (url = App.song.get('oggUrl')))) {
+      url = App.song.get('url');
+    }
     return soundManager.onready(function() {
       _this.sound = soundManager.createSound({
         id: "phish" + id,
-        url: App.song.get('url'),
+        url: url,
         position: ms
       });
       return _this.sound.play({

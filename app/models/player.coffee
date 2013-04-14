@@ -12,10 +12,15 @@ class App.Models.Player extends App.Models.Model
     @set 'id', id = App.song.get '_id'
     App.playerView.played.push id
 
+    canPlayOgg = soundManager.canPlayMIME 'audio/ogg'
+
+    # Use ogg if it exists + can be played, otherwise use mp3
+    url = App.song.get 'url' unless canPlayOgg and url = App.song.get 'oggUrl'
+
     soundManager.onready =>
       @sound = soundManager.createSound
         id: "phish#{id}"
-        url: App.song.get 'url'
+        url: url
         position: ms
       @sound.play
         ondataerror: ->
