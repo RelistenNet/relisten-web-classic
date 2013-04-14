@@ -38,50 +38,55 @@ getYears = ->
 
 getShows = ->
   Year.find (err, years) ->
-    output = {}
-    years.map (y) ->
-      setTimeout ->
-        Year.findById y._id, (err, year) ->
-          archive.search
-            q: "collection:GratefulDead date:[#{year.year}-01-01 TO #{year.year}-12-31]"
-            rows: 1000
-          , (err, folder) ->
-            return console.log err if err
-            return null unless folder.response.docs.length
-            dates = [0]
-            folder.response.docs.map (j) ->
-              return console.log 'format mismatch' if j.format?.indexOf('VBR MP3') is -1
-              date = extractDate j.title
-              return console.log 'no date', date, j.title unless date.month and date.day
-              j.month = date.month if date.month
-              j.day = date.day if date.day
-              j.year = year.year
-              return console.log "Year didn't match:", j, year.year, j.year, j.title unless j.year is year.year
-              dateStr = "#{j.year}-#{j.month}-#{j.day}"
-              j.date = new Date "#{j.month}/#{j.day}/#{j.year}"
-              j.id = j.identifier
-              j.col = j.collection
-              i = _.reduce dates, (memo, val) ->
-                return ++memo if val is dateStr
-                memo
-              dates.push dateStr
-              #console.log j.month, j.day, j.year
-              console.log 'fail', j.title unless j.month > 0 || j.day > 0
-              j.version = i
-              j._year = year._id
-              show = new Show j
-              year._shows.push show._id
+    async.each years, (y, cb) ->
+      Year.findById y._id, (err, year) ->
+        archive.search
+          q: "collection:GratefulDead date:[#{year.year}-01-01 TO #{year.year}-12-31]"
+          rows: 1000
+        , (err, folder) ->
+          return cb() if err
+          return cb() unless folder.response.docs.length
+          dates = [0]
+          async.each folder.response.docs, (j, callback) ->
+            return callback() if j.format?.indexOf('VBR MP3') is -1 && j.format?.indexOf('Ogg Vorbis') is -1
+            date = extractDate j.title
+            return callback() unless date.month and date.day
+            j.month = date.month if date.month
+            j.day = date.day if date.day
+            j.year = year.year
+            return callback() unless j.year is year.year
+            dateStr = "#{j.year}-#{j.month}-#{j.day}"
+            j.date = new Date "#{j.month}/#{j.day}/#{j.year}"
+            j.id = j.identifier
+            j.col = j.collection
+            i = _.reduce dates, (memo, val) ->
+              return ++memo if val is dateStr
+              memo
+            dates.push dateStr
+            #console.log j.month, j.day, j.year
+            return callback() unless j.month > 0 || j.day > 0
+            j.version = i
+            j._year = year._id
+            Song.findOneAndUpdate { id: j.id }, j, { }, (err, show) ->
+              console.log err if err
+              return callback() if err || !show
+              year._shows.push show._id if year._shows.indexOf show._id is -1
               year.save()
-              show.save()
-              console.log year.year unless output[year.year]
-              console.log 'done' if _.size(output) is years.length - 1 and !output[show.year]
-              output[year.year] = true
+              callback()
+          , (err) ->
+            console.log err if err
+            console.log 'year', year.year
+            cb()
 
+    , (err) ->
+      console.log err if err
+      console.log 'DONE!!'
 
-      , Math.random() * 20000
-counter = 0
 getSongs = ->
+  counter = 0
   Show.find (err, shows) ->
+    return console.log err if err
+
     async.each shows, (s, cb) ->
       Show.findById s._id, (err, show) ->
         return cb() if err
@@ -91,11 +96,24 @@ getSongs = ->
           songs = [0]
           _.each _.pairs(folder.files), (arr) -> arr[1].file = arr[0]
           files = _.where folder.files, format: 'VBR MP3'
+          oggFiles = _.where folder.files, format: 'Ogg Vorbis'
           unless files.length
             show.remove()
             return cb()
+          show.server = folder.server
+          show.dir = folder.dir
+          show.reviews = folder.reviews
+          show.venue = folder.metadata.venue
+          show.coverage = folder.metadata.coverage
+          show.source = folder.metadata.source
+          show.lineage = folder.metadata.lineage
+          show.taper = folder.metadata.taper
+          show.transferer = folder.metadata.transferer
+          show.runtime = folder.metadata.runtime
+          show.md5s = folder.metadata.md5s
+          show.notes = folder.metadata.notes
           async.each files, (k, callback) ->
-            return true unless k.title
+            return callback() unless k.title
             k.month = show.month
             k.day = show.day
             k.year = show.year
@@ -115,13 +133,14 @@ getSongs = ->
             console.log 'fail', k.title unless k.month > 0 || k.day > 0
             k._show = show._id
             k.url = '//archive.org/download/' + show.id + k.file
+            if oggFiles.length
+              k.oggUrl = '//archive.org/download/' + show.id + oggFiles.shift().file
             k.id = show.id + '::' + k.longSlug
 
-            Song.findOneAndUpdate { year: k.year, month: k.month, longDay: k.longDay, showVersion: k.showVersion, longSlug: k.longSlug }, k, { upsert: true }, (err, song) ->
-              show._songs.push song._id unless show._songs.indexOf song._id is -1
-              show.server = folder.server
+            Song.findOneAndUpdate { year: k.year, month: k.month, longDay: k.longDay, showVersion: k.showVersion, longSlug: k.longSlug }, k, { }, (err, song) ->
+              return callback() if err || !song
+              show._songs.push song._id if show._songs.indexOf song._id is -1
               show.album = k.album
-              show.dir = folder.dir
               show.save()
               callback()
           , (err) ->

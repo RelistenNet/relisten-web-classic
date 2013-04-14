@@ -8,6 +8,7 @@ songSchema = new Schema
   version: Number, default: 0
   showVersion: Number, default: 0
   url: String
+  oggUrl: String
   id: String
   longSlug: String
   longDay: String
