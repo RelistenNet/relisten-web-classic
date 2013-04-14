@@ -25,6 +25,8 @@ class Application
     App.player = new App.Models.Player()
     App.playerView = new App.Views.Player()
 
+    #App.notify.send 'Archive is down', 'Archive.org is down for routine maintenance, therefore no audio will stream properly. Please follow @phishvids on twitter for updates. Sorry for the inconvenience.', 'sticky', true
+
   pushAnchors: ->
     # Thanks Gib + Art.sy
     # Globally capture clicks. If they are internal and not in the pass
