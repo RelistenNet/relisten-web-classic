@@ -28,7 +28,7 @@ class App.Collections.Queue extends App.Collections.Collection
     unless window.location.pathname.match "/#{year}/#{month}/#{longDay}/#{longSlug}"
       url = "/#{year}/#{month}/#{longDay}/#{longSlug}"
       document.title = "#{title} | #{year}/#{month}/#{day} | Listen to the Grateful Dead"
-      #Backbone.history.navigate url, trigger: false
+      Backbone.history.navigate url, trigger: false
       ga('send', 'pageview', "#{url}")
     App.queueView.render App.queueView.$el.find('ul').scrollTop()
     ++@idx

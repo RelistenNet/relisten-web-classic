@@ -1159,7 +1159,9 @@ App.Models.Player = (function(_super) {
       });
       return _this.sound.play({
         ondataerror: function() {
-          return console.log('error mate');
+          if (console) {
+            return console.log('error mate');
+          }
         },
         whileloading: function() {
           return App.footer.updateProgress(this.bytesLoaded, this.bytesTotal);
@@ -1493,6 +1495,9 @@ App.Collections.Queue = (function(_super) {
     if (!window.location.pathname.match("/" + year + "/" + month + "/" + longDay + "/" + longSlug)) {
       url = "/" + year + "/" + month + "/" + longDay + "/" + longSlug;
       document.title = "" + title + " | " + year + "/" + month + "/" + day + " | Listen to the Grateful Dead";
+      Backbone.history.navigate(url, {
+        trigger: false
+      });
       ga('send', 'pageview', "" + url);
     }
     App.queueView.render(App.queueView.$el.find('ul').scrollTop());
@@ -2473,10 +2478,10 @@ App.Views.Songs = (function(_super) {
     $li = $(e.target).parent();
     id = $li.attr('data-id');
     songs = this.folder.get('_songs');
-    App.queue.reset(songs);
     App.song = new App.Models.Song(_.findWhere(songs, {
       _id: id
     }));
+    App.queue.reset(songs);
     return this.playing = !!"in the band";
   };
 

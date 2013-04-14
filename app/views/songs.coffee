@@ -37,8 +37,8 @@ class App.Views.Songs extends App.Views.View
     $li = $(e.target).parent()
     id = $li.attr('data-id')
     songs = @folder.get('_songs')
-    App.queue.reset songs
     App.song = new App.Models.Song _.findWhere songs, _id: id
+    App.queue.reset songs
     # { id, year, month, longDay, longSlug } = App.song.toJSON()
     @playing = !!"in the band" # true
     #Backbone.history.navigate "/#{year}/#{month}/#{longDay}/#{longSlug}", trigger: true

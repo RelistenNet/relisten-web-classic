@@ -19,7 +19,7 @@ class App.Models.Player extends App.Models.Model
         position: ms
       @sound.play
         ondataerror: ->
-          console.log 'error mate'
+          console.log 'error mate' if console
         whileloading: ->
           App.footer.updateProgress @bytesLoaded, @bytesTotal
         whileplaying: ->
