@@ -6,5 +6,6 @@ yearSchema = new Schema
   parent: Number
   year: Number
   _shows: [ type: Schema.Types.ObjectId, ref: 'Show' ]
+  _days: [ type: Schema.Types.ObjectId, ref: 'Day' ]
 
 Year = mongoose.model 'Year', yearSchema

@@ -1,8 +1,11 @@
 <div class=ul-header>{{shows.year}}</div>
 <ul>
-{{#each shows._shows}}
+{{#each shows._days}}
   <li>
-    <a href="/{{year}}/{{month}}/{{day}}{{#if version}}-{{version}}{{/if}}">{{album}}</a>
+    <a href="/{{year}}/{{month}}/{{day}}">
+      <span class=date>{{month}}/{{addZero day}}</span>
+      <span class=venue>{{venue}}</span>
+    </a>
   </li>
 {{/each}}
 </ul>

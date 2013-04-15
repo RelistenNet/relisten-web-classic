@@ -10,11 +10,11 @@ showSchema = new Schema
   album: String
   server: String
   dir: String
+  date: Date
   creator: [String]
   mediatype: [String]
   col: [String]
   description: [String]
-  date: [String]
   subject: [String]
   pick: [String]
   publicdate: [String]
@@ -42,5 +42,6 @@ showSchema = new Schema
     ]
   _songs: [ type: Schema.Types.ObjectId, ref: 'Song' ]
   _year: type: Schema.Types.ObjectId, ref: 'Year'
+  _day: type: Schema.Types.ObjectId, ref: 'Day'
 
 Show = mongoose.model 'Show', showSchema

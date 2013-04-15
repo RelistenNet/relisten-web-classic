@@ -27,6 +27,7 @@ fs.readdirSync(modelsPath).forEach (file) ->
 Year = mongoose.model 'Year'
 Show = mongoose.model 'Show'
 Song = mongoose.model 'Song'
+Day = mongoose.model 'Day'
 
 years = [1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995]
 
@@ -81,6 +82,44 @@ getShows = ->
     , (err) ->
       console.log err if err
       console.log 'DONE!!'
+
+getDays = ->
+  counter = 0
+  Show.find (err, shows) ->
+    return console.log err if err
+
+    async.each shows, (s, cb) ->
+      date =
+        year: s.year
+        month: s.month
+        day: s.day
+        date: s.date
+        album: s.album
+        venue: s.venue
+
+      Day.findOneAndUpdate
+        year: date.year
+        month: date.month
+        day: date.day
+      , date
+      , upsert: true
+      , (err, day) ->
+        return cb() if err
+        day._shows.push s._id if day._shows.indexOf(s._id) is -1
+        day.save()
+        Show.findById s._id, (err, show) ->
+          return cb() if err
+          show._day = day._id
+          show.save()
+          Year.findOne year: show.year, (err, year) ->
+            return cb() if err
+            year._days.push day._id if year._days.indexOf(day._id) is -1
+            year.save()
+            console.log ++counter
+            cb()
+    , (err) ->
+      console.log err if err
+      console.log 'DONE!!!'
 
 getSongs = ->
   counter = 0
@@ -209,6 +248,11 @@ program
   .command('songs [id]')
   .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
   .action(getSongs)
+
+program
+  .command('days [id]')
+  .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
+  .action(getDays)
 
 program
   .command('clean')

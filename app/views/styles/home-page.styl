@@ -125,7 +125,17 @@ asihtosblue = #008ab0
             &.archive
               color #333
 
-            span
+            span.date
+              font-size 1.3em
+              color asihtosblue
+
+            span.venue
+              color #555
+              font-size 0.75em
+              margin-top 5px
+              pointer-events none
+
+            span.time
               color #555
               font-size 0.75em
               margin-top 5px
@@ -167,3 +177,12 @@ asihtosblue = #008ab0
             ne-height 1em
             padding 10px
             color #D90F0F
+
+      &.shows-container
+
+        a
+          color #333
+
+          &.active
+            span
+              color #fff

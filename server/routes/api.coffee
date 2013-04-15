@@ -6,6 +6,7 @@ User = mongoose.model 'User'
 Year = mongoose.model 'Year'
 Song = mongoose.model 'Song'
 Show = mongoose.model 'Show'
+Day = mongoose.model 'Day'
 Playlist = mongoose.model 'Playlist'
 Blurb = mongoose.model 'Blurb'
 
@@ -20,11 +21,21 @@ router.get /^\/([0-9]{4})\/?$/, (req, res) ->
   Year.findOne(
     year: +req.params[0]
   )
-  .populate('_shows', '', null, sort: 'date')
+  .populate('_days', '', null, sort: 'date')
   .exec (err, year) ->
     res.json year || {}
 
-router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, (req, res) ->
+router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, (req, res) ->
+  Day.findOne(
+    year: +req.params[0]
+    month: +req.params[1]
+    day: +req.params[2]
+  )
+  .populate('_shows')
+  .exec (err, show) ->
+    res.json show || {}
+
+router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-([0-9]{1,2})\/?$/, (req, res) ->
   Show.findOne(
     year: +req.params[0]
     month: +req.params[1]

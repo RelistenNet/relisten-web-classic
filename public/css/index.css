@@ -5497,7 +5497,9 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .home-page .row-fluid .span4 ul li > a.clear{padding:0;width:auto;height:auto;display:inline-block}
 .home-page .row-fluid .span4 ul li > a.video-link{font-size:1.14em}
 .home-page .row-fluid .span4 ul li > a.archive{color:#333}
-.home-page .row-fluid .span4 ul li > a span{color:#555;font-size:.75em;margin-top:5px;text-align:right;pointer-events:none}
+.home-page .row-fluid .span4 ul li > a span.date{font-size:1.3em;color:#008ab0}
+.home-page .row-fluid .span4 ul li > a span.venue{color:#555;font-size:.75em;margin-top:5px;pointer-events:none}
+.home-page .row-fluid .span4 ul li > a span.time{color:#555;font-size:.75em;margin-top:5px;text-align:right;pointer-events:none}
 .home-page .row-fluid .span4 ul li .report{color:#555;font-size:.91em;position:absolute;z-index:2;right:4px;bottom:10px;opacity:.7;filter:alpha(opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";}
 .home-page .row-fluid .span4 ul li .report:hover{opacity:1;-ms-filter:none;filter:none}
 .home-page .row-fluid .span4 ul li .report-actions{padding:5px;text-align:center;display:none;}
@@ -5505,6 +5507,8 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .home-page .row-fluid .span4 ul li form{margin:0;}
 .home-page .row-fluid .span4 ul li form input{margin:5px;width:93%;background:transparent;border:1px solid rgba(0,0,0,0.3)}
 .home-page .row-fluid .span4 ul li .error{font-size:3em;ne-height:1em;padding:10px;color:#d90f0f}
+.home-page .row-fluid .span4.shows-container a{color:#333;}
+.home-page .row-fluid .span4.shows-container a.active span{color:#fff}
 
 .login-page,.register-page{text-align:center;}
 .login-page form,.register-page form{width:400px;margin:auto;text-align:left;}
