@@ -11,6 +11,7 @@ class App.Router extends Backbone.Router
     #':notFound': 'notFound'
   initialize: ->
     @route /^([0-9]{4})\/?$/, 'year'
+    @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day'
     @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show'
     @route /^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song'
     @route /^playlist\/([0-9a-f]{24})\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'playlistSong'
@@ -30,6 +31,14 @@ class App.Router extends Backbone.Router
     App.shows = new App.Views.Shows { year }
     App.songs.$el.empty() if App.songs
     document.title = "#{year} | Listen to the Grateful Dead"
+  day: (@year, @month, @day) ->
+    App.songs.undelegateEvents() if App.songs
+    if App.initial
+      @changeView(new App.Views.HomePage())
+      App.years = new App.Views.Years()
+    App.shows = new App.Views.Shows { @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
+    App.songs = new App.Views.Songs { @year, @month, @day }
+    document.title = "#{@year}/#{@month}/#{@day} | Listen to the Grateful Dead"
   show: (@year, @month, @day, @showVersion) ->
     App.songs.undelegateEvents() if App.songs
     if App.initial
@@ -47,6 +56,7 @@ class App.Router extends Backbone.Router
       return App.songs.listenToOnce App.songs.folder, 'change', @finishSong
 
     App.shows = new App.Views.Shows { @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
+
     @finishSong()
 
   finishSong: =>
@@ -57,7 +67,8 @@ class App.Router extends Backbone.Router
       document.title = "#{App.song.get('title')} | #{self.year}/#{self.month}/#{self.day} | Listen to the Grateful Dead"
       App.queue.play App.song, ms
       App.queue.off 'reset'
-    App.queue.reset App.songs.folder.get('_songs')
+
+    App.queue.reset App.songs.songs._songs
   about: ->
     @changeView(new App.Views.AboutPage())
     document.title = 'About | Listen to the Grateful Dead'

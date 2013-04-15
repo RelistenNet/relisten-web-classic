@@ -1,6 +1,53 @@
 <div class=ul-header>{{songs.month}}/{{songs.day}}</div>
 <ul>
-  <li class=add-all>Add all</li>
+  {{#with songs}}
+    <li class="current-source show-sources">
+      <h5>Current Source <span>(click here to select another source)</span></h5>
+      {{#each taper}}
+        {{#if this}}<p class=taper>Taper: {{this}}</p>{{/if}}
+      {{/each}}
+      {{#each transferer}}
+        {{#if this}}<p>Transferer: {{this}}</p>{{/if}}
+      {{/each}}
+      {{#each source}}
+        <p>{{this}}</p>
+      {{/each}}
+      {{#each lineage}}
+        {{#if this}}<p>Lineage: {{this}}</p>{{/if}}
+      {{/each}}
+      {{#if avg}}
+        <p>Rating: {{avg}}</p>
+      {{/if}}
+      <div class=total-sources>{{length ../sources}}</div>
+    </li>
+  {{/with}}
+  {{#if sources}}
+    <li class=source>Choose your source:</li>
+  {{/if}}
+  {{#each sources}}
+    <li class=source>
+      <a href=/{{year}}/{{month}}/{{day}}-{{version}}>
+        {{#each taper}}
+          {{#if this}}<p class=taper>Taper: {{this}}</p>{{/if}}
+        {{/each}}
+        {{#each transferer}}
+          {{#if this}}<p>Transferer: {{this}}</p>{{/if}}
+        {{/each}}
+        {{#each source}}
+          <p>{{this}}</p>
+        {{/each}}
+        {{#each lineage}}
+          {{#if this}}<p>Lineage: {{this}}</p>{{/if}}
+        {{/each}}
+        {{#if avg}}
+          <p>Rating: {{avg}}</p>
+        {{/if}}
+      </a>
+    </li>
+  {{/each}}
+  {{#if sources}}
+    <li class=source>This is where the show starts, bub.</li>
+  {{/if}}
   {{#each songs._songs}}
     <li data-id={{_id}} data-song="{{title}}">
       <a class=song href="/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{showVersion}}{{/if}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}} <span class=time>{{toHHMMSS duration}}</span></a>
@@ -9,5 +56,5 @@
     </li>
   {{/each}}
   <li><a class=archive href="https://archive.org/details/{{songs.id}}" target=_blank>View on Archive.org</a></li>
-  <li>{{songs.source.[0]}}</li>
+  <li><a class=add-all href="javascript:">Add All To Queue</a></li>
 </ul>

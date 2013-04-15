@@ -7,6 +7,7 @@ daySchema = new Schema
   date: Date
   venue: String
   album: String
+  show: Schema.Types.Mixed
   _shows: [ type: Schema.Types.ObjectId, ref: 'Show' ]
 
 Day = mongoose.model 'Day', daySchema

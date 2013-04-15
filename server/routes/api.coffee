@@ -25,26 +25,24 @@ router.get /^\/([0-9]{4})\/?$/, (req, res) ->
   .exec (err, year) ->
     res.json year || {}
 
-router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, (req, res) ->
+OMIT_FROM_SHOW = '-reviews.reviews -md5s -updatedate -updater -addeddate -description -col -mediatype -creator'
+
+router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, (req, res) ->
   Day.findOne(
     year: +req.params[0]
     month: +req.params[1]
     day: +req.params[2]
   )
-  .populate('_shows')
-  .exec (err, show) ->
-    res.json show || {}
-
-router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-([0-9]{1,2})\/?$/, (req, res) ->
-  Show.findOne(
-    year: +req.params[0]
-    month: +req.params[1]
-    day: +req.params[2]
-    version: +req.params[3] || 0
-  )
-  .populate('_songs')
-  .exec (err, show) ->
-    res.json show || {}
+  .populate('_shows', OMIT_FROM_SHOW + ' -_songs', null, sort: avg: -1)
+  .exec (err, day) ->
+    return res.json {} if err || !day || !day._shows.length
+    show = _.findWhere day._shows, version: +req.params[3]
+    show = day._shows[0]._id unless show
+    Show.findById(show, OMIT_FROM_SHOW)
+      .populate('_songs')
+      .exec (err, show) ->
+        day.show = show
+        res.json day || {}
 
 router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\/?$/, (req, res) ->
   Song.findOne

@@ -5,5 +5,5 @@ class App.Models.Songs extends App.Models.Model
     year = @get 'year'
     month = @get 'month'
     day = @get 'day'
-    version = @get('version') || 0
-    "/api/v1/#{year}/#{month}/#{day}-#{version}"
+    versionStr = if @get('version') then '-' + @get('version') else ''
+    "/api/v1/#{year}/#{month}/#{day}#{versionStr}"

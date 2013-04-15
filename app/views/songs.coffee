@@ -6,6 +6,7 @@ class App.Views.Songs extends App.Views.View
     #'click .song': 'addShowToPlaylist'
     'click .play': 'play'
     'click .add-all': 'addAll'
+    'click .show-sources': 'showSources'
   initialize: ->
     unless @options.year || @options.month || @options.day
       @folder = new App.Models.Songs songs
@@ -14,14 +15,21 @@ class App.Views.Songs extends App.Views.View
       year: @options.year
       month: @options.month
       day: @options.day
-      version: @options.showVersion || 0
+      version: @options.showVersion
 
     @listenTo @folder, 'change', @render
     @folder.fetch()
   render: ->
     App.router.clearActive()
+    @songs = @folder.get 'show' if @folder
+    sources = @folder.get '_shows' if @folder and @songs
+    @songs = @folder.toJSON() if @folder and !@songs
+
     @$el.html @template
-      songs: if @folder then @folder.toJSON() else songs
+      songs: @songs
+      sources: sources || []
+
+    @$sources = @$el.find '.source'
 
     @
 
@@ -31,13 +39,12 @@ class App.Views.Songs extends App.Views.View
     song.fetch success: -> App.queue.reset song
 
   addAll: ->
-    App.queue.reset @folder.get('_songs') if App.queue.length is 0
-    App.queue.add @folder.get('_songs')
+    App.queue.reset @songs._songs if App.queue.length is 0
+    App.queue.add @songs._songs
   addShowToPlaylist: (e) ->
     $li = $(e.target).parent()
     id = $li.attr('data-id')
-    songs = @folder.get('_songs')
-    App.song = new App.Models.Song _.findWhere songs, _id: id
+    App.song = new App.Models.Song _.findWhere @songs._songs, _id: id
     App.queue.reset songs
     # { id, year, month, longDay, longSlug } = App.song.toJSON()
     @playing = !!"in the band" # true
@@ -50,3 +57,7 @@ class App.Views.Songs extends App.Views.View
       success: -> App.song.change()
 
     false
+  showSources: =>
+    return @$sources.slideDown() if @$sources.is ':hidden'
+    @$sources.slideUp()
+

@@ -142,6 +142,8 @@ getSongs = ->
           show.server = folder.server
           show.dir = folder.dir
           show.reviews = folder.reviews
+          show.avg = if folder.reviews and folder.reviews.info then folder.reviews.info.avg_rating else 0
+          show.total_reviews = if folder.reviews and folder.reviews.info then folder.reviews.info.num_reviews else 0
           show.venue = folder.metadata.venue
           show.coverage = folder.metadata.coverage
           show.source = folder.metadata.source
@@ -277,7 +279,7 @@ program.parse process.argv
 
 ## Mongo scripts
 # Update song id from show.id + '##' + song.longSlug
-# db.songs.find().forEach(function(song) {   show = db.shows.findOne({_id:song._show});   db.songs.update({_id: song._id},{$set:{id:show.id + '::' + song.longSlug}}); });
+# db.shows.find().forEach(function(show) {   db.shows.update({_id: show._id},{$set:{'avg': +(show.reviews.info.avg_rating),'reviews': +(show.reviews.info.num_reviews)} });
 #
 #
 # db.songs.find().forEach(function (song) {

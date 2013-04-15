@@ -6,8 +6,10 @@ User = mongoose.model 'User'
 Year = mongoose.model 'Year'
 Song = mongoose.model 'Song'
 Show = mongoose.model 'Show'
+Day = mongoose.model 'Day'
 
 async = require 'async'
+_ = require 'underscore'
 
 router.get '/', (req, res, next) ->
   bootstrapData (err, folders) ->
@@ -81,18 +83,32 @@ login = (req, res, {email, password}) ->
       when reasons.NOT_FOUND, reasons.PASSWORD_INCORRECT, reasons.MAX_ATTEMPTS
         res.redirect "login?err=#{reason}"
 
+OMIT_FROM_SHOW = '-reviews.reviews -md5s -updatedate -updater -addeddate -description -col -mediatype -creator'
+
 bootstrapData = (cb) ->
   async.parallel [
     (callback) ->
       Year.find {}, 'year', sort: { year: 1 }, callback
     , (callback) ->
-      Year.findOne(year: 1977)
-        .populate('_shows', 'album year month day version longDay title', null, sort: { date: 1 })
+      Year.findOne(year: 1977, '_days year !_shows')
+        .populate('_days', '', null, sort: { date: 1 })
         .exec callback
     , (callback) ->
-      Show.findOne({ year: 1977, month: 5, day: 8 })
-        .populate('_songs')
-        .exec callback
+      Day.findOne(
+        year: 1977
+        month: 5
+        day: 8
+      )
+      .populate('_shows', OMIT_FROM_SHOW + ' -_songs', null, sort: avg: -1)
+      .exec (err, day) ->
+        return callback err, {} if err || !day || !day._shows.length
+        show = _.findWhere day._shows, version: 5
+        show = day._shows[0]._id unless show
+        Show.findById(show, OMIT_FROM_SHOW)
+          .populate('_songs')
+          .exec (err, show) ->
+            day.show = show
+            callback null, day
     ], cb
 
 module.exports = router
