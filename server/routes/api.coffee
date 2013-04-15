@@ -17,6 +17,15 @@ nconf = require 'nconf'
 # Everything added under this router will be prefaced by /api/v1
 # You can change this path in your index.coffee middleware
 
+router.get '/status', (req, res) ->
+  obj =
+    status: 'up'
+    easteregg: false
+  if req.query.easteregg
+    obj.easteregg = true
+    obj.icculus = 'Read the fucking book.'
+  res.json obj
+
 router.get /^\/([0-9]{4})\/?$/, (req, res) ->
   Year.findOne(
     year: +req.params[0]
@@ -139,8 +148,6 @@ router.put '/blurbs', (req, res) ->
       , (err, arr) ->
         return res.json err: err if err
         res.json arr
-
-
 
 router.get '/me', (req, res) ->
   User
