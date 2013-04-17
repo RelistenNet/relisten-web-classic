@@ -24,11 +24,10 @@ fs.readdirSync(modelsPath).forEach (file) ->
   require "#{modelsPath}/#{file}"
 
 # Remove this and app.use forceSSL below if you do not want SSL enabled
-forceNonSSL = (req, res, next) ->
-  if process.env.NODE_ENV is "development" or req.headers["x-forwarded-proto"] is "https"
-    next()
-  else
-    res.redirect 301, "https://" + req.headers.host + req.path
+forceSSL = (req, res, next) ->
+  return next() if process.env.NODE_ENV is "development" or req.headers["x-forwarded-proto"] is "https"
+  # Redirect to https
+  res.redirect 301, "https://" + req.headers.host + req.path
 
 app = express()
 
@@ -36,7 +35,7 @@ app.configure ->
   app.set "port", PORT
   app.set "views", "#{__dirname}/views"
   app.set "view engine", "jade"
-  app.use forceNonSSL
+  app.use forceSSL
   app.use express.favicon()
   app.use express.logger("dev")
   app.use express.bodyParser()
