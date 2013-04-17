@@ -90,14 +90,14 @@ bootstrapData = (cb) ->
     (callback) ->
       Year.find {}, 'year', sort: { year: 1 }, callback
     , (callback) ->
-      Year.findOne(year: 1977, '_days year !_shows')
+      Year.findOne(year: 1973, '_days year !_shows')
         .populate('_days', '', null, sort: { date: 1 })
         .exec callback
     , (callback) ->
       Day.findOne(
-        year: 1977
-        month: 5
-        day: 8
+        year: 1973
+        month: 11
+        day: 30
       )
       .populate('_shows', OMIT_FROM_SHOW + ' -_songs', null, sort: avg: -1)
       .exec (err, day) ->

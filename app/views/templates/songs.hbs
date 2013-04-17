@@ -16,7 +16,7 @@
         {{#if this}}<p>Lineage: {{this}}</p>{{/if}}
       {{/each}}
       {{#if avg}}
-        <p>Rating: {{avg}}</p>
+        <p>Rating: {{avg}} / {{total_reviews}} reviews</p>
       {{/if}}
       <div class=total-sources>{{length ../sources}}</div>
     </li>
@@ -40,7 +40,7 @@
           {{#if this}}<p>Lineage: {{this}}</p>{{/if}}
         {{/each}}
         {{#if avg}}
-          <p>Rating: {{avg}}</p>
+          <p>Rating: {{avg}} / {{total_reviews}} reviews</p>
         {{/if}}
       </a>
     </li>

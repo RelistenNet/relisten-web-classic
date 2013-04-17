@@ -36,7 +36,7 @@ app.configure ->
   app.set "port", PORT
   app.set "views", "#{__dirname}/views"
   app.set "view engine", "jade"
-  app.use forceNonSSL
+  #app.use forceNonSSL
   app.use express.favicon()
   app.use express.logger("dev")
   app.use express.bodyParser()
