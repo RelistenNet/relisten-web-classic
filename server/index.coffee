@@ -16,7 +16,6 @@ nconf.argv()
 
 mongoose.connect nconf.get('GD_URI'), (err) ->
   throw err if err
-  console.log 'Connected to database'
 
 # Bootstrap models
 modelsPath = __dirname + '/models'
