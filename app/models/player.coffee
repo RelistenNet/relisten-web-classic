@@ -8,12 +8,13 @@ class App.Models.Player extends App.Models.Model
       else
         $('footer .pause').removeClass('pause').addClass 'play'
   play: (ms = 0) =>
-    @sound.destruct() if @sound
+    if @sound
+      volume = @sound.volume
+      @sound.destruct()
     @set 'id', id = App.song.get '_id'
     App.playerView.played.push id
 
     canPlayOgg = soundManager.canPlayMIME 'audio/ogg'
-
     # Use ogg if it exists + can be played, otherwise use mp3
     url = App.song.get 'url' unless canPlayOgg and url = App.song.get 'oggUrl'
 
@@ -30,6 +31,7 @@ class App.Models.Player extends App.Models.Model
         whileplaying: ->
           App.footer.updatePlaying @position, @duration
         onplay: =>
+          @sound.setVolume volume || 100
           @updateText()
           @slideDown()
         onfinish: ->

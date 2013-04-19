@@ -1379,13 +1379,14 @@ App.Models.Player = (function(_super) {
   };
 
   Player.prototype.play = function(ms) {
-    var canPlayOgg, id, url,
+    var canPlayOgg, id, url, volume,
       _this = this;
 
     if (ms == null) {
       ms = 0;
     }
     if (this.sound) {
+      volume = this.sound.volume;
       this.sound.destruct();
     }
     this.set('id', id = App.song.get('_id'));
@@ -1413,6 +1414,7 @@ App.Models.Player = (function(_super) {
           return App.footer.updatePlaying(this.position, this.duration);
         },
         onplay: function() {
+          _this.sound.setVolume(volume || 100);
           _this.updateText();
           return _this.slideDown();
         },
