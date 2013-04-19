@@ -139,6 +139,27 @@ module.exports = (grunt) ->
           src: ["public/index.html"]
           dest: "production/index.html"
         ]
+    compress:
+      js:
+        options:
+          mode: 'gzip'
+        src: ['production/gd.min.js']
+        dest: 'production/gd.min.js'
+      css:
+        options:
+          mode: 'gzip'
+        src: ['production/index.css']
+        dest: 'production/index.css'
+    rename:
+      production:
+        files: [{
+          src: 'production/gd.min.js.gz'
+          dest: 'production/gd.min.js'
+        },{
+          src: 'production/index.css.gz'
+          dest: 'production/index.css'
+        }]
+
 
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-concat"
@@ -149,8 +170,9 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-cssmin"
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-uglify"
-
+  grunt.loadNpmTasks 'grunt-contrib-compress'
+  grunt.loadNpmTasks 'grunt-contrib-rename'
 
   grunt.registerTask "compile", ["coffee", "handlebars", "concat", "stylus", "clean"]
   grunt.registerTask "compile:coffee", ["coffee", "handlebars", "concat", "clean"]
-  grunt.registerTask "production", ["coffee", "handlebars", "concat", "stylus", "clean", "copy", "cssmin", "uglify"]
+  grunt.registerTask "production", ["coffee", "handlebars", "concat", "stylus", "clean", "copy:production", "cssmin", "uglify", "compress", "rename"]
