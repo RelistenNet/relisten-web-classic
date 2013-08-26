@@ -1364,11 +1364,8 @@ App.Models.Player = (function(_super) {
     return _ref;
   }
 
-  Player.prototype.defaults = {
-    playing: false
-  };
-
   Player.prototype.initialize = function() {
+    this.times = 0;
     return this.on('change:playing', function(player, playing) {
       if (playing) {
         return $('footer .play').removeClass('play').addClass('pause');
@@ -1379,11 +1376,14 @@ App.Models.Player = (function(_super) {
   };
 
   Player.prototype.play = function(ms) {
-    var canPlayOgg, id, url, volume,
+    var canPlayOgg, id, self, url, volume,
       _this = this;
 
     if (ms == null) {
       ms = 0;
+    }
+    if (this.times > 4) {
+      return this.times = 0;
     }
     if (this.sound) {
       volume = this.sound.volume;
@@ -1395,6 +1395,7 @@ App.Models.Player = (function(_super) {
     if (!(canPlayOgg && (url = App.song.get('oggUrl')))) {
       url = App.song.get('url');
     }
+    self = this;
     return soundManager.onready(function() {
       _this.sound = soundManager.createSound({
         id: "phish" + id,
@@ -1408,6 +1409,9 @@ App.Models.Player = (function(_super) {
           }
         },
         whileloading: function() {
+          if (self.times > 0) {
+            self.times = 0;
+          }
           return App.footer.updateProgress(this.bytesLoaded, this.bytesTotal);
         },
         whileplaying: function() {
@@ -1423,6 +1427,11 @@ App.Models.Player = (function(_super) {
           App.footer.playNext();
           if (App.queue.idx === App.queue.length) {
             return App.player.set('playing', false);
+          }
+        },
+        onload: function() {
+          if (this.readyState === 2 && self.times++ < 5) {
+            return self.play();
           }
         }
       });

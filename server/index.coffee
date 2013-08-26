@@ -7,6 +7,9 @@ nconf = require 'nconf'
 Mongo_Store = require('connect-mongo')(express)
 csrf = express.csrf()
 PORT = process.env.PORT || 3000
+TODAY = new Date()
+ONE_YEAR = TODAY.setFullYear(TODAY.getFullYear()+1)
+
 
 nconf.argv()
   .env()
@@ -42,6 +45,8 @@ app.configure ->
   app.use express.cookieParser()
   app.use express.session
     secret: 'this is your call, buddy'
+    maxAge  : ONE_YEAR
+    expires : ONE_YEAR
     store: new Mongo_Store
       url: nconf.get('GD_URI')
   app.use (req, res, next) ->
