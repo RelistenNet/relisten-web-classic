@@ -11,8 +11,16 @@ Day = mongoose.model 'Day'
 async = require 'async'
 _ = require 'underscore'
 
+YEARS = [1965..1995]
+
+Array::getRandomElement = -> this[Math.floor(Math.random() * this.length)]
+
 router.get '/', (req, res, next) ->
-  bootstrapData (err, folders) ->
+  bootstrapData (err, years, shows, songs) ->
+
+    unless years && shows && songs
+      return res.send 500, 'Sorry something broke, please try refreshing.'
+
     # If user isn't logged in then next() so public/index.html is served
     unless req.session && req.session.userId
       # If we're in development, then render via jade so we can set loggedIn
@@ -22,9 +30,9 @@ router.get '/', (req, res, next) ->
         user: {}
         csrf: ''
         isProduction: false
-        years: folders[0]
-        shows: folders[1]
-        songs: folders[2]
+        years: years
+        shows: shows
+        songs: songs
     # If the user is logged in, then render the views/loggedIn.jade
     # This way, we can bootstrap the user and csrf objects on page load
     User
@@ -35,9 +43,9 @@ router.get '/', (req, res, next) ->
           user: user
           csrf: req.session._csrf
           isProduction: process.env.NODE_ENV is "production"
-          years: folders[0]
-          shows: folders[1]
-          songs: folders[2]
+          years: years
+          shows: shows
+          songs: songs
 
 router.get '/rest/*', (req, res) ->
   res.redirect 'http://74.104.117.66:8044' + req._parsedUrl.path
@@ -86,29 +94,33 @@ login = (req, res, {email, password}) ->
 OMIT_FROM_SHOW = '-reviews.reviews -md5s -updatedate -updater -addeddate -description -col -mediatype -creator'
 
 bootstrapData = (cb) ->
-  async.parallel [
+  async.waterfall [
     (callback) ->
-      Year.find {}, 'year', sort: { year: 1 }, callback
-    , (callback) ->
-      Year.findOne(year: 1977, '_days year !_shows')
-        .populate('_days', '', null, sort: { date: 1 })
-        .exec callback
-    , (callback) ->
-      Day.findOne(
-        year: 1977
-        month: 5
-        day: 8
-      )
-      .populate('_shows', OMIT_FROM_SHOW + ' -_songs', null, sort: avg: -1)
-      .exec (err, day) ->
-        return callback err, {} if err || !day || !day._shows.length
-        show = _.findWhere day._shows, version: 9
-        show = day._shows[0]._id unless show
-        Show.findById(show, OMIT_FROM_SHOW)
-          .populate('_songs')
-          .exec (err, show) ->
-            day.show = show
-            callback null, day
+      async.parallel [
+        (callback) ->
+          Year.find {}, 'year', sort: { year: 1 }, callback
+        , (callback) ->
+          Year.findOne(year: YEARS.getRandomElement(), '_days year !_shows')
+            .populate('_days', '', null, sort: { date: 1 })
+            .exec callback
+      ], callback
+    , (arr, callback) ->
+      [years, year] = arr
+
+      Day.findRandom year: year.year, (err, day) ->
+        return callback err if err
+
+        Day.findById(day._id)
+          .populate('_shows', OMIT_FROM_SHOW + ' -_songs', null, sort: avg: -1)
+          .exec (err, day) ->
+            return callback err, {} if err || !day || !day._shows.length
+
+            show = day._shows[0]._id unless show
+            Show.findById(show, OMIT_FROM_SHOW)
+              .populate('_songs')
+              .exec (err, show) ->
+                day.show = show
+                callback null, years, year, day
     ], cb
 
 module.exports = router

@@ -1,4 +1,5 @@
 { Schema } = mongoose = require 'mongoose'
+random = require 'mongoose-random'
 
 daySchema = new Schema
   month: Number
@@ -9,5 +10,7 @@ daySchema = new Schema
   album: String
   show: Schema.Types.Mixed
   _shows: [ type: Schema.Types.ObjectId, ref: 'Show' ]
+
+daySchema.plugin random()
 
 Day = mongoose.model 'Day', daySchema
