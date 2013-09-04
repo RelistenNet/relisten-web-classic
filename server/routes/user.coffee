@@ -113,8 +113,8 @@ bootstrapData = (cb) ->
           .exec (err, day) ->
             return callback err, {} if err || !day || !day._shows.length
 
-            show = day._shows[0]._id unless show
-            Show.findById(show, OMIT_FROM_SHOW)
+            id = day._shows[0]._id
+            Show.findById(id, OMIT_FROM_SHOW)
               .populate('_songs')
               .exec (err, show) ->
                 day.show = show
