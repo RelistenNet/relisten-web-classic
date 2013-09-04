@@ -16,6 +16,7 @@ YEARS = [1965..1995]
 Array::getRandomElement = -> this[Math.floor(Math.random() * this.length)]
 
 router.get '/', (req, res, next) ->
+  Day.syncRandom -> null
   bootstrapData (err, years, shows, songs) ->
 
     unless years && shows && songs
