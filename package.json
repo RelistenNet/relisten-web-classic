@@ -22,7 +22,7 @@
     "slugs": "~0.1.2",
     "connect-mongo": "~0.3.2",
     "archive.org": "0.0.7",
-    "mongoose-random": "0.0.2",
+    "mongoose-random": "git://github.com/switz/mongoose-random.git",
     "mongoose": "~3.6.18"
   },
   "devDependencies": {
