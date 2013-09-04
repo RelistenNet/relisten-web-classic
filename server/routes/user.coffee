@@ -13,10 +13,15 @@ _ = require 'underscore'
 
 YEARS = [1965..1995]
 
+years = []
+
 Array::getRandomElement = -> this[Math.floor(Math.random() * this.length)]
 
+# Initialize years
+Year.find {}, 'year', sort: { year: 1 }, (err, y) -> years = y
+
 router.get '/', (req, res, next) ->
-  bootstrapData (err, years, shows, songs) ->
+  bootstrapData (err, shows, songs) ->
 
     unless years && shows && songs
       return res.send 500, 'Sorry something broke, please try refreshing.'
@@ -96,17 +101,10 @@ OMIT_FROM_SHOW = '-reviews.reviews -md5s -updatedate -updater -addeddate -descri
 bootstrapData = (cb) ->
   async.waterfall [
     (callback) ->
-      async.parallel [
-        (callback) ->
-          Year.find {}, 'year', sort: { year: 1 }, callback
-        , (callback) ->
-          Year.findOne(year: YEARS.getRandomElement(), '_days year !_shows')
-            .populate('_days', '', null, sort: { date: 1 })
-            .exec callback
-      ], callback
-    , (arr, callback) ->
-      [years, year] = arr
-
+      Year.findOne(year: YEARS.getRandomElement(), '_days year !_shows')
+        .populate('_days', '', null, sort: { date: 1 })
+        .exec callback
+    , (year, callback) ->
       Day.findRandom year: year.year, (err, day) ->
         return callback err if err
 
@@ -120,7 +118,7 @@ bootstrapData = (cb) ->
               .populate('_songs')
               .exec (err, show) ->
                 day.show = show
-                callback null, years, year, day
+                callback null, year, day
     ], cb
 
 module.exports = router
