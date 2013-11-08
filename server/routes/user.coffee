@@ -30,7 +30,7 @@ router.get '/', (req, res, next) ->
     unless req.session && req.session.userId
       # If we're in development, then render via jade so we can set loggedIn
       # TODO: Find a more robust solution, this is slightly messy
-      return next() unless process.env.NODE_ENV is "development"
+      #return next() unless process.env.NODE_ENV is "development"
       return res.render 'loggedIn',
         user: {}
         csrf: ''
