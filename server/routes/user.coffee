@@ -10,8 +10,9 @@ Day = mongoose.model 'Day'
 
 async = require 'async'
 _ = require 'underscore'
+toobusy = require 'toobusy'
 
-YEARS = [1965..1995]
+YEARS = [1966..1995]
 
 years = []
 
@@ -21,6 +22,9 @@ Array::getRandomElement = -> this[Math.floor(Math.random() * this.length)]
 Year.find {}, 'year', sort: { year: 1 }, (err, y) -> years = y
 
 router.get '/', (req, res, next) ->
+  if toobusy()
+    return res.sendfile '/public/index.html', root: __dirname + '/../..'
+
   bootstrapData (err, shows, songs) ->
 
     unless years && shows && songs

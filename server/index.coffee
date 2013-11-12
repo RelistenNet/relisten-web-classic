@@ -10,7 +10,6 @@ PORT = process.env.PORT || 3000
 TODAY = new Date()
 ONE_YEAR = TODAY.setFullYear(TODAY.getFullYear()+1)
 
-
 nconf.argv()
   .env()
   .file(__dirname + '/../config.json')
