@@ -113,7 +113,7 @@ bootstrapData = (cb) ->
         return callback err if err
 
         Day.findById(day._id)
-          .populate('_shows', OMIT_FROM_SHOW + ' -_songs', null, sort: avg: -1)
+          .populate('_shows', OMIT_FROM_SHOW + ' -_songs', null, sort: weighted_avg: -1)
           .exec (err, day) ->
             return callback err, {} if err || !day || !day._shows.length
 
