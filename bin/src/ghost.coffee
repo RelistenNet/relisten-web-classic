@@ -31,6 +31,45 @@ Day = mongoose.model 'Day'
 
 years = [1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995]
 
+getZips = ->
+  total = 8643
+  Day.find().populate('_shows').stream().on 'data', (day) ->
+    shows = estimate day._shows
+
+    for show in shows
+
+      Show.findOneAndUpdate
+        _id: show._id
+      , weighted_avg: show.weighted || 0
+      , (err, new_show) ->
+        console.log if err then err else --total
+
+sum = (arr) ->
+  _.reduce(arr, (memo, num) ->
+    memo + num
+  , 0)
+
+average = (arr) ->
+  sum(arr) / arr.length
+
+estimate = (shows) ->
+  averages = _.pluck shows, 'avg'
+  ratings = _.pluck shows, 'total_reviews'
+
+  avgAll = average averages
+  ratingAll = average ratings
+
+  output = []
+
+  for show in shows
+    if show.total_reviews == 0
+      output.push 0
+    else
+      output.push _id: show._id, weighted: (ratingAll * avgAll) + (show.total_reviews * show.avg) / (ratingAll + show.total_reviews), avg: show.avg, total: show.total_reviews
+
+  output
+
+
 getYears = ->
   for f in years
     console.log f
@@ -270,6 +309,11 @@ program
   .command('gd')
   .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
   .action(gd)
+
+program
+  .command('zips')
+  .description('\nUpdate the year list. If no folder id is provided, 32 will be default.')
+  .action(getZips)
 
 # Infinite stack trace
 Error.stackTraceLimit = Infinity

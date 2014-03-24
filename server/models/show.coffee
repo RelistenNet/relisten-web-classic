@@ -39,6 +39,7 @@ showSchema = new Schema
     ]
   avg: type: Number, default: 0
   total_reviews: type: Number, default: 0
+  weighted_avg: type: Number, default: 0
   _songs: [ type: Schema.Types.ObjectId, ref: 'Song' ]
   _year: type: Schema.Types.ObjectId, ref: 'Year'
   _day: type: Schema.Types.ObjectId, ref: 'Day'

@@ -42,7 +42,7 @@ router.get /^\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, (req,
     month: +req.params[1]
     day: +req.params[2]
   )
-  .populate('_shows', OMIT_FROM_SHOW + ' -_songs', null, sort: avg: -1)
+  .populate('_shows', OMIT_FROM_SHOW + ' -_songs', null, sort: weighted_avg: -1)
   .exec (err, day) ->
     return res.json {} if err || !day || !day._shows.length
     show = _.findWhere day._shows, version: +req.params[3]
