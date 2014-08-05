@@ -68,7 +68,7 @@ router.get '/playlists', (req, res) ->
   Playlist.find()
     #.populate('_songs')
     .exec (err, playlists) ->
-      res.json playlists
+      res.json playlists.reverse()
 
 router.get '/playlist/:id', (req, res) ->
   Playlist.findById(req.params.id)
