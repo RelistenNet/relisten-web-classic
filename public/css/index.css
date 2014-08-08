@@ -5454,6 +5454,10 @@ header ul.left li.home-container{font-family:'Lato';font-style:italic;font-weigh
 header ul.left li.home-container a.home{font-size:2em;line-height:1.5em;height:50px;color:#0a64a4;display:block;padding:0 10px 0 10px;}
 header ul.left li.home-container a.home:hover{color:#f6f6f6;background:#0a64a4}
 header ul.left li.home-container a.home span{font-size:.7em}
+header ul.left li.band-selector span{font-size:3em}
+header ul.left li.band-selector .bands{display:none;width:300px;min-height:200px;font-size:1.8em;background:#eee;border:1px solid #333;}
+header ul.left li.band-selector .bands li{padding:10px 10px;width:100%;height:30px}
+header ul.left li.band-selector:hover .bands{display:block}
 header ul.right{position:absolute;right:0;}
 header ul.right li{float:right;height:100%;text-align:center;border-left:1px solid #ddd;}
 header ul.right li:hover,header ul.right li.active{border-left:1px solid #0a64a4}

@@ -35,7 +35,7 @@ function program3(depth0,data) {
   return "\n    <li><a class=\"login header-link\" href=\"/login\">LOGIN</a></li>\n    <li><a class=\"register header-link\" href=\"/register\">REGISTER</a></li>\n  ";
   }
 
-  buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\">ListenToTheDead<span>.com</span></a></li>\n</ul>\n\n<ul class=\"right\">\n  ";
+  buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\">ListenToTheDead<span>.com</span></a></li>\n  <li class=\"band-selector\">\n    <span>V</span>\n    <ul class=\"bands\">\n      <li><a href=\"/phish\">Phish?</a></li>\n      <li><a href=\"/gd\">Grateful Dead</a></li>\n      <li><a href=\"/umphreys\">Umphrey's McGee</a></li>\n    </ul>\n  </li>\n</ul>\n\n<ul class=\"right\">\n  ";
   stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n    <li><a class=\"playlists header-link\" href=\"/playlists\">PLAYLISTS</a></li>\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n</ul>\n";
@@ -708,23 +708,25 @@ this["JST"]["years"] = Handlebars.template(function (Handlebars,depth0,helpers,p
 helpers = helpers || Handlebars.helpers; data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
-function program1(depth0,data) {
+function program1(depth0,data,depth1) {
   
-  var buffer = "", stack1;
-  buffer += "\n  <li>\n    <a href=\"/";
-  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  var buffer = "", stack1, stack2;
+  buffer += "\n  <li>\n    <a href=\"/"
+    + escapeExpression(((stack1 = depth1.band),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/";
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "\">";
-  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "</a>\n  </li>\n";
   return buffer;
   }
 
   buffer += "<div class=ul-header>Choose a year</div>\n<ul>\n";
-  stack1 = helpers.each.call(depth0, depth0.years, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack1 = helpers.each.call(depth0, depth0.years, {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</ul>\n";
   return buffer;
@@ -927,11 +929,11 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.initialize = function() {
-    this.route(/^([0-9]{4})\/?$/, 'year');
-    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day');
-    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show');
-    this.route(/^([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song');
-    this.route(/^playlist\/([0-9a-f]{24})\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'playlistSong');
+    this.route(/^([A-Za-z]+)\/?$/, 'band');
+    this.route(/^([A-Za-z]+)\/([0-9]{4})\/?$/, 'year');
+    this.route(/^([A-Za-z]+)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day');
+    this.route(/^([A-Za-z]+)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show');
+    this.route(/^([A-Za-z]+)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
   };
@@ -944,7 +946,17 @@ App.Router = (function(_super) {
     return document.title = 'Listen to the Grateful Dead';
   };
 
-  Router.prototype.year = function(year) {
+  Router.prototype.band = function(band) {
+    this.changeView(new App.Views.HomePage());
+    App.years = new App.Views.Years({
+      band: band
+    });
+    App.shows = new App.Views.Shows();
+    App.songs = new App.Views.Songs();
+    return document.title = 'Listen to the Grateful Dead';
+  };
+
+  Router.prototype.year = function(band, year) {
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years();
@@ -958,7 +970,8 @@ App.Router = (function(_super) {
     return document.title = "" + year + " | Listen to the Grateful Dead";
   };
 
-  Router.prototype.day = function(year, month, day) {
+  Router.prototype.day = function(band, year, month, day) {
+    this.band = band;
     this.year = year;
     this.month = month;
     this.day = day;
@@ -982,7 +995,8 @@ App.Router = (function(_super) {
     return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | Listen to the Grateful Dead";
   };
 
-  Router.prototype.show = function(year, month, day, showVersion) {
+  Router.prototype.show = function(band, year, month, day, showVersion) {
+    this.band = band;
     this.year = year;
     this.month = month;
     this.day = day;
@@ -1008,7 +1022,8 @@ App.Router = (function(_super) {
     return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | Listen to the Grateful Dead";
   };
 
-  Router.prototype.song = function(year, month, day, showVersion, slug, version, time) {
+  Router.prototype.song = function(band, year, month, day, showVersion, slug, version, time) {
+    this.band = band;
     this.year = year;
     this.month = month;
     this.day = day;
@@ -1617,6 +1632,29 @@ var _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+App.Models.Years = (function(_super) {
+  __extends(Years, _super);
+
+  function Years() {
+    _ref = Years.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Years.prototype.url = function() {
+    var band;
+
+    band = this.get('band');
+    return "http://marcoallday.com/api/artists/" + band + "/years";
+  };
+
+  return Years;
+
+})(App.Models.Model);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
 App.Collections.Collection = (function(_super) {
   __extends(Collection, _super);
 
@@ -1999,6 +2037,10 @@ App.Views.Header = (function(_super) {
 
   Header.prototype.template = JST['header'];
 
+  Header.prototype.events = {
+    'click .band-select': 'chooseBand'
+  };
+
   Header.prototype.initialize = function() {
     return Header.__super__.initialize.apply(this, arguments);
   };
@@ -2008,6 +2050,10 @@ App.Views.Header = (function(_super) {
       loggedIn: App.user.loggedIn(),
       playlistId: playlist ? playlist.get('_id') : void 0
     }));
+  };
+
+  Header.prototype.chooseBand = function() {
+    return 0;
   };
 
   return Header;
@@ -2796,8 +2842,6 @@ App.Views.Years = (function(_super) {
     return _ref;
   }
 
-  Years.prototype.autoRender = true;
-
   Years.prototype.el = '.years-container';
 
   Years.prototype.template = JST['years'];
@@ -2806,10 +2850,23 @@ App.Views.Years = (function(_super) {
     'click a': 'activate'
   };
 
+  Years.prototype.initialize = function() {
+    if (!this.options.band) {
+      this.options.band = 'dead';
+    }
+    this.years = new App.Models.Years({
+      band: this.options.band
+    });
+    this.listenTo(this.years, 'change', this.render);
+    return this.years.fetch();
+  };
+
   Years.prototype.render = function() {
+    console.log(this.years.get('data'));
     App.router.clearActive();
     this.$el.html(this.template({
-      years: years
+      years: this.years.get('data'),
+      band: this.options.band
     }));
     this.$a = this.$el.find('a');
     return this;
