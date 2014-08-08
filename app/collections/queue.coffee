@@ -19,11 +19,13 @@ class App.Collections.Queue extends App.Collections.Collection
 
     App.player.play ms
     App.player.set 'playing', true
-    { year, month, longDay, longSlug, day, title } = App.song.toJSON()
+    { band, year, month, day, showVersion } = App.router
+    { slug, title } = App.song.toJSON()
+    showVersionStr = if showVersion then '-' + showVersion else ''
     # If not on the URL already, go ahead!
-    unless window.location.pathname.match "/#{year}/#{month}/#{longDay}/#{longSlug}"
-      url = "/#{year}/#{month}/#{longDay}/#{longSlug}"
-      document.title = "#{title} | #{year}/#{month}/#{day} | Listen to the Grateful Dead"
+    unless window.location.pathname.match "/#{band}/#{year}/#{month}/#{day}#{showVersionStr}/#{slug}"
+      url = "/#{band}/#{year}/#{month}/#{day}#{showVersionStr}/#{slug}"
+      document.title = "#{title} | #{year}/#{month}/#{day} | Listen to the #{band}"
       Backbone.history.navigate url, trigger: false
       ga('send', 'pageview', "#{url}")
     App.queueView.render App.queueView.$el.find('ul').scrollTop()

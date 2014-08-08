@@ -16,7 +16,12 @@ class App.Views.Queue extends App.Views.View
     @$el.html @template
       queue: App.queue.toJSON()
       loggedIn: App.user.loggedIn()
-      activeSlug: if App.queue then song?.get 'longSlug' else false
+      activeSlug: if App.queue then song?.get 'slug' else false
+      year: App.router?.year
+      month: App.router?.month
+      day: App.router?.day
+      showVersion: App.router?.showVersion
+      band: App.router?.band
 
     @$ul = @$el.find 'ul'
     @$ul.scrollTop scrollTop if scrollTop

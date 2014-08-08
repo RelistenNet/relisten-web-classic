@@ -4,14 +4,14 @@
       <span>[
         <a href="javascript:" class=delete>x</a>
       ]</span>
-      <a class="song {{active}}" href="/{{year}}/{{month}}/{{longDay}}/{{longSlug}}">
+      <a class="song {{active}}" href="/{{band}}/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{/if}}{{showVersion}}/{{slug}}">
         {{title}}
       </a>
       <span>
-        [{{toHHMMSS duration}}]
+        [{{len this}}]
       </span>
       <span>
-        [<a href="/{{year}}/{{month}}/{{longDay}}">{{month}}/{{day}}/{{year}}</a>]
+        [<a href="/{{band}}/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{/if}}{{showVersion}}">{{month}}/{{day}}/{{year}}</a>]
       </span>
     </li>
   {{/each}}

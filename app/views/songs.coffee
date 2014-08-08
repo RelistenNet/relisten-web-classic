@@ -66,10 +66,9 @@ class App.Views.Songs extends App.Views.View
     #Backbone.history.navigate "/#{year}/#{month}/#{longDay}/#{longSlug}", trigger: true
   addToPlaylist: (e) ->
     $li = $(e.target).parent()
-    id = $li.attr 'data-id'
-    App.song = new App.Models.Song _id: id
-    App.song.fetch
-      success: -> App.song.change()
+    idx = $li.attr 'data-idx'
+    song = _.extend @songs.tracks[+idx], { band: @options.band, year: @options.year, month: @options.month, day: @options.day, showVersion: @options.showVersion }
+    App.queue.push song
 
     false
   showSources: =>

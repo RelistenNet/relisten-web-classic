@@ -18,7 +18,7 @@ class App.Models.Player extends App.Models.Model
 
     # Use ogg if it exists + can be played, otherwise use mp3
     canPlayOgg = soundManager.canPlayMIME 'audio/ogg'
-    url = App.song.get 'url' unless canPlayOgg and url = App.song.get 'oggUrl'
+    url = App.song.get 'file' unless canPlayOgg and url = App.song.get 'oggUrl'
 
     self = this
 

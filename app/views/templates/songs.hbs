@@ -33,7 +33,7 @@
     <li class=source>This is where the show starts, bub.</li>
   {{/if}}
   {{#each songs.tracks}}
-    <li data-id={{_id}} data-song="{{title}}">
+    <li data-idx={{@index}} data-song="{{title}}">
       <a class=song href="/{{../band}}/{{../year}}/{{../month}}/{{../day}}{{#if ../showVersion}}-{{/if}}{{../showVersion}}/{{slug}}">{{title}} <span class=time>{{len this}}</span></a>
       <div class=play>ᐅ</div>
       <div title="Add To Queue" class=add>+</div>

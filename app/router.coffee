@@ -60,8 +60,8 @@ class App.Router extends Backbone.Router
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
-      App.shows = new App.Views.Shows { @year }
-      App.songs = new App.Views.Songs { @year, @month, @day, @showVersion }
+      App.shows = new App.Views.Shows { @band, @year }
+      App.songs = new App.Views.Songs { @band, @year, @month, @day, @showVersion }
       return App.songs.listenToOnce App.songs.folder, 'change', @finishSong
 
     App.shows = new App.Views.Shows { @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
@@ -72,12 +72,14 @@ class App.Router extends Backbone.Router
     self = @
     App.queue.on 'reset', ->
       ms = timeToMS self.time
-      App.song = App.queue.findWhere { slug: self.slug, version: +self.version || 0 }
+      App.song = App.queue.findWhere { slug: self.slug }
       document.title = "#{App.song.get('title')} | #{self.year}/#{self.month}/#{self.day} | Listen to the Grateful Dead"
       App.queue.play App.song, ms
       App.queue.off 'reset'
 
-    App.queue.reset App.songs.songs._songs
+    App.songs.songs.tracks.map (track) => _.extend track, { @band, @year, @month, @day, @showVersion }
+
+    App.queue.reset App.songs.songs.tracks
   about: ->
     @changeView(new App.Views.AboutPage())
     document.title = 'About | Listen to the Grateful Dead'
