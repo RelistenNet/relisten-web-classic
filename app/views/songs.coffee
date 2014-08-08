@@ -11,7 +11,9 @@ class App.Views.Songs extends App.Views.View
     unless @options.year || @options.month || @options.day
       @folder = new App.Models.Songs songs
       return @render()
+
     @folder = new App.Models.Songs
+      band: @options.band
       year: @options.year
       month: @options.month
       day: @options.day
@@ -20,14 +22,27 @@ class App.Views.Songs extends App.Views.View
     @listenTo @folder, 'change', @render
     @folder.fetch()
   render: ->
+    console.log @folder.toJSON()
     App.router.clearActive()
-    @songs = @folder.get 'show' if @folder
-    sources = @folder.get '_shows' if @folder and @songs
-    @songs = @folder.toJSON() if @folder and !@songs
+    sources = @folder.get('data') if @folder
+    return unless sources?.length
+
+    console.log @options.showVersion
+    if @options.showVersion
+      @songs = sources[@options.showVersion]
+    else
+      @songs = sources[0]
+
+    console.log @songs
 
     @$el.html @template
       songs: @songs
       sources: sources || []
+      year: @options.year
+      month: @options.month
+      day: @options.day
+      band: @options.band
+      showVersion: @options.showVersion || ''
 
     @$sources = @$el.find '.source'
 

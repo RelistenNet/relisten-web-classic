@@ -368,25 +368,27 @@ this["JST"]["shows"] = Handlebars.template(function (Handlebars,depth0,helpers,p
 helpers = helpers || Handlebars.helpers; data = data || {};
   var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
-function program1(depth0,data) {
+function program1(depth0,data,depth1) {
   
   var buffer = "", stack1, stack2, options;
-  buffer += "\n  <li>\n    <a href=\"/";
-  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  buffer += "\n  <li>\n    <a href=\"/"
+    + escapeExpression(((stack1 = depth1.band),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/";
-  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
-  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.month) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.month; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/";
+  if (stack2 = helpers.day) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.day; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "\">\n      <span class=date>";
-  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  if (stack2 = helpers.month) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.month; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
     + "/";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.addZero),stack1 ? stack1.call(depth0, depth0.day, options) : helperMissing.call(depth0, "addZero", depth0.day, options)))
@@ -401,7 +403,7 @@ function program1(depth0,data) {
   buffer += "<div class=ul-header>"
     + escapeExpression(((stack1 = ((stack1 = depth0.data),stack1 == null || stack1 === false ? stack1 : stack1.year)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</div>\n<ul>\n";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.data),stack1 == null || stack1 === false ? stack1 : stack1.shows), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.data),stack1 == null || stack1 === false ? stack1 : stack1.shows), {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</ul>\n";
   return buffer;
@@ -416,19 +418,19 @@ function program1(depth0,data,depth1) {
   
   var buffer = "", stack1, options;
   buffer += "\n    <li class=\"current-source show-sources\">\n      <h5>Current Source <span>(click here to select another source)</span></h5>\n      ";
-  stack1 = helpers.each.call(depth0, depth0.taper, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.taper, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      ";
-  stack1 = helpers.each.call(depth0, depth0.transferer, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.transferer, {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      ";
-  stack1 = helpers.each.call(depth0, depth0.source, {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.source, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      ";
-  stack1 = helpers.each.call(depth0, depth0.lineage, {hash:{},inverse:self.noop,fn:self.program(10, program10, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.lineage, {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      ";
-  stack1 = helpers['if'].call(depth0, depth0.avg, {hash:{},inverse:self.noop,fn:self.program(13, program13, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.avg, {hash:{},inverse:self.noop,fn:self.program(10, program10, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      <div class=total-sources>";
   options = {hash:{},data:data};
@@ -439,67 +441,48 @@ function program1(depth0,data,depth1) {
 function program2(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n        ";
-  stack1 = helpers['if'].call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n      ";
-  return buffer;
-  }
-function program3(depth0,data) {
-  
-  var buffer = "";
-  buffer += "<p class=taper>Taper: "
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+  buffer += "<p class=taper>Taper: ";
+  if (stack1 = helpers.taper) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.taper; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
     + "</p>";
   return buffer;
   }
 
-function program5(depth0,data) {
+function program4(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n        ";
-  stack1 = helpers['if'].call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n      ";
+  buffer += "<p>Transferer: ";
+  if (stack1 = helpers.transferer) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.transferer; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>";
   return buffer;
   }
+
 function program6(depth0,data) {
   
-  var buffer = "";
-  buffer += "<p>Transferer: "
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+  var buffer = "", stack1;
+  buffer += "<p>";
+  if (stack1 = helpers.source) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.source; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
     + "</p>";
   return buffer;
   }
 
 function program8(depth0,data) {
   
-  var buffer = "";
-  buffer += "\n        <p>"
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + "</p>\n      ";
-  return buffer;
-  }
-
-function program10(depth0,data) {
-  
   var buffer = "", stack1;
-  buffer += "\n        ";
-  stack1 = helpers['if'].call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n      ";
-  return buffer;
-  }
-function program11(depth0,data) {
-  
-  var buffer = "";
-  buffer += "<p>Lineage: "
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
+  buffer += "<p>Lineage: ";
+  if (stack1 = helpers.lineage) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.lineage; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
     + "</p>";
   return buffer;
   }
 
-function program13(depth0,data) {
+function program10(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n        <p>Rating: ";
@@ -514,89 +497,44 @@ function program13(depth0,data) {
   return buffer;
   }
 
-function program15(depth0,data) {
+function program12(depth0,data) {
   
   
   return "\n    <li class=source>Choose your source:</li>\n  ";
   }
 
-function program17(depth0,data) {
+function program14(depth0,data,depth1) {
   
-  var buffer = "", stack1;
-  buffer += "\n    <li class=source>\n      <a href=/";
-  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "/";
-  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "-";
-  if (stack1 = helpers.version) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.version; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+  var buffer = "", stack1, stack2;
+  buffer += "\n    <li class=source>\n      <a href=/"
+    + escapeExpression(((stack1 = depth1.band),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/"
+    + escapeExpression(((stack1 = depth1.year),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/"
+    + escapeExpression(((stack1 = depth1.month),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/"
+    + escapeExpression(((stack1 = depth1.day),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "-"
+    + escapeExpression(((stack1 = data.index),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + ">\n        ";
-  stack1 = helpers.each.call(depth0, depth0.taper, {hash:{},inverse:self.noop,fn:self.program(18, program18, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
+  stack2 = helpers['if'].call(depth0, depth0.taper, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n        ";
-  stack1 = helpers.each.call(depth0, depth0.transferer, {hash:{},inverse:self.noop,fn:self.program(20, program20, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
+  stack2 = helpers['if'].call(depth0, depth0.transferer, {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n        ";
-  stack1 = helpers.each.call(depth0, depth0.source, {hash:{},inverse:self.noop,fn:self.program(22, program22, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
+  stack2 = helpers['if'].call(depth0, depth0.source, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n        ";
-  stack1 = helpers.each.call(depth0, depth0.lineage, {hash:{},inverse:self.noop,fn:self.program(24, program24, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
+  stack2 = helpers['if'].call(depth0, depth0.lineage, {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n        ";
-  stack1 = helpers['if'].call(depth0, depth0.avg, {hash:{},inverse:self.noop,fn:self.program(26, program26, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
+  stack2 = helpers['if'].call(depth0, depth0.avg, {hash:{},inverse:self.noop,fn:self.program(15, program15, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n      </a>\n    </li>\n  ";
   return buffer;
   }
-function program18(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n          ";
-  stack1 = helpers['if'].call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        ";
-  return buffer;
-  }
-
-function program20(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n          ";
-  stack1 = helpers['if'].call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        ";
-  return buffer;
-  }
-
-function program22(depth0,data) {
-  
-  var buffer = "";
-  buffer += "\n          <p>"
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + "</p>\n        ";
-  return buffer;
-  }
-
-function program24(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n          ";
-  stack1 = helpers['if'].call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        ";
-  return buffer;
-  }
-
-function program26(depth0,data) {
+function program15(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n          <p>Rating: ";
@@ -611,15 +549,15 @@ function program26(depth0,data) {
   return buffer;
   }
 
-function program28(depth0,data) {
+function program17(depth0,data) {
   
   
   return "\n    <li class=source>This is where the show starts, bub.</li>\n  ";
   }
 
-function program30(depth0,data) {
+function program19(depth0,data,depth1) {
   
-  var buffer = "", stack1, options;
+  var buffer = "", stack1, stack2, options;
   buffer += "\n    <li data-id=";
   if (stack1 = helpers._id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0._id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
@@ -628,77 +566,62 @@ function program30(depth0,data) {
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">\n      <a class=song href=\"/";
-  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
+    + "\">\n      <a class=song href=\"/"
+    + escapeExpression(((stack1 = depth1.band),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/"
+    + escapeExpression(((stack1 = depth1.year),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/"
+    + escapeExpression(((stack1 = depth1.month),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/"
+    + escapeExpression(((stack1 = depth1.day),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
+  stack2 = helpers['if'].call(depth0, depth1.showVersion, {hash:{},inverse:self.noop,fn:self.program(20, program20, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += escapeExpression(((stack1 = depth1.showVersion),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/";
+  if (stack2 = helpers.slug) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.slug; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\">";
+  if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + " <span class=time>";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.len),stack1 ? stack1.call(depth0, depth0, options) : helperMissing.call(depth0, "len", depth0, options)))
+    + "</span></a>\n      <div class=play>ᐅ</div>\n      <div title=\"Add To Queue\" class=add>+</div>\n    </li>\n  ";
+  return buffer;
+  }
+function program20(depth0,data) {
+  
+  
+  return "-";
+  }
+
+  buffer += "<div class=ul-header>";
   if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "/";
   if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1);
-  stack1 = helpers['if'].call(depth0, depth0.showVersion, {hash:{},inverse:self.noop,fn:self.program(31, program31, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "/";
-  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1);
-  stack1 = helpers['if'].call(depth0, depth0.version, {hash:{},inverse:self.noop,fn:self.program(33, program33, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + " <span class=time>";
-  options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.toHHMMSS),stack1 ? stack1.call(depth0, depth0.duration, options) : helperMissing.call(depth0, "toHHMMSS", depth0.duration, options)))
-    + "</span></a>\n      <div class=play>ᐅ</div>\n      <div title=\"Add To Queue\" class=add>+</div>\n    </li>\n  ";
-  return buffer;
-  }
-function program31(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "-";
-  if (stack1 = helpers.showVersion) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.showVersion; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1);
-  return buffer;
-  }
-
-function program33(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "/";
-  if (stack1 = helpers.version) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.version; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1);
-  return buffer;
-  }
-
-  buffer += "<div class=ul-header>"
-    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.month)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "/"
-    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.day)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</div>\n<ul>\n  ";
-  stack2 = helpers['with'].call(depth0, depth0.songs, {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
+  stack1 = helpers['with'].call(depth0, depth0.songs, {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
-  stack2 = helpers['if'].call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.program(15, program15, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
+  stack1 = helpers['if'].call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.program(12, program12, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
-  stack2 = helpers.each.call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.program(17, program17, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
+  stack1 = helpers.each.call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.programWithDepth(program14, data, depth0),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
-  stack2 = helpers['if'].call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.program(28, program28, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
+  stack1 = helpers['if'].call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.program(17, program17, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.program(30, program30, data),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.tracks), {hash:{},inverse:self.noop,fn:self.programWithDepth(program19, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n  <li><a class=archive href=\"https://archive.org/details/"
-    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.archive_identifier)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\" target=_blank>View on Archive.org</a></li>\n  <li><a class=add-all href=\"javascript:\">Add All To Queue</a></li>\n</ul>\n";
   return buffer;
   });
@@ -823,6 +746,10 @@ timeToMS = function(time) {
 
 Handlebars.registerHelper("toHHMMSS", function() {
   return new Handlebars.SafeString(toHHMMSS(this.duration));
+});
+
+Handlebars.registerHelper("len", function() {
+  return new Handlebars.SafeString(toHHMMSS(this.length));
 });
 
 Handlebars.registerHelper("length", function(arr) {
@@ -959,7 +886,9 @@ App.Router = (function(_super) {
   Router.prototype.year = function(band, year) {
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
-      App.years = new App.Views.Years();
+      App.years = new App.Views.Years({
+        band: band
+      });
     }
     App.shows = new App.Views.Shows({
       band: band,
@@ -981,14 +910,18 @@ App.Router = (function(_super) {
     }
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
-      App.years = new App.Views.Years();
+      App.years = new App.Views.Years({
+        band: band
+      });
     }
     if (!(App.shows && App.shows.shows && App.shows.shows.get('year') === +this.year)) {
       App.shows = new App.Views.Shows({
+        band: this.band,
         year: this.year
       });
     }
     App.songs = new App.Views.Songs({
+      band: this.band,
       year: this.year,
       month: this.month,
       day: this.day
@@ -1007,14 +940,18 @@ App.Router = (function(_super) {
     }
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
-      App.years = new App.Views.Years();
+      App.years = new App.Views.Years({
+        band: band
+      });
     }
     if (!(App.shows && App.shows.shows && App.shows.shows.get('year') === +this.year)) {
       App.shows = new App.Views.Shows({
+        band: this.band,
         year: this.year
       });
     }
     App.songs = new App.Views.Songs({
+      band: this.band,
       year: this.year,
       month: this.month,
       day: this.day,
@@ -1600,13 +1537,17 @@ App.Models.Songs = (function(_super) {
   }
 
   Songs.prototype.url = function() {
-    var day, month, versionStr, year;
+    var band, day, month, year;
 
+    band = this.get('band');
     year = this.get('year');
-    month = this.get('month');
-    day = this.get('day');
-    versionStr = this.get('version') ? '-' + this.get('version') : '';
-    return "/api/v1/" + year + "/" + month + "/" + day + versionStr;
+    month = addZero(this.get('month'));
+    day = addZero(this.get('day'));
+    return "http://marcoallday.com/api/artists/" + band + "/years/" + year + "/shows/" + year + "-" + month + "-" + day;
+  };
+
+  Songs.prototype.parse = function(response) {
+    return response;
   };
 
   return Songs;
@@ -2713,7 +2654,8 @@ App.Views.Shows = (function(_super) {
     console.log(this.shows.toJSON());
     App.router.clearActive();
     this.$el.html(this.template({
-      data: this.shows ? this.shows.toJSON() : shows
+      data: this.shows ? this.shows.toJSON() : shows,
+      band: this.options.band
     }));
     this.$a = this.$el.find('a');
     this.$a.removeClass('active');
@@ -2759,6 +2701,7 @@ App.Views.Songs = (function(_super) {
       return this.render();
     }
     this.folder = new App.Models.Songs({
+      band: this.options.band,
       year: this.options.year,
       month: this.options.month,
       day: this.options.day,
@@ -2771,19 +2714,29 @@ App.Views.Songs = (function(_super) {
   Songs.prototype.render = function() {
     var sources;
 
+    console.log(this.folder.toJSON());
     App.router.clearActive();
     if (this.folder) {
-      this.songs = this.folder.get('show');
+      sources = this.folder.get('data');
     }
-    if (this.folder && this.songs) {
-      sources = this.folder.get('_shows');
+    if (!(sources != null ? sources.length : void 0)) {
+      return;
     }
-    if (this.folder && !this.songs) {
-      this.songs = this.folder.toJSON();
+    console.log(this.options.showVersion);
+    if (this.options.showVersion) {
+      this.songs = sources[this.options.showVersion];
+    } else {
+      this.songs = sources[0];
     }
+    console.log(this.songs);
     this.$el.html(this.template({
       songs: this.songs,
-      sources: sources || []
+      sources: sources || [],
+      year: this.options.year,
+      month: this.options.month,
+      day: this.options.day,
+      band: this.options.band,
+      showVersion: this.options.showVersion || ''
     }));
     this.$sources = this.$el.find('.source');
     return this;

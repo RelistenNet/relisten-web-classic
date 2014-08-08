@@ -63,6 +63,9 @@ timeToMS = (time) ->
 Handlebars.registerHelper "toHHMMSS", ->
   new Handlebars.SafeString toHHMMSS(@duration)
 
+Handlebars.registerHelper "len", ->
+  new Handlebars.SafeString toHHMMSS(@length)
+
 Handlebars.registerHelper "length", (arr) ->
   return 0 unless arr
   new Handlebars.SafeString arr.length

@@ -1,20 +1,12 @@
-<div class=ul-header>{{songs.month}}/{{songs.day}}</div>
+<div class=ul-header>{{month}}/{{day}}</div>
 <ul>
   {{#with songs}}
     <li class="current-source show-sources">
       <h5>Current Source <span>(click here to select another source)</span></h5>
-      {{#each taper}}
-        {{#if this}}<p class=taper>Taper: {{this}}</p>{{/if}}
-      {{/each}}
-      {{#each transferer}}
-        {{#if this}}<p>Transferer: {{this}}</p>{{/if}}
-      {{/each}}
-      {{#each source}}
-        <p>{{this}}</p>
-      {{/each}}
-      {{#each lineage}}
-        {{#if this}}<p>Lineage: {{this}}</p>{{/if}}
-      {{/each}}
+      {{#if taper}}<p class=taper>Taper: {{taper}}</p>{{/if}}
+      {{#if transferer}}<p>Transferer: {{transferer}}</p>{{/if}}
+      {{#if source}}<p>{{source}}</p>{{/if}}
+      {{#if lineage}}<p>Lineage: {{lineage}}</p>{{/if}}
       {{#if avg}}
         <p>Rating: {{avg}} / {{total_reviews}} reviews</p>
       {{/if}}
@@ -26,19 +18,11 @@
   {{/if}}
   {{#each sources}}
     <li class=source>
-      <a href=/{{year}}/{{month}}/{{day}}-{{version}}>
-        {{#each taper}}
-          {{#if this}}<p class=taper>Taper: {{this}}</p>{{/if}}
-        {{/each}}
-        {{#each transferer}}
-          {{#if this}}<p>Transferer: {{this}}</p>{{/if}}
-        {{/each}}
-        {{#each source}}
-          <p>{{this}}</p>
-        {{/each}}
-        {{#each lineage}}
-          {{#if this}}<p>Lineage: {{this}}</p>{{/if}}
-        {{/each}}
+      <a href=/{{../band}}/{{../year}}/{{../month}}/{{../day}}-{{@index}}>
+        {{#if taper}}<p class=taper>Taper: {{taper}}</p>{{/if}}
+        {{#if transferer}}<p>Transferer: {{transferer}}</p>{{/if}}
+        {{#if source}}<p>{{source}}</p>{{/if}}
+        {{#if lineage}}<p>Lineage: {{lineage}}</p>{{/if}}
         {{#if avg}}
           <p>Rating: {{avg}} / {{total_reviews}} reviews</p>
         {{/if}}
@@ -48,13 +32,13 @@
   {{#if sources}}
     <li class=source>This is where the show starts, bub.</li>
   {{/if}}
-  {{#each songs._songs}}
+  {{#each songs.tracks}}
     <li data-id={{_id}} data-song="{{title}}">
-      <a class=song href="/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{showVersion}}{{/if}}/{{slug}}{{#if version}}/{{version}}{{/if}}">{{title}} <span class=time>{{toHHMMSS duration}}</span></a>
+      <a class=song href="/{{../band}}/{{../year}}/{{../month}}/{{../day}}{{#if ../showVersion}}-{{/if}}{{../showVersion}}/{{slug}}">{{title}} <span class=time>{{len this}}</span></a>
       <div class=play>ᐅ</div>
       <div title="Add To Queue" class=add>+</div>
     </li>
   {{/each}}
-  <li><a class=archive href="https://archive.org/details/{{songs.id}}" target=_blank>View on Archive.org</a></li>
+  <li><a class=archive href="https://archive.org/details/{{songs.archive_identifier}}" target=_blank>View on Archive.org</a></li>
   <li><a class=add-all href="javascript:">Add All To Queue</a></li>
 </ul>

@@ -36,7 +36,7 @@ class App.Router extends Backbone.Router
   year: (band, year) ->
     if App.initial
       @changeView(new App.Views.HomePage())
-      App.years = new App.Views.Years()
+      App.years = new App.Views.Years { band }
     App.shows = new App.Views.Shows { band, year }
     App.songs.$el.empty() if App.songs
     document.title = "#{year} | Listen to the Grateful Dead"
@@ -44,17 +44,17 @@ class App.Router extends Backbone.Router
     App.songs.undelegateEvents() if App.songs
     if App.initial
       @changeView(new App.Views.HomePage())
-      App.years = new App.Views.Years()
-    App.shows = new App.Views.Shows { @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
-    App.songs = new App.Views.Songs { @year, @month, @day }
+      App.years = new App.Views.Years { band }
+    App.shows = new App.Views.Shows { @band, @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
+    App.songs = new App.Views.Songs { @band, @year, @month, @day }
     document.title = "#{@year}/#{@month}/#{@day} | Listen to the Grateful Dead"
   show: (@band, @year, @month, @day, @showVersion) ->
     App.songs.undelegateEvents() if App.songs
     if App.initial
       @changeView(new App.Views.HomePage())
-      App.years = new App.Views.Years()
-    App.shows = new App.Views.Shows { @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
-    App.songs = new App.Views.Songs { @year, @month, @day, @showVersion }
+      App.years = new App.Views.Years { band }
+    App.shows = new App.Views.Shows { @band, @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
+    App.songs = new App.Views.Songs { @band, @year, @month, @day, @showVersion }
     document.title = "#{@year}/#{@month}/#{@day} | Listen to the Grateful Dead"
   song: (@band, @year, @month, @day, @showVersion, @slug, @version, @time) ->
     if App.initial
