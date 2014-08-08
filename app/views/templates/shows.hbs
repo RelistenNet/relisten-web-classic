@@ -1,10 +1,10 @@
-<div class=ul-header>{{shows.year}}</div>
+<div class=ul-header>{{data.year}}</div>
 <ul>
-{{#each shows._days}}
+{{#each data.shows}}
   <li>
     <a href="/{{year}}/{{month}}/{{day}}">
       <span class=date>{{month}}/{{addZero day}}</span>
-      <span class=venue>{{venue}}</span>
+      <span class=venue>{{venue_name}}</span>
     </a>
   </li>
 {{/each}}

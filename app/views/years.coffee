@@ -4,13 +4,12 @@ class App.Views.Years extends App.Views.View
   events:
     'click a': 'activate'
   initialize: ->
-    @options.band = 'dead' unless @options.band
+    @options.band = 'gd' unless @options.band
 
     @years = new App.Models.Years band: @options.band
     @listenTo @years, 'change', @render
     @years.fetch()
   render: ->
-    console.log @years.get 'data'
     App.router.clearActive()
     @$el.html @template
       years: @years.get 'data'

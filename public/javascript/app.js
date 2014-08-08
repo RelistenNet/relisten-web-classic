@@ -391,17 +391,17 @@ function program1(depth0,data) {
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.addZero),stack1 ? stack1.call(depth0, depth0.day, options) : helperMissing.call(depth0, "addZero", depth0.day, options)))
     + "</span>\n      <span class=venue>";
-  if (stack2 = helpers.venue) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.venue; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  if (stack2 = helpers.venue_name) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.venue_name; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
     + "</span>\n    </a>\n  </li>\n";
   return buffer;
   }
 
   buffer += "<div class=ul-header>"
-    + escapeExpression(((stack1 = ((stack1 = depth0.shows),stack1 == null || stack1 === false ? stack1 : stack1.year)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + escapeExpression(((stack1 = ((stack1 = depth0.data),stack1 == null || stack1 === false ? stack1 : stack1.year)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</div>\n<ul>\n";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.shows),stack1 == null || stack1 === false ? stack1 : stack1._days), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.data),stack1 == null || stack1 === false ? stack1 : stack1.shows), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</ul>\n";
   return buffer;
@@ -962,6 +962,7 @@ App.Router = (function(_super) {
       App.years = new App.Views.Years();
     }
     App.shows = new App.Views.Shows({
+      band: band,
       year: year
     });
     if (App.songs) {
@@ -1526,10 +1527,24 @@ App.Models.Shows = (function(_super) {
   }
 
   Shows.prototype.url = function() {
-    var year;
+    var band, year;
 
     year = this.get('year');
-    return "/api/v1/" + year;
+    band = this.get('band');
+    return "http://marcoallday.com/api/artists/" + band + "/years/" + year;
+  };
+
+  Shows.prototype.parse = function(response) {
+    response.data.shows.map(function(show) {
+      var day, month, year, _ref1;
+
+      _ref1 = show.display_date.split('-'), year = _ref1[0], month = _ref1[1], day = _ref1[2];
+      show.year = +year;
+      show.month = +month;
+      show.day = +day;
+      return show;
+    });
+    return response.data;
   };
 
   return Shows;
@@ -2679,11 +2694,15 @@ App.Views.Shows = (function(_super) {
   };
 
   Shows.prototype.initialize = function() {
+    if (!this.options.band) {
+      this.options.band = 'gd';
+    }
     if (!this.options.year) {
-      this.shows = new App.Models.Shows(shows);
+      this.shows = new App.Models.Shows(this.options.band, shows);
       return this.render();
     }
     this.shows = new App.Models.Shows({
+      band: this.options.band,
       year: this.options.year
     });
     this.listenTo(this.shows, 'change', this.render);
@@ -2691,9 +2710,10 @@ App.Views.Shows = (function(_super) {
   };
 
   Shows.prototype.render = function() {
+    console.log(this.shows.toJSON());
     App.router.clearActive();
     this.$el.html(this.template({
-      shows: this.shows ? this.shows.toJSON() : shows
+      data: this.shows ? this.shows.toJSON() : shows
     }));
     this.$a = this.$el.find('a');
     this.$a.removeClass('active');
@@ -2852,7 +2872,7 @@ App.Views.Years = (function(_super) {
 
   Years.prototype.initialize = function() {
     if (!this.options.band) {
-      this.options.band = 'dead';
+      this.options.band = 'gd';
     }
     this.years = new App.Models.Years({
       band: this.options.band
@@ -2862,7 +2882,6 @@ App.Views.Years = (function(_super) {
   };
 
   Years.prototype.render = function() {
-    console.log(this.years.get('data'));
     App.router.clearActive();
     this.$el.html(this.template({
       years: this.years.get('data'),

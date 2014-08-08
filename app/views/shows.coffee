@@ -4,17 +4,20 @@ class App.Views.Shows extends App.Views.View
   events:
     'click a': 'activate'
   initialize: ->
+    @options.band = 'gd' unless @options.band
+
     unless @options.year
-      @shows = new App.Models.Shows shows
+      @shows = new App.Models.Shows @options.band,shows
       return @render()
 
-    @shows = new App.Models.Shows year: @options.year
+    @shows = new App.Models.Shows band: @options.band, year: @options.year
     @listenTo @shows, 'change', @render
     @shows.fetch()
   render: ->
+    console.log @shows.toJSON()
     App.router.clearActive()
     @$el.html @template
-      shows: if @shows then @shows.toJSON() else shows
+      data: if @shows then @shows.toJSON() else shows
 
     @$a = @$el.find('a')
     @$a.removeClass 'active'

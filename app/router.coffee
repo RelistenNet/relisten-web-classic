@@ -29,7 +29,7 @@ class App.Router extends Backbone.Router
     document.title = 'Listen to the Grateful Dead'
   band: (band) ->
     @changeView(new App.Views.HomePage())
-    App.years = new App.Views.Years { band: band }
+    App.years = new App.Views.Years { band }
     App.shows = new App.Views.Shows()
     App.songs = new App.Views.Songs()
     document.title = 'Listen to the Grateful Dead'
@@ -37,7 +37,7 @@ class App.Router extends Backbone.Router
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years()
-    App.shows = new App.Views.Shows { year }
+    App.shows = new App.Views.Shows { band, year }
     App.songs.$el.empty() if App.songs
     document.title = "#{year} | Listen to the Grateful Dead"
   day: (@band, @year, @month, @day) ->
