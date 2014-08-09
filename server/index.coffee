@@ -6,7 +6,7 @@ mongoose = require 'mongoose'
 nconf = require 'nconf'
 Mongo_Store = require('connect-mongo')(express)
 csrf = express.csrf()
-PORT = process.env.PORT || 3000
+PORT = process.env.PORT || 3001
 TODAY = new Date()
 ONE_YEAR = TODAY.setFullYear(TODAY.getFullYear()+1)
 
