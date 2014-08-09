@@ -1,21 +1,9 @@
 <ul class="left">
-  <li class="home-container"><a class="home" href="/">ListenToTheDead<span>.com</span></a></li>
-  <li class="band-selector">
-    <span>V</span>
-    <ul class="bands">
-      <li><a href="/gd">Grateful Dead</a></li>
-      <li><a href="/um">Umphrey's McGee</a></li>
-    </ul>
-  </li>
+  <li class="home-container"><a class="home" href="/{{#if gd}}gd{{else}}um{{/if}}">{{#if gd}}ListenToTheDead{{else}}ListenToUM{{/if}}<span>.com</span></a></li>
 </ul>
 
 <ul class="right">
-  {{#if loggedIn}}
-    <li><a class="header-link" href="/logout">LOGOUT</a></li>
-  {{else}}
-    <li><a class="login header-link" href="/login">LOGIN</a></li>
-    <li><a class="register header-link" href="/register">REGISTER</a></li>
-  {{/if}}
-    <li><a class="playlists header-link" href="/playlists">PLAYLISTS</a></li>
     <li><a class="about header-link" href="/about">ABOUT</a></li>
+    <li><a href="/um">UM</a></li>
+    <li><a href="/gd">GD</a></li>
 </ul>

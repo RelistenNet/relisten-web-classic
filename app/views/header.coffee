@@ -9,6 +9,4 @@ class App.Views.Header extends App.Views.View
   render: (playlist) =>
     @$el.html @template
       loggedIn: App.user.loggedIn()
-      playlistId: playlist.get '_id' if playlist
-  chooseBand: ->
-    0
+      gd: if /gd/.test(window.location.href) then true else false

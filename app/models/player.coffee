@@ -48,11 +48,11 @@ class App.Models.Player extends App.Models.Model
           self.play() if @readyState is 2 and self.times++ < 5
 
   updateText: ->
-    if @get 'id'
+    if title = App.song?.get 'title'
       App.playerView.updateText
-        title: App.song.get 'title'
-        album: App.song.get 'album'
-        duration: App.song.get 'duration'
+        title: title
+        album: App.songs.songs.title
+        length: App.song.get 'length'
 
   slideDown: ->
     $footer = $('footer')

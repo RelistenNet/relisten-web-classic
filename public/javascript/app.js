@@ -26,19 +26,34 @@ helpers = helpers || Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   
-  return "\n    <li><a class=\"header-link\" href=\"/logout\">LOGOUT</a></li>\n  ";
+  return "gd";
   }
 
 function program3(depth0,data) {
   
   
-  return "\n    <li><a class=\"login header-link\" href=\"/login\">LOGIN</a></li>\n    <li><a class=\"register header-link\" href=\"/register\">REGISTER</a></li>\n  ";
+  return "um";
   }
 
-  buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\">ListenToTheDead<span>.com</span></a></li>\n  <li class=\"band-selector\">\n    <span>V</span>\n    <ul class=\"bands\">\n      <li><a href=\"/gd\">Grateful Dead</a></li>\n      <li><a href=\"/um\">Umphrey's McGee</a></li>\n    </ul>\n  </li>\n</ul>\n\n<ul class=\"right\">\n  ";
-  stack1 = helpers['if'].call(depth0, depth0.loggedIn, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+function program5(depth0,data) {
+  
+  
+  return "ListenToTheDead";
+  }
+
+function program7(depth0,data) {
+  
+  
+  return "ListenToUM";
+  }
+
+  buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/";
+  stack1 = helpers['if'].call(depth0, depth0.gd, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <li><a class=\"playlists header-link\" href=\"/playlists\">PLAYLISTS</a></li>\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n</ul>\n";
+  buffer += "\">";
+  stack1 = helpers['if'].call(depth0, depth0.gd, {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "<span>.com</span></a></li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a href=\"/um\">UM</a></li>\n    <li><a href=\"/gd\">GD</a></li>\n</ul>\n";
   return buffer;
   });
 
@@ -889,8 +904,6 @@ App.Router = (function(_super) {
   Router.prototype.index = function() {
     this.changeView(new App.Views.HomePage());
     App.years = new App.Views.Years();
-    App.shows = new App.Views.Shows();
-    App.songs = new App.Views.Songs();
     return document.title = 'Listen to the Grateful Dead';
   };
 
@@ -899,8 +912,7 @@ App.Router = (function(_super) {
     App.years = new App.Views.Years({
       band: band
     });
-    App.shows = new App.Views.Shows();
-    App.songs = new App.Views.Songs();
+    App.header.render();
     return document.title = 'Listen to the Grateful Dead';
   };
 
@@ -918,6 +930,7 @@ App.Router = (function(_super) {
     if (App.songs) {
       App.songs.$el.empty();
     }
+    App.header.render();
     return document.title = "" + year + " | Listen to the Grateful Dead";
   };
 
@@ -947,6 +960,7 @@ App.Router = (function(_super) {
       month: this.month,
       day: this.day
     });
+    App.header.render();
     return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | Listen to the Grateful Dead";
   };
 
@@ -978,6 +992,7 @@ App.Router = (function(_super) {
       day: this.day,
       showVersion: this.showVersion
     });
+    App.header.render();
     return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | Listen to the Grateful Dead";
   };
 
@@ -1004,9 +1019,10 @@ App.Router = (function(_super) {
         day: this.day,
         showVersion: this.showVersion
       });
+      App.header.render();
       return App.songs.listenToOnce(App.songs.folder, 'change', this.finishSong);
     }
-    if (!(App.shows && App.shows.shows && App.shows.shows.get('year') === +this.year)) {
+    if (!(App.shows && App.shows.shows && App.shows.shows.year === +this.year)) {
       App.shows = new App.Views.Shows({
         year: this.year
       });
@@ -1424,11 +1440,13 @@ App.Models.Player = (function(_super) {
   };
 
   Player.prototype.updateText = function() {
-    if (this.get('id')) {
+    var title, _ref1;
+
+    if (title = (_ref1 = App.song) != null ? _ref1.get('title') : void 0) {
       return App.playerView.updateText({
-        title: App.song.get('title'),
-        album: App.song.get('album'),
-        duration: App.song.get('duration')
+        title: title,
+        album: App.songs.songs.title,
+        length: App.song.get('length')
       });
     }
   };
@@ -1970,7 +1988,7 @@ App.Views.Footer = (function(_super) {
       App.player.sound.destruct();
       return App.player.play(this._clickToMs(pageX));
     }
-    return App.player.sound.setPosition(coord * App.song.get('duration') * 1000);
+    return App.player.sound.setPosition(coord * App.song.get('length') * 1000);
   };
 
   Footer.prototype.pause = function() {
@@ -2001,7 +2019,7 @@ App.Views.Footer = (function(_super) {
     var coord;
 
     coord = pageX / this.$window.width();
-    return coord * App.song.get('duration') * 1000;
+    return coord * App.song.get('length') * 1000;
   };
 
   return Footer;
@@ -2038,12 +2056,8 @@ App.Views.Header = (function(_super) {
   Header.prototype.render = function(playlist) {
     return this.$el.html(this.template({
       loggedIn: App.user.loggedIn(),
-      playlistId: playlist ? playlist.get('_id') : void 0
+      gd: /gd/.test(window.location.href) ? true : false
     }));
-  };
-
-  Header.prototype.chooseBand = function() {
-    return 0;
   };
 
   return Header;
@@ -2275,18 +2289,12 @@ App.Views.Player = (function(_super) {
   };
 
   Player.prototype.updateText = function(obj) {
-    var album, duration, title;
+    var album, length, title;
 
-    title = obj.title, album = obj.album, duration = obj.duration;
-    if (title) {
-      this.$el.find('h3').html(title);
-    }
-    if (album) {
-      this.$el.find('h4').html(album);
-    }
-    if (duration) {
-      return this.$el.find('.total').html(toHHMMSS(duration));
-    }
+    title = obj.title, album = obj.album, length = obj.length;
+    this.$el.find('h3').html(title || '');
+    this.$el.find('h4').html(album || '');
+    return this.$el.find('.total').html(length ? toHHMMSS(length) : "0:00");
   };
 
   Player.prototype.volume = function(e) {
@@ -2690,7 +2698,6 @@ App.Views.Shows = (function(_super) {
   };
 
   Shows.prototype.render = function() {
-    console.log(this.shows.toJSON());
     App.router.clearActive();
     this.$el.html(this.template({
       data: this.shows ? this.shows.toJSON() : shows,
@@ -2753,7 +2760,6 @@ App.Views.Songs = (function(_super) {
   Songs.prototype.render = function() {
     var sources;
 
-    console.log(this.folder.toJSON());
     App.router.clearActive();
     if (this.folder) {
       sources = this.folder.get('data');
@@ -2761,13 +2767,11 @@ App.Views.Songs = (function(_super) {
     if (!(sources != null ? sources.length : void 0)) {
       return;
     }
-    console.log(this.options.showVersion);
     if (this.options.showVersion) {
       this.songs = sources[this.options.showVersion];
     } else {
       this.songs = sources[0];
     }
-    console.log(this.songs);
     this.$el.html(this.template({
       songs: this.songs,
       sources: sources || [],

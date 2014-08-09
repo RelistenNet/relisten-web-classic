@@ -21,10 +21,10 @@ class App.Views.Player extends App.Views.View
     @$volumeContainer = @$el.find '.volume-container'
     @$volume = @$volumeContainer.find '.volume'
   updateText: (obj) ->
-    { title, album, duration } = obj
-    @$el.find('h3').html title if title
-    @$el.find('h4').html album if album
-    @$el.find('.total').html toHHMMSS duration if duration
+    { title, album, length } = obj
+    @$el.find('h3').html title || ''
+    @$el.find('h4').html album || ''
+    @$el.find('.total').html if length then toHHMMSS length else "0:00"
   volume: (e) =>
     @setVolume e.pageY
     @dragging = true

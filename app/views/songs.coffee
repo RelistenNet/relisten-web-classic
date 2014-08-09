@@ -22,18 +22,14 @@ class App.Views.Songs extends App.Views.View
     @listenTo @folder, 'change', @render
     @folder.fetch()
   render: ->
-    console.log @folder.toJSON()
     App.router.clearActive()
     sources = @folder.get('data') if @folder
     return unless sources?.length
 
-    console.log @options.showVersion
     if @options.showVersion
       @songs = sources[@options.showVersion]
     else
       @songs = sources[0]
-
-    console.log @songs
 
     @$el.html @template
       songs: @songs

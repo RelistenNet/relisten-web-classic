@@ -14,7 +14,6 @@ class App.Views.Shows extends App.Views.View
     @listenTo @shows, 'change', @render
     @shows.fetch()
   render: ->
-    console.log @shows.toJSON()
     App.router.clearActive()
     @$el.html @template
       data: if @shows then @shows.toJSON() else shows

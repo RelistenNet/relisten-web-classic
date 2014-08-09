@@ -50,7 +50,7 @@ class App.Views.Footer extends App.Views.View
     if App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord
       App.player.sound.destruct()
       return App.player.play @_clickToMs(pageX)
-    App.player.sound.setPosition coord * App.song.get('duration') * 1000
+    App.player.sound.setPosition coord * App.song.get('length') * 1000
 
   pause: ->
     soundManager.pause "phish" + App.player.get('id')
@@ -67,4 +67,4 @@ class App.Views.Footer extends App.Views.View
 
   _clickToMs: (pageX) ->
     coord = pageX / @$window.width()
-    coord * App.song.get('duration') * 1000
+    coord * App.song.get('length') * 1000
