@@ -22,10 +22,7 @@ class App.Router extends Backbone.Router
     @$container = $('#page-container')
     @bind 'all', @_trackPageview
   index: ->
-    @changeView(new App.Views.HomePage())
-    App.years = new App.Views.Years()
-    #App.shows = new App.Views.Shows()
-    #App.songs = new App.Views.Songs()
+    @navigate '/gd', trigger: true
     document.title = 'Listen to the Grateful Dead'
   band: (band) ->
     @changeView(new App.Views.HomePage())

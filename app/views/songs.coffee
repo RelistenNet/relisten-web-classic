@@ -50,8 +50,9 @@ class App.Views.Songs extends App.Views.View
     song.fetch success: -> App.queue.reset song
 
   addAll: ->
-    App.queue.reset @songs._songs if App.queue.length is 0
-    App.queue.add @songs._songs
+    console.log @songs.tracks
+    App.queue.reset @songs.tracks if App.queue.length is 0
+    App.queue.add @songs.tracks
   addShowToPlaylist: (e) ->
     $li = $(e.target).parent()
     id = $li.attr('data-id')

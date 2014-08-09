@@ -902,8 +902,9 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.index = function() {
-    this.changeView(new App.Views.HomePage());
-    App.years = new App.Views.Years();
+    this.navigate('/gd', {
+      trigger: true
+    });
     return document.title = 'Listen to the Grateful Dead';
   };
 
@@ -2800,10 +2801,11 @@ App.Views.Songs = (function(_super) {
   };
 
   Songs.prototype.addAll = function() {
+    console.log(this.songs.tracks);
     if (App.queue.length === 0) {
-      App.queue.reset(this.songs._songs);
+      App.queue.reset(this.songs.tracks);
     }
-    return App.queue.add(this.songs._songs);
+    return App.queue.add(this.songs.tracks);
   };
 
   Songs.prototype.addShowToPlaylist = function(e) {
