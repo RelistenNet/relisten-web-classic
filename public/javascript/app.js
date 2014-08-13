@@ -1699,7 +1699,7 @@ App.Models.Shows = (function(_super) {
     var band, year;
     year = this.get('year');
     band = this.get('band');
-    return "http://localhost:9000/api/artists/" + band + "/years/" + year;
+    return "http://relisten.net:49170/api/artists/" + band + "/years/" + year;
   };
 
   Shows.prototype.parse = function(response) {
@@ -1772,7 +1772,7 @@ App.Models.Songs = (function(_super) {
     year = this.get('year');
     month = addZero(this.get('month'));
     day = addZero(this.get('day'));
-    return "http://localhost:9000/api/artists/" + band + "/years/" + year + "/shows/" + year + "-" + month + "-" + day;
+    return "http://relisten.net:49170/api/artists/" + band + "/years/" + year + "/shows/" + year + "-" + month + "-" + day;
   };
 
   Songs.prototype.parse = function(response) {
@@ -1828,7 +1828,7 @@ App.Models.Years = (function(_super) {
   Years.prototype.url = function() {
     var band;
     band = this.get('band');
-    return "http://localhost:9000/api/artists/" + band + "/years";
+    return "http://relisten.net:49170/api/artists/" + band + "/years";
   };
 
   return Years;
