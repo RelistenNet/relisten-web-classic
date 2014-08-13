@@ -5445,9 +5445,9 @@ body ul#notifications li div h3{line-height:1em}
 .clear{clear:both}
 
 header{height:50px;width:100%;border-bottom:1px solid #aaa;background:$backgroundColor;position:relative;z-index:99;}
-header ul{height:50px;width:60%;margin:0;}
+header ul{height:50px;margin:0;}
 header ul li{height:100%;list-style-type:none;margin:0;padding:0}
-header ul.left{position:absolute;left:0;max-width:70%;}
+header ul.left{position:absolute;left:0;width:80%;}
 header ul.left li{float:left;}
 header ul.left li a:hover{text-decoration:none}
 header ul.left li.home-container{font-family:'Lato';font-style:italic;font-weight:700;font-size:1.2em;}
@@ -5460,7 +5460,7 @@ header ul.left li.band-selector span{font-size:3em}
 header ul.left li.band-selector .bands{display:none;width:300px;min-height:200px;font-size:1.8em;background:#eee;border:1px solid #333;}
 header ul.left li.band-selector .bands li{padding:10px 10px;width:100%;height:30px}
 header ul.left li.band-selector:hover .bands{display:block}
-header ul.right{position:absolute;right:0;}
+header ul.right{position:absolute;right:0;width:20%;}
 header ul.right li{float:right;height:100%;text-align:center;border-left:1px solid #ddd;}
 header ul.right li:hover,header ul.right li.active{border-left:1px solid #008ab0}
 header ul.right li input{height:100%;min-width:200px;width:100%;display:block;background:#f6f6f6;font-size:2em;font-family:"HelveticaNeue-CondensedBold",Helvetica,Arial,sans-serif;}
