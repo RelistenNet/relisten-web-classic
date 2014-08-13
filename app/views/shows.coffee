@@ -24,5 +24,6 @@ class App.Views.Shows extends App.Views.View
 
     @
   activate: (e) =>
+    @$a = @$el.find('a') unless @$a
     @$a.removeClass 'active'
     $(e.target).addClass 'active'

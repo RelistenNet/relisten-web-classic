@@ -2866,6 +2866,9 @@ App.Views.Shows = (function(_super) {
   };
 
   Shows.prototype.activate = function(e) {
+    if (!this.$a) {
+      this.$a = this.$el.find('a');
+    }
     this.$a.removeClass('active');
     return $(e.target).addClass('active');
   };
