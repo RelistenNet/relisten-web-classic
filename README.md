@@ -1,2 +1,2 @@
 # Ghost
-Funk.
+Funk. part ii
