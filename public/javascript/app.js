@@ -783,7 +783,7 @@ window.App = {
     },
     "bela-fleck": {
       "name": "Bela Fleck and the Flecktones",
-      "the": true
+      "the": false
     },
     "aqueous": {
       "name": "Aqueous",
