@@ -5451,10 +5451,11 @@ header ul.left{position:absolute;left:0;width:80%;}
 header ul.left li{float:left;}
 header ul.left li a:hover{text-decoration:none}
 header ul.left li.home-container{font-family:'Lato';font-style:italic;font-weight:700;font-size:1.2em;}
-header ul.left li.home-container a.home,header ul.left li.home-container a.band{font-size:2em;line-height:1.5em;height:50px;color:#008ab0;display:inline-block;padding:0 10px 0 10px;}
+header ul.left li.home-container a.home,header ul.left li.home-container a.band{font-size:2em;line-height:1.5em;height:50px;color:#008ab0;float:left;padding:0 5px 0 5px;}
 header ul.left li.home-container a.home:hover,header ul.left li.home-container a.band:hover{color:#f6f6f6;background:#008ab0}
 header ul.left li.home-container a.home span,header ul.left li.home-container a.band span{font-size:.7em}
-header ul.left li.home-container a.home.band,header ul.left li.home-container a.band.band{padding:0 10px 0 3px}
+header ul.left li.home-container a.band{padding:0 5px 0 5px}
+header ul.left li.home-container span{font-size:1.5em;line-height:57px;height:50px;color:#008ab0;float:left;padding:0 0 0 0}
 header ul.left li.band-selector{width:50px;}
 header ul.left li.band-selector span{font-size:3em}
 header ul.left li.band-selector .bands{display:none;width:300px;min-height:200px;font-size:1.8em;background:#eee;border:1px solid #333;}

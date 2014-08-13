@@ -25,39 +25,30 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
-  
-  return "style=\"padding: 0 3px 0 10px;\"";
-  }
-
-function program3(depth0,data) {
-  
   var buffer = "", stack1;
-  buffer += "<a class=\"band\" href=\"/";
+  buffer += "\n      <a class=\"band\" href=\"/";
   if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">";
-  stack1 = helpers['if'].call(depth0, depth0.the, {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+    + "\">\n        ";
+  stack1 = helpers['if'].call(depth0, depth0.the, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   if (stack1 = helpers.bandName) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.bandName; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "<span></span></a>";
+    + "\n      </a>\n    ";
   return buffer;
   }
-function program4(depth0,data) {
+function program2(depth0,data) {
   
   
   return "the ";
   }
 
-  buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\" ";
+  buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to </span>\n    ";
   stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += ">Relisten to</a>";
-  stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n</ul>\n";
+  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n</ul>\n";
   return buffer;
   });
 
@@ -1699,7 +1690,7 @@ App.Models.Shows = (function(_super) {
     var band, year;
     year = this.get('year');
     band = this.get('band');
-    return "http://relisten.net:49170/api/artists/" + band + "/years/" + year;
+    return "http://data.relisten.net/api/artists/" + band + "/years/" + year;
   };
 
   Shows.prototype.parse = function(response) {
@@ -1772,7 +1763,7 @@ App.Models.Songs = (function(_super) {
     year = this.get('year');
     month = addZero(this.get('month'));
     day = addZero(this.get('day'));
-    return "http://relisten.net:49170/api/artists/" + band + "/years/" + year + "/shows/" + year + "-" + month + "-" + day;
+    return "http://data.relisten.net/api/artists/" + band + "/years/" + year + "/shows/" + year + "-" + month + "-" + day;
   };
 
   Songs.prototype.parse = function(response) {
@@ -1828,7 +1819,7 @@ App.Models.Years = (function(_super) {
   Years.prototype.url = function() {
     var band;
     band = this.get('band');
-    return "http://relisten.net:49170/api/artists/" + band + "/years";
+    return "http://data.relisten.net/api/artists/" + band + "/years";
   };
 
   return Years;

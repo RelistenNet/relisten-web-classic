@@ -3,7 +3,7 @@ http = require 'http'
 path = require 'path'
 fs = require 'fs'
 nconf = require 'nconf'
-PORT = process.env.PORT || 3001
+PORT = process.env.PORT || 3000
 TODAY = new Date()
 ONE_YEAR = TODAY.setFullYear(TODAY.getFullYear()+1)
 

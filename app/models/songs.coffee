@@ -7,7 +7,7 @@ class App.Models.Songs extends App.Models.Model
     month = addZero @get 'month'
     day = addZero @get 'day'
 
-    "http://relisten.net:49170/api/artists/#{band}/years/#{year}/shows/#{year}-#{month}-#{day}"
+    "http://data.relisten.net/api/artists/#{band}/years/#{year}/shows/#{year}-#{month}-#{day}"
 
   parse: (response) ->
     response

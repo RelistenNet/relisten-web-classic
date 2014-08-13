@@ -1,5 +1,14 @@
 <ul class="left">
-  <li class="home-container"><a class="home" href="/" {{#if bandName}}style="padding: 0 3px 0 10px;"{{/if}}>Relisten to</a>{{#if bandName}}<a class="band" href="/{{slug}}">{{#if the}}the {{/if}}{{bandName}}<span></span></a>{{/if}}</li>
+  <li class="home-container">
+    <a class="home" href="/">Relisten</a>
+    <span> to </span>
+    {{#if bandName}}
+      <a class="band" href="/{{slug}}">
+        {{#if the}}the {{/if}}{{bandName}}
+      </a>
+    {{/if}}
+    <div class="clear"></div>
+  </li>
 </ul>
 
 <ul class="right">
