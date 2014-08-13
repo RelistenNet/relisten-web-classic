@@ -1,16 +1,17 @@
 @import 'nib'
+@import './variables'
 
-wavesblue = #0a64a4
+asihtosblue = #008ab0//#0a64a4
 
 header
   height 50px
   width 100%
   border-bottom 1px solid #AAA
-  background #EEEEEE
+  background $backgroundColor
   position relative
   z-index 99
-  -webkit-box-shadow 0px 3px 2px -2px rgba(61, 61, 61, 0.4)
-  box-shadow 0px 3px 2px -2px rgba(61, 61, 61, 0.4)
+  //-webkit-box-shadow 0px 3px 2px -2px rgba(61, 61, 61, 0.4)
+  //box-shadow 0px 3px 2px -2px rgba(61, 61, 61, 0.4)
 
   ul
     height 50px
@@ -26,7 +27,7 @@ header
     &.left
       position absolute
       left 0
-      max-width 40%
+      max-width 70%
 
       li
         float left
@@ -40,20 +41,23 @@ header
           font-weight 700
           font-size 1.2em
 
-          a.home
+          a.home, a.band
             font-size 2em
             line-height 1.5em
             height 50px
-            color wavesblue
-            display block
+            color asihtosblue
+            display inline-block
             padding 0 10px 0 10px
 
             &:hover
               color #F6F6F6
-              background wavesblue
+              background asihtosblue
 
             span
               font-size .7em
+
+            &.band
+              padding 0 10px 0 3px
 
         &.band-selector
           width 50px
@@ -89,7 +93,7 @@ header
         border-left 1px solid #DDD
 
         &:hover, &.active
-          border-left 1px solid wavesblue
+          border-left 1px solid asihtosblue
 
         input
           height 100%
@@ -101,11 +105,11 @@ header
           font-family "HelveticaNeue-CondensedBold", Helvetica, Arial, sans-serif
 
           &:focus
-            border 1px solid wavesblue
+            border 1px solid asihtosblue
             outline 0
 
         a, a:visited
-          color wavesblue
+          color asihtosblue
           font-size 1.4em
           line-height 2.7em
           height 100%
@@ -116,7 +120,7 @@ header
 
           &:hover, &.active
             color #F6F6F6
-            background wavesblue
+            background asihtosblue
             text-decoration none
 
           span

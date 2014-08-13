@@ -7,11 +7,13 @@
       <a class="song {{active}}" href="/{{band}}/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{/if}}{{showVersion}}/{{slug}}">
         {{title}}
       </a>
-      <span>
-        [{{len this}}]
-      </span>
-      <span>
-        [<a href="/{{band}}/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{/if}}{{showVersion}}">{{month}}/{{day}}/{{year}}</a>]
+      <span class="right">
+        <span>
+          [{{len this}}]
+        </span>
+        <span>
+          [<a href="/{{band}}/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{/if}}{{showVersion}}">{{month}}/{{day}}/{{year}}</a>]
+        </span>
       </span>
     </li>
   {{/each}}

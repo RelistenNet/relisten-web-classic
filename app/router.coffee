@@ -12,33 +12,33 @@ class App.Router extends Backbone.Router
   initialize: ->
    #@route /^playlist\/([0-9a-f]{24})\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'playlistSong'
 
-    @route /^([A-Za-z]+)\/?$/, 'band'
-    @route /^([A-Za-z]+)\/([0-9]{4})\/?$/, 'year'
-    @route /^([A-Za-z]+)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day'
-    @route /^([A-Za-z]+)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show'
-    @route /^([A-Za-z]+)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song'
-
+    @route /^([a-z]+(?:-[a-z]+)*)\/?$/, 'band'
+    @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/?$/, 'year'
+    @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day'
+    @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show'
+    @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song'
 
     @$container = $('#page-container')
     @bind 'all', @_trackPageview
   index: ->
-    @navigate '/gd', trigger: true
-    document.title = 'Listen to the Grateful Dead'
-  band: (band) ->
+    @band = ''
+    @changeView(new App.Views.IndexPage())
+    document.title = 'Relisten'
+  band: (@band) ->
     @changeView(new App.Views.HomePage())
     App.years = new App.Views.Years { band }
     #App.shows = new App.Views.Shows()
     #App.songs = new App.Views.Songs()
     App.header.render()
-    document.title = 'Listen to the Grateful Dead'
-  year: (band, year) ->
+    document.title = 'Relisten'
+  year: (@band, @year) ->
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years { band }
     App.shows = new App.Views.Shows { band, year }
     App.songs.$el.empty() if App.songs
     App.header.render()
-    document.title = "#{year} | Listen to the Grateful Dead"
+    document.title = "#{year} | Relisten"
   day: (@band, @year, @month, @day) ->
     App.songs.undelegateEvents() if App.songs
     if App.initial
@@ -47,20 +47,20 @@ class App.Router extends Backbone.Router
     App.shows = new App.Views.Shows { @band, @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
     App.songs = new App.Views.Songs { @band, @year, @month, @day }
     App.header.render()
-    document.title = "#{@year}/#{@month}/#{@day} | Listen to the Grateful Dead"
+    document.title = "#{@year}/#{@month}/#{@day} | Relisten"
   show: (@band, @year, @month, @day, @showVersion) ->
     App.songs.undelegateEvents() if App.songs
     if App.initial
       @changeView(new App.Views.HomePage())
-      App.years = new App.Views.Years { band }
+      App.years = new App.Views.Years { @band }
     App.shows = new App.Views.Shows { @band, @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
     App.songs = new App.Views.Songs { @band, @year, @month, @day, @showVersion }
     App.header.render()
-    document.title = "#{@year}/#{@month}/#{@day} | Listen to the Grateful Dead"
+    document.title = "#{@year}/#{@month}/#{@day} | Relisten"
   song: (@band, @year, @month, @day, @showVersion, @slug, @version, @time) ->
     if App.initial
       @changeView(new App.Views.HomePage())
-      App.years = new App.Views.Years()
+      App.years = new App.Views.Years { @band }
       App.shows = new App.Views.Shows { @band, @year }
       App.songs = new App.Views.Songs { @band, @year, @month, @day, @showVersion }
       App.header.render()
@@ -75,7 +75,7 @@ class App.Router extends Backbone.Router
     App.queue.on 'reset', ->
       ms = timeToMS self.time
       App.song = App.queue.findWhere { slug: self.slug }
-      document.title = "#{App.song.get('title')} | #{self.year}/#{self.month}/#{self.day} | Listen to the Grateful Dead"
+      document.title = "#{App.song.get('title')} | #{self.year}/#{self.month}/#{self.day} | Relisten"
       App.queue.play App.song, ms
       App.queue.off 'reset'
 
@@ -84,19 +84,19 @@ class App.Router extends Backbone.Router
     App.queue.reset App.songs.songs.tracks
   about: ->
     @changeView(new App.Views.AboutPage())
-    document.title = 'About | Listen to the Grateful Dead'
+    document.title = 'About | Relisten'
   login: ->
     @changeView(new App.Views.LoginPage())
-    document.title = 'Login | Listen to the Grateful Dead'
+    document.title = 'Login | Relisten'
   register: ->
     @changeView(new App.Views.RegisterPage())
-    document.title = 'Register | Listen to the Grateful Dead'
+    document.title = 'Register | Relisten'
   playlist: (id) ->
     @changeView(new App.Views.PlaylistPage(playlistId: id))
-    document.title = 'Playlist | Listen to the Grateful Dead'
+    document.title = 'Playlist | Relisten'
   playlists: ->
     @changeView(new App.Views.PlaylistsPage(), false)
-    document.title = 'Playlists | Listen to the Grateful Dead'
+    document.title = 'Playlists | Relisten'
   playlistSong: (id, @year, @month, @day, @showVersion, @slug, @version, @time) ->
     if App.initial
       @changeView(new App.Views.PlaylistPage(playlistId: id))

@@ -2,7 +2,7 @@ class App.Models.Shows extends App.Models.Model
   url: ->
     year = @get 'year'
     band = @get 'band'
-    "http://marcoallday.com/api/artists/#{band}/years/#{year}"
+    "http://localhost:9000/api/artists/#{band}/years/#{year}"
 
   parse: (response) ->
     response.data.shows.map (show) ->

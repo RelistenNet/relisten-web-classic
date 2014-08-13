@@ -1,8 +1,8 @@
 this["JST"] = this["JST"] || {};
 
 this["JST"]["about"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
@@ -10,8 +10,8 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   });
 
 this["JST"]["footer"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
@@ -19,56 +19,85 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   });
 
 this["JST"]["header"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, self=this;
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
   
-  return "gd";
+  return "style=\"padding: 0 3px 0 10px;\"";
   }
 
 function program3(depth0,data) {
   
-  
-  return "um";
-  }
-
-function program5(depth0,data) {
-  
-  
-  return "ListenToTheDead";
-  }
-
-function program7(depth0,data) {
-  
-  
-  return "ListenToUM";
-  }
-
-  buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/";
-  stack1 = helpers['if'].call(depth0, depth0.gd, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  var buffer = "", stack1;
+  buffer += "<a class=\"band\" href=\"/";
+  if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  stack1 = helpers['if'].call(depth0, depth0.the, {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">";
-  stack1 = helpers['if'].call(depth0, depth0.gd, {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
+  if (stack1 = helpers.bandName) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.bandName; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "<span></span></a>";
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  
+  return "the ";
+  }
+
+  buffer += "<ul class=\"left\">\n  <li class=\"home-container\"><a class=\"home\" href=\"/\" ";
+  stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "<span>.com</span></a></li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a href=\"/um\">UM</a></li>\n    <li><a href=\"/gd\">GD</a></li>\n</ul>\n";
+  buffer += ">Relisten to</a>";
+  stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n</ul>\n";
   return buffer;
   });
 
 this["JST"]["home"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
   return "<div class=row-fluid>\n  <div class=\"span4 years-container\">\n  </div>\n\n  <div class=\"span4 shows-container\">\n  </div>\n\n  <div class=\"span4 songs-container\">\n  </div>\n</div>";
   });
 
+this["JST"]["index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1, stack2;
+  buffer += "\n  <li><a href=\"/"
+    + escapeExpression(((stack1 = ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.key)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\">";
+  if (stack2 = helpers.name) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.name; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</a></li>\n";
+  return buffer;
+  }
+
+  buffer += "<ul>\n";
+  stack1 = helpers.each.call(depth0, depth0.bands, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</ul>\n";
+  return buffer;
+  });
+
 this["JST"]["login"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
@@ -81,8 +110,8 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   });
 
 this["JST"]["notification"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
@@ -112,8 +141,8 @@ function program1(depth0,data) {
   });
 
 this["JST"]["player"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
@@ -121,8 +150,8 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   });
 
 this["JST"]["playlist"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
@@ -139,7 +168,7 @@ function program3(depth0,data,depth1) {
   var buffer = "", stack1, stack2, options;
   buffer += "\n    <tr>\n      <td><p>";
   options = {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data};
-  stack2 = ((stack1 = helpers.blurb),stack1 ? stack1.call(depth0, ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options) : helperMissing.call(depth0, "blurb", ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options));
+  stack2 = ((stack1 = helpers.blurb || depth1.blurb),stack1 ? stack1.call(depth0, ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options) : helperMissing.call(depth0, "blurb", ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "</p></td>\n      <td class=second><a data-id=\"";
   if (stack2 = helpers._id) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
@@ -186,18 +215,18 @@ function program4(depth0,data) {
   options = {hash:{
     'compare': (((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._user))
   },inverse:self.noop,fn:self.program(1, program1, data),data:data};
-  stack2 = ((stack1 = helpers.if_eq),stack1 ? stack1.call(depth0, depth0.userId, options) : helperMissing.call(depth0, "if_eq", depth0.userId, options));
+  stack2 = ((stack1 = helpers.if_eq || depth0.if_eq),stack1 ? stack1.call(depth0, depth0.userId, options) : helperMissing.call(depth0, "if_eq", depth0.userId, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n\n<table>\n  ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.programWithDepth(program3, data, depth0),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.programWithDepth(3, program3, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</table>\n";
   return buffer;
   });
 
 this["JST"]["playlists-edit"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, stack2, self=this, helperMissing=helpers.helperMissing, functionType="function", escapeExpression=this.escapeExpression;
 
 function program1(depth0,data,depth1) {
@@ -205,7 +234,7 @@ function program1(depth0,data,depth1) {
   var buffer = "", stack1, stack2, options;
   buffer += "\n      <tr>\n        <td><textarea name=blurb[text]>";
   options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data};
-  stack2 = ((stack1 = helpers.blurb),stack1 ? stack1.call(depth0, ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options) : helperMissing.call(depth0, "blurb", ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options));
+  stack2 = ((stack1 = helpers.blurb || depth1.blurb),stack1 ? stack1.call(depth0, ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options) : helperMissing.call(depth0, "blurb", ((stack1 = depth1.playlist),stack1 == null || stack1 === false ? stack1 : stack1._blurbs), depth0._id, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "</textarea><input type=hidden name=blurb[id] value=";
   if (stack2 = helpers._id) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
@@ -249,15 +278,15 @@ function program2(depth0,data) {
     + "\" /> - <a href=\"/playlist/"
     + escapeExpression(((stack1 = ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\">View Playlist</a>\n  </div>\n\n  <table>\n    ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.playlist),stack1 == null || stack1 === false ? stack1 : stack1._songs), {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n  </table>\n\n  <button type=submit class=save>Save</button>\n  </form>";
   return buffer;
   });
 
 this["JST"]["playlists"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
 function program1(depth0,data) {
@@ -273,7 +302,7 @@ function program1(depth0,data) {
   buffer += escapeExpression(stack1)
     + "</a><div class=count>";
   options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.length),stack1 ? stack1.call(depth0, depth0._songs, options) : helperMissing.call(depth0, "length", depth0._songs, options)))
+  buffer += escapeExpression(((stack1 = helpers.length || depth0.length),stack1 ? stack1.call(depth0, depth0._songs, options) : helperMissing.call(depth0, "length", depth0._songs, options)))
     + "</div></li>\n  ";
   return buffer;
   }
@@ -286,8 +315,8 @@ function program1(depth0,data) {
   });
 
 this["JST"]["queue"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
@@ -326,10 +355,10 @@ function program1(depth0,data) {
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\n      </a>\n      <span>\n        [";
+    + "\n      </a>\n      <span class=\"right\">\n        <span>\n          [";
   options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.len),stack1 ? stack1.call(depth0, depth0, options) : helperMissing.call(depth0, "len", depth0, options)))
-    + "]\n      </span>\n      <span>\n        [<a href=\"/";
+  buffer += escapeExpression(((stack1 = helpers.len || depth0.len),stack1 ? stack1.call(depth0, depth0, options) : helperMissing.call(depth0, "len", depth0, options)))
+    + "]\n        </span>\n        <span>\n          [<a href=\"/";
   if (stack2 = helpers.band) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.band; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
@@ -362,7 +391,7 @@ function program1(depth0,data) {
   if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "</a>]\n      </span>\n    </li>\n  ";
+    + "</a>]\n        </span>\n      </span>\n    </li>\n  ";
   return buffer;
   }
 function program2(depth0,data) {
@@ -388,8 +417,8 @@ function program4(depth0,data) {
   });
 
 this["JST"]["register"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
@@ -402,8 +431,8 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   });
 
 this["JST"]["shows"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
 function program1(depth0,data,depth1) {
@@ -429,7 +458,7 @@ function program1(depth0,data,depth1) {
   buffer += escapeExpression(stack2)
     + "/";
   options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.addZero),stack1 ? stack1.call(depth0, depth0.day, options) : helperMissing.call(depth0, "addZero", depth0.day, options)))
+  buffer += escapeExpression(((stack1 = helpers.addZero || depth0.addZero),stack1 ? stack1.call(depth0, depth0.day, options) : helperMissing.call(depth0, "addZero", depth0.day, options)))
     + "</span>\n      <span class=venue>";
   if (stack2 = helpers.venue_name) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.venue_name; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
@@ -441,15 +470,15 @@ function program1(depth0,data,depth1) {
   buffer += "<div class=ul-header>"
     + escapeExpression(((stack1 = ((stack1 = depth0.data),stack1 == null || stack1 === false ? stack1 : stack1.year)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</div>\n<ul>\n";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.data),stack1 == null || stack1 === false ? stack1 : stack1.shows), {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.data),stack1 == null || stack1 === false ? stack1 : stack1.shows), {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</ul>\n";
   return buffer;
   });
 
 this["JST"]["songs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data,depth1) {
@@ -472,7 +501,7 @@ function program1(depth0,data,depth1) {
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      <div class=total-sources>";
   options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.length),stack1 ? stack1.call(depth0, depth1.sources, options) : helperMissing.call(depth0, "length", depth1.sources, options)))
+  buffer += escapeExpression(((stack1 = helpers.length || depth1.length),stack1 ? stack1.call(depth0, depth1.sources, options) : helperMissing.call(depth0, "length", depth1.sources, options)))
     + "</div>\n    </li>\n  ";
   return buffer;
   }
@@ -553,7 +582,7 @@ function program14(depth0,data,depth1) {
     + "/"
     + escapeExpression(((stack1 = depth1.day),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "-"
-    + escapeExpression(((stack1 = data.index),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + escapeExpression(((stack1 = ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + ">\n        ";
   stack2 = helpers['if'].call(depth0, depth0.taper, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
@@ -597,7 +626,7 @@ function program19(depth0,data,depth1) {
   
   var buffer = "", stack1, stack2, options;
   buffer += "\n    <li data-idx="
-    + escapeExpression(((stack1 = data.index),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + escapeExpression(((stack1 = ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + " data-song=\"";
   if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
@@ -623,7 +652,7 @@ function program19(depth0,data,depth1) {
   buffer += escapeExpression(stack2)
     + " <span class=time>";
   options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.len),stack1 ? stack1.call(depth0, depth0, options) : helperMissing.call(depth0, "len", depth0, options)))
+  buffer += escapeExpression(((stack1 = helpers.len || depth0.len),stack1 ? stack1.call(depth0, depth0, options) : helperMissing.call(depth0, "len", depth0, options)))
     + "</span></a>\n      <div class=play>ᐅ</div>\n      <div title=\"Add To Queue\" class=add>+</div>\n    </li>\n  ";
   return buffer;
   }
@@ -642,19 +671,19 @@ function program20(depth0,data) {
   else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "</div>\n<ul>\n  ";
-  stack1 = helpers['with'].call(depth0, depth0.songs, {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
+  stack1 = helpers['with'].call(depth0, depth0.songs, {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
   stack1 = helpers['if'].call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.program(12, program12, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
-  stack1 = helpers.each.call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.programWithDepth(program14, data, depth0),data:data});
+  stack1 = helpers.each.call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.programWithDepth(14, program14, data, depth0),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
   stack1 = helpers['if'].call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.program(17, program17, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.tracks), {hash:{},inverse:self.noop,fn:self.programWithDepth(program19, data, depth0),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.tracks), {hash:{},inverse:self.noop,fn:self.programWithDepth(19, program19, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n  <li><a class=archive href=\"https://archive.org/details/"
     + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.archive_identifier)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
@@ -663,8 +692,8 @@ function program20(depth0,data) {
   });
 
 this["JST"]["years"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Handlebars.helpers; data = data || {};
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data,depth1) {
@@ -685,7 +714,7 @@ function program1(depth0,data,depth1) {
   }
 
   buffer += "<div class=ul-header>Choose a year</div>\n<ul>\n";
-  stack1 = helpers.each.call(depth0, depth0.years, {hash:{},inverse:self.noop,fn:self.programWithDepth(program1, data, depth0),data:data});
+  stack1 = helpers.each.call(depth0, depth0.years, {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</ul>\n";
   return buffer;
@@ -698,17 +727,185 @@ window.App = {
   "Views": {},
   "Controllers": {},
   "Router": {},
-  "utils": {}
+  "utils": {},
+  "bands": {
+    "grateful-dead": {
+      "name": "Grateful Dead",
+      "the": true
+    },
+    "marco": {
+      "name": "Marco Benevento",
+      "the": false
+    },
+    "garage-a-trois": {
+      "name": "Garage A Trois",
+      "the": false
+    },
+    "g-nome": {
+      "name": "G-Nome Project",
+      "the": false
+    },
+    "furthur": {
+      "name": "Furthur",
+      "the": false
+    },
+    "everyone-orchestra": {
+      "name": "Everyone Orchestra",
+      "the": false
+    },
+    "dispatch": {
+      "name": "Dispatch",
+      "the": false
+    },
+    "disco-biscuits": {
+      "name": "Disco Biscuits",
+      "the": true
+    },
+    "dark-star": {
+      "name": "Dark Star Orchestra",
+      "the": false
+    },
+    "weir": {
+      "name": "Bob Weir",
+      "the": false
+    },
+    "bernie-worrell": {
+      "name": "Bernie Worrell Orchestra",
+      "the": false
+    },
+    "duo": {
+      "name": "Benevento Russo Duo",
+      "the": true
+    },
+    "ben-kweller": {
+      "name": "Ben Kweller",
+      "the": false
+    },
+    "bela-fleck": {
+      "name": "Bela Fleck and the Flecktones",
+      "the": true
+    },
+    "aqueous": {
+      "name": "Aqueous",
+      "the": false
+    },
+    "aru": {
+      "name": "Aquarium Rescue Unit",
+      "the": false
+    },
+    "animal-collective": {
+      "name": "Animal Collective",
+      "the": false
+    },
+    "umphreys": {
+      "name": "Umphrey's McGee",
+      "the": false
+    },
+    "max-creek": {
+      "name": "Max Creek",
+      "the": false
+    },
+    "matisyahu": {
+      "name": "Matisyahu",
+      "the": false
+    },
+    "lotus": {
+      "name": "Lotus",
+      "the": false
+    },
+    "john-popper": {
+      "name": "John Popper",
+      "the": false
+    },
+    "guster": {
+      "name": "Guster",
+      "the": false
+    },
+    "greensky-bluegrass": {
+      "name": "Greensky Bluegrass",
+      "the": false
+    },
+    "god-street-wine": {
+      "name": "God Street Wine",
+      "the": false
+    },
+    "g-love": {
+      "name": "G. Love and Special Sauce",
+      "the": false
+    },
+    "funky-butter": {
+      "name": "Funky Butter",
+      "the": false
+    },
+    "fugazi": {
+      "name": "Fugazi",
+      "the": false
+    },
+    "railroad-earth": {
+      "name": "Railroad Earth",
+      "the": false
+    },
+    "yonder": {
+      "name": "Yonder Mountain String Band",
+      "the": false
+    },
+    "ween": {
+      "name": "Ween",
+      "the": false
+    },
+    "the-new-deal": {
+      "name": "The New Deal",
+      "the": false
+    },
+    "the-heavy-pets": {
+      "name": "The Heavy Pets",
+      "the": false
+    },
+    "sci": {
+      "name": "String Cheese Incident",
+      "the": true
+    },
+    "steve-kimock": {
+      "name": "Steve Kimock Band",
+      "the": true
+    },
+    "kimock": {
+      "name": "Steve Kimock",
+      "the": false
+    },
+    "spoon": {
+      "name": "Spoon",
+      "the": false
+    },
+    "raq": {
+      "name": "Raq",
+      "the": false
+    },
+    "zero": {
+      "name": "Zero",
+      "the": false
+    },
+    "kvhw": {
+      "name": "KVHW",
+      "the": false
+    },
+    "stringdusters": {
+      "name": "Infamous Stringdusters",
+      "the": true
+    },
+    "grace-potter": {
+      "name": "Grace Potter",
+      "the": true
+    }
+  }
 };
 
 $(function() {
   var Tweezer;
-
   Tweezer = new Application().initialize();
   $(window).resize(resize);
   return $(window).keydown(function(e) {
     var _ref, _ref1;
-
     if ($("input,textarea").is(":focus")) {
       return;
     }
@@ -735,7 +932,6 @@ $(function() {
 
 $(document).ajaxSend(function(e, xhr, options) {
   var token;
-
   token = csrf;
   if (token && !_.isEmpty(user)) {
     return xhr.setRequestHeader("X-CSRF-Token", token);
@@ -748,7 +944,6 @@ resize = function() {
 
 toHHMMSS = function(seconds) {
   var hourStr, hours, minutes, sec_numb, time;
-
   sec_numb = parseInt(seconds);
   hours = Math.floor(sec_numb / 3600);
   minutes = Math.floor((sec_numb - (hours * 3600)) / 60);
@@ -770,7 +965,6 @@ addZero = function(num) {
 
 timeToMS = function(time) {
   var min, sec;
-
   if (!/m/.test(time)) {
     return 0;
   }
@@ -807,7 +1001,6 @@ Handlebars.registerHelper("ifEqual", function(val1, val2, fn) {
 
 Handlebars.registerHelper("blurb", function(arr, id) {
   var blurb;
-
   if (arr) {
     blurb = _.findWhere(arr, {
       _song: id
@@ -849,7 +1042,6 @@ Application = (function() {
   Application.prototype.pushAnchors = function() {
     return $(document).on("click", "a[href^='/']", function(event) {
       var href, passThrough, url;
-
       href = $(event.currentTarget).attr('href');
       passThrough = /logout|auth/.test(href);
       if (!passThrough && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
@@ -877,7 +1069,8 @@ App.Router = (function(_super) {
 
   function Router() {
     this.changeView = __bind(this.changeView, this);
-    this.finishSong = __bind(this.finishSong, this);    _ref = Router.__super__.constructor.apply(this, arguments);
+    this.finishSong = __bind(this.finishSong, this);
+    _ref = Router.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -892,32 +1085,34 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.initialize = function() {
-    this.route(/^([A-Za-z]+)\/?$/, 'band');
-    this.route(/^([A-Za-z]+)\/([0-9]{4})\/?$/, 'year');
-    this.route(/^([A-Za-z]+)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day');
-    this.route(/^([A-Za-z]+)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show');
-    this.route(/^([A-Za-z]+)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song');
+    this.route(/^([a-z]+(?:-[a-z]+)*)\/?$/, 'band');
+    this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/?$/, 'year');
+    this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day');
+    this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show');
+    this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
   };
 
   Router.prototype.index = function() {
-    this.navigate('/gd', {
-      trigger: true
-    });
-    return document.title = 'Listen to the Grateful Dead';
+    this.band = '';
+    this.changeView(new App.Views.IndexPage());
+    return document.title = 'Relisten';
   };
 
   Router.prototype.band = function(band) {
+    this.band = band;
     this.changeView(new App.Views.HomePage());
     App.years = new App.Views.Years({
       band: band
     });
     App.header.render();
-    return document.title = 'Listen to the Grateful Dead';
+    return document.title = 'Relisten';
   };
 
   Router.prototype.year = function(band, year) {
+    this.band = band;
+    this.year = year;
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years({
@@ -932,7 +1127,7 @@ App.Router = (function(_super) {
       App.songs.$el.empty();
     }
     App.header.render();
-    return document.title = "" + year + " | Listen to the Grateful Dead";
+    return document.title = "" + year + " | Relisten";
   };
 
   Router.prototype.day = function(band, year, month, day) {
@@ -962,7 +1157,7 @@ App.Router = (function(_super) {
       day: this.day
     });
     App.header.render();
-    return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | Listen to the Grateful Dead";
+    return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | Relisten";
   };
 
   Router.prototype.show = function(band, year, month, day, showVersion) {
@@ -977,7 +1172,7 @@ App.Router = (function(_super) {
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years({
-        band: band
+        band: this.band
       });
     }
     if (!(App.shows && App.shows.shows && App.shows.shows.get('year') === +this.year)) {
@@ -994,7 +1189,7 @@ App.Router = (function(_super) {
       showVersion: this.showVersion
     });
     App.header.render();
-    return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | Listen to the Grateful Dead";
+    return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | Relisten";
   };
 
   Router.prototype.song = function(band, year, month, day, showVersion, slug, version, time) {
@@ -1008,7 +1203,9 @@ App.Router = (function(_super) {
     this.time = time;
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
-      App.years = new App.Views.Years();
+      App.years = new App.Views.Years({
+        band: this.band
+      });
       App.shows = new App.Views.Shows({
         band: this.band,
         year: this.year
@@ -1034,16 +1231,14 @@ App.Router = (function(_super) {
   Router.prototype.finishSong = function() {
     var self,
       _this = this;
-
     self = this;
     App.queue.on('reset', function() {
       var ms;
-
       ms = timeToMS(self.time);
       App.song = App.queue.findWhere({
         slug: self.slug
       });
-      document.title = "" + (App.song.get('title')) + " | " + self.year + "/" + self.month + "/" + self.day + " | Listen to the Grateful Dead";
+      document.title = "" + (App.song.get('title')) + " | " + self.year + "/" + self.month + "/" + self.day + " | Relisten";
       App.queue.play(App.song, ms);
       return App.queue.off('reset');
     });
@@ -1061,34 +1256,33 @@ App.Router = (function(_super) {
 
   Router.prototype.about = function() {
     this.changeView(new App.Views.AboutPage());
-    return document.title = 'About | Listen to the Grateful Dead';
+    return document.title = 'About | Relisten';
   };
 
   Router.prototype.login = function() {
     this.changeView(new App.Views.LoginPage());
-    return document.title = 'Login | Listen to the Grateful Dead';
+    return document.title = 'Login | Relisten';
   };
 
   Router.prototype.register = function() {
     this.changeView(new App.Views.RegisterPage());
-    return document.title = 'Register | Listen to the Grateful Dead';
+    return document.title = 'Register | Relisten';
   };
 
   Router.prototype.playlist = function(id) {
     this.changeView(new App.Views.PlaylistPage({
       playlistId: id
     }));
-    return document.title = 'Playlist | Listen to the Grateful Dead';
+    return document.title = 'Playlist | Relisten';
   };
 
   Router.prototype.playlists = function() {
     this.changeView(new App.Views.PlaylistsPage(), false);
-    return document.title = 'Playlists | Listen to the Grateful Dead';
+    return document.title = 'Playlists | Relisten';
   };
 
   Router.prototype.playlistSong = function(id, year, month, day, showVersion, slug, version, time) {
     var _this = this;
-
     this.year = year;
     this.month = month;
     this.day = day;
@@ -1124,10 +1318,8 @@ App.Router = (function(_super) {
 
   Router.prototype.finishPlaylistSong = function(obj, time) {
     var _this = this;
-
     App.queue.on('reset', function() {
       var ms;
-
       ms = timeToMS(time);
       App.song = App.queue.findWhere(obj);
       App.queue.play(App.song, ms);
@@ -1173,7 +1365,6 @@ App.Router = (function(_super) {
 
   Router.prototype._trackPageview = function() {
     var url;
-
     if (App.initial) {
       App.initial = false;
     }
@@ -1201,7 +1392,6 @@ cookie = function(name, value, days) {
 
 createCookie = function(name, value, days) {
   var date, expires;
-
   if (days == null) {
     days = 7;
   }
@@ -1217,7 +1407,6 @@ createCookie = function(name, value, days) {
 
 readCookie = function(name) {
   var c, ca, nameEQ, result, _i, _len;
-
   nameEQ = name + "=";
   ca = document.cookie.split(';');
   for (_i = 0, _len = ca.length; _i < _len; _i++) {
@@ -1245,7 +1434,6 @@ App.utils.cookie = {
 
 $.fn.getCursorPosition = function() {
   var input, sel, selLen;
-
   input = this.get(0);
   if (!input) {
     return;
@@ -1263,7 +1451,6 @@ $.fn.getCursorPosition = function() {
 
 $.fn.setCursorPosition = function(pos) {
   var range;
-
   if ($(this).get(0).setSelectionRange) {
     return $(this).get(0).setSelectionRange(pos, pos);
   } else if ($(this).get(0).createTextRange) {
@@ -1278,7 +1465,6 @@ $.fn.setCursorPosition = function(pos) {
 $.fn.setCursorRange = function(start, end) {
   return this.each(function() {
     var range;
-
     if (this.setSelectionRange) {
       this.focus();
       return this.setSelectionRange(start, end);
@@ -1294,11 +1480,9 @@ $.fn.setCursorRange = function(start, end) {
 
 App.utils.getURLParameters = function(url) {
   var obj;
-
   obj = {};
   _.each(url.split('?')[1].split('&'), function(param) {
     var split;
-
     split = param.split('=');
     return obj[split[0]] = split[1];
   });
@@ -1362,7 +1546,8 @@ App.Models.Player = (function(_super) {
   __extends(Player, _super);
 
   function Player() {
-    this.play = __bind(this.play, this);    _ref = Player.__super__.constructor.apply(this, arguments);
+    this.play = __bind(this.play, this);
+    _ref = Player.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -1380,7 +1565,6 @@ App.Models.Player = (function(_super) {
   Player.prototype.play = function(ms) {
     var canPlayOgg, id, self, url, volume,
       _this = this;
-
     if (ms == null) {
       ms = 0;
     }
@@ -1442,7 +1626,6 @@ App.Models.Player = (function(_super) {
 
   Player.prototype.updateText = function() {
     var title, _ref1;
-
     if (title = (_ref1 = App.song) != null ? _ref1.get('title') : void 0) {
       return App.playerView.updateText({
         title: title,
@@ -1454,7 +1637,6 @@ App.Models.Player = (function(_super) {
 
   Player.prototype.slideDown = function() {
     var $container, $footer;
-
     $footer = $('footer');
     if ($footer.height() !== 100) {
       $footer.animate({
@@ -1488,7 +1670,6 @@ App.Models.Playlist = (function(_super) {
 
   Playlist.prototype.url = function() {
     var id;
-
     id = this.get('_id');
     return '/api/v1/playlist' + (id ? "/" + id : '');
   };
@@ -1516,16 +1697,14 @@ App.Models.Shows = (function(_super) {
 
   Shows.prototype.url = function() {
     var band, year;
-
     year = this.get('year');
     band = this.get('band');
-    return "http://marcoallday.com/api/artists/" + band + "/years/" + year;
+    return "http://localhost:9000/api/artists/" + band + "/years/" + year;
   };
 
   Shows.prototype.parse = function(response) {
     response.data.shows.map(function(show) {
       var day, month, year, _ref1;
-
       _ref1 = show.display_date.split('-'), year = _ref1[0], month = _ref1[1], day = _ref1[2];
       show.year = +year;
       show.month = +month;
@@ -1548,13 +1727,13 @@ App.Models.Song = (function(_super) {
   __extends(Song, _super);
 
   function Song() {
-    this.change = __bind(this.change, this);    _ref = Song.__super__.constructor.apply(this, arguments);
+    this.change = __bind(this.change, this);
+    _ref = Song.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
   Song.prototype.url = function() {
     var day, id, month, showVersion, slug, year;
-
     id = this.get('_id');
     if (id) {
       return "/api/v1/song/" + id;
@@ -1589,12 +1768,11 @@ App.Models.Songs = (function(_super) {
 
   Songs.prototype.url = function() {
     var band, day, month, year;
-
     band = this.get('band');
     year = this.get('year');
     month = addZero(this.get('month'));
     day = addZero(this.get('day'));
-    return "http://marcoallday.com/api/artists/" + band + "/years/" + year + "/shows/" + year + "-" + month + "-" + day;
+    return "http://localhost:9000/api/artists/" + band + "/years/" + year + "/shows/" + year + "-" + month + "-" + day;
   };
 
   Songs.prototype.parse = function(response) {
@@ -1649,9 +1827,8 @@ App.Models.Years = (function(_super) {
 
   Years.prototype.url = function() {
     var band;
-
     band = this.get('band');
-    return "http://marcoallday.com/api/artists/" + band + "/years";
+    return "http://localhost:9000/api/artists/" + band + "/years";
   };
 
   return Years;
@@ -1673,48 +1850,6 @@ App.Collections.Collection = (function(_super) {
   return Collection;
 
 })(Backbone.Collection);
-
-var _ref,
-  __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-App.Collections.Folder = (function(_super) {
-  __extends(Folder, _super);
-
-  function Folder() {
-    _ref = Folder.__super__.constructor.apply(this, arguments);
-    return _ref;
-  }
-
-  Folder.prototype.url = '/api/v1/phish';
-
-  Folder.prototype.initialize = function() {
-    return this.add(phish);
-  };
-
-  return Folder;
-
-})(App.Collections.Collection);
-
-var _ref,
-  __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-App.Collections.Folder = (function(_super) {
-  __extends(Folder, _super);
-
-  function Folder() {
-    _ref = Folder.__super__.constructor.apply(this, arguments);
-    return _ref;
-  }
-
-  Folder.prototype.url = function() {
-    return '/api/v1/folder/' + this.get('id');
-  };
-
-  return Folder;
-
-})(App.Collections.Collection);
 
 var _ref,
   __hasProp = {}.hasOwnProperty,
@@ -1745,7 +1880,8 @@ App.Collections.Queue = (function(_super) {
   __extends(Queue, _super);
 
   function Queue() {
-    this.play = __bind(this.play, this);    _ref = Queue.__super__.constructor.apply(this, arguments);
+    this.play = __bind(this.play, this);
+    _ref = Queue.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -1755,7 +1891,6 @@ App.Collections.Queue = (function(_super) {
 
   Queue.prototype.initialize = function() {
     var _this = this;
-
     this.on('add', function() {
       if ((_this.length === 1) || (_this.idx === _this.length - 1 && !App.player.get('playing'))) {
         return _this.play();
@@ -1768,7 +1903,6 @@ App.Collections.Queue = (function(_super) {
 
   Queue.prototype.play = function(song, ms) {
     var band, day, month, showVersion, showVersionStr, slug, title, url, year, _ref1, _ref2;
-
     if (song) {
       if (App.song) {
         this.idx = this.indexOf(App.song);
@@ -1889,7 +2023,8 @@ App.Views.Footer = (function(_super) {
   __extends(Footer, _super);
 
   function Footer() {
-    this.mouseUp = __bind(this.mouseUp, this);    _ref = Footer.__super__.constructor.apply(this, arguments);
+    this.mouseUp = __bind(this.mouseUp, this);
+    _ref = Footer.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -1930,7 +2065,6 @@ App.Views.Footer = (function(_super) {
 
   Footer.prototype.moveBar = function(e) {
     var time;
-
     time = toHHMMSS(this._clickToMs(e.pageX) / 1000);
     App.playerView.$seconds.html(time);
     if (this.dragging) {
@@ -1969,7 +2103,6 @@ App.Views.Footer = (function(_super) {
 
   Footer.prototype.mouseUp = function(e) {
     var coord;
-
     if (!this.dragging) {
       return;
     }
@@ -1983,7 +2116,6 @@ App.Views.Footer = (function(_super) {
 
   Footer.prototype.seek = function(pageX) {
     var coord;
-
     coord = pageX / this.$window.width();
     if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
       App.player.sound.destruct();
@@ -1999,7 +2131,6 @@ App.Views.Footer = (function(_super) {
 
   Footer.prototype.playButton = function() {
     var id;
-
     id = App.player.get('id');
     App.player.set('playing', true);
     if (App.playerView.played.indexOf(id >= 0)) {
@@ -2018,7 +2149,6 @@ App.Views.Footer = (function(_super) {
 
   Footer.prototype._clickToMs = function(pageX) {
     var coord;
-
     coord = pageX / this.$window.width();
     return coord * App.song.get('length') * 1000;
   };
@@ -2036,7 +2166,8 @@ App.Views.Header = (function(_super) {
   __extends(Header, _super);
 
   function Header() {
-    this.render = __bind(this.render, this);    _ref = Header.__super__.constructor.apply(this, arguments);
+    this.render = __bind(this.render, this);
+    _ref = Header.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -2055,9 +2186,12 @@ App.Views.Header = (function(_super) {
   };
 
   Header.prototype.render = function(playlist) {
+    var _ref1, _ref2, _ref3, _ref4, _ref5;
     return this.$el.html(this.template({
       loggedIn: App.user.loggedIn(),
-      gd: /gd/.test(window.location.href) ? true : false
+      slug: (_ref1 = App.router) != null ? _ref1.band : void 0,
+      bandName: (_ref2 = App.bands[(_ref3 = App.router) != null ? _ref3.band : void 0]) != null ? _ref2.name : void 0,
+      the: (_ref4 = App.bands[(_ref5 = App.router) != null ? _ref5.band : void 0]) != null ? _ref4.the : void 0
     }));
   };
 
@@ -2074,7 +2208,8 @@ App.Views.HomePage = (function(_super) {
   __extends(HomePage, _super);
 
   function HomePage() {
-    this.render = __bind(this.render, this);    _ref = HomePage.__super__.constructor.apply(this, arguments);
+    this.render = __bind(this.render, this);
+    _ref = HomePage.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -2095,7 +2230,6 @@ App.Views.HomePage = (function(_super) {
 
   HomePage.prototype.checkErr = function() {
     var params;
-
     if (window.location.search) {
       params = App.utils.getURLParameters(window.location.search);
       switch (params.err) {
@@ -2106,6 +2240,35 @@ App.Views.HomePage = (function(_super) {
   };
 
   return HomePage;
+
+})(App.Views.View);
+
+var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.IndexPage = (function(_super) {
+  __extends(IndexPage, _super);
+
+  function IndexPage() {
+    this.render = __bind(this.render, this);
+    _ref = IndexPage.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  IndexPage.prototype.className = 'index-page';
+
+  IndexPage.prototype.template = JST['index'];
+
+  IndexPage.prototype.render = function() {
+    App.header.render();
+    return this.$el.html(this.template({
+      bands: App.bands
+    }));
+  };
+
+  return IndexPage;
 
 })(App.Views.View);
 
@@ -2135,7 +2298,6 @@ App.Views.LoginPage = (function(_super) {
 
   LoginPage.prototype.checkErr = function() {
     var params;
-
     if (window.location.search) {
       params = App.utils.getURLParameters(window.location.search);
       switch (params.err) {
@@ -2162,7 +2324,8 @@ App.Views.Notification = (function(_super) {
   __extends(Notification, _super);
 
   function Notification() {
-    this.close = __bind(this.close, this);    _ref = Notification.__super__.constructor.apply(this, arguments);
+    this.close = __bind(this.close, this);
+    _ref = Notification.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -2206,7 +2369,8 @@ App.Views.Notifications = (function(_super) {
   __extends(Notifications, _super);
 
   function Notifications() {
-    this.send = __bind(this.send, this);    _ref1 = Notifications.__super__.constructor.apply(this, arguments);
+    this.send = __bind(this.send, this);
+    _ref1 = Notifications.__super__.constructor.apply(this, arguments);
     return _ref1;
   }
 
@@ -2214,7 +2378,6 @@ App.Views.Notifications = (function(_super) {
 
   Notifications.prototype.send = function(title, message, sticky, time, img) {
     var notificationEl, type;
-
     if (sticky == null) {
       sticky = false;
     }
@@ -2255,7 +2418,8 @@ App.Views.Player = (function(_super) {
     this.setVolume = __bind(this.setVolume, this);
     this.volumeMove = __bind(this.volumeMove, this);
     this.clickUp = __bind(this.clickUp, this);
-    this.volume = __bind(this.volume, this);    _ref = Player.__super__.constructor.apply(this, arguments);
+    this.volume = __bind(this.volume, this);
+    _ref = Player.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -2291,7 +2455,6 @@ App.Views.Player = (function(_super) {
 
   Player.prototype.updateText = function(obj) {
     var album, length, title;
-
     title = obj.title, album = obj.album, length = obj.length;
     this.$el.find('h3').html(title || '');
     this.$el.find('h4').html(album || '');
@@ -2315,7 +2478,6 @@ App.Views.Player = (function(_super) {
 
   Player.prototype.setVolume = function(pageY) {
     var vol;
-
     vol = 100 - (pageY - this.$volumeContainer.offset().top) / this.$volumeContainer.height() * 100;
     App.player.sound.setVolume(vol);
     return this.$volume.height("" + vol + "%");
@@ -2403,7 +2565,6 @@ App.Views.PlaylistsEdit = (function(_super) {
 
   PlaylistsEdit.prototype.saveBlurbs = function(e) {
     var $textarea, PUT, data, playlistId, title;
-
     e.preventDefault();
     playlistId = App.playlist.get('_id');
     title = this.$el.find('input.name').val();
@@ -2416,7 +2577,6 @@ App.Views.PlaylistsEdit = (function(_super) {
     $textarea = $('textarea');
     $textarea.each(function(idx) {
       var $text, val;
-
       $text = $(this);
       val = typeof $text.val() === 'string' ? $text.val() : '';
       data.arr.push({
@@ -2515,7 +2675,6 @@ App.Views.Queue = (function(_super) {
 
   Queue.prototype.render = function(scrollTop, dontAnimateScroll) {
     var $active, song, top, _ref1, _ref2, _ref3, _ref4, _ref5;
-
     song = App.queue.at(App.queue.idx - 1);
     this.$el.html(this.template({
       queue: App.queue.toJSON(),
@@ -2546,7 +2705,6 @@ App.Views.Queue = (function(_super) {
 
   Queue.prototype.savePlaylist = function() {
     var playlist;
-
     playlist = new App.Models.Playlist({
       _songs: _.pluck(App.queue.toJSON(), '_id')
     });
@@ -2566,7 +2724,6 @@ App.Views.Queue = (function(_super) {
 
   Queue.prototype.removeFromQueue = function(e) {
     var idx;
-
     idx = this.$el.find('.delete').index($(e.target));
     App.queue.remove(App.queue.at(idx));
     if (idx < App.queue.idx) {
@@ -2609,7 +2766,6 @@ App.Views.RegisterPage = (function(_super) {
 
   RegisterPage.prototype.render = function() {
     var params;
-
     App.router.clearActive($('header .register'));
     if (window.location.search) {
       params = App.utils.getURLParameters(window.location.search);
@@ -2649,7 +2805,6 @@ App.Views.RegisterPage = (function(_super) {
 
   RegisterPage.prototype.button = function(hide) {
     var disabled;
-
     disabled = 'disabled';
     if (!hide) {
       disabled = false;
@@ -2670,7 +2825,8 @@ App.Views.Shows = (function(_super) {
   __extends(Shows, _super);
 
   function Shows() {
-    this.activate = __bind(this.activate, this);    _ref = Shows.__super__.constructor.apply(this, arguments);
+    this.activate = __bind(this.activate, this);
+    _ref = Shows.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -2727,7 +2883,8 @@ App.Views.Songs = (function(_super) {
   __extends(Songs, _super);
 
   function Songs() {
-    this.showSources = __bind(this.showSources, this);    _ref = Songs.__super__.constructor.apply(this, arguments);
+    this.showSources = __bind(this.showSources, this);
+    _ref = Songs.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
@@ -2760,7 +2917,6 @@ App.Views.Songs = (function(_super) {
 
   Songs.prototype.render = function() {
     var sources;
-
     App.router.clearActive();
     if (this.folder) {
       sources = this.folder.get('data');
@@ -2788,7 +2944,6 @@ App.Views.Songs = (function(_super) {
 
   Songs.prototype.play = function(e) {
     var id, song;
-
     id = $(e.target).parent().attr('data-id');
     song = new App.Models.Song({
       _id: id
@@ -2810,7 +2965,6 @@ App.Views.Songs = (function(_super) {
 
   Songs.prototype.addShowToPlaylist = function(e) {
     var $li, id;
-
     $li = $(e.target).parent();
     id = $li.attr('data-id');
     App.song = new App.Models.Song(_.findWhere(this.songs._songs, {
@@ -2822,7 +2976,6 @@ App.Views.Songs = (function(_super) {
 
   Songs.prototype.addToPlaylist = function(e) {
     var $li, idx, song;
-
     $li = $(e.target).parent();
     idx = $li.attr('data-idx');
     song = _.extend(this.songs.tracks[+idx], {
@@ -2856,7 +3009,8 @@ App.Views.Years = (function(_super) {
   __extends(Years, _super);
 
   function Years() {
-    this.activate = __bind(this.activate, this);    _ref = Years.__super__.constructor.apply(this, arguments);
+    this.activate = __bind(this.activate, this);
+    _ref = Years.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 

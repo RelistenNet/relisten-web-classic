@@ -1,3 +1,4 @@
+
 class App.Views.Header extends App.Views.View
   autoRender: true
   el: 'header'
@@ -9,4 +10,6 @@ class App.Views.Header extends App.Views.View
   render: (playlist) =>
     @$el.html @template
       loggedIn: App.user.loggedIn()
-      gd: if /gd/.test(window.location.href) then true else false
+      slug: App.router?.band
+      bandName: App.bands[App.router?.band]?.name
+      the: App.bands[App.router?.band]?.the

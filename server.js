@@ -1,4 +1,4 @@
-require('coffee-script');
+require('coffee-script/register');
 var cluster = require('cluster');
 
 var numCPUs = require('os').cpus().length;

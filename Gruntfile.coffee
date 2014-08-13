@@ -92,6 +92,7 @@ module.exports = (grunt) ->
             "app/views/styles/application.styl",
             "app/views/styles/header.styl",
             "app/views/styles/footer.styl",
+            "app/views/styles/index.styl",
             "app/views/styles/home-page.styl",
             "app/views/styles/login-page.styl",
             "app/views/styles/player.styl",
@@ -160,6 +161,17 @@ module.exports = (grunt) ->
           dest: 'production/index.css'
         }]
 
+    aerobatic:
+      # These are the files that should be deployed to the cloud.
+      deploy:
+        src: ['public/*.*']
+      sim:
+        index: 'public/index.html'
+        port: 3000
+        livereload: true
+
+
+  grunt.loadNpmTasks 'grunt-aerobatic'
 
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-concat"
@@ -172,6 +184,12 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks 'grunt-contrib-compress'
   grunt.loadNpmTasks 'grunt-contrib-rename'
+
+  # Specify the sync option to avoid blocking the watch task
+  grunt.registerTask 'sim', ['aerobatic:sim:sync', 'watch']
+
+  # Create a deploy alias task which builds then deploys to aerobatic in the cloud
+  grunt.registerTask 'deploy', ['production', 'aerobatic:deploy']
 
   grunt.registerTask "compile", ["coffee", "handlebars", "concat", "stylus", "clean"]
   grunt.registerTask "compile:coffee", ["coffee", "handlebars", "concat", "clean"]
