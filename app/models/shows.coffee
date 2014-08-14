@@ -2,7 +2,7 @@ class App.Models.Shows extends App.Models.Model
   url: ->
     year = @get 'year'
     band = @get 'band'
-    "http://data.relisten.net/api/artists/#{band}/years/#{year}"
+    "#{App.root}/api/artists/#{band}/years/#{year}"
 
   parse: (response) ->
     response.data.shows.map (show) ->
