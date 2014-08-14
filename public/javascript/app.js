@@ -1074,16 +1074,11 @@ App.Router = (function(_super) {
   }
 
   Router.prototype.routes = {
-    '': 'index',
-    'about': 'about',
-    'login': 'login',
-    'register': 'register',
-    'playlists': 'playlists',
-    'playlist/:id': 'playlist',
-    'playlist/:id/edit': 'editPlaylist'
+    '': 'index'
   };
 
   Router.prototype.initialize = function() {
+    this(/^about\/?$/, 'about');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/?$/, 'band');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/?$/, 'year');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day');
