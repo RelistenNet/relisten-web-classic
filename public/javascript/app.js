@@ -835,10 +835,6 @@ window.App = {
       "name": "G. Love and Special Sauce",
       "the": false
     },
-    "funky-butter": {
-      "name": "Funky Butter",
-      "the": false
-    },
     "fugazi": {
       "name": "Fugazi",
       "the": false
@@ -900,7 +896,7 @@ window.App = {
       "the": true
     }
   },
-  "root": "http://data.relisten:net"
+  "root": "http://data.relisten.net"
 };
 
 $(function() {
