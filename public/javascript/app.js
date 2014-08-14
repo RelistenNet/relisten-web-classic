@@ -1078,7 +1078,7 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.initialize = function() {
-    this(/^about\/?$/, 'about');
+    this.route(/^about\/?$/, 'about');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/?$/, 'band');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/?$/, 'year');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day');

@@ -6,7 +6,7 @@ class App.Router extends Backbone.Router
   initialize: ->
    #@route /^playlist\/([0-9a-f]{24})\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9])?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'playlistSong'
 
-    @ /^about\/?$/, 'about'
+    @route /^about\/?$/, 'about'
     @route /^([a-z]+(?:-[a-z]+)*)\/?$/, 'band'
     @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/?$/, 'year'
     @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day'
