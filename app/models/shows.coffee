@@ -12,6 +12,8 @@ class App.Models.Shows extends App.Models.Model
       show.month = +month
       show.day = +day
 
+      show.day = +day.split(' ')[0] if !show.day
+
       show
 
     response.data

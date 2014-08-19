@@ -25,13 +25,25 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
+  
+  return " ";
+  }
+
+function program3(depth0,data) {
+  
+  
+  return "...";
+  }
+
+function program5(depth0,data) {
+  
   var buffer = "", stack1;
   buffer += "\n      <a class=\"band\" href=\"/";
   if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "\">\n        ";
-  stack1 = helpers['if'].call(depth0, depth0.the, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.the, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   if (stack1 = helpers.bandName) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.bandName; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
@@ -39,14 +51,17 @@ function program1(depth0,data) {
     + "\n      </a>\n    ";
   return buffer;
   }
-function program2(depth0,data) {
+function program6(depth0,data) {
   
   
   return "the ";
   }
 
-  buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to </span>\n    ";
-  stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to";
+  stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</span>\n    ";
+  stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n</ul>\n";
   return buffer;
@@ -79,7 +94,7 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<ul>\n";
+  buffer += "<ul>\n  <li class=\"featured\"><a href=\"/grateful-dead\">Grateful Dead</a></li>\n  <br>\n";
   stack1 = helpers.each.call(depth0, depth0.bands, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n</ul>\n";
@@ -731,60 +746,8 @@ window.App = {
   "Router": {},
   "utils": {},
   "bands": {
-    "grateful-dead": {
-      "name": "Grateful Dead",
-      "the": true
-    },
-    "marco": {
-      "name": "Marco Benevento",
-      "the": false
-    },
-    "garage-a-trois": {
-      "name": "Garage A Trois",
-      "the": false
-    },
-    "g-nome": {
-      "name": "G-Nome Project",
-      "the": false
-    },
-    "furthur": {
-      "name": "Furthur",
-      "the": false
-    },
-    "everyone-orchestra": {
-      "name": "Everyone Orchestra",
-      "the": false
-    },
-    "dispatch": {
-      "name": "Dispatch",
-      "the": false
-    },
-    "disco-biscuits": {
-      "name": "Disco Biscuits",
-      "the": true
-    },
-    "dark-star": {
-      "name": "Dark Star Orchestra",
-      "the": false
-    },
-    "weir": {
-      "name": "Bob Weir",
-      "the": false
-    },
-    "bernie-worrell": {
-      "name": "Bernie Worrell Orchestra",
-      "the": false
-    },
-    "duo": {
-      "name": "Benevento Russo Duo",
-      "the": true
-    },
-    "ben-kweller": {
-      "name": "Ben Kweller",
-      "the": false
-    },
-    "bela-fleck": {
-      "name": "Bela Fleck and the Flecktones",
+    "animal-collective": {
+      "name": "Animal Collective",
       "the": false
     },
     "aqueous": {
@@ -795,108 +758,200 @@ window.App = {
       "name": "Aquarium Rescue Unit",
       "the": false
     },
-    "animal-collective": {
-      "name": "Animal Collective",
+    "bela-fleck": {
+      "name": "Bela Fleck and the Flecktones",
       "the": false
     },
-    "umphreys": {
-      "name": "Umphrey's McGee",
+    "ben-kweller": {
+      "name": "Ben Kweller",
       "the": false
     },
-    "max-creek": {
-      "name": "Max Creek",
+    "bernie-worrell": {
+      "name": "Bernie Worrell Orchestra",
+      "the": true
+    },
+    "the-big-wu": {
+      "name": "The Big Wu",
       "the": false
     },
-    "matisyahu": {
-      "name": "Matisyahu",
+    "the-breakfast": {
+      "name": "The Breakfast",
       "the": false
     },
-    "lotus": {
-      "name": "Lotus",
+    "weir": {
+      "name": "Bob Weir",
       "the": false
     },
-    "john-popper": {
-      "name": "John Popper",
+    "dark-star": {
+      "name": "Dark Star Orchestra",
       "the": false
     },
-    "guster": {
-      "name": "Guster",
+    "disco-biscuits": {
+      "name": "Disco Biscuits",
+      "the": true
+    },
+    "dispatch": {
+      "name": "Dispatch",
       "the": false
     },
-    "greensky-bluegrass": {
-      "name": "Greensky Bluegrass",
+    "dopapod": {
+      "name": "Dopapod",
       "the": false
     },
-    "god-street-wine": {
-      "name": "God Street Wine",
+    "duo": {
+      "name": "Benevento Russo Duo",
+      "the": true
+    },
+    "everyone-orchestra": {
+      "name": "Everyone Orchestra",
+      "the": true
+    },
+    "fugazi": {
+      "name": "Fugazi",
+      "the": false
+    },
+    "furthur": {
+      "name": "Furthur",
       "the": false
     },
     "g-love": {
       "name": "G. Love and Special Sauce",
       "the": false
     },
-    "fugazi": {
-      "name": "Fugazi",
+    "g-nome": {
+      "name": "G-Nome Project",
+      "the": true
+    },
+    "garage-a-trois": {
+      "name": "Garage A Trois",
       "the": false
     },
-    "railroad-earth": {
-      "name": "Railroad Earth",
+    "god-street-wine": {
+      "name": "God Street Wine",
       "the": false
     },
-    "yonder": {
-      "name": "Yonder Mountain String Band",
+    "grace-potter": {
+      "name": "Grace Potter",
+      "the": true
+    },
+    "grateful-dead": {
+      "name": "Grateful Dead",
+      "the": true
+    },
+    "greensky-bluegrass": {
+      "name": "Greensky Bluegrass",
       "the": false
     },
-    "ween": {
-      "name": "Ween",
-      "the": false
-    },
-    "the-new-deal": {
-      "name": "The New Deal",
+    "guster": {
+      "name": "Guster",
       "the": false
     },
     "the-heavy-pets": {
       "name": "The Heavy Pets",
       "the": false
     },
-    "sci": {
-      "name": "String Cheese Incident",
-      "the": true
-    },
-    "steve-kimock-band": {
-      "name": "Steve Kimock Band",
-      "the": true
-    },
-    "steve-kimock": {
-      "name": "Steve Kimock",
+    "john-popper": {
+      "name": "John Popper",
       "the": false
     },
-    "spoon": {
-      "name": "Spoon",
-      "the": false
-    },
-    "raq": {
-      "name": "Raq",
-      "the": false
-    },
-    "zero": {
-      "name": "Zero",
+    "keller-williams": {
+      "name": "Keller Williams",
       "the": false
     },
     "kvhw": {
       "name": "KVHW",
       "the": false
     },
+    "lotus": {
+      "name": "Lotus",
+      "the": false
+    },
+    "marco": {
+      "name": "Marco Benevento",
+      "the": false
+    },
+    "matisyahu": {
+      "name": "Matisyahu",
+      "the": false
+    },
+    "max-creek": {
+      "name": "Max Creek",
+      "the": false
+    },
+    "moe": {
+      "name": "moe.",
+      "the": false
+    },
+    "the-new-deal": {
+      "name": "The New Deal",
+      "the": false
+    },
+    "phil-lesh": {
+      "name": "Phil Lesh and Friends",
+      "the": false
+    },
+    "radiators": {
+      "name": "The Radiators",
+      "the": false
+    },
+    "railroad-earth": {
+      "name": "Railroad Earth",
+      "the": false
+    },
+    "raq": {
+      "name": "Raq",
+      "the": false
+    },
+    "ratdog": {
+      "name": "Ratdog",
+      "the": false
+    },
+    "sci": {
+      "name": "String Cheese Incident",
+      "the": true
+    },
+    "smashing-pumpkins": {
+      "name": "Smashing Pumpkins",
+      "the": true
+    },
+    "spoon": {
+      "name": "Spoon",
+      "the": false
+    },
+    "steve-kimock": {
+      "name": "Steve Kimock",
+      "the": false
+    },
+    "steve-kimock-band": {
+      "name": "Steve Kimock Band",
+      "the": true
+    },
     "stringdusters": {
       "name": "Infamous Stringdusters",
       "the": true
     },
-    "grace-potter": {
-      "name": "Grace Potter",
+    "tedeschi-trucks": {
+      "name": "Tedeschi Trucks Band",
       "the": true
+    },
+    "umphreys": {
+      "name": "Umphrey's McGee",
+      "the": false
+    },
+    "ween": {
+      "name": "Ween",
+      "the": false
+    },
+    "yonder": {
+      "name": "Yonder Mountain String Band",
+      "the": false
+    },
+    "zero": {
+      "name": "Zero",
+      "the": false
     }
   },
-  "root": "http://iguana.relisten.net"
+  "root": "http://localhost:9000"
 };
 
 $(function() {
@@ -1078,12 +1133,12 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.initialize = function() {
-    this.route(/^about\/?$/, 'about');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/?$/, 'band');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/?$/, 'year');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song');
+    this.route(/^about\/?$/, 'about');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
   };
@@ -1703,6 +1758,9 @@ App.Models.Shows = (function(_super) {
       show.year = +year;
       show.month = +month;
       show.day = +day;
+      if (!show.day) {
+        show.day = +day.split(' ')[0];
+      }
       return show;
     });
     return response.data;

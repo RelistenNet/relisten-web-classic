@@ -1,7 +1,7 @@
 <ul class="left">
   <li class="home-container">
     <a class="home" href="/">Relisten</a>
-    <span> to </span>
+    <span> to{{#if bandName}} {{else}}...{{/if}}</span>
     {{#if bandName}}
       <a class="band" href="/{{slug}}">
         {{#if the}}the {{/if}}{{bandName}}

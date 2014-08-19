@@ -192,7 +192,7 @@ background-color: #ffffff;
 }
 
 a {
-color: #0088cc;
+color: #008ab0;
 text-decoration: none;
 }
 
@@ -5488,7 +5488,7 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 
 .index-page{padding-bottom:50px;}
 .index-page ul{clear:both;}
-.index-page ul li{list-style-type:none;font-size:1.3em;line-height:30px}
+.index-page ul li{list-style-type:none;font-size:1.6em;line-height:30px;padding:5px 0}
 
 .home-page{color:#333;height:100%;}
 .home-page .row-fluid{width:100%;height:100%;}
