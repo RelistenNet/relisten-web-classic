@@ -747,88 +747,71 @@ window.App = {
   "utils": {},
   "bands": {
     "animal-collective": {
-      "name": "Animal Collective",
-      "the": false
+      "name": "Animal Collective"
     },
     "aqueous": {
-      "name": "Aqueous",
-      "the": false
+      "name": "Aqueous"
     },
     "aru": {
-      "name": "Aquarium Rescue Unit",
-      "the": false
+      "name": "Aquarium Rescue Unit"
     },
     "bela-fleck": {
-      "name": "Bela Fleck and the Flecktones",
-      "the": false
+      "name": "Bela Fleck and the Flecktones"
     },
     "ben-kweller": {
-      "name": "Ben Kweller",
-      "the": false
+      "name": "Ben Kweller"
     },
     "bernie-worrell": {
       "name": "Bernie Worrell Orchestra",
       "the": true
     },
     "the-big-wu": {
-      "name": "The Big Wu",
-      "the": false
+      "name": "The Big Wu"
     },
     "the-breakfast": {
-      "name": "The Breakfast",
-      "the": false
+      "name": "The Breakfast"
     },
     "weir": {
-      "name": "Bob Weir",
-      "the": false
+      "name": "Bob Weir"
     },
     "dark-star": {
-      "name": "Dark Star Orchestra",
-      "the": false
+      "name": "Dark Star Orchestra"
     },
     "disco-biscuits": {
       "name": "Disco Biscuits",
       "the": true
     },
     "dispatch": {
-      "name": "Dispatch",
-      "the": false
+      "name": "Dispatch"
     },
     "dopapod": {
-      "name": "Dopapod",
-      "the": false
+      "name": "Dopapod"
     },
     "duo": {
       "name": "Benevento Russo Duo",
       "the": true
     },
     "everyone-orchestra": {
-      "name": "Everyone Orchestra",
-      "the": true
+      "name": "Everyone Orchestra"
     },
     "fugazi": {
-      "name": "Fugazi",
-      "the": false
+      "name": "Fugazi"
     },
     "furthur": {
-      "name": "Furthur",
-      "the": false
+      "name": "Furthur"
     },
     "g-love": {
-      "name": "G. Love and Special Sauce",
-      "the": false
+      "name": "G. Love and Special Sauce"
     },
     "g-nome": {
       "name": "G-Nome Project",
       "the": true
     },
     "garage-a-trois": {
-      "name": "Garage A Trois",
-      "the": false
+      "name": "Garage A Trois"
     },
     "god-street-wine": {
-      "name": "God Street Wine",
-      "the": false
+      "name": "God Street Wine"
     },
     "grace-potter": {
       "name": "Grace Potter",
@@ -839,72 +822,55 @@ window.App = {
       "the": true
     },
     "greensky-bluegrass": {
-      "name": "Greensky Bluegrass",
-      "the": false
+      "name": "Greensky Bluegrass"
     },
     "guster": {
-      "name": "Guster",
-      "the": false
+      "name": "Guster"
     },
     "the-heavy-pets": {
-      "name": "The Heavy Pets",
-      "the": false
+      "name": "The Heavy Pets"
     },
     "john-popper": {
-      "name": "John Popper",
-      "the": false
+      "name": "John Popper"
     },
     "keller-williams": {
-      "name": "Keller Williams",
-      "the": false
+      "name": "Keller Williams"
     },
     "kvhw": {
-      "name": "KVHW",
-      "the": false
+      "name": "KVHW"
     },
     "lotus": {
-      "name": "Lotus",
-      "the": false
+      "name": "Lotus"
     },
     "marco": {
-      "name": "Marco Benevento",
-      "the": false
+      "name": "Marco Benevento"
     },
     "matisyahu": {
-      "name": "Matisyahu",
-      "the": false
+      "name": "Matisyahu"
     },
     "max-creek": {
-      "name": "Max Creek",
-      "the": false
+      "name": "Max Creek"
     },
     "moe": {
-      "name": "moe.",
-      "the": false
+      "name": "moe."
     },
     "the-new-deal": {
-      "name": "The New Deal",
-      "the": false
+      "name": "The New Deal"
     },
     "phil-lesh": {
-      "name": "Phil Lesh and Friends",
-      "the": false
+      "name": "Phil Lesh and Friends"
     },
     "radiators": {
-      "name": "The Radiators",
-      "the": false
+      "name": "The Radiators"
     },
     "railroad-earth": {
-      "name": "Railroad Earth",
-      "the": false
+      "name": "Railroad Earth"
     },
     "raq": {
-      "name": "Raq",
-      "the": false
+      "name": "Raq"
     },
     "ratdog": {
-      "name": "Ratdog",
-      "the": false
+      "name": "Ratdog"
     },
     "sci": {
       "name": "String Cheese Incident",
@@ -915,12 +881,10 @@ window.App = {
       "the": true
     },
     "spoon": {
-      "name": "Spoon",
-      "the": false
+      "name": "Spoon"
     },
     "steve-kimock": {
-      "name": "Steve Kimock",
-      "the": false
+      "name": "Steve Kimock"
     },
     "steve-kimock-band": {
       "name": "Steve Kimock Band",
@@ -935,20 +899,16 @@ window.App = {
       "the": true
     },
     "umphreys": {
-      "name": "Umphrey's McGee",
-      "the": false
+      "name": "Umphrey's McGee"
     },
     "ween": {
-      "name": "Ween",
-      "the": false
+      "name": "Ween"
     },
     "yonder": {
-      "name": "Yonder Mountain String Band",
-      "the": false
+      "name": "Yonder Mountain String Band"
     },
     "zero": {
-      "name": "Zero",
-      "the": false
+      "name": "Zero"
     }
   },
   "root": "http://iguana.relisten.net"
