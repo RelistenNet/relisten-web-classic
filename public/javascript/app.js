@@ -761,6 +761,10 @@ window.App = {
     "ben-kweller": {
       "name": "Ben Kweller"
     },
+    "duo": {
+      "name": "Benevento Russo Duo",
+      "the": true
+    },
     "bernie-worrell": {
       "name": "Bernie Worrell Orchestra",
       "the": true
@@ -768,14 +772,23 @@ window.App = {
     "the-big-wu": {
       "name": "The Big Wu"
     },
+    "blues-traveler": {
+      "name": "Blues Traveler"
+    },
     "the-breakfast": {
       "name": "The Breakfast"
     },
     "weir": {
       "name": "Bob Weir"
     },
+    "club-d-elf": {
+      "name": "Club d'Elf"
+    },
     "dark-star": {
       "name": "Dark Star Orchestra"
+    },
+    "the-decemberists": {
+      "name": "The Decemberists"
     },
     "disco-biscuits": {
       "name": "Disco Biscuits",
@@ -787,9 +800,12 @@ window.App = {
     "dopapod": {
       "name": "Dopapod"
     },
-    "duo": {
-      "name": "Benevento Russo Duo",
+    "drive-by-truckers": {
+      "name": "Drive-By Truckers",
       "the": true
+    },
+    "eliott-smith": {
+      "name": "Eliott Smith"
     },
     "everyone-orchestra": {
       "name": "Everyone Orchestra"
@@ -830,6 +846,13 @@ window.App = {
     "the-heavy-pets": {
       "name": "The Heavy Pets"
     },
+    "jack-johnson": {
+      "name": "Jack Johnson"
+    },
+    "jazz-mandolin-project": {
+      "name": "Jazz Mandolin Project",
+      "the": true
+    },
     "john-popper": {
       "name": "John Popper"
     },
@@ -838,6 +861,9 @@ window.App = {
     },
     "kvhw": {
       "name": "KVHW"
+    },
+    "little-feat": {
+      "name": "Little Feat"
     },
     "lotus": {
       "name": "Lotus"
@@ -848,14 +874,29 @@ window.App = {
     "matisyahu": {
       "name": "Matisyahu"
     },
+    "matt-pond-pa": {
+      "name": "Matt Pond PA"
+    },
     "max-creek": {
       "name": "Max Creek"
+    },
+    "mmj": {
+      "name": "My Morning Jacket"
     },
     "moe": {
       "name": "moe."
     },
+    "mogwai": {
+      "name": "Mogwai"
+    },
+    "the-motet": {
+      "name": "The Motet"
+    },
     "the-new-deal": {
       "name": "The New Deal"
+    },
+    "percy-hill": {
+      "name": "Percy Hill"
     },
     "phil-lesh": {
       "name": "Phil Lesh and Friends"
@@ -871,6 +912,9 @@ window.App = {
     },
     "ratdog": {
       "name": "Ratdog"
+    },
+    "ryan-adams": {
+      "name": "Ryan Adams"
     },
     "sci": {
       "name": "String Cheese Incident",
@@ -890,16 +934,34 @@ window.App = {
       "name": "Steve Kimock Band",
       "the": true
     },
+    "strangefolk": {
+      "name": "Strangefolk"
+    },
     "stringdusters": {
       "name": "Infamous Stringdusters",
       "the": true
+    },
+    "tea-leaf-green": {
+      "name": "Tea Leaf Green"
+    },
+    "ted-leo": {
+      "name": "Ted Leo and the Pharmacists"
     },
     "tedeschi-trucks": {
       "name": "Tedeschi Trucks Band",
       "the": true
     },
+    "tenacious-d": {
+      "name": "Tenacious D"
+    },
     "umphreys": {
       "name": "Umphrey's McGee"
+    },
+    "the-walkmen": {
+      "name": "The Walkmen"
+    },
+    "war-on-drugs": {
+      "name": "The War on Drugs"
     },
     "ween": {
       "name": "Ween"
