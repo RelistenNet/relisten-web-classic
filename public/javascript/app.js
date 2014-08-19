@@ -804,8 +804,8 @@ window.App = {
       "name": "Drive-By Truckers",
       "the": true
     },
-    "eliott-smith": {
-      "name": "Eliott Smith"
+    "elliott-smith": {
+      "name": "Elliott Smith"
     },
     "everyone-orchestra": {
       "name": "Everyone Orchestra"
