@@ -6,7 +6,7 @@ class App.Views.Songs extends App.Views.View
     #'click .song': 'addShowToPlaylist'
     'click .play': 'play'
     'click .add-all': 'addAll'
-    'click .show-sources': 'showSources'
+    'click .select-source': 'showSources'
   initialize: ->
     unless @options.year || @options.month || @options.day
       @folder = new App.Models.Songs songs
@@ -26,10 +26,10 @@ class App.Views.Songs extends App.Views.View
     sources = @folder.get('data') if @folder
     return unless sources?.length
 
-    if @options.showVersion
-      @songs = sources[@options.showVersion]
-    else
-      @songs = sources[0]
+    @songs = sources[@options.showVersion || 0]
+    sources[@options.showVersion || 0].hidden = true
+
+    console.log @songs
 
     @$el.html @template
       songs: @songs
@@ -39,6 +39,8 @@ class App.Views.Songs extends App.Views.View
       day: @options.day
       band: @options.band
       showVersion: @options.showVersion || ''
+      multipleSources: sources.length > 1
+      totalSources: sources.length
 
     @$sources = @$el.find '.source'
 

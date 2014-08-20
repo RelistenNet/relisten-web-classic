@@ -1,36 +1,34 @@
 <div class=ul-header>{{month}}/{{day}}</div>
 <ul>
   {{#with songs}}
-    <li class="current-source show-sources">
-      <h5>Current Source <span>(click here to select another source)</span></h5>
-      {{#if taper}}<p class=taper>Taper: {{taper}}</p>{{/if}}
-      {{#if transferer}}<p>Transferer: {{transferer}}</p>{{/if}}
-      {{#if source}}<p>Source: {{source}}</p>{{/if}}
-      {{#if lineage}}<p>Lineage: {{lineage}}</p>{{/if}}
+    <li class="current-source select-source">
+      {{#if taper}}<p><span class="field">Taper:</span> {{taper}}</p>{{/if}}
+      {{#if transferer}}<p><span class="field">Transferer:</span> {{transferer}}</p>{{/if}}
+      {{#if source}}<p><span class="field">Source:</span> {{source}}</p>{{/if}}
+      {{#if lineage}}<p><span class="field">Lineage:</span> {{lineage}}</p>{{/if}}
       {{#if avg}}
         <p>Rating: {{avg}} / {{total_reviews}} reviews</p>
       {{/if}}
-      <div class=total-sources>{{length ../sources}}</div>
     </li>
   {{/with}}
-  {{#if sources}}
-    <li class=source>Choose your source:</li>
-  {{/if}}
-  {{#each sources}}
-    <li class=source>
-      <a href=/{{../band}}/{{../year}}/{{../month}}/{{../day}}-{{@index}}>
-        {{#if taper}}<p class=taper>Taper: {{taper}}</p>{{/if}}
-        {{#if transferer}}<p>Transferer: {{transferer}}</p>{{/if}}
-        {{#if source}}<p>{{source}}</p>{{/if}}
-        {{#if lineage}}<p>Lineage: {{lineage}}</p>{{/if}}
-        {{#if avg}}
-          <p>Rating: {{avg}} / {{total_reviews}} reviews</p>
-        {{/if}}
-      </a>
-    </li>
-  {{/each}}
-  {{#if sources}}
-    <li class=source>This is where the show starts, bub.</li>
+  {{#if multipleSources}}
+    <li class="select-source multiple-sources">Select another source <span class=total-sources>({{totalSources}})</span></li>
+    {{#each sources}}
+      {{#if hidden}}
+      {{else}}
+        <li class=source>
+          <a href=/{{../../band}}/{{../../year}}/{{../../month}}/{{../../day}}-{{@index}}>
+            {{#if taper}}<p><span class="field">Taper:</span> {{taper}}</p>{{/if}}
+            {{#if transferer}}<p><span class="field">Transferer:</span> {{transferer}}</p>{{/if}}
+            {{#if source}}<p><span class="field">Source:</span> {{source}}</p>{{/if}}
+            {{#if lineage}}<p><span class="field">Lineage:</span> {{lineage}}</p>{{/if}}
+            {{#if avg}}
+              <p>Rating: {{avg}} / {{total_reviews}} reviews</p>
+            {{/if}}
+          </a>
+        </li>
+      {{/if}}
+    {{/each}}
   {{/if}}
   {{#each songs.tracks}}
     <li data-idx={{@index}} data-song="{{title}}">
