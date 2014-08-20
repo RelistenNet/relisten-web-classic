@@ -6,7 +6,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<p>\n  Welcome to this internet experiment.\n</p>\n\n<br>\n\n<p class=big>\n  \"Screw this wall of text. I just want to email you\": <a href=\"mailto:postmaster@listentothedead.com\">postmaster@listentothedead.com</a>\n</p>\n\n<br>\n\n<p>\n  If you haven't figured it out already, you can stream nearly every <a href=\"http://en.wikipedia.org/wiki/Grateful_Dead\">Grateful Dead</a> show here.\n</p>\n\n<p>\n  This site just launched very recently. Please use it as you'd like, but keep in mind it is still very young. If you find a bug, please send a quick email with your browser and operating system, along with a straightforward explanation as to what happened to <a href=\"mailto:postmaster@listentothedead.com\">postmaster@listentothedead.com</a>. Comments and suggestions are also always welcome.\n</p>\n\n<p>Want a streaming site for your band? Please email us.</p>\n\n<br>\n<br>\n\n<p>\n  If you'd like to donate, all of the proceeds will go towards the running of this site and others like it. Any extra funds will be donated to Archive.org and The Mockingbird Foundation.\n</p>\n\n<br>\n\n<p>\n<center>\n<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_blank\">\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----MIIHFgYJKoZIhvcNAQcEoIIHBzCCBwMCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAh11KAHoBFTbiDh9MoFT1ZNklv3yVRAL/xI1WXNO58Prr3sP48LaQYUJIxnO6IumOfvZ4qzAqQe9uwof1Wj6u6F4t2bIX2j2nUTl8oSRFKQBXEp6T+ttXZBX8tF9+mZjhjYp1C6b+LbiBWbnR+aK0S2pQzOqN/6CQSy3neg8pwGTELMAkGBSsOAwIaBQAwgZMGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIU6sIpVoDyTSAcIOU0s5Gg4xrtR3i2/Ax0+7UTc/7+aWmJ5TYVvhwjRaqwmmL9grTmRpbtC1Lco+OTBzpIXXTpI3599m0nzlVwwf/AQ+pFGeqiyy3k5CU4jH01Hp3ahhlOilbNOzM063eIT5fTdPomG8nD5kR9SSwBjegggOHMIIDgzCCAuygAwIBAgIBADANBgkqhkiG9w0BAQUFADCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wHhcNMDQwMjEzMTAxMzE1WhcNMzUwMjEzMTAxMzE1WjCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMFHTt38RMxLXJyO2SmS+Ndl72T7oKJ4u4uw+6awntALWh03PewmIJuzbALScsTS4sZoS1fKciBGoh11gIfHzylvkdNe/hJl66/RGqrj5rFb08sAABNTzDTiqqNpJeBsYs/c2aiGozptX2RlnBktH+SUNpAajW724Nv2Wvhif6sFAgMBAAGjge4wgeswHQYDVR0OBBYEFJaffLvGbxe9WT9S1wob7BDWZJRrMIG7BgNVHSMEgbMwgbCAFJaffLvGbxe9WT9S1wob7BDWZJRroYGUpIGRMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbYIBADAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAIFfOlaagFrl71+jq6OKidbWFSE+Q4FqROvdgIONth+8kSK//Y/4ihuE4Ymvzn5ceE3S/iBSQQMjyvb+s2TWbQYDwcp129OPIbD9epdr4tJOUNiSojw7BHwYRiPh58S1xGlFgHFXwrEBb3dgNbMUa+u4qectsMAXpVHnD9wIyfmHMYIBmjCCAZYCAQEwgZQwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tAgEAMAkGBSsOAwIaBQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xMzA0MDQwNzQwMTVaMCMGCSqGSIb3DQEJBDEWBBTyqz+PT/+DcoUfNIN7gCq1nPjwgDANBgkqhkiG9w0BAQEFAASBgEkz4EmW0MS+MfKFaWfUN2+tspQovr6tlWNmYEj/wBNAhbErRLcVURKVGooF+JI1JtVZkklT2NtPSva2hinpGH1NRGWvlbRYF3vZlhktJhbkwpnOUUlS/IkmmW8Bp8Zsq+duCzC74aC5AM+Qsn6DGxzDELp4qxCWLlaVQlW9KXBp-----END PKCS7-----\n\">\n<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n</form>\n</center>\n</p>\n\n<p><center>Bitcoin: 1FQRjYy5hqzeDD5DWThGNzfyy1E2PoNdMC</center></p>\n\n<br>\n<br>\n\n<p>\n  This site complies with the Grateful Dead's <a href=\"http://web.archive.org/web/20050324025618/http://dead.net/hotline_info/NEW_DOCUMENTS/mp3.html\">taping policy</a> along with Archive.org's <a href=\"https://archive.org/post/261115/hotlinking-allowed\">policy</a>.\n</p>\n\n<p>\n  <i>\n    The Grateful Dead and our managing organizations have long encouraged the purely non-commercial exchange of music taped at our concerts and those of our individual members. That a new medium of distribution has arisen - digital audio files being traded over the Internet - does not change our policy in this regard. Our stipulations regarding digital distribution are merely extensions of those long-standing principles and they are as follow:\n</i>\n</p>\n\n<p>\n  <i>\n    No commercial gain may be sought by websites offering digital files of our music, whether through advertising, exploiting databases compiled from their traffic, or any other means.\nAll participants in such digital exchange acknowledge and respect the copyrights of the performers, writers and publishers of the music.\n</i>\n</p>\n<p>\n  <i>\n    This notice should be clearly posted on all sites engaged in this activity.\n    We reserve the ability to withdraw our sanction of non-commercial digital music should circumstances arise that compromise our ability to protect and steward the integrity of our work.\n</i>\n</p>\n";
+  return "<p>\n  Welcome to yet another internet experiment.\n</p>\n\n<br>\n\n<p class=big>\n  For any comments, suggestions, or data errors please email <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>.\n</p>\n\n<br>\n\n<p class=big>\n  Peruse the various bands and enjoy their extensive live catalogues.\n</p>\n\n<br>\n\n<p>\n  This site is powered by Archive.org and Alec Gorge's <a href=\"https://github.com/alecgorge/iguana\">Iguana</a>.\n</p>\n\n<br>\n\n<p>\n  If you'd like to donate, all of the proceeds will go towards the running of this site and others like it. Any extra funds will be donated to Archive.org and The Mockingbird Foundation.\n</p>\n\n<br>\n\n<p>\n<center>\n<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_blank\">\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----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-----END PKCS7-----\n\">\n<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n</form>\n</center>\n</p>\n\n<p><center>Bitcoin: 1FQRjYy5hqzeDD5DWThGNzfyy1E2PoNdMC</center></p>\n\n<br>\n<br>\n\n<p>\n  This site complies with Archive.org's <a href=\"https://archive.org/post/261115/hotlinking-allowed\">policy</a>.\n</p>\n\n<p>\n  <i>\n    The Grateful Dead and our managing organizations have long encouraged the purely non-commercial exchange of music taped at our concerts and those of our individual members. That a new medium of distribution has arisen - digital audio files being traded over the Internet - does not change our policy in this regard. Our stipulations regarding digital distribution are merely extensions of those long-standing principles and they are as follow:\n</i>\n</p>\n\n<p>\n  <i>\n    No commercial gain may be sought by websites offering digital files of our music, whether through advertising, exploiting databases compiled from their traffic, or any other means.\n    All participants in such digital exchange acknowledge and respect the copyrights of the performers, writers and publishers of the music.\n  </i>\n</p>\n<p>\n  <i>\n    This notice should be clearly posted on all sites engaged in this activity.\n    We reserve the ability to withdraw our sanction of non-commercial digital music should circumstances arise that compromise our ability to protect and steward the integrity of our work.\n</i>\n</p>\n";
   });
 
 this["JST"]["footer"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -444,7 +444,19 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data,depth1) {
   
   var buffer = "", stack1, stack2, options;
-  buffer += "\n  <li>\n    <a href=\"/"
+  buffer += "\n  <li>\n    <a class=\"show-";
+  if (stack1 = helpers.year) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.year; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "-";
+  if (stack1 = helpers.month) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.month; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "-";
+  if (stack1 = helpers.day) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.day; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" href=\"/"
     + escapeExpression(((stack1 = depth1.band),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/";
   if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
@@ -605,10 +617,10 @@ function program16(depth0,data,depth2) {
     + "/"
     + escapeExpression(((stack1 = depth2.month),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/"
-    + escapeExpression(((stack1 = depth2.day),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "-"
-    + escapeExpression(((stack1 = ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + ">\n            ";
+    + escapeExpression(((stack1 = depth2.day),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
+  stack2 = helpers['if'].call(depth0, ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index), {hash:{},inverse:self.noop,fn:self.program(17, program17, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += ">\n            ";
   stack2 = helpers['if'].call(depth0, depth0.taper, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n            ";
@@ -621,12 +633,20 @@ function program16(depth0,data,depth2) {
   stack2 = helpers['if'].call(depth0, depth0.lineage, {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n            ";
-  stack2 = helpers['if'].call(depth0, depth0.avg, {hash:{},inverse:self.noop,fn:self.program(17, program17, data),data:data});
+  stack2 = helpers['if'].call(depth0, depth0.avg, {hash:{},inverse:self.noop,fn:self.program(19, program19, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n          </a>\n        </li>\n      ";
   return buffer;
   }
 function program17(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "-"
+    + escapeExpression(((stack1 = ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
+  return buffer;
+  }
+
+function program19(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n              <p>Rating: ";
@@ -641,7 +661,7 @@ function program17(depth0,data) {
   return buffer;
   }
 
-function program19(depth0,data,depth1) {
+function program21(depth0,data,depth1) {
   
   var buffer = "", stack1, stack2, options;
   buffer += "\n    <li data-idx="
@@ -658,7 +678,7 @@ function program19(depth0,data,depth1) {
     + escapeExpression(((stack1 = depth1.month),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/"
     + escapeExpression(((stack1 = depth1.day),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
-  stack2 = helpers['if'].call(depth0, depth1.showVersion, {hash:{},inverse:self.noop,fn:self.program(20, program20, data),data:data});
+  stack2 = helpers['if'].call(depth0, depth1.showVersion, {hash:{},inverse:self.noop,fn:self.program(22, program22, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += escapeExpression(((stack1 = depth1.showVersion),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/";
@@ -675,7 +695,7 @@ function program19(depth0,data,depth1) {
     + "</span></a>\n      <div class=play>ᐅ</div>\n      <div title=\"Add To Queue\" class=add>+</div>\n    </li>\n  ";
   return buffer;
   }
-function program20(depth0,data) {
+function program22(depth0,data) {
   
   
   return "-";
@@ -696,7 +716,7 @@ function program20(depth0,data) {
   stack1 = helpers['if'].call(depth0, depth0.multipleSources, {hash:{},inverse:self.noop,fn:self.program(12, program12, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.tracks), {hash:{},inverse:self.noop,fn:self.programWithDepth(19, program19, data, depth0),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.tracks), {hash:{},inverse:self.noop,fn:self.programWithDepth(21, program21, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n  <li><a class=archive href=\"https://archive.org/details/"
     + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.archive_identifier)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
@@ -715,6 +735,10 @@ function program1(depth0,data,depth1) {
   buffer += "\n  <li>\n    <a href=\"/"
     + escapeExpression(((stack1 = depth1.band),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/";
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\" class=\"year-";
   if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
@@ -1171,19 +1195,45 @@ App.Router = (function(_super) {
     return document.title = 'Relisten';
   };
 
-  Router.prototype.band = function(band) {
-    this.band = band;
-    this.changeView(new App.Views.HomePage());
-    App.years = new App.Views.Years({
-      band: band
-    });
-    App.header.render();
-    return document.title = 'Relisten';
-  };
-
-  Router.prototype.year = function(band, year) {
+  Router.prototype.band = function(band, year, month, day) {
+    var _this = this;
     this.band = band;
     this.year = year;
+    this.month = month;
+    this.day = day;
+    this.changeView(new App.Views.HomePage());
+    this.randomShow = new App.Models.RandomShow({
+      band: this.band
+    });
+    this.randomShow.fetch({
+      success: function() {
+        var _ref1;
+        _ref1 = _this.randomShow.toJSON(), _this.year = _ref1.year, _this.month = _ref1.month, _this.day = _ref1.day;
+        App.years = new App.Views.Years({
+          band: _this.band
+        });
+        App.shows = new App.Views.Shows({
+          band: _this.band,
+          year: _this.year
+        });
+        return App.songs = new App.Views.Songs({
+          band: _this.band,
+          year: _this.year,
+          month: _this.month,
+          day: _this.day,
+          showVersion: _this.showVersion
+        });
+      }
+    });
+    App.header.render();
+    return document.title = "" + App.bands[this.band].name + " | Relisten";
+  };
+
+  Router.prototype.year = function(band, year, month, day) {
+    this.band = band;
+    this.year = year;
+    this.month = month;
+    this.day = day;
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years({
@@ -1198,7 +1248,7 @@ App.Router = (function(_super) {
       App.songs.$el.empty();
     }
     App.header.render();
-    return document.title = "" + year + " | Relisten";
+    return document.title = "" + year + " | " + App.bands[this.band].name + " | Relisten";
   };
 
   Router.prototype.day = function(band, year, month, day) {
@@ -1228,7 +1278,7 @@ App.Router = (function(_super) {
       day: this.day
     });
     App.header.render();
-    return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | Relisten";
+    return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | " + App.bands[this.band].name + " | Relisten";
   };
 
   Router.prototype.show = function(band, year, month, day, showVersion) {
@@ -1260,7 +1310,7 @@ App.Router = (function(_super) {
       showVersion: this.showVersion
     });
     App.header.render();
-    return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | Relisten";
+    return document.title = "" + this.year + "/" + this.month + "/" + this.day + " | " + App.bands[this.band].name + " | Relisten";
   };
 
   Router.prototype.song = function(band, year, month, day, showVersion, slug, version, time) {
@@ -1300,8 +1350,7 @@ App.Router = (function(_super) {
   };
 
   Router.prototype.finishSong = function() {
-    var self,
-      _this = this;
+    var self;
     self = this;
     App.queue.on('reset', function() {
       var ms;
@@ -1309,18 +1358,9 @@ App.Router = (function(_super) {
       App.song = App.queue.findWhere({
         slug: self.slug
       });
-      document.title = "" + (App.song.get('title')) + " | " + self.year + "/" + self.month + "/" + self.day + " | Relisten";
+      document.title = "" + (App.song.get('title')) + " | " + self.year + "/" + self.month + "/" + self.day + " | " + App.bands[self.band].name + " | Relisten";
       App.queue.play(App.song, ms);
       return App.queue.off('reset');
-    });
-    App.songs.songs.tracks.map(function(track) {
-      return _.extend(track, {
-        band: _this.band,
-        year: _this.year,
-        month: _this.month,
-        day: _this.day,
-        showVersion: _this.showVersion
-      });
     });
     return App.queue.reset(App.songs.songs.tracks);
   };
@@ -1758,6 +1798,45 @@ var _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+App.Models.RandomShow = (function(_super) {
+  __extends(RandomShow, _super);
+
+  function RandomShow() {
+    _ref = RandomShow.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  RandomShow.prototype.url = function() {
+    var band;
+    band = this.get('band');
+    return "" + App.root + "/api/artists/" + band + "/random_date";
+  };
+
+  RandomShow.prototype.parse = function(response) {
+    var date, day, month, year, _ref1;
+    if (!(response != null ? response.data : void 0)) {
+      return {};
+    }
+    date = response.data;
+    _ref1 = date.split('-'), year = _ref1[0], month = _ref1[1], day = _ref1[2];
+    year = +year;
+    month = +month;
+    day = +day;
+    return {
+      year: year,
+      month: month,
+      day: day
+    };
+  };
+
+  return RandomShow;
+
+})(App.Models.Model);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
 App.Models.Shows = (function(_super) {
   __extends(Shows, _super);
 
@@ -2001,7 +2080,7 @@ App.Collections.Queue = (function(_super) {
     showVersionStr = showVersion ? '-' + showVersion : '';
     if (!window.location.pathname.match("/" + band + "/" + year + "/" + month + "/" + day + showVersionStr + "/" + slug)) {
       url = "/" + band + "/" + year + "/" + month + "/" + day + showVersionStr + "/" + slug;
-      document.title = "" + title + " | " + year + "/" + month + "/" + day + " | Listen to the " + band;
+      document.title = "" + title + " | " + year + "/" + month + "/" + day + " | " + App.bands[band].name + "| Relisten";
       Backbone.history.navigate(url, {
         trigger: false
       });
@@ -2252,7 +2331,7 @@ App.Views.Header = (function(_super) {
   Header.prototype.template = JST['header'];
 
   Header.prototype.events = {
-    'click .band-select': 'chooseBand'
+    'click .band': 'refreshBand'
   };
 
   Header.prototype.initialize = function() {
@@ -2267,6 +2346,17 @@ App.Views.Header = (function(_super) {
       bandName: (_ref2 = App.bands[(_ref3 = App.router) != null ? _ref3.band : void 0]) != null ? _ref2.name : void 0,
       the: (_ref4 = App.bands[(_ref5 = App.router) != null ? _ref5.band : void 0]) != null ? _ref4.the : void 0
     }));
+  };
+
+  Header.prototype.refreshBand = function() {
+    var _ref1, _ref2, _ref3;
+    if (Backbone.history.fragment === ((_ref1 = App.router) != null ? _ref1.band : void 0)) {
+      return Backbone.history.loadUrl('/' + ((_ref2 = App.router) != null ? _ref2.band : void 0));
+    } else {
+      return App.router.navigate('/' + ((_ref3 = App.router) != null ? _ref3.band : void 0), {
+        trigger: true
+      });
+    }
   };
 
   return Header;
@@ -2914,7 +3004,7 @@ App.Views.Shows = (function(_super) {
 
   Shows.prototype.initialize = function() {
     if (!this.options.band) {
-      this.options.band = 'gd';
+      return;
     }
     if (!this.options.year) {
       this.shows = new App.Models.Shows(this.options.band, shows);
@@ -2935,7 +3025,7 @@ App.Views.Shows = (function(_super) {
       band: this.options.band
     }));
     this.$a = this.$el.find('a');
-    this.$a.removeClass('active');
+    this.$a.filter(".show-" + App.router.year + "-" + App.router.month + "-" + App.router.day).addClass('active');
     return this;
   };
 
@@ -2993,7 +3083,8 @@ App.Views.Songs = (function(_super) {
   };
 
   Songs.prototype.render = function() {
-    var sources;
+    var band, day, month, showVersion, sources, year, _ref1,
+      _this = this;
     App.router.clearActive();
     if (this.folder) {
       sources = this.folder.get('data');
@@ -3003,7 +3094,16 @@ App.Views.Songs = (function(_super) {
     }
     this.songs = sources[this.options.showVersion || 0];
     sources[this.options.showVersion || 0].hidden = true;
-    console.log(this.songs);
+    _ref1 = App.router, band = _ref1.band, year = _ref1.year, month = _ref1.month, day = _ref1.day, showVersion = _ref1.showVersion;
+    this.songs.tracks.map(function(track) {
+      return _.extend(track, {
+        band: band,
+        year: year,
+        month: month,
+        day: day,
+        showVersion: showVersion
+      });
+    });
     this.$el.html(this.template({
       songs: this.songs,
       sources: sources || [],
@@ -3033,7 +3133,6 @@ App.Views.Songs = (function(_super) {
   };
 
   Songs.prototype.addAll = function() {
-    console.log(this.songs.tracks);
     if (App.queue.length === 0) {
       App.queue.reset(this.songs.tracks);
     }
@@ -3101,7 +3200,7 @@ App.Views.Years = (function(_super) {
 
   Years.prototype.initialize = function() {
     if (!this.options.band) {
-      this.options.band = 'gd';
+      return;
     }
     this.years = new App.Models.Years({
       band: this.options.band
@@ -3117,6 +3216,7 @@ App.Views.Years = (function(_super) {
       band: this.options.band
     }));
     this.$a = this.$el.find('a');
+    this.$a.filter('.year-' + App.router.year).addClass('active');
     return this;
   };
 

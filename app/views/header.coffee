@@ -4,7 +4,7 @@ class App.Views.Header extends App.Views.View
   el: 'header'
   template: JST['header']
   events:
-    'click .band-select': 'chooseBand'
+    'click .band': 'refreshBand'
   initialize: ->
     super
   render: (playlist) =>
@@ -13,3 +13,9 @@ class App.Views.Header extends App.Views.View
       slug: App.router?.band
       bandName: App.bands[App.router?.band]?.name
       the: App.bands[App.router?.band]?.the
+  refreshBand: ->
+    if Backbone.history.fragment is App.router?.band
+      Backbone.history.loadUrl '/' + App.router?.band
+    else
+      App.router.navigate '/' + App.router?.band, trigger: true
+

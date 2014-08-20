@@ -29,7 +29,8 @@ class App.Views.Songs extends App.Views.View
     @songs = sources[@options.showVersion || 0]
     sources[@options.showVersion || 0].hidden = true
 
-    console.log @songs
+    { band, year, month, day, showVersion } = App.router
+    @songs.tracks.map (track) => _.extend track, { band, year, month, day, showVersion }
 
     @$el.html @template
       songs: @songs
@@ -52,7 +53,6 @@ class App.Views.Songs extends App.Views.View
     song.fetch success: -> App.queue.reset song
 
   addAll: ->
-    console.log @songs.tracks
     App.queue.reset @songs.tracks if App.queue.length is 0
     App.queue.add @songs.tracks
   addShowToPlaylist: (e) ->

@@ -17,7 +17,7 @@
       {{#if hidden}}
       {{else}}
         <li class=source>
-          <a href=/{{../../band}}/{{../../year}}/{{../../month}}/{{../../day}}-{{@index}}>
+          <a href=/{{../../band}}/{{../../year}}/{{../../month}}/{{../../day}}{{#if @index}}-{{@index}}{{/if}}>
             {{#if taper}}<p><span class="field">Taper:</span> {{taper}}</p>{{/if}}
             {{#if transferer}}<p><span class="field">Transferer:</span> {{transferer}}</p>{{/if}}
             {{#if source}}<p><span class="field">Source:</span> {{source}}</p>{{/if}}

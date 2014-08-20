@@ -25,7 +25,7 @@ class App.Collections.Queue extends App.Collections.Collection
     # If not on the URL already, go ahead!
     unless window.location.pathname.match "/#{band}/#{year}/#{month}/#{day}#{showVersionStr}/#{slug}"
       url = "/#{band}/#{year}/#{month}/#{day}#{showVersionStr}/#{slug}"
-      document.title = "#{title} | #{year}/#{month}/#{day} | Listen to the #{band}"
+      document.title = "#{title} | #{year}/#{month}/#{day} | #{App.bands[band].name}| Relisten"
       Backbone.history.navigate url, trigger: false
       ga('send', 'pageview', "#{url}")
     App.queueView.render App.queueView.$el.find('ul').scrollTop()

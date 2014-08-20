@@ -19,21 +19,25 @@ class App.Router extends Backbone.Router
     @band = ''
     @changeView(new App.Views.IndexPage())
     document.title = 'Relisten'
-  band: (@band) ->
+  band: (@band, @year, @month, @day) ->
     @changeView(new App.Views.HomePage())
-    App.years = new App.Views.Years { band }
-    #App.shows = new App.Views.Shows()
-    #App.songs = new App.Views.Songs()
+    @randomShow = new App.Models.RandomShow { @band }
+    @randomShow.fetch success: =>
+      { @year, @month, @day } = @randomShow.toJSON()
+
+      App.years = new App.Views.Years { @band }
+      App.shows = new App.Views.Shows { @band, @year }
+      App.songs = new App.Views.Songs { @band, @year, @month, @day, @showVersion }
     App.header.render()
-    document.title = 'Relisten'
-  year: (@band, @year) ->
+    document.title = "#{App.bands[@band].name} | Relisten"
+  year: (@band, @year, @month, @day) ->
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years { band }
     App.shows = new App.Views.Shows { band, year }
     App.songs.$el.empty() if App.songs
     App.header.render()
-    document.title = "#{year} | Relisten"
+    document.title = "#{year} | #{App.bands[@band].name} | Relisten"
   day: (@band, @year, @month, @day) ->
     App.songs.undelegateEvents() if App.songs
     if App.initial
@@ -42,7 +46,7 @@ class App.Router extends Backbone.Router
     App.shows = new App.Views.Shows { @band, @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
     App.songs = new App.Views.Songs { @band, @year, @month, @day }
     App.header.render()
-    document.title = "#{@year}/#{@month}/#{@day} | Relisten"
+    document.title = "#{@year}/#{@month}/#{@day} | #{App.bands[@band].name} | Relisten"
   show: (@band, @year, @month, @day, @showVersion) ->
     App.songs.undelegateEvents() if App.songs
     if App.initial
@@ -51,7 +55,7 @@ class App.Router extends Backbone.Router
     App.shows = new App.Views.Shows { @band, @year } unless App.shows and App.shows.shows and App.shows.shows.get('year') is +@year
     App.songs = new App.Views.Songs { @band, @year, @month, @day, @showVersion }
     App.header.render()
-    document.title = "#{@year}/#{@month}/#{@day} | Relisten"
+    document.title = "#{@year}/#{@month}/#{@day} | #{App.bands[@band].name} | Relisten"
   song: (@band, @year, @month, @day, @showVersion, @slug, @version, @time) ->
     if App.initial
       @changeView(new App.Views.HomePage())
@@ -70,11 +74,9 @@ class App.Router extends Backbone.Router
     App.queue.on 'reset', ->
       ms = timeToMS self.time
       App.song = App.queue.findWhere { slug: self.slug }
-      document.title = "#{App.song.get('title')} | #{self.year}/#{self.month}/#{self.day} | Relisten"
+      document.title = "#{App.song.get('title')} | #{self.year}/#{self.month}/#{self.day} | #{App.bands[self.band].name} | Relisten"
       App.queue.play App.song, ms
       App.queue.off 'reset'
-
-    App.songs.songs.tracks.map (track) => _.extend track, { @band, @year, @month, @day, @showVersion }
 
     App.queue.reset App.songs.songs.tracks
   about: ->
@@ -132,3 +134,4 @@ class App.Router extends Backbone.Router
     return if @lastUrl is url
     @lastUrl = url
     ga('send', 'pageview', "/#{url}");
+

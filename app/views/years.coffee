@@ -4,7 +4,7 @@ class App.Views.Years extends App.Views.View
   events:
     'click a': 'activate'
   initialize: ->
-    @options.band = 'gd' unless @options.band
+    return unless @options.band
 
     @years = new App.Models.Years band: @options.band
     @listenTo @years, 'change', @render
@@ -16,6 +16,8 @@ class App.Views.Years extends App.Views.View
       band: @options.band
 
     @$a = @$el.find 'a'
+
+    @$a.filter('.year-' + App.router.year).addClass 'active'
 
     @
   activate: (e) =>

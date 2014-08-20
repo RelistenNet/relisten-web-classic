@@ -2,7 +2,7 @@
 <ul>
 {{#each data.shows}}
   <li>
-    <a href="/{{../band}}/{{year}}/{{month}}/{{day}}">
+    <a class="show-{{year}}-{{month}}-{{day}}" href="/{{../band}}/{{year}}/{{month}}/{{day}}">
       <span class=date>{{month}}/{{addZero day}}</span>
       <span class=venue>{{venue_name}}</span>
     </a>
