@@ -1,8 +1,30 @@
-<ul>
-  <br>
-  <li class="featured"><a href="/grateful-dead">Grateful Dead</a></li>
-  <br>
-{{#each bands}}
-  <li><a href="/{{@key}}">{{name}}</a></li>
-{{/each}}
-</ul>
+<table>
+   <thead>
+      <tr>
+         <th>Band</th>
+         <th>Tapes</th>
+      </tr>
+   </thead>
+   <thead>
+    <tr>
+      <th><a href="/grateful-dead">Grateful Dead</a></th>
+      <td>{{bands.grateful-dead.shows}}</td>
+    </tr>
+   </thead>
+   <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <td>&nbsp;</td>
+    </tr>
+   </thead>
+   {{#each bands}}
+   <tbody>
+      <tr>
+        <th>
+          <a href="/{{@key}}">{{name}}</a>
+        </th>
+        <td>{{shows}}</td>
+      </tr>
+   </tbody>
+  {{/each}}
+</table>
