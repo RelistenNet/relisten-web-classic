@@ -19,8 +19,7 @@ class App.Collections.Queue extends App.Collections.Collection
 
     App.player.play ms
     App.player.set 'playing', true
-    { band, year, month, day, showVersion } = App.router
-    { slug, title } = App.song.toJSON()
+    { slug, title, year, month, day, showVersion, band } = App.song.toJSON()
     showVersionStr = if showVersion then '-' + showVersion else ''
     # If not on the URL already, go ahead!
     unless window.location.pathname.match "/#{band}/#{year}/#{month}/#{day}#{showVersionStr}/#{slug}"
@@ -29,6 +28,8 @@ class App.Collections.Queue extends App.Collections.Collection
       Backbone.history.navigate url, trigger: false
       ga('send', 'pageview', "#{url}")
     App.queueView.render App.queueView.$el.find('ul').scrollTop()
+    $('.song').removeClass 'active'
+    $(".#{band}-#{year}-#{month}-#{day}#{showVersionStr}-#{slug}").addClass 'active'
     ++@idx
   playLast: ->
     return App.player.sound.setPosition 0 if App.player.sound.position > 10000
