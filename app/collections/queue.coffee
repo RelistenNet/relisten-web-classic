@@ -20,6 +20,9 @@ class App.Collections.Queue extends App.Collections.Collection
     App.player.play ms
     App.player.set 'playing', true
     { slug, title, year, month, day, showVersion, band } = App.song.toJSON()
+
+    @notify App.bands[band].name, "#{title}\n#{year}/#{month}/#{day}"
+
     showVersionStr = if showVersion then '-' + showVersion else ''
     # If not on the URL already, go ahead!
     unless window.location.pathname.match "/#{band}/#{year}/#{month}/#{day}#{showVersionStr}/#{slug}"
@@ -36,3 +39,13 @@ class App.Collections.Queue extends App.Collections.Collection
     @idx -= 2
     @idx = 0 if @idx < 0
     @play null, 0
+
+  notify: (title, body) ->
+    return unless window.Notification
+
+    if Notification.permission is "granted"
+      notification = new Notification(title, { body })
+
+      setTimeout ->
+        notification.close()
+      , 2500

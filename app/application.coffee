@@ -9,6 +9,10 @@ class Application
     App.initial = true
     @initViews()
 
+    if Notification.permission == "default"
+      document.querySelector('body').addEventListener 'click', ->
+        Notification.requestPermission() if Notification.permission == "default"
+
     # Register all routes and start routing
     App.router = new App.Router()
 

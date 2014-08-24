@@ -3,7 +3,7 @@ class App.Views.Songs extends App.Views.View
   template: JST['songs']
   events:
     'click .add': 'addToPlaylist'
-    #'click .song': 'addShowToPlaylist'
+    'click .song': 'clickSong'
     'click .play': 'play'
     'click .add-all': 'addAll'
     'click .select-source': 'showSources'
@@ -73,4 +73,8 @@ class App.Views.Songs extends App.Views.View
   showSources: =>
     return @$sources.slideDown() if @$sources.is ':hidden'
     @$sources.slideUp()
+
+  clickSong: (e) ->
+    if Notify.needsPermission
+      Notify.requestPermission(console.log, console.log)
 
