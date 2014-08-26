@@ -6,7 +6,7 @@
       <a class="band" href="/{{slug}}">
         {{#if the}}the {{/if}}{{bandName}}
       </a>
-      <span class="tip">&nbsp;&nbsp;&lt;- click here for a random show!</span>
+      <span class="tip">&nbsp;&nbsp;&lt;- click here for a random show! {{#if_eq bandName "Phish"}}(Powered by phish.in){{/if_eq}}</span>
     {{/if}}
     <div class="clear"></div>
   </li>

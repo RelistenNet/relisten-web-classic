@@ -6,7 +6,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<p>\n  Welcome to yet another internet experiment.\n</p>\n\n<br>\n\n<p class=big>\n  For any comments, suggestions, or data errors please email <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>.\n</p>\n\n<br>\n\n<p class=big>\n  Peruse the various bands and enjoy their extensive live catalogues.\n</p>\n\n<br>\n\n<p>\n  This site is powered by Archive.org and Alec Gorge's <a href=\"https://github.com/alecgorge/iguana\">Iguana</a>.\n</p>\n\n<br>\n\n<p>\n  If you'd like to donate, all of the proceeds will go towards the running of this site and others like it. Any extra funds will be donated to Archive.org and The Mockingbird Foundation.\n</p>\n\n<br>\n\n<p>\n<center>\n<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_blank\">\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----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-----END PKCS7-----\n\">\n<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n</form>\n</center>\n</p>\n\n<p><center>Bitcoin: 1FQRjYy5hqzeDD5DWThGNzfyy1E2PoNdMC</center></p>\n\n<br>\n<br>\n\n<p>\n  This site complies with Archive.org's <a href=\"https://archive.org/post/261115/hotlinking-allowed\">policy</a>.\n</p>\n\n<p>\n  <i>\n    The Grateful Dead and our managing organizations have long encouraged the purely non-commercial exchange of music taped at our concerts and those of our individual members. That a new medium of distribution has arisen - digital audio files being traded over the Internet - does not change our policy in this regard. Our stipulations regarding digital distribution are merely extensions of those long-standing principles and they are as follow:\n</i>\n</p>\n\n<p>\n  <i>\n    No commercial gain may be sought by websites offering digital files of our music, whether through advertising, exploiting databases compiled from their traffic, or any other means.\n    All participants in such digital exchange acknowledge and respect the copyrights of the performers, writers and publishers of the music.\n  </i>\n</p>\n<p>\n  <i>\n    This notice should be clearly posted on all sites engaged in this activity.\n    We reserve the ability to withdraw our sanction of non-commercial digital music should circumstances arise that compromise our ability to protect and steward the integrity of our work.\n</i>\n</p>\n";
+  return "<p>\n  Welcome to yet another internet experiment.\n</p>\n\n<br>\n\n<p class=big>\n  For any comments, suggestions, or data errors please email <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>.\n</p>\n\n<br>\n\n<p class=big>\n  Peruse the various bands and enjoy their extensive live catalogues.\n</p>\n\n<br>\n\n<p>\n  This site is powered by Archive.org and Alec Gorge's <a href=\"https://github.com/alecgorge/iguana\" target=\"_blank\">Iguana</a>. The Phish collection is hosted and provided by <a href=\"http://phish.in\" target=\"_blank\">Phish.in</a>.\n</p>\n\n<br>\n\n<p>\n  If you'd like to donate, all of the proceeds will go towards the running of this site and others like it. Any extra funds will be donated to Archive.org and The Mockingbird Foundation.\n</p>\n\n<br>\n\n<p>\n<center>\n<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_blank\">\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----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-----END PKCS7-----\n\">\n<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n</form>\n</center>\n</p>\n\n<p><center>Bitcoin: 1FQRjYy5hqzeDD5DWThGNzfyy1E2PoNdMC</center></p>\n\n<br>\n<br>\n\n<p>\n  This site complies with Archive.org's <a href=\"https://archive.org/post/261115/hotlinking-allowed\">policy</a>.\n</p>\n\n<p>\n  <i>\n    The Grateful Dead and our managing organizations have long encouraged the purely non-commercial exchange of music taped at our concerts and those of our individual members. That a new medium of distribution has arisen - digital audio files being traded over the Internet - does not change our policy in this regard. Our stipulations regarding digital distribution are merely extensions of those long-standing principles and they are as follow:\n</i>\n</p>\n\n<p>\n  <i>\n    No commercial gain may be sought by websites offering digital files of our music, whether through advertising, exploiting databases compiled from their traffic, or any other means.\n    All participants in such digital exchange acknowledge and respect the copyrights of the performers, writers and publishers of the music.\n  </i>\n</p>\n<p>\n  <i>\n    This notice should be clearly posted on all sites engaged in this activity.\n    We reserve the ability to withdraw our sanction of non-commercial digital music should circumstances arise that compromise our ability to protect and steward the integrity of our work.\n</i>\n</p>\n";
   });
 
 this["JST"]["footer"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -21,7 +21,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 this["JST"]["header"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -37,7 +37,7 @@ function program3(depth0,data) {
 
 function program5(depth0,data) {
   
-  var buffer = "", stack1;
+  var buffer = "", stack1, stack2, options;
   buffer += "\n      <a class=\"band\" href=\"/";
   if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
@@ -48,13 +48,23 @@ function program5(depth0,data) {
   if (stack1 = helpers.bandName) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.bandName; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\n      </a>\n      <span class=\"tip\">&nbsp;&nbsp;&lt;- click here for a random show!</span>\n    ";
+    + "\n      </a>\n      <span class=\"tip\">&nbsp;&nbsp;&lt;- click here for a random show! ";
+  options = {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data};
+  stack2 = ((stack1 = helpers.if_eq || depth0.if_eq),stack1 ? stack1.call(depth0, depth0.bandName, "Phish", options) : helperMissing.call(depth0, "if_eq", depth0.bandName, "Phish", options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "</span>\n    ";
   return buffer;
   }
 function program6(depth0,data) {
   
   
   return "the ";
+  }
+
+function program8(depth0,data) {
+  
+  
+  return "(Powered by phish.in)";
   }
 
   buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to";
@@ -79,9 +89,26 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 this["JST"]["index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
+  
+  
+  return "\n   ";
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n   <thead>\n    <tr>\n      <th><a href=\"/grateful-dead\">Grateful Dead</a></th>\n      <td>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.bands),stack1 == null || stack1 === false ? stack1 : stack1['grateful-dead'])),stack1 == null || stack1 === false ? stack1 : stack1.shows)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</td>\n    </tr>\n   </thead>\n   <thead>\n    <tr>\n      <th><a href=\"/phish\">Phish</a></th>\n      <td>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.bands),stack1 == null || stack1 === false ? stack1 : stack1.phish)),stack1 == null || stack1 === false ? stack1 : stack1.shows)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</td>\n    </tr>\n   </thead>\n   <thead>\n    <tr>\n      <th>&nbsp;</th>\n      <td>&nbsp;</td>\n    </tr>\n   </thead>\n   ";
+  return buffer;
+  }
+
+function program5(depth0,data) {
   
   var buffer = "", stack1, stack2;
   buffer += "\n   <tbody>\n      <tr>\n        <th>\n          <a href=\"/"
@@ -98,12 +125,22 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<table>\n   <thead>\n      <tr>\n         <th class=\"heading\">Band</th>\n         <th class=\"heading\">Tapes</th>\n      </tr>\n   </thead>\n   <thead>\n    <tr>\n      <th><a href=\"/grateful-dead\">Grateful Dead</a></th>\n      <td>"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.bands),stack1 == null || stack1 === false ? stack1 : stack1['grateful-dead'])),stack1 == null || stack1 === false ? stack1 : stack1.shows)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</td>\n    </tr>\n   </thead>\n   <thead>\n    <tr>\n      <th>&nbsp;</th>\n      <td>&nbsp;</td>\n    </tr>\n   </thead>\n   ";
-  stack2 = helpers.each.call(depth0, depth0.bands, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</table>\n";
+function program7(depth0,data) {
+  
+  
+  return "<button class=enable-notifications>ENABLE NOTIFICATIONS</button>";
+  }
+
+  buffer += "<table>\n   <thead>\n      <tr>\n         <th class=\"heading\">Band</th>\n         <th class=\"heading\">Tapes</th>\n      </tr>\n   </thead>\n   ";
+  stack1 = helpers['if'].call(depth0, depth0.realMusic, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n   ";
+  stack1 = helpers.each.call(depth0, depth0.bands, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</table>\n\n";
+  stack1 = helpers['if'].call(depth0, depth0['default'], {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n";
   return buffer;
   });
 
@@ -334,11 +371,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1, stack2, options;
-  buffer += "\n    <li>\n      <span>[\n        <a href=\"javascript:\" class=delete>x</a>\n      ]</span>\n      <a class=\"song ";
+  buffer += "\n    <li class=\"";
   if (stack1 = helpers.active) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.active; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" href=\"/";
+    + "\">\n      <span>[\n        <a href=\"javascript:\" class=delete>x</a>\n      ]</span>\n      <a class=\"song\" href=\"/";
   if (stack1 = helpers.band) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.band; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -503,7 +540,7 @@ function program1(depth0,data,depth1) {
 this["JST"]["songs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -515,13 +552,16 @@ function program1(depth0,data) {
   stack1 = helpers['if'].call(depth0, depth0.transferer, {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      ";
-  stack1 = helpers['if'].call(depth0, depth0.source, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.source, {hash:{},inverse:self.program(8, program8, data),fn:self.program(6, program6, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      ";
-  stack1 = helpers['if'].call(depth0, depth0.lineage, {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.lineage, {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      ";
-  stack1 = helpers['if'].call(depth0, depth0.avg, {hash:{},inverse:self.noop,fn:self.program(10, program10, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.description, {hash:{},inverse:self.noop,fn:self.program(13, program13, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n      ";
+  stack1 = helpers['if'].call(depth0, depth0.average_rating, {hash:{},inverse:self.noop,fn:self.program(15, program15, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n    </li>\n  ";
   return buffer;
@@ -555,11 +595,25 @@ function program6(depth0,data) {
   if (stack1 = helpers.source) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.source; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</p>";
+    + "</p>\n      ";
   return buffer;
   }
 
 function program8(depth0,data) {
+  
+  var buffer = "", stack1;
+  stack1 = helpers['if'].call(depth0, depth0.is_soundboard, {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n      ";
+  return buffer;
+  }
+function program9(depth0,data) {
+  
+  
+  return "<p><span class=\"field\">Source:</span> Soundboard</p>";
+  }
+
+function program11(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "<p><span class=\"field\">Lineage:</span> ";
@@ -570,22 +624,32 @@ function program8(depth0,data) {
   return buffer;
   }
 
-function program10(depth0,data) {
+function program13(depth0,data) {
+  
+  var buffer = "", stack1, options;
+  buffer += "<p title=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.newLine || depth0.newLine),stack1 ? stack1.call(depth0, depth0.description, options) : helperMissing.call(depth0, "newLine", depth0.description, options)))
+    + "\" class=\"description\"><span class=\"field\">Description:</span> Hover</p>";
+  return buffer;
+  }
+
+function program15(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n        <p>Rating: ";
-  if (stack1 = helpers.avg) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.avg; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += "\n        <p><span class=\"field\">Rating:</span> ";
+  if (stack1 = helpers.average_rating) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.average_rating; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + " / ";
-  if (stack1 = helpers.total_reviews) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.total_reviews; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if (stack1 = helpers.reviews_count) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.reviews_count; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + " reviews</p>\n      ";
   return buffer;
   }
 
-function program12(depth0,data) {
+function program17(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n    <li class=\"select-source multiple-sources\">Select another source <span class=total-sources>(";
@@ -593,27 +657,27 @@ function program12(depth0,data) {
   else { stack1 = depth0.totalSources; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + ")</span></li>\n    ";
-  stack1 = helpers.each.call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.programWithDepth(13, program13, data, depth0),data:data});
+  stack1 = helpers.each.call(depth0, depth0.sources, {hash:{},inverse:self.noop,fn:self.programWithDepth(18, program18, data, depth0),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
   return buffer;
   }
-function program13(depth0,data,depth1) {
+function program18(depth0,data,depth1) {
   
   var buffer = "", stack1;
   buffer += "\n      ";
-  stack1 = helpers['if'].call(depth0, depth0.hidden, {hash:{},inverse:self.programWithDepth(16, program16, data, depth1),fn:self.program(14, program14, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.hidden, {hash:{},inverse:self.programWithDepth(21, program21, data, depth1),fn:self.program(19, program19, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n    ";
   return buffer;
   }
-function program14(depth0,data) {
+function program19(depth0,data) {
   
   
   return "\n      ";
   }
 
-function program16(depth0,data,depth2) {
+function program21(depth0,data,depth2) {
   
   var buffer = "", stack1, stack2;
   buffer += "\n        <li class=source>\n          <a href=/"
@@ -624,7 +688,7 @@ function program16(depth0,data,depth2) {
     + escapeExpression(((stack1 = depth2.month),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/"
     + escapeExpression(((stack1 = depth2.day),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
-  stack2 = helpers['if'].call(depth0, ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index), {hash:{},inverse:self.noop,fn:self.program(17, program17, data),data:data});
+  stack2 = helpers['if'].call(depth0, ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.index), {hash:{},inverse:self.noop,fn:self.program(22, program22, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += ">\n            ";
   stack2 = helpers['if'].call(depth0, depth0.taper, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
@@ -633,18 +697,21 @@ function program16(depth0,data,depth2) {
   stack2 = helpers['if'].call(depth0, depth0.transferer, {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n            ";
-  stack2 = helpers['if'].call(depth0, depth0.source, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+  stack2 = helpers['if'].call(depth0, depth0.source, {hash:{},inverse:self.program(26, program26, data),fn:self.program(24, program24, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n            ";
-  stack2 = helpers['if'].call(depth0, depth0.lineage, {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data});
+  stack2 = helpers['if'].call(depth0, depth0.lineage, {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n            ";
-  stack2 = helpers['if'].call(depth0, depth0.avg, {hash:{},inverse:self.noop,fn:self.program(19, program19, data),data:data});
+  stack2 = helpers['if'].call(depth0, depth0.description, {hash:{},inverse:self.noop,fn:self.program(13, program13, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n            ";
+  stack2 = helpers['if'].call(depth0, depth0.average_rating, {hash:{},inverse:self.noop,fn:self.program(28, program28, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n          </a>\n        </li>\n      ";
   return buffer;
   }
-function program17(depth0,data) {
+function program22(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "-"
@@ -652,22 +719,42 @@ function program17(depth0,data) {
   return buffer;
   }
 
-function program19(depth0,data) {
+function program24(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n              <p>Rating: ";
-  if (stack1 = helpers.avg) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.avg; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += "<p><span class=\"field\">Source:</span> ";
+  if (stack1 = helpers.source) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.source; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n            ";
+  return buffer;
+  }
+
+function program26(depth0,data) {
+  
+  var buffer = "", stack1;
+  stack1 = helpers['if'].call(depth0, depth0.is_soundboard, {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n            ";
+  return buffer;
+  }
+
+function program28(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n              <p><span class=\"field\">Rating:</span> ";
+  if (stack1 = helpers.average_rating) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.average_rating; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + " / ";
-  if (stack1 = helpers.total_reviews) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.total_reviews; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if (stack1 = helpers.reviews_count) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.reviews_count; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + " reviews</p>\n            ";
   return buffer;
   }
 
-function program21(depth0,data,depth1) {
+function program30(depth0,data,depth1) {
   
   var buffer = "", stack1, stack2, options;
   buffer += "\n    <li data-idx="
@@ -684,7 +771,7 @@ function program21(depth0,data,depth1) {
     + escapeExpression(((stack1 = depth1.month),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "-"
     + escapeExpression(((stack1 = depth1.day),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
-  stack2 = helpers['if'].call(depth0, depth1.showVersion, {hash:{},inverse:self.noop,fn:self.program(22, program22, data),data:data});
+  stack2 = helpers['if'].call(depth0, depth1.showVersion, {hash:{},inverse:self.noop,fn:self.program(31, program31, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += escapeExpression(((stack1 = depth1.showVersion),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "-";
@@ -699,7 +786,7 @@ function program21(depth0,data,depth1) {
     + escapeExpression(((stack1 = depth1.month),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/"
     + escapeExpression(((stack1 = depth1.day),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
-  stack2 = helpers['if'].call(depth0, depth1.showVersion, {hash:{},inverse:self.noop,fn:self.program(22, program22, data),data:data});
+  stack2 = helpers['if'].call(depth0, depth1.showVersion, {hash:{},inverse:self.noop,fn:self.program(31, program31, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += escapeExpression(((stack1 = depth1.showVersion),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "/";
@@ -716,10 +803,30 @@ function program21(depth0,data,depth1) {
     + "</span></a>\n      <div class=play>ᐅ</div>\n      <div title=\"Add To Queue\" class=add>+</div>\n    </li>\n  ";
   return buffer;
   }
-function program22(depth0,data) {
+function program31(depth0,data) {
   
   
   return "-";
+  }
+
+function program33(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n    <li><a class=archive href=\"http://phish.net/setlists/?d="
+    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.display_date)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" target=_blank>View on Phish.net</a></li>\n    <li><a class=archive href=\"http://phish.in/"
+    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.display_date)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" target=_blank>View on Phish.in</a></li>\n  ";
+  return buffer;
+  }
+
+function program35(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n    <li><a class=archive href=\"https://archive.org/details/"
+    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.archive_identifier)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" target=_blank>View on Archive.org</a></li>\n  ";
+  return buffer;
   }
 
   buffer += "<div class=ul-header>";
@@ -734,14 +841,16 @@ function program22(depth0,data) {
   stack1 = helpers['with'].call(depth0, depth0.songs, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
-  stack1 = helpers['if'].call(depth0, depth0.multipleSources, {hash:{},inverse:self.noop,fn:self.program(12, program12, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.multipleSources, {hash:{},inverse:self.noop,fn:self.program(17, program17, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
-  stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.tracks), {hash:{},inverse:self.noop,fn:self.programWithDepth(21, program21, data, depth0),data:data});
+  stack2 = helpers.each.call(depth0, ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.tracks), {hash:{},inverse:self.noop,fn:self.programWithDepth(30, program30, data, depth0),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n  <li><a class=archive href=\"https://archive.org/details/"
-    + escapeExpression(((stack1 = ((stack1 = depth0.songs),stack1 == null || stack1 === false ? stack1 : stack1.archive_identifier)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" target=_blank>View on Archive.org</a></li>\n  <li><a class=add-all href=\"javascript:\">Add All To Queue</a></li>\n</ul>\n";
+  buffer += "\n  <li><a class=add-all href=\"javascript:\">Add All To Queue</a></li>\n  ";
+  options = {hash:{},inverse:self.program(35, program35, data),fn:self.program(33, program33, data),data:data};
+  stack2 = ((stack1 = helpers.if_eq || depth0.if_eq),stack1 ? stack1.call(depth0, depth0.band, "phish", options) : helperMissing.call(depth0, "if_eq", depth0.band, "phish", options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n</ul>\n";
   return buffer;
   });
 
@@ -777,7 +886,14 @@ function program1(depth0,data,depth1) {
   buffer += "\n</ul>\n";
   return buffer;
   });
-var addZero, resize, timeToMS, toHHMMSS;
+var Notification, addZero, resize, timeToMS, toHHMMSS;
+
+if (!Notification) {
+  Notification = function() {
+    return 0;
+  };
+  Notification.permission = false;
+}
 
 window.App = {
   "Models": {},
@@ -787,6 +903,10 @@ window.App = {
   "Router": {},
   "utils": {},
   "bands": {
+    "akron-family": {
+      "name": "Akron/Family",
+      "shows": 35
+    },
     "animal-collective": {
       "name": "Animal Collective",
       "shows": 23
@@ -1003,6 +1123,11 @@ window.App = {
       "name": "Phil Lesh and Friends",
       "shows": "1,707"
     },
+    "phish": {
+      "name": "Phish",
+      "the": true,
+      "shows": "1,417"
+    },
     "radiators": {
       "name": "The Radiators",
       "shows": "1,163"
@@ -1101,6 +1226,148 @@ window.App = {
       "shows": 416
     }
   },
+  "realMusic": {
+    "akron-family": {
+      "name": "Akron/Family",
+      "shows": 35
+    },
+    "animal-collective": {
+      "name": "Animal Collective",
+      "shows": 23
+    },
+    "bela-fleck": {
+      "name": "Béla Fleck and the Flecktones",
+      "shows": 321
+    },
+    "ben-kweller": {
+      "name": "Ben Kweller",
+      "shows": 18
+    },
+    "bernie-worrell": {
+      "name": "Bernie Worrell Orchestra",
+      "the": true,
+      "shows": 27
+    },
+    "club-d-elf": {
+      "name": "Club d'Elf",
+      "shows": 523
+    },
+    "the-decemberists": {
+      "name": "The Decemberists",
+      "shows": 74
+    },
+    "dispatch": {
+      "name": "Dispatch",
+      "shows": 32
+    },
+    "drive-by-truckers": {
+      "name": "Drive-By Truckers",
+      "the": true,
+      "shows": 680
+    },
+    "elliott-smith": {
+      "name": "Elliott Smith",
+      "shows": 81
+    },
+    "fugazi": {
+      "name": "Fugazi",
+      "shows": 18
+    },
+    "g-love": {
+      "name": "G. Love and Special Sauce",
+      "shows": 124
+    },
+    "garage-a-trois": {
+      "name": "Garage A Trois",
+      "shows": 74
+    },
+    "grace-potter": {
+      "name": "Grace Potter",
+      "the": true,
+      "shows": 488
+    },
+    "guster": {
+      "name": "Guster",
+      "shows": 484
+    },
+    "jack-johnson": {
+      "name": "Jack Johnson",
+      "shows": 146
+    },
+    "jerry-joseph": {
+      "name": "Jerry Joseph and the Jackmormons",
+      "shows": 604
+    },
+    "john-popper": {
+      "name": "John Popper",
+      "shows": 67
+    },
+    "little-feat": {
+      "name": "Little Feat",
+      "shows": 567
+    },
+    "matisyahu": {
+      "name": "Matisyahu",
+      "shows": 296
+    },
+    "matt-pond-pa": {
+      "name": "Matt Pond PA",
+      "shows": 8
+    },
+    "mmj": {
+      "name": "My Morning Jacket",
+      "shows": 253
+    },
+    "mogwai": {
+      "name": "Mogwai",
+      "shows": 164
+    },
+    "new-mastersounds": {
+      "name": "The New Mastersounds",
+      "shows": 197
+    },
+    "radiators": {
+      "name": "The Radiators",
+      "shows": "1,163"
+    },
+    "ryan-adams": {
+      "name": "Ryan Adams",
+      "shows": 409
+    },
+    "smashing-pumpkins": {
+      "name": "Smashing Pumpkins",
+      "the": true,
+      "shows": "1,005"
+    },
+    "spoon": {
+      "name": "Spoon",
+      "shows": 51
+    },
+    "ted-leo": {
+      "name": "Ted Leo and the Pharmacists",
+      "shows": 20
+    },
+    "tenacious-d": {
+      "name": "Tenacious D",
+      "shows": 31
+    },
+    "the-walkmen": {
+      "name": "The Walkmen",
+      "shows": 18
+    },
+    "war-on-drugs": {
+      "name": "The War on Drugs",
+      "shows": 30
+    },
+    "warren-zevon": {
+      "name": "Warren Zevon",
+      "shows": 104
+    },
+    "ween": {
+      "name": "Ween",
+      "shows": 447
+    }
+  },
   "root": "http://relisten.net"
 };
 
@@ -1172,6 +1439,7 @@ timeToMS = function(time) {
   if (!/m/.test(time)) {
     return 0;
   }
+  time = time.replace(/s$/, '');
   time = time.split('m');
   min = +time[0];
   sec = +time[1];
@@ -1201,9 +1469,15 @@ Handlebars.registerHelper("addOne", function(num) {
   return new Handlebars.SafeString(num + 1);
 });
 
-Handlebars.registerHelper("ifEqual", function(val1, val2, fn) {
-  if (val1 === val2) {
-    return fn();
+Handlebars.registerHelper("newLine", function(str) {
+  return new Handlebars.SafeString($('<div/>').text(str.replace(/\n/g, '<br />')).html());
+});
+
+Handlebars.registerHelper("if_eq", function(a, b, opts) {
+  if (a === b) {
+    return opts.fn(this);
+  } else {
+    return opts.inverse(this);
   }
 });
 
@@ -1231,13 +1505,6 @@ Application = (function() {
     }
     App.initial = true;
     this.initViews();
-    if (Notification.permission === "default") {
-      document.querySelector('body').addEventListener('click', function() {
-        if (Notification.permission === "default") {
-          return Notification.requestPermission();
-        }
-      });
-    }
     App.router = new App.Router();
     Backbone.history.start({
       pushState: true
@@ -1298,8 +1565,9 @@ App.Router = (function(_super) {
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/?$/, 'year');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show');
-    this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song');
+    this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?s?\/?$/, 'song');
     this.route(/^about\/?$/, 'about');
+    this.route(/^real-music\/?$/, 'realMusic');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
   };
@@ -1308,6 +1576,14 @@ App.Router = (function(_super) {
     this.band = '';
     this.changeView(new App.Views.IndexPage());
     return document.title = 'Relisten';
+  };
+
+  Router.prototype.realMusic = function() {
+    this.band = '';
+    this.changeView(new App.Views.IndexPage({
+      realMusic: true
+    }));
+    return document.title = 'Real Music | Relisten';
   };
 
   Router.prototype.band = function(band, year, month, day) {
@@ -1437,7 +1713,13 @@ App.Router = (function(_super) {
     this.slug = slug;
     this.version = version;
     this.time = time;
+    if (this.version) {
+      this.slug += '-' + this.version;
+    }
     if (App.initial) {
+      if (!/m/.test(this.time)) {
+        this.time = this.getParameterByName('t');
+      }
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years({
         band: this.band
@@ -1600,6 +1882,18 @@ App.Router = (function(_super) {
     }
     this.lastUrl = url;
     return ga('send', 'pageview', "/" + url);
+  };
+
+  Router.prototype.getParameterByName = function(name) {
+    var regex, results;
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+    results = regex.exec(location.search);
+    if (results == null) {
+      return "";
+    } else {
+      return decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
   };
 
   return Router;
@@ -1801,7 +2095,7 @@ App.Models.Player = (function(_super) {
       volume = this.sound.volume;
       this.sound.destruct();
     }
-    this.set('id', id = App.song.get('_id'));
+    this.set('id', id = App.song.get('id'));
     App.playerView.played.push(id);
     canPlayOgg = soundManager.canPlayMIME('audio/ogg');
     if (!(canPlayOgg && (url = App.song.get('oggUrl')))) {
@@ -1855,7 +2149,7 @@ App.Models.Player = (function(_super) {
     if (title = (_ref1 = App.song) != null ? _ref1.get('title') : void 0) {
       return App.playerView.updateText({
         title: title,
-        album: App.songs.songs.title,
+        album: App.song.get('show_title'),
         length: App.song.get('length')
       });
     }
@@ -2191,7 +2485,7 @@ App.Collections.Queue = (function(_super) {
     App.player.play(ms);
     App.player.set('playing', true);
     _ref1 = App.song.toJSON(), slug = _ref1.slug, title = _ref1.title, year = _ref1.year, month = _ref1.month, day = _ref1.day, showVersion = _ref1.showVersion, band = _ref1.band;
-    this.notify(App.bands[band].name, "" + title + "\n" + year + "/" + month + "/" + day);
+    this.notify(title, "" + App.bands[band].name + "\n" + year + "/" + month + "/" + day);
     showVersionStr = showVersion ? '-' + showVersion : '';
     if (!window.location.pathname.match("/" + band + "/" + year + "/" + month + "/" + day + showVersionStr + "/" + slug)) {
       url = "/" + band + "/" + year + "/" + month + "/" + day + showVersionStr + "/" + slug;
@@ -2557,11 +2851,29 @@ App.Views.IndexPage = (function(_super) {
 
   IndexPage.prototype.template = JST['index'];
 
+  IndexPage.prototype.initialize = function(options) {
+    this.options = options;
+    return IndexPage.__super__.initialize.apply(this, arguments);
+  };
+
   IndexPage.prototype.render = function() {
+    var _ref1, _ref2;
     App.header.render();
-    return this.$el.html(this.template({
-      bands: App.bands
+    this.$el.html(this.template({
+      bands: ((_ref1 = this.options) != null ? _ref1.realMusic : void 0) ? App.realMusic : App.bands,
+      "default": Notification.permission === "default",
+      realMusic: (_ref2 = this.options) != null ? _ref2.realMusic : void 0
     }));
+    if (Notification.permission === "default") {
+      return this.$el.find('.enable-notifications')[0].addEventListener('click', function(e) {
+        if (Notification.permission === "default") {
+          return Notification.requestPermission(function(permission) {
+            $(e.target).fadeOut();
+            return ga('send', 'event', 'notifications', 'enable', 'index button', permission === "granted" ? 1 : 0);
+          });
+        }
+      });
+    }
   };
 
   return IndexPage;
@@ -3193,7 +3505,6 @@ App.Views.Songs = (function(_super) {
 
   Songs.prototype.events = {
     'click .add': 'addToPlaylist',
-    'click .song': 'clickSong',
     'click .play': 'play',
     'click .add-all': 'addAll',
     'click .select-source': 'showSources'
@@ -3216,7 +3527,7 @@ App.Views.Songs = (function(_super) {
   };
 
   Songs.prototype.render = function() {
-    var band, day, month, showVersion, sources, year, _ref1,
+    var $description, band, day, month, showVersion, sources, year, _ref1,
       _this = this;
     App.router.clearActive();
     if (this.folder) {
@@ -3234,7 +3545,8 @@ App.Views.Songs = (function(_super) {
         year: year,
         month: month,
         day: day,
-        showVersion: showVersion
+        showVersion: showVersion,
+        show_title: _this.songs.title
       });
     });
     this.$el.html(this.template({
@@ -3248,6 +3560,10 @@ App.Views.Songs = (function(_super) {
       multipleSources: sources.length > 1,
       totalSources: sources.length
     }));
+    $description = this.$el.find('.description');
+    $description.powerTip({
+      placement: 'sw'
+    });
     this.$sources = this.$el.find('.source');
     return this;
   };
@@ -3303,12 +3619,6 @@ App.Views.Songs = (function(_super) {
       return this.$sources.slideDown();
     }
     return this.$sources.slideUp();
-  };
-
-  Songs.prototype.clickSong = function(e) {
-    if (Notify.needsPermission) {
-      return Notify.requestPermission(console.log, console.log);
-    }
   };
 
   return Songs;

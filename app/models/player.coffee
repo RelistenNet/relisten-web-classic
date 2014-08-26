@@ -13,7 +13,7 @@ class App.Models.Player extends App.Models.Model
       volume = @sound.volume
       @sound.destruct()
 
-    @set 'id', id = App.song.get '_id'
+    @set 'id', id = App.song.get 'id'
     App.playerView.played.push id
 
     # Use ogg if it exists + can be played, otherwise use mp3
@@ -51,7 +51,7 @@ class App.Models.Player extends App.Models.Model
     if title = App.song?.get 'title'
       App.playerView.updateText
         title: title
-        album: App.songs.songs.title
+        album: App.song.get 'show_title'
         length: App.song.get 'length'
 
   slideDown: ->

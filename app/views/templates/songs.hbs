@@ -4,10 +4,13 @@
     <li class="current-source select-source">
       {{#if taper}}<p><span class="field">Taper:</span> {{taper}}</p>{{/if}}
       {{#if transferer}}<p><span class="field">Transferer:</span> {{transferer}}</p>{{/if}}
-      {{#if source}}<p><span class="field">Source:</span> {{source}}</p>{{/if}}
+      {{#if source}}<p><span class="field">Source:</span> {{source}}</p>
+      {{else}}{{#if is_soundboard}}<p><span class="field">Source:</span> Soundboard</p>{{/if}}
+      {{/if}}
       {{#if lineage}}<p><span class="field">Lineage:</span> {{lineage}}</p>{{/if}}
-      {{#if avg}}
-        <p>Rating: {{avg}} / {{total_reviews}} reviews</p>
+      {{#if description}}<p title="{{newLine description}}" class="description"><span class="field">Description:</span> Hover</p>{{/if}}
+      {{#if average_rating}}
+        <p><span class="field">Rating:</span> {{average_rating}} / {{reviews_count}} reviews</p>
       {{/if}}
     </li>
   {{/with}}
@@ -20,10 +23,13 @@
           <a href=/{{../../band}}/{{../../year}}/{{../../month}}/{{../../day}}{{#if @index}}-{{@index}}{{/if}}>
             {{#if taper}}<p><span class="field">Taper:</span> {{taper}}</p>{{/if}}
             {{#if transferer}}<p><span class="field">Transferer:</span> {{transferer}}</p>{{/if}}
-            {{#if source}}<p><span class="field">Source:</span> {{source}}</p>{{/if}}
+            {{#if source}}<p><span class="field">Source:</span> {{source}}</p>
+            {{else}}{{#if is_soundboard}}<p><span class="field">Source:</span> Soundboard</p>{{/if}}
+            {{/if}}
             {{#if lineage}}<p><span class="field">Lineage:</span> {{lineage}}</p>{{/if}}
-            {{#if avg}}
-              <p>Rating: {{avg}} / {{total_reviews}} reviews</p>
+            {{#if description}}<p title="{{newLine description}}" class="description"><span class="field">Description:</span> Hover</p>{{/if}}
+            {{#if average_rating}}
+              <p><span class="field">Rating:</span> {{average_rating}} / {{reviews_count}} reviews</p>
             {{/if}}
           </a>
         </li>
@@ -37,6 +43,11 @@
       <div title="Add To Queue" class=add>+</div>
     </li>
   {{/each}}
-  <li><a class=archive href="https://archive.org/details/{{songs.archive_identifier}}" target=_blank>View on Archive.org</a></li>
   <li><a class=add-all href="javascript:">Add All To Queue</a></li>
+  {{#if_eq band "phish"}}
+    <li><a class=archive href="http://phish.net/setlists/?d={{songs.display_date}}" target=_blank>View on Phish.net</a></li>
+    <li><a class=archive href="http://phish.in/{{songs.display_date}}" target=_blank>View on Phish.in</a></li>
+  {{else}}
+    <li><a class=archive href="https://archive.org/details/{{songs.archive_identifier}}" target=_blank>View on Archive.org</a></li>
+  {{/if_eq}}
 </ul>

@@ -3,7 +3,7 @@ class App.Views.Songs extends App.Views.View
   template: JST['songs']
   events:
     'click .add': 'addToPlaylist'
-    'click .song': 'clickSong'
+    #'click .song': 'clickSong'
     'click .play': 'play'
     'click .add-all': 'addAll'
     'click .select-source': 'showSources'
@@ -30,7 +30,7 @@ class App.Views.Songs extends App.Views.View
     sources[@options.showVersion || 0].hidden = true
 
     { band, year, month, day, showVersion } = App.router
-    @songs.tracks.map (track) => _.extend track, { band, year, month, day, showVersion }
+    @songs.tracks.map (track) => _.extend track, { band, year, month, day, showVersion, show_title: @songs.title }
 
     @$el.html @template
       songs: @songs
@@ -42,6 +42,10 @@ class App.Views.Songs extends App.Views.View
       showVersion: @options.showVersion || ''
       multipleSources: sources.length > 1
       totalSources: sources.length
+
+    $description = @$el.find('.description')
+    $description.powerTip
+      placement: 'sw'
 
     @$sources = @$el.find '.source'
 
@@ -73,8 +77,3 @@ class App.Views.Songs extends App.Views.View
   showSources: =>
     return @$sources.slideDown() if @$sources.is ':hidden'
     @$sources.slideUp()
-
-  clickSong: (e) ->
-    if Notify.needsPermission
-      Notify.requestPermission(console.log, console.log)
-

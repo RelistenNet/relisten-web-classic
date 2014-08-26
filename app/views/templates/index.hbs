@@ -5,6 +5,8 @@
          <th class="heading">Tapes</th>
       </tr>
    </thead>
+   {{#if realMusic}}
+   {{else}}
    <thead>
     <tr>
       <th><a href="/grateful-dead">Grateful Dead</a></th>
@@ -13,10 +15,17 @@
    </thead>
    <thead>
     <tr>
+      <th><a href="/phish">Phish</a></th>
+      <td>{{bands.phish.shows}}</td>
+    </tr>
+   </thead>
+   <thead>
+    <tr>
       <th>&nbsp;</th>
       <td>&nbsp;</td>
     </tr>
    </thead>
+   {{/if}}
    {{#each bands}}
    <tbody>
       <tr>
@@ -28,3 +37,5 @@
    </tbody>
   {{/each}}
 </table>
+
+{{#if default}}<button class=enable-notifications>ENABLE NOTIFICATIONS</button>{{/if}}

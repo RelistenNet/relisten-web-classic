@@ -21,7 +21,7 @@ class App.Collections.Queue extends App.Collections.Collection
     App.player.set 'playing', true
     { slug, title, year, month, day, showVersion, band } = App.song.toJSON()
 
-    @notify App.bands[band].name, "#{title}\n#{year}/#{month}/#{day}"
+    @notify title, "#{App.bands[band].name}\n#{year}/#{month}/#{day}"
 
     showVersionStr = if showVersion then '-' + showVersion else ''
     # If not on the URL already, go ahead!

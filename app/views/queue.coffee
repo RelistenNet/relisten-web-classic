@@ -13,6 +13,7 @@ class App.Views.Queue extends App.Views.View
     @render()
   render: (scrollTop, dontAnimateScroll) ->
     song = App.queue.at(App.queue.idx - 1)
+
     @$el.html @template
       queue: App.queue.toJSON()
       loggedIn: App.user.loggedIn()

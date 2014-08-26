@@ -10,8 +10,9 @@ class App.Router extends Backbone.Router
     @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/?$/, 'year'
     @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})\/?$/, 'day'
     @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show'
-    @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?\/?$/, 'song'
+    @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?s?\/?$/, 'song'
     @route /^about\/?$/, 'about'
+    @route /^real-music\/?$/, 'realMusic'
 
     @$container = $('#page-container')
     @bind 'all', @_trackPageview
@@ -19,6 +20,10 @@ class App.Router extends Backbone.Router
     @band = ''
     @changeView(new App.Views.IndexPage())
     document.title = 'Relisten'
+  realMusic: ->
+    @band = ''
+    @changeView(new App.Views.IndexPage(realMusic: true))
+    document.title = 'Real Music | Relisten'
   band: (@band, @year, @month, @day) ->
     @changeView(new App.Views.HomePage())
     @randomShow = new App.Models.RandomShow { @band }
@@ -57,7 +62,10 @@ class App.Router extends Backbone.Router
     App.header.render()
     document.title = "#{@year}/#{@month}/#{@day} | #{App.bands[@band].name} | Relisten"
   song: (@band, @year, @month, @day, @showVersion, @slug, @version, @time) ->
+    if @version
+      @slug += '-' + @version
     if App.initial
+      @time = @getParameterByName 't' unless /m/.test @time
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years { @band }
       App.shows = new App.Views.Shows { @band, @year }
@@ -135,3 +143,8 @@ class App.Router extends Backbone.Router
     @lastUrl = url
     ga('send', 'pageview', "/#{url}");
 
+  getParameterByName: (name) ->
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]")
+    regex = new RegExp("[\\?&]" + name + "=([^&#]*)")
+    results = regex.exec(location.search)
+    (if not results? then "" else decodeURIComponent(results[1].replace(/\+/g, " ")))

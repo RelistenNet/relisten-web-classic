@@ -1,10 +1,10 @@
 <ul>
   {{#each queue}}
-    <li>
+    <li class="{{active}}">
       <span>[
         <a href="javascript:" class=delete>x</a>
       ]</span>
-      <a class="song {{active}}" href="/{{band}}/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{/if}}{{showVersion}}/{{slug}}">
+      <a class="song" href="/{{band}}/{{year}}/{{month}}/{{day}}{{#if showVersion}}-{{/if}}{{showVersion}}/{{slug}}">
         {{title}}
       </a>
       <span class="right">
