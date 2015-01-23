@@ -21,31 +21,36 @@ class App.Models.Player extends App.Models.Model
     url = App.song.get 'file' unless canPlayOgg and url = App.song.get 'oggUrl'
 
     self = this
-
-    soundManager.onready =>
-      @sound = soundManager.createSound
-        id: "phish#{id}"
-        url: url
-        position: ms
-      @sound.play
-        ondataerror: ->
-          console.log 'error mate' if console
-        whileloading: ->
-          self.times = 0 if self.times > 0
-          App.footer.updateProgress @bytesLoaded, @bytesTotal
-        whileplaying: ->
-          App.footer.updatePlaying @position, @duration
-        onplay: =>
-          @sound.setVolume volume || 100
-          @updateText()
-          @slideDown()
-        onfinish: ->
-          @stop()
-          App.footer.playNext()
-          App.player.set 'playing', false if App.queue.idx is App.queue.length
-        onload: ->
-          # on failed load
-          self.play() if @readyState is 2 and self.times++ < 5
+    console.log App.queue
+    if gapless5AudioContext && App.queue.gaplessPlayer
+      App.queue.gaplessPlayer.gotoTrack(App.queue.idx, true)
+      @updateText()
+      @slideDown()
+    else
+      soundManager.onready =>
+        @sound = soundManager.createSound
+          id: "phish#{id}"
+          url: url
+          position: ms
+        @sound.play
+          ondataerror: ->
+            console.log 'error mate' if console
+          whileloading: ->
+            self.times = 0 if self.times > 0
+            App.footer.updateProgress @bytesLoaded, @bytesTotal
+          whileplaying: ->
+            App.footer.updatePlaying @position, @duration
+          onplay: =>
+            @sound.setVolume volume || 100
+            @updateText()
+            @slideDown()
+          onfinish: ->
+            @stop()
+            App.footer.playNext()
+            App.player.set 'playing', false if App.queue.idx is App.queue.length
+          onload: ->
+            # on failed load
+            self.play() if @readyState is 2 and self.times++ < 5
 
   updateText: ->
     if title = App.song?.get 'title'

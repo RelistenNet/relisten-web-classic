@@ -67,11 +67,17 @@ function program8(depth0,data) {
   return "(Powered by phish.in)";
   }
 
+function program10(depth0,data) {
+  
+  
+  return "\n      <div class=\"info\" href=\"/about\">\n        1232 songs from 456 shows by 313 bands\n      </div>\n    ";
+  }
+
   buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to";
   stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "</span>\n    ";
-  stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.program(10, program10, data),fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n</ul>\n";
   return buffer;
@@ -1126,7 +1132,7 @@ window.App = {
     "phish": {
       "name": "Phish",
       "the": true,
-      "shows": "1,417"
+      "shows": "1,420"
     },
     "radiators": {
       "name": "The Radiators",
@@ -1199,7 +1205,7 @@ window.App = {
     },
     "umphreys": {
       "name": "Umphrey's McGee",
-      "shows": 696
+      "shows": "2,024"
     },
     "the-walkmen": {
       "name": "The Walkmen",
@@ -1216,6 +1222,10 @@ window.App = {
     "ween": {
       "name": "Ween",
       "shows": 447
+    },
+    "white-denim": {
+      "name": "White Denim",
+      "shows": 24
     },
     "yonder": {
       "name": "Yonder Mountain String Band",
@@ -1366,9 +1376,13 @@ window.App = {
     "ween": {
       "name": "Ween",
       "shows": 447
+    },
+    "white-denim": {
+      "name": "White Denim",
+      "shows": 24
     }
   },
-  "root": "http://relisten.net"
+  "root": "http://localhost:9000"
 };
 
 $(function() {
@@ -1444,6 +1458,22 @@ timeToMS = function(time) {
   min = +time[0];
   sec = +time[1];
   return ((min * 60) + sec) * 1000;
+};
+
+App.utils.ordinal_suffix = function(i) {
+  var j, k;
+  j = i % 10;
+  k = i % 100;
+  if (j === 1 && k !== 11) {
+    return i + "st";
+  }
+  if (j === 2 && k !== 12) {
+    return i + "nd";
+  }
+  if (j === 3 && k !== 13) {
+    return i + "rd";
+  }
+  return i + "th";
 };
 
 Handlebars.registerHelper("toHHMMSS", function() {
@@ -1592,6 +1622,7 @@ App.Router = (function(_super) {
     this.year = year;
     this.month = month;
     this.day = day;
+    App.router.updateDescription("Relisten to " + App.bands[this.band].shows + " " + App.bands[this.band].name + " recordings");
     this.changeView(new App.Views.HomePage());
     this.randomShow = new App.Models.RandomShow({
       band: this.band
@@ -1617,7 +1648,7 @@ App.Router = (function(_super) {
       }
     });
     App.header.render();
-    return document.title = "" + App.bands[this.band].name + " | Relisten";
+    return document.title = "Relisten to " + (App.bands[this.band].the ? "the " : void 0) + App.bands[this.band].name;
   };
 
   Router.prototype.year = function(band, year, month, day) {
@@ -1625,6 +1656,7 @@ App.Router = (function(_super) {
     this.year = year;
     this.month = month;
     this.day = day;
+    App.router.updateDescription("Relisten to " + App.bands[this.band].name + " concerts from " + this.year);
     if (App.initial) {
       this.changeView(new App.Views.HomePage());
       App.years = new App.Views.Years({
@@ -1896,6 +1928,13 @@ App.Router = (function(_super) {
     }
   };
 
+  Router.prototype.updateDescription = function(desc) {
+    if (!this.$meta) {
+      this.$meta = $('meta[name=description]');
+    }
+    return this.$meta.attr('content', desc);
+  };
+
   return Router;
 
 })(Backbone.Router);
@@ -2102,46 +2141,53 @@ App.Models.Player = (function(_super) {
       url = App.song.get('file');
     }
     self = this;
-    return soundManager.onready(function() {
-      _this.sound = soundManager.createSound({
-        id: "phish" + id,
-        url: url,
-        position: ms
+    console.log(App.queue);
+    if (gapless5AudioContext && App.queue.gaplessPlayer) {
+      App.queue.gaplessPlayer.gotoTrack(App.queue.idx, true);
+      this.updateText();
+      return this.slideDown();
+    } else {
+      return soundManager.onready(function() {
+        _this.sound = soundManager.createSound({
+          id: "phish" + id,
+          url: url,
+          position: ms
+        });
+        return _this.sound.play({
+          ondataerror: function() {
+            if (console) {
+              return console.log('error mate');
+            }
+          },
+          whileloading: function() {
+            if (self.times > 0) {
+              self.times = 0;
+            }
+            return App.footer.updateProgress(this.bytesLoaded, this.bytesTotal);
+          },
+          whileplaying: function() {
+            return App.footer.updatePlaying(this.position, this.duration);
+          },
+          onplay: function() {
+            _this.sound.setVolume(volume || 100);
+            _this.updateText();
+            return _this.slideDown();
+          },
+          onfinish: function() {
+            this.stop();
+            App.footer.playNext();
+            if (App.queue.idx === App.queue.length) {
+              return App.player.set('playing', false);
+            }
+          },
+          onload: function() {
+            if (this.readyState === 2 && self.times++ < 5) {
+              return self.play();
+            }
+          }
+        });
       });
-      return _this.sound.play({
-        ondataerror: function() {
-          if (console) {
-            return console.log('error mate');
-          }
-        },
-        whileloading: function() {
-          if (self.times > 0) {
-            self.times = 0;
-          }
-          return App.footer.updateProgress(this.bytesLoaded, this.bytesTotal);
-        },
-        whileplaying: function() {
-          return App.footer.updatePlaying(this.position, this.duration);
-        },
-        onplay: function() {
-          _this.sound.setVolume(volume || 100);
-          _this.updateText();
-          return _this.slideDown();
-        },
-        onfinish: function() {
-          this.stop();
-          App.footer.playNext();
-          if (App.queue.idx === App.queue.length) {
-            return App.player.set('playing', false);
-          }
-        },
-        onload: function() {
-          if (this.readyState === 2 && self.times++ < 5) {
-            return self.play();
-          }
-        }
-      });
-    });
+    }
   };
 
   Player.prototype.updateText = function() {
@@ -2433,10 +2479,12 @@ App.Collections.Playlists = (function(_super) {
 
 })(App.Collections.Collection);
 
-var _ref,
+var gapless5AudioContext, _ref,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+gapless5AudioContext = (window.hasWebKit ? new webkitAudioContext() : (typeof AudioContext !== "undefined" ? new AudioContext() : null));
 
 App.Collections.Queue = (function(_super) {
   __extends(Queue, _super);
@@ -2459,7 +2507,22 @@ App.Collections.Queue = (function(_super) {
       }
     });
     return this.on('reset', function() {
-      return _this.idx = 0;
+      _this.idx = 0;
+      if (gapless5AudioContext) {
+        _this.gaplessPlayer = new Gapless5("gapless-block", {
+          tracks: _this.pluck("file"),
+          playOnLoad: true
+        });
+        $("footer .buttons > div, footer .progress-container, .player .time").hide();
+        $("#gapless-block").show();
+        $("footer .buttons").css({
+          margin: "0 auto auto auto",
+          width: "225px"
+        });
+        return $("footer").css({
+          borderTop: "2px solid #888"
+        });
+      }
     });
   };
 
@@ -2485,6 +2548,7 @@ App.Collections.Queue = (function(_super) {
     App.player.play(ms);
     App.player.set('playing', true);
     _ref1 = App.song.toJSON(), slug = _ref1.slug, title = _ref1.title, year = _ref1.year, month = _ref1.month, day = _ref1.day, showVersion = _ref1.showVersion, band = _ref1.band;
+    App.router.updateDescription("Relisten to " + (App.bands[band].the ? "the " : void 0) + App.bands[band].name + " playing " + title + " on " + months[month - 1] + " " + (App.utils.ordinal_suffix(day)) + ", " + year + " at " + App.songs.songs.venue.name + " in " + App.songs.songs.venue.city);
     this.notify(title, "" + App.bands[band].name + "\n" + year + "/" + month + "/" + day);
     showVersionStr = showVersion ? '-' + showVersion : '';
     if (!window.location.pathname.match("/" + band + "/" + year + "/" + month + "/" + day + showVersionStr + "/" + slug)) {
@@ -3485,10 +3549,12 @@ App.Views.Shows = (function(_super) {
 
 })(App.Views.View);
 
-var _ref,
+var months, _ref,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 App.Views.Songs = (function(_super) {
   __extends(Songs, _super);
@@ -3549,6 +3615,9 @@ App.Views.Songs = (function(_super) {
         show_title: _this.songs.title
       });
     });
+    if (window.location.pathname.match(/\//g).length > 2) {
+      App.router.updateDescription("Relisten to " + (App.bands[band].the ? "the " : void 0) + App.bands[band].name + " playing on " + months[month - 1] + " " + (App.utils.ordinal_suffix(day)) + ", " + year + " at " + (this._the(this.songs.venue.name)) + " in " + this.songs.venue.city);
+    }
     this.$el.html(this.template({
       songs: this.songs,
       sources: sources || [],
@@ -3619,6 +3688,13 @@ App.Views.Songs = (function(_super) {
       return this.$sources.slideDown();
     }
     return this.$sources.slideUp();
+  };
+
+  Songs.prototype._the = function(str) {
+    if (!/^the/i.test(str)) {
+      return "the " + str;
+    }
+    return str;
   };
 
   return Songs;

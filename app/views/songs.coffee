@@ -1,3 +1,5 @@
+months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
+
 class App.Views.Songs extends App.Views.View
   el: '.songs-container'
   template: JST['songs']
@@ -31,6 +33,11 @@ class App.Views.Songs extends App.Views.View
 
     { band, year, month, day, showVersion } = App.router
     @songs.tracks.map (track) => _.extend track, { band, year, month, day, showVersion, show_title: @songs.title }
+
+    if window.location.pathname.match(/\//g).length > 2
+      App.router.updateDescription """
+        Relisten to #{"the " if App.bands[band].the}#{App.bands[band].name} playing on #{months[month - 1]} #{App.utils.ordinal_suffix(day)}, #{year} at #{@_the(@songs.venue.name)} in #{@songs.venue.city}
+      """
 
     @$el.html @template
       songs: @songs
@@ -77,3 +84,6 @@ class App.Views.Songs extends App.Views.View
   showSources: =>
     return @$sources.slideDown() if @$sources.is ':hidden'
     @$sources.slideUp()
+  _the: (str) ->
+    return "the " + str unless /^the/i.test(str)
+    str

@@ -71,7 +71,8 @@ module.exports = function(grunt) {
           "vendor/scripts/handlebars.js",
           "vendor/scripts/handlebars-helpers.js",
           "vendor/scripts/console-helper.js",
-          "vendor/scripts/jquery.serializeToJSON.js"
+          "vendor/scripts/jquery.serializeToJSON.js",
+          "vendor/scripts/gapless.js"
         ],
         dest: "public/javascript/vendor.js"
       }

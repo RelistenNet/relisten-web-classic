@@ -5425,6 +5425,31 @@ visibility: hidden;
 position: fixed;
 }
 
+.g5position{font-family:Arial,Helvetica,Geneva,sans-serif;font-size:9px;color:#888;text-align:center;width:115px;padding:2px}
+.g5inside{font-family:Arial,Helvetica,Geneva,sans-serif;font-size:9px;background-color:#eee;border:1px;border-color:#808080;border-style:solid;width:225px;height:65px;padding:3px;overflow:hidden}
+.g5transport{height:12px;overflow:hidden}
+input[type='range'].transportbar,input[type='range'].volume{outline:none;vertical-align:middle;-webkit-appearance:none !important;-moz-appearance:none !important;-ms-appearance:none !important;-o-appearance:none !important;appearance:none !important}
+input[type='range'].transportbar::-webkit-slider-thumb,input[type='range'].volume::-webkit-slider-thumb{vertical-align:middle;-webkit-appearance:none !important}
+input[type='range'].transportbar{margin-top:-17px;margin-left:2px;padding:0;height:4px;width:111px;background:transparent}
+.g5meter{margin:3px 2px 2px 2px;padding:0;height:4px;width:100%;background-image:-webkit-linear-gradient(#ddd,#aaa);background-image:-moz-linear-gradient(#ddd,#aaa);background-image:-ms-linear-gradient(#ddd,#aaa);background-image:-o-linear-gradient(#ddd,#aaa)}
+.g5meter > span{display:block;padding:0;height:100%;background-image:-webkit-linear-gradient(#bbb,#888);background-image:-moz-linear-gradient(#bbb,#888);background-image:-ms-linear-gradient(#bbb,#888);background-image:-o-linear-gradient(#bbb,#888)}
+input[type='range'].transportbar::-webkit-slider-thumb{height:8px;width:4px;background-image:-webkit-linear-gradient(#aaa,#666)}
+input[type='range'].transportbar::-moz-range-thumb{-moz-appearance:none !important;height:8px;width:4px;background-image:-moz-linear-gradient(#aaa,#666);border:0}
+.g5transport-1pxup::-webkit-slider-thumb{margin-top:-3px !important}
+.g5meter-1pxup::-webkit-slider-thumb{margin-top:-2px !important}
+input[type='range'].volume{width:35px;height:15px;margin:2px;padding:0;background-repeat:no-repeat;background-image:url("data:image/gif;base64,R0lGODlhIwAPAMQAAAAAAP///8DAwLCwsK6urqampp2dnZWVlYyMjICAgH9/f319fXp6end3d3Z2dnV1dXR0dHNzc3JycnFxcXBwcP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABUALAAAAAAjAA8AAAVWoCCOZGmeaKqubOu+sKPALaFQ1DLRacFQk4QwEeGVCrfIcFk0+ijKpbT5MkQoEqlWSF0dJtitmLhCQB/jdJf0gzTS8MSONEg6HIy8fs/vMyYHRoKDLCEAOw==")}
+input[type='range'].volume::-webkit-slider-thumb{background:#bbb;height:15px;width:4px}
+input[type='range'].transportbar::-moz-range-track,input[type='range'].volume::-moz-range-track{background:none;border:0}
+input[type='range'].volume::-moz-range-thumb{vertical-align:middle;-moz-appearance:none !important;background:#bbb;height:13px;width:4px;border:0}
+@-moz-document url-prefix(){input[type='range'].transportbar{margin-top:-20px}
+.g5meter-1pxup{margin-top:-22px !important}
+}.g5buttons{height:30px}
+.g5buttons-1pxup{height:14px !important}
+.g5button{outline:none;float:left;border:0;width:40px;height:40px;background-repeat:no-repeat;margin:2px;padding:0;color:#333;font-size:13px;text-align:center}
+.volumedisabled{width:35px;height:15px;background-image:url("data:image/gif;base64,R0lGODlhIwAPAPcAAP//////zP//mf//Zv//M///AP/M///MzP/Mmf/MZv/MM//MAP+Z//+ZzP+Zmf+ZZv+ZM/+ZAP9m//9mzP9mmf9mZv9mM/9mAP8z//8zzP8zmf8zZv8zM/8zAP8A//8AzP8Amf8AZv8AM/8AAMz//8z/zMz/mcz/Zsz/M8z/AMzM/8zMzMzMmczMZszMM8zMAMyZ/8yZzMyZmcyZZsyZM8yZAMxm/8xmzMxmmcxmZsxmM8xmAMwz/8wzzMwzmcwzZswzM8wzAMwA/8wAzMwAmcwAZswAM8wAAJn//5n/zJn/mZn/Zpn/M5n/AJnM/5nMzJnMmZnMZpnMM5nMAJmZ/5mZzJmZmZmZZpmZM5mZAJlm/5lmzJlmmZlmZplmM5lmAJkz/5kzzJkzmZkzZpkzM5kzAJkA/5kAzJkAmZkAZpkAM5kAAGb//2b/zGb/mWb/Zmb/M2b/AGbM/2bMzGbMmWbMZmbMM2bMAGaZ/2aZzGaZmWaZZmaZM2aZAGZm/2ZmzGZmmWZmZmZmM2ZmAGYz/2YzzGYzmWYzZmYzM2YzAGYA/2YAzGYAmWYAZmYAM2YAADP//zP/zDP/mTP/ZjP/MzP/ADPM/zPMzDPMmTPMZjPMMzPMADOZ/zOZzDOZmTOZZjOZMzOZADNm/zNmzDNmmTNmZjNmMzNmADMz/zMzzDMzmTMzZjMzMzMzADMA/zMAzDMAmTMAZjMAMzMAAAD//wD/zAD/mQD/ZgD/MwD/AADM/wDMzADMmQDMZgDMMwDMAACZ/wCZzACZmQCZZgCZMwCZAABm/wBmzABmmQBmZgBmMwBmAAAz/wAzzAAzmQAzZgAzMwAzAAAA/wAAzAAAmQAAZgAAMwAAAO7u7u3t7ezs7Orq6unp6ejo6Ofn5+Dg4Nra2tXV1dHR0c7Ozs3Nzf///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAOUALAAAAAAjAA8AAAhqAMkJHEiwoMGDCBMqXMiwocOHELV1g9hwXDds2Lhho5hQ3DaMILFl41hQ3MVsIUGOJOlRZMqUKx+GQ4ny5cuYC8FhrGnTJs6D30Rq60l0J8KP2YYWXbqx4Elt2rZJnUq1qtWP4Ehq3cowIAA7")}
+.g5play.enabled:before{content:"Play"}
+.g5play.disabled:before{content:"Pause"}
+
 @import url("//fonts.googleapis.com/css?family=Lato:700,700italic");
 @font-face{font-family:'Lato';font-style:normal;font-weight:400;src:local('Lato Regular'),local('Lato-Regular'),url("https://themes.googleusercontent.com/static/fonts/lato/v6/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff") format('woff')}
 @font-face{font-family:'Lato';font-style:italic;font-weight:700;src:local('Lato Bold Italic'),local('Lato-BoldItalic'),url("https://themes.googleusercontent.com/licensed/font?kit=HkF_qI1x_noxlxhrhMQYEI_sLczJPRm2COowb5SrMT8") format('woff')}
@@ -5451,9 +5476,10 @@ header ul.left{position:absolute;left:0;width:100%;}
 header ul.left li{float:left;}
 header ul.left li a:hover{text-decoration:none}
 header ul.left li.home-container{font-family:'Lato';font-style:italic;font-weight:700;font-size:1.2em;}
-header ul.left li.home-container a.home,header ul.left li.home-container a.band{font-size:2em;line-height:1.5em;height:50px;color:#008ab0;float:left;padding:0 5px 0 5px;}
-header ul.left li.home-container a.home:hover,header ul.left li.home-container a.band:hover{color:#f6f6f6;background:#008ab0}
-header ul.left li.home-container a.home span,header ul.left li.home-container a.band span{font-size:.7em}
+header ul.left li.home-container a.home,header ul.left li.home-container a.band,header ul.left li.home-container .info{font-size:2em;line-height:1.5em;height:50px;color:#008ab0;float:left;padding:0 5px 0 5px;}
+header ul.left li.home-container a.home:hover,header ul.left li.home-container a.band:hover,header ul.left li.home-container .info:hover{color:#f6f6f6;background:#008ab0}
+header ul.left li.home-container a.home span,header ul.left li.home-container a.band span,header ul.left li.home-container .info span{font-size:.7em}
+header ul.left li.home-container .info{font-size:1.4em;padding-top:12px}
 header ul.left li.home-container a.band{padding:0 5px 0 5px;}
 header ul.left li.home-container a.band:hover + .tip{display:block}
 header ul.left li.home-container span{font-size:1.5em;line-height:57px;height:50px;color:#008ab0;float:left;padding:0 0 0 0;}

@@ -25,6 +25,7 @@ class App.Router extends Backbone.Router
     @changeView(new App.Views.IndexPage(realMusic: true))
     document.title = 'Real Music | Relisten'
   band: (@band, @year, @month, @day) ->
+    App.router.updateDescription "Relisten to #{App.bands[@band].shows} #{App.bands[@band].name} recordings"
     @changeView(new App.Views.HomePage())
     @randomShow = new App.Models.RandomShow { @band }
     @randomShow.fetch success: =>
@@ -34,8 +35,11 @@ class App.Router extends Backbone.Router
       App.shows = new App.Views.Shows { @band, @year }
       App.songs = new App.Views.Songs { @band, @year, @month, @day, @showVersion }
     App.header.render()
-    document.title = "#{App.bands[@band].name} | Relisten"
+    document.title = "Relisten to #{"the " if App.bands[@band].the}#{App.bands[@band].name}"
   year: (@band, @year, @month, @day) ->
+    App.router.updateDescription """
+      Relisten to #{App.bands[@band].name} concerts from #{@year}
+    """
     if App.initial
       @changeView(new App.Views.HomePage())
       App.years = new App.Views.Years { band }
@@ -148,3 +152,7 @@ class App.Router extends Backbone.Router
     regex = new RegExp("[\\?&]" + name + "=([^&#]*)")
     results = regex.exec(location.search)
     (if not results? then "" else decodeURIComponent(results[1].replace(/\+/g, " ")))
+  updateDescription: (desc) ->
+    @$meta = $('meta[name=description]') unless @$meta
+
+    @$meta.attr 'content', desc
