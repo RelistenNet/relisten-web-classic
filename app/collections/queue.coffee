@@ -9,17 +9,6 @@ class App.Collections.Queue extends App.Collections.Collection
     @on 'reset', =>
       @idx = 0
 
-      if gapless5AudioContext
-        @gaplessPlayer = new Gapless5 "gapless-block",
-          tracks: this.pluck("file")
-          playOnLoad: true
-
-        $("footer .buttons > div, footer .progress-container, .player .time").hide()
-        $("#gapless-block").show()
-        $("footer .buttons").css margin: "0 auto auto auto",  width: "225px"
-        $("footer").css borderTop: "2px solid #888"
-
-
   play: (song, ms) =>
     if song
       @idx = @indexOf App.song if App.song

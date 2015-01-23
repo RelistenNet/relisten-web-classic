@@ -79,7 +79,7 @@ function program10(depth0,data) {
   buffer += "</span>\n    ";
   stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.program(10, program10, data),fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n</ul>\n";
+  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a class=\"news header-link\" href=\"/news\">NEWS</a></li>\n</ul>\n";
   return buffer;
   });
 
@@ -1782,7 +1782,32 @@ App.Router = (function(_super) {
     var self;
     self = this;
     App.queue.on('reset', function() {
-      var ms;
+      var ms, track, tracks, _i, _len;
+      tracks = this.pluck("file");
+      if (gapless5AudioContext) {
+        if (this.gaplessPlayer) {
+          this.gaplessPlayer.stop();
+          this.gaplessPlayer.removeAllTracks();
+          for (_i = 0, _len = tracks.length; _i < _len; _i++) {
+            track = tracks[_i];
+            this.gaplessPlayer.addTrack(track);
+          }
+        } else {
+          this.gaplessPlayer = new Gapless5("gapless-block", {
+            tracks: tracks,
+            playOnLoad: true
+          });
+        }
+        $("footer .buttons > div, footer .progress-container, .player .time").hide();
+        $("#gapless-block").show();
+        $("footer .buttons").css({
+          margin: "0 auto auto auto",
+          width: "225px"
+        });
+        $("footer").css({
+          borderTop: "2px solid #888"
+        });
+      }
       ms = timeToMS(self.time);
       App.song = App.queue.findWhere({
         slug: self.slug
@@ -2507,22 +2532,7 @@ App.Collections.Queue = (function(_super) {
       }
     });
     return this.on('reset', function() {
-      _this.idx = 0;
-      if (gapless5AudioContext) {
-        _this.gaplessPlayer = new Gapless5("gapless-block", {
-          tracks: _this.pluck("file"),
-          playOnLoad: true
-        });
-        $("footer .buttons > div, footer .progress-container, .player .time").hide();
-        $("#gapless-block").show();
-        $("footer .buttons").css({
-          margin: "0 auto auto auto",
-          width: "225px"
-        });
-        return $("footer").css({
-          borderTop: "2px solid #888"
-        });
-      }
+      return _this.idx = 0;
     });
   };
 

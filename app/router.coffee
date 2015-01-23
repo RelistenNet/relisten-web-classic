@@ -84,6 +84,25 @@ class App.Router extends Backbone.Router
   finishSong: =>
     self = @
     App.queue.on 'reset', ->
+
+      tracks = @pluck("file")
+
+      if gapless5AudioContext
+        if @gaplessPlayer
+          @gaplessPlayer.stop()
+          @gaplessPlayer.removeAllTracks()
+          for track in tracks
+            @gaplessPlayer.addTrack track
+        else
+          @gaplessPlayer = new Gapless5 "gapless-block",
+            tracks: tracks
+            playOnLoad: true
+
+        $("footer .buttons > div, footer .progress-container, .player .time").hide()
+        $("#gapless-block").show()
+        $("footer .buttons").css margin: "0 auto auto auto",  width: "225px"
+        $("footer").css borderTop: "2px solid #888"
+
       ms = timeToMS self.time
       App.song = App.queue.findWhere { slug: self.slug }
       document.title = "#{App.song.get('title')} | #{self.year}/#{self.month}/#{self.day} | #{App.bands[self.band].name} | Relisten"

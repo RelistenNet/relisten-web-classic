@@ -35,9 +35,8 @@ header
           text-decoration none
 
         &.home-container
-          font-family 'Lato'
-          font-style italic
-          font-weight 700
+          font-family 'HelveticaNeue', Helvetica
+          font-weight 600
           font-size 1.2em
 
           a.home, a.band, .info
@@ -114,6 +113,7 @@ header
         height 100%
         text-align center
         border-left 1px solid #DDD
+        position relative
 
         &:hover, &.active
           border-left 1px solid asihtosblue
@@ -141,10 +141,25 @@ header
           //font-weight bold
           font-family "HelveticaNeue-CondensedBold", Helvetica, Arial, sans-serif
 
+          &.news
+            &:before
+              content: "Fresh!"
+              position absolute
+              top 8px
+              left 15px
+              font-size 12px
+              line-height 16px
+              color green
+              transform: rotate(-20deg);
+
           &:hover, &.active
             color #F6F6F6
             background asihtosblue
             text-decoration none
+
+            &.news
+              &:before
+                color #FFF
 
           span
             font-size .7em
