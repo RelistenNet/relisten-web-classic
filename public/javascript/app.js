@@ -18,6 +18,30 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return "<div class=progress-bar></div>\n<div class=position-bar></div>\n";
   });
 
+this["JST"]["gapless"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, self=this;
+
+function program1(depth0,data) {
+  
+  
+  return "DISABLE";
+  }
+
+function program3(depth0,data) {
+  
+  
+  return "ENABLE";
+  }
+
+  buffer += "<pre>\nHello there –\n\n  I'm proud to announce that our most sought after feature (other than adding JGB) has come to fruition. Until recently, gapless playback has been impossible in the browser, at least not without some ridiculous implementations. A few months ago, I came across a library built by Rego Sen called <a href=\"https://github.com/regosen/Gapless-5\">Gapless-5</a>, a proof-of-concept implementation of gapless playback in the browser using the cutting-edge <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API\">Web Audio API</a>. Frankly, it's a messy library that's tied directly to a pre-built UI, but, hell, it works.\n\n  I don't need to tell you why gapless playback is so sought after for live music. Immediately, I tested it out on the Relisten codebase, only to find that there was a technical limitation. Files had to have a <a href=\"http://enable-cors.org/\">specific flag</a> enabled that allowed them to be accessed directly via the Web Audio API in the browser. I shot a quick email to the archive.org support team and they eventually got back to me saying they were busy at the moment, but would look into it in the future.\n\n  A few months and correspondents later, I recieved an email from Tracey, a lead engineer at Archive, saying that she had implemented the flag on all flac*, ogg, mp3, and wav files. A brief email to Justin over at <a href=\"http://phish.in\">Phish.in</a> yielded the same result for our Phish library. This feature is 100% thanks to the wonderful people at <a href=\"http://archive.org\">archive.org</a>, Justin, and Rego Sen. If you feel compelled at all, please send a <a href=\"https://archive.org/donate/\">donation to the archive team</a>. They provide an incredible service, all for free, without any fanfare. They are quite simply a service that the internet is lucky to have.\n\n  Now this feature isn't complete. I've been spending my time working on a new application, one not directly related to live music, but I couldn't sit on a half-baked implementation. I knew you all wanted this feature yesterday.\n\n  So here, it is. Fair warning – I've barely tested this. I played a few Scarlet -> Fires and my panties melted, so it does work. Until I have more time to implement it properly, it will remain an opt-in feature. The queue probably won't work so well, what will work [in a modern browser] is clicking on a song and listening to the entirety of that tape. That's how most of you use the site anyway.\n\n  There appears to be a core legion of a few hundred of you that use the site on a daily basis, often from 9 AM - 5 PM. The only reason I'm putting this up right now is for you – the people who actually use this site day-in and day-out. If you do use this site often, I'd love to get to know you. Whether you have a suggestion for the site, or just want to share a story. <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>\n\n– Daniel Saewitz\n\n  <button class=enable-gapless>";
+  stack1 = helpers['if'].call(depth0, depth0.enabled, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += " GAPLESS PLAYBACK</button>\n\n  You must be using a browser that is <a href=\"http://caniuse.com/#feat=audio-api\">listed here</a>.\n\n\n  * Would you be interested in FLAC support? If so, send me an email: <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>\n\n\n\n\n\n\n\n</pre>\n";
+  return buffer;
+  });
+
 this["JST"]["header"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -25,61 +49,46 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
-  
-  return " ";
-  }
-
-function program3(depth0,data) {
-  
-  
-  return "...";
-  }
-
-function program5(depth0,data) {
-  
   var buffer = "", stack1, stack2, options;
   buffer += "\n      <a class=\"band\" href=\"/";
   if (stack1 = helpers.slug) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.slug; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "\">\n        ";
-  stack1 = helpers['if'].call(depth0, depth0.the, {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.the, {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   if (stack1 = helpers.bandName) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.bandName; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "\n      </a>\n      <span class=\"tip\">&nbsp;&nbsp;&lt;- click here for a random show! ";
-  options = {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data};
   stack2 = ((stack1 = helpers.if_eq || depth0.if_eq),stack1 ? stack1.call(depth0, depth0.bandName, "Phish", options) : helperMissing.call(depth0, "if_eq", depth0.bandName, "Phish", options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "</span>\n    ";
   return buffer;
   }
-function program6(depth0,data) {
+function program2(depth0,data) {
   
   
   return "the ";
   }
 
-function program8(depth0,data) {
+function program4(depth0,data) {
   
   
   return "(Powered by phish.in)";
   }
 
-function program10(depth0,data) {
+function program6(depth0,data) {
   
   
-  return "\n      <div class=\"info\" href=\"/about\">\n        1232 songs from 456 shows by 313 bands\n      </div>\n    ";
+  return "\n      <div class=\"info\" href=\"/about\">\n        833,640 songs from 45,645 shows by 78 bands\n      </div>\n    ";
   }
 
-  buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to";
-  stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to </span>\n    ";
+  stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.program(6, program6, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</span>\n    ";
-  stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.program(10, program10, data),fn:self.program(5, program5, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a class=\"news header-link\" href=\"/news\">NEWS</a></li>\n</ul>\n";
+  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a class=\"gapless header-link\" href=\"/gapless\">GAPLESS</a></li>\n</ul>\n";
   return buffer;
   });
 
@@ -1382,7 +1391,7 @@ window.App = {
       "shows": 24
     }
   },
-  "root": "http://localhost:9000"
+  "root": "http://relisten.net"
 };
 
 $(function() {
@@ -1597,6 +1606,7 @@ App.Router = (function(_super) {
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show');
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?s?\/?$/, 'song');
     this.route(/^about\/?$/, 'about');
+    this.route(/^gapless\/?$/, 'gapless');
     this.route(/^real-music\/?$/, 'realMusic');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
@@ -1784,7 +1794,7 @@ App.Router = (function(_super) {
     App.queue.on('reset', function() {
       var ms, track, tracks, _i, _len;
       tracks = this.pluck("file");
-      if (gapless5AudioContext) {
+      if (cookie("gapless") && gapless5AudioContext) {
         if (this.gaplessPlayer) {
           this.gaplessPlayer.stop();
           this.gaplessPlayer.removeAllTracks();
@@ -1797,8 +1807,11 @@ App.Router = (function(_super) {
             tracks: tracks,
             playOnLoad: true
           });
+          this.gaplessPlayer.onnext = function() {
+            return App.queue.play(null, 0);
+          };
         }
-        $("footer .buttons > div, footer .progress-container, .player .time").hide();
+        $("footer .buttons > div, footer .progress-container, .player .time, .player .volume-container").hide();
         $("#gapless-block").show();
         $("footer .buttons").css({
           margin: "0 auto auto auto",
@@ -1822,6 +1835,11 @@ App.Router = (function(_super) {
   Router.prototype.about = function() {
     this.changeView(new App.Views.AboutPage());
     return document.title = 'About | Relisten';
+  };
+
+  Router.prototype.gapless = function() {
+    this.changeView(new App.Views.GaplessPage());
+    return document.title = 'Gapless | Relisten';
   };
 
   Router.prototype.login = function() {
@@ -2166,8 +2184,7 @@ App.Models.Player = (function(_super) {
       url = App.song.get('file');
     }
     self = this;
-    console.log(App.queue);
-    if (gapless5AudioContext && App.queue.gaplessPlayer) {
+    if (cookie("gapless") && gapless5AudioContext && App.queue.gaplessPlayer) {
       App.queue.gaplessPlayer.gotoTrack(App.queue.idx, true);
       this.updateText();
       return this.slideDown();
@@ -2760,7 +2777,7 @@ App.Views.Footer = (function(_super) {
       return;
     }
     coord = e.pageX / this.$window.width();
-    if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
+    if (App.player.sound && App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
       App.player.sound.destruct();
       App.player.play(this._clickToMs(e.pageX));
     }
@@ -2770,7 +2787,7 @@ App.Views.Footer = (function(_super) {
   Footer.prototype.seek = function(pageX) {
     var coord;
     coord = pageX / this.$window.width();
-    if (App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
+    if (App.player.sound && App.player.sound.bytesLoaded / App.player.sound.bytesTotal < coord) {
       App.player.sound.destruct();
       return App.player.play(this._clickToMs(pageX));
     }
@@ -2778,7 +2795,11 @@ App.Views.Footer = (function(_super) {
   };
 
   Footer.prototype.pause = function() {
-    soundManager.pause("phish" + App.player.get('id'));
+    if (cookie("gapless") && gapless5AudioContext && App.queue.gaplessPlayer) {
+      App.queue.gaplessPlayer.pause();
+    } else {
+      soundManager.pause("phish" + App.player.get('id'));
+    }
     return App.player.set('playing', false);
   };
 
@@ -2786,6 +2807,9 @@ App.Views.Footer = (function(_super) {
     var id;
     id = App.player.get('id');
     App.player.set('playing', true);
+    if (cookie("gapless") && gapless5AudioContext && App.queue.gaplessPlayer && App.playerView.played.indexOf(id >= 0)) {
+      App.queue.gaplessPlayer.play();
+    }
     if (App.playerView.played.indexOf(id >= 0)) {
       return soundManager.resume("phish" + id);
     }
@@ -2807,6 +2831,49 @@ App.Views.Footer = (function(_super) {
   };
 
   return Footer;
+
+})(App.Views.View);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.GaplessPage = (function(_super) {
+  __extends(GaplessPage, _super);
+
+  function GaplessPage() {
+    _ref = GaplessPage.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  GaplessPage.prototype.className = 'gapless-page';
+
+  GaplessPage.prototype.template = JST['gapless'];
+
+  GaplessPage.prototype.initialize = function() {
+    return App.router.clearActive($('header .gapless'));
+  };
+
+  GaplessPage.prototype.events = {
+    'click .enable-gapless': 'gapless'
+  };
+
+  GaplessPage.prototype.render = function() {
+    this.$el.html(this.template({
+      enabled: cookie("gapless")
+    }));
+    return this;
+  };
+
+  GaplessPage.prototype.gapless = function() {
+    var enabled;
+    enabled = cookie("gapless");
+    deleteCookie("gapless");
+    cookie("gapless", !enabled, 1024);
+    return this.render();
+  };
+
+  return GaplessPage;
 
 })(App.Views.View);
 

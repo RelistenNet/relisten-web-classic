@@ -12,6 +12,7 @@ class App.Router extends Backbone.Router
     @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/?$/, 'show'
     @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?s?\/?$/, 'song'
     @route /^about\/?$/, 'about'
+    @route /^gapless\/?$/, 'gapless'
     @route /^real-music\/?$/, 'realMusic'
 
     @$container = $('#page-container')
@@ -87,7 +88,7 @@ class App.Router extends Backbone.Router
 
       tracks = @pluck("file")
 
-      if gapless5AudioContext
+      if cookie("gapless") && gapless5AudioContext
         if @gaplessPlayer
           @gaplessPlayer.stop()
           @gaplessPlayer.removeAllTracks()
@@ -98,7 +99,10 @@ class App.Router extends Backbone.Router
             tracks: tracks
             playOnLoad: true
 
-        $("footer .buttons > div, footer .progress-container, .player .time").hide()
+          @gaplessPlayer.onnext = ->
+            App.queue.play null, 0
+
+        $("footer .buttons > div, footer .progress-container, .player .time, .player .volume-container").hide()
         $("#gapless-block").show()
         $("footer .buttons").css margin: "0 auto auto auto",  width: "225px"
         $("footer").css borderTop: "2px solid #888"
@@ -113,6 +117,9 @@ class App.Router extends Backbone.Router
   about: ->
     @changeView(new App.Views.AboutPage())
     document.title = 'About | Relisten'
+  gapless: ->
+    @changeView(new App.Views.GaplessPage())
+    document.title = 'Gapless | Relisten'
   login: ->
     @changeView(new App.Views.LoginPage())
     document.title = 'Login | Relisten'

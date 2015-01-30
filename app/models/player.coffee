@@ -21,8 +21,8 @@ class App.Models.Player extends App.Models.Model
     url = App.song.get 'file' unless canPlayOgg and url = App.song.get 'oggUrl'
 
     self = this
-    console.log App.queue
-    if gapless5AudioContext && App.queue.gaplessPlayer
+
+    if cookie("gapless") && gapless5AudioContext && App.queue.gaplessPlayer
       App.queue.gaplessPlayer.gotoTrack(App.queue.idx, true)
       @updateText()
       @slideDown()

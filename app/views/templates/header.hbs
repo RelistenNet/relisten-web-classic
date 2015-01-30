@@ -1,7 +1,7 @@
 <ul class="left">
   <li class="home-container">
     <a class="home" href="/">Relisten</a>
-    <span> to{{#if bandName}} {{else}}...{{/if}}</span>
+    <span> to </span>
     {{#if bandName}}
       <a class="band" href="/{{slug}}">
         {{#if the}}the {{/if}}{{bandName}}
@@ -9,7 +9,7 @@
       <span class="tip">&nbsp;&nbsp;&lt;- click here for a random show! {{#if_eq bandName "Phish"}}(Powered by phish.in){{/if_eq}}</span>
     {{else}}
       <div class="info" href="/about">
-        1232 songs from 456 shows by 313 bands
+        833,640 songs from 45,645 shows by 78 bands
       </div>
     {{/if}}
     <div class="clear"></div>
@@ -18,5 +18,5 @@
 
 <ul class="right">
     <li><a class="about header-link" href="/about">ABOUT</a></li>
-    <li><a class="news header-link" href="/news">NEWS</a></li>
+    <li><a class="gapless header-link" href="/gapless">GAPLESS</a></li>
 </ul>
