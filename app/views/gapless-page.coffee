@@ -12,4 +12,7 @@ class App.Views.GaplessPage extends App.Views.View
     enabled = cookie("gapless")
     deleteCookie "gapless"
     cookie "gapless", !enabled, 1024
+    ga('send', 'event', 'gapless', 'enable', 'button', if !enabled then 1 else 0)
+
     @render()
+    location.reload()

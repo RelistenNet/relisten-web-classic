@@ -1,31 +1,25 @@
 <pre>
 Hello there –
 
-  I'm proud to announce that our most sought after feature (other than adding JGB) has come to fruition. Until recently, gapless playback has been impossible in the browser, at least not without some ridiculous implementations. A few months ago, I came across a library built by Rego Sen called <a href="https://github.com/regosen/Gapless-5">Gapless-5</a>, a proof-of-concept implementation of gapless playback in the browser using the cutting-edge <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>. Frankly, it's a messy library that's tied directly to a pre-built UI, but, hell, it works.
+  I'm proud to announce that our most sought after feature (other than adding JGB) has finally come to fruition. Until recently, gapless playback has been impossible in the browser, at least not without some ridiculous implementations. A few months ago, I came across a library built by Rego Sen called <a href="https://github.com/regosen/Gapless-5">Gapless-5</a>, a proof-of-concept implementation of gapless playback in the browser using the cutting-edge <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>. Frankly, it's not perfect, but, hell, it works.
 
-  I don't need to tell you why gapless playback is so sought after for live music. Immediately, I tested it out on the Relisten codebase, only to find that there was a technical limitation. Files had to have a <a href="http://enable-cors.org/">specific flag</a> enabled that allowed them to be accessed directly via the Web Audio API in the browser. I shot a quick email to the archive.org support team and they eventually got back to me saying they were busy at the moment, but would look into it in the future.
+  I don't need to tell you why gapless playback is so treasured. I immediately tested it out on the Relisten codebase, only to find that there was a technical limitation. Files had to have a <a href="http://enable-cors.org/">specific flag</a> enabled that allowed them to be accessed directly via the Web Audio API in the browser. I shot a quick email to the archive.org support team asking them to implement the flag.
 
-  A few months and correspondents later, I recieved an email from Tracey, a lead engineer at Archive, saying that she had implemented the flag on all flac*, ogg, mp3, and wav files. A brief email to Justin over at <a href="http://phish.in">Phish.in</a> yielded the same result for our Phish library. This feature is 100% thanks to the wonderful people at <a href="http://archive.org">archive.org</a>, Justin, and Rego Sen. If you feel compelled at all, please send a <a href="https://archive.org/donate/">donation to the archive team</a>. They provide an incredible service, all for free, without any fanfare. They are quite simply a service that the internet is lucky to have.
+  A few months and correspondence later, I recieved an email from Tracey, a lead engineer at Archive, saying that she had implemented the flag on all flac*, ogg, mp3, and wav files. A brief email to Justin over at <a href="http://phish.in">Phish.in</a> yielded the same result for our Phish library. This feature is 100% thanks to the wonderful people at <a href="http://archive.org">archive.org</a>, Justin, and Rego Sen. If you feel compelled at all, please send a <a href="https://archive.org/donate/">donation to the archive team</a>. They provide an incredible service, all for free, without any fanfare. They are quite simply a service that the internet is lucky to have.
 
-  Now this feature isn't complete. I've been spending my time working on a new application, one not directly related to live music, but I couldn't sit on a half-baked implementation. I knew you all wanted this feature yesterday.
+  Now this feature isn't complete. I've been spending my time working on a new unrelated application, but I couldn't sit on a half-baked implementation. I know you all wanted this feature yesterday.
 
-  So here, it is. Fair warning – I've barely tested this. I played a few Scarlet -> Fires and my panties melted, so it does work. Until I have more time to implement it properly, it will remain an opt-in feature. The queue probably won't work so well, what will work [in a modern browser] is clicking on a song and listening to the entirety of that tape. That's how most of you use the site anyway.
+  So here, it is. Fair warning – I've barely tested this. I played a few Scarlet -> Fires and my panties melted, so I can confirm that it does work. Until I have more time to implement it properly, gapless will remain an opt-in feature. The queue probably won't work so well, what will work [in a modern browser] is clicking on a song and listening to the entirety of that tape. That's how most of you use the site anyway.
 
-  There appears to be a core legion of a few hundred of you that use the site on a daily basis, often from 9 AM - 5 PM. The only reason I'm putting this up right now is for you – the people who actually use this site day-in and day-out. If you do use this site often, I'd love to get to know you. Whether you have a suggestion for the site, or just want to share a story. <a href="mailto:admin@relisten.net">admin@relisten.net</a>
+  There appears to be a core legion of a few hundred of you that use the site on a daily basis, often from 9 AM - 5 PM. The only reason I'm putting this up right now is for you – the people who actually use this site day-in and day-out. If you do use this site often, I'd love to say hi and get to know you - whether you have a suggestion or just want to share a story.
 
-– Daniel Saewitz
+– Daniel Saewitz, <a href="mailto:admin@relisten.net">admin@relisten.net</a>
 
   <button class=enable-gapless>{{#if enabled}}DISABLE{{else}}ENABLE{{/if}} GAPLESS PLAYBACK</button>
 
-  You must be using a browser that is <a href="http://caniuse.com/#feat=audio-api">listed here</a>.
+  <a href="http://relisten.net/phish/1995/12/29/bathtub-gin">Once you have it enabled, give the Bathtub Gin -> The Real Me -> Bathtub Gin a shot.</a> Email me your favorite segues and I'll add them to this list.
 
+  You must be using a browser that is <a href="http://caniuse.com/#feat=audio-api">listed here</a>. If something breaks, just try refreshing.
 
   * Would you be interested in FLAC support? If so, send me an email: <a href="mailto:admin@relisten.net">admin@relisten.net</a>
-
-
-
-
-
-
-
 </pre>

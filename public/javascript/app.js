@@ -6,7 +6,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<p>\n  Welcome to yet another internet experiment.\n</p>\n\n<br>\n\n<p class=big>\n  For any comments, suggestions, or data errors please email <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>.\n</p>\n\n<br>\n\n<p class=big>\n  Peruse the various bands and enjoy their extensive live catalogues.\n</p>\n\n<br>\n\n<p>\n  This site is powered by Archive.org and Alec Gorge's <a href=\"https://github.com/alecgorge/iguana\" target=\"_blank\">Iguana</a>. The Phish collection is hosted and provided by <a href=\"http://phish.in\" target=\"_blank\">Phish.in</a>.\n</p>\n\n<br>\n\n<p>\n  If you'd like to donate, all of the proceeds will go towards the running of this site and others like it. Any extra funds will be donated to Archive.org and The Mockingbird Foundation.\n</p>\n\n<br>\n\n<p>\n<center>\n<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_blank\">\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----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-----END PKCS7-----\n\">\n<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n</form>\n</center>\n</p>\n\n<p><center>Bitcoin: 1FQRjYy5hqzeDD5DWThGNzfyy1E2PoNdMC</center></p>\n\n<br>\n<br>\n\n<p>\n  This site complies with Archive.org's <a href=\"https://archive.org/post/261115/hotlinking-allowed\">policy</a>.\n</p>\n\n<p>\n  <i>\n    The Grateful Dead and our managing organizations have long encouraged the purely non-commercial exchange of music taped at our concerts and those of our individual members. That a new medium of distribution has arisen - digital audio files being traded over the Internet - does not change our policy in this regard. Our stipulations regarding digital distribution are merely extensions of those long-standing principles and they are as follow:\n</i>\n</p>\n\n<p>\n  <i>\n    No commercial gain may be sought by websites offering digital files of our music, whether through advertising, exploiting databases compiled from their traffic, or any other means.\n    All participants in such digital exchange acknowledge and respect the copyrights of the performers, writers and publishers of the music.\n  </i>\n</p>\n<p>\n  <i>\n    This notice should be clearly posted on all sites engaged in this activity.\n    We reserve the ability to withdraw our sanction of non-commercial digital music should circumstances arise that compromise our ability to protect and steward the integrity of our work.\n</i>\n</p>\n";
+  return "<pre>\n\nWelcome to yet another internet experiment.\n\nFor any comments, suggestions, or data errors please email <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>.\n\nPeruse the various bands and enjoy their extensive live catalogues for free.\n\nThis site is powered by Archive.org and Alec Gorge's <a href=\"https://github.com/alecgorge/iguana\" target=\"_blank\">Iguana</a>. The Phish collection is hosted and provided by <a href=\"http://phish.in\" target=\"_blank\">Phish.in</a>.\n\nIf you'd like to donate, all of the proceeds will go towards the running of this site and others like it. Any extra funds will be donated to Archive.org and The Mockingbird Foundation.\n\n<center>\n<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_blank\">\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----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-----END PKCS7-----\n\">\n<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n</form>\n</center>\n\n<center>Bitcoin: 1FQRjYy5hqzeDD5DWThGNzfyy1E2PoNdMC</center>\n\nThis site complies with Archive.org's <a href=\"https://archive.org/post/261115/hotlinking-allowed\">policy</a>.\n\n<i>\nThe Grateful Dead and our managing organizations have long encouraged the purely non-commercial exchange of music taped at our concerts and those of our individual members. That a new medium of distribution has arisen - digital audio files being traded over the Internet - does not change our policy in this regard. Our stipulations regarding digital distribution are merely extensions of those long-standing principles and they are as follow:\n\nNo commercial gain may be sought by websites offering digital files of our music, whether through advertising, exploiting databases compiled from their traffic, or any other means.\nAll participants in such digital exchange acknowledge and respect the copyrights of the performers, writers and publishers of the music.\n\nThis notice should be clearly posted on all sites engaged in this activity.\nWe reserve the ability to withdraw our sanction of non-commercial digital music should circumstances arise that compromise our ability to protect and steward the integrity of our work.\n</i>\n\n\n</pre>";
   });
 
 this["JST"]["footer"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -35,10 +35,10 @@ function program3(depth0,data) {
   return "ENABLE";
   }
 
-  buffer += "<pre>\nHello there –\n\n  I'm proud to announce that our most sought after feature (other than adding JGB) has come to fruition. Until recently, gapless playback has been impossible in the browser, at least not without some ridiculous implementations. A few months ago, I came across a library built by Rego Sen called <a href=\"https://github.com/regosen/Gapless-5\">Gapless-5</a>, a proof-of-concept implementation of gapless playback in the browser using the cutting-edge <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API\">Web Audio API</a>. Frankly, it's a messy library that's tied directly to a pre-built UI, but, hell, it works.\n\n  I don't need to tell you why gapless playback is so sought after for live music. Immediately, I tested it out on the Relisten codebase, only to find that there was a technical limitation. Files had to have a <a href=\"http://enable-cors.org/\">specific flag</a> enabled that allowed them to be accessed directly via the Web Audio API in the browser. I shot a quick email to the archive.org support team and they eventually got back to me saying they were busy at the moment, but would look into it in the future.\n\n  A few months and correspondents later, I recieved an email from Tracey, a lead engineer at Archive, saying that she had implemented the flag on all flac*, ogg, mp3, and wav files. A brief email to Justin over at <a href=\"http://phish.in\">Phish.in</a> yielded the same result for our Phish library. This feature is 100% thanks to the wonderful people at <a href=\"http://archive.org\">archive.org</a>, Justin, and Rego Sen. If you feel compelled at all, please send a <a href=\"https://archive.org/donate/\">donation to the archive team</a>. They provide an incredible service, all for free, without any fanfare. They are quite simply a service that the internet is lucky to have.\n\n  Now this feature isn't complete. I've been spending my time working on a new application, one not directly related to live music, but I couldn't sit on a half-baked implementation. I knew you all wanted this feature yesterday.\n\n  So here, it is. Fair warning – I've barely tested this. I played a few Scarlet -> Fires and my panties melted, so it does work. Until I have more time to implement it properly, it will remain an opt-in feature. The queue probably won't work so well, what will work [in a modern browser] is clicking on a song and listening to the entirety of that tape. That's how most of you use the site anyway.\n\n  There appears to be a core legion of a few hundred of you that use the site on a daily basis, often from 9 AM - 5 PM. The only reason I'm putting this up right now is for you – the people who actually use this site day-in and day-out. If you do use this site often, I'd love to get to know you. Whether you have a suggestion for the site, or just want to share a story. <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>\n\n– Daniel Saewitz\n\n  <button class=enable-gapless>";
+  buffer += "<pre>\nHello there –\n\n  I'm proud to announce that our most sought after feature (other than adding JGB) has finally come to fruition. Until recently, gapless playback has been impossible in the browser, at least not without some ridiculous implementations. A few months ago, I came across a library built by Rego Sen called <a href=\"https://github.com/regosen/Gapless-5\">Gapless-5</a>, a proof-of-concept implementation of gapless playback in the browser using the cutting-edge <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API\">Web Audio API</a>. Frankly, it's not perfect, but, hell, it works.\n\n  I don't need to tell you why gapless playback is so treasured. I immediately tested it out on the Relisten codebase, only to find that there was a technical limitation. Files had to have a <a href=\"http://enable-cors.org/\">specific flag</a> enabled that allowed them to be accessed directly via the Web Audio API in the browser. I shot a quick email to the archive.org support team asking them to implement the flag.\n\n  A few months and correspondence later, I recieved an email from Tracey, a lead engineer at Archive, saying that she had implemented the flag on all flac*, ogg, mp3, and wav files. A brief email to Justin over at <a href=\"http://phish.in\">Phish.in</a> yielded the same result for our Phish library. This feature is 100% thanks to the wonderful people at <a href=\"http://archive.org\">archive.org</a>, Justin, and Rego Sen. If you feel compelled at all, please send a <a href=\"https://archive.org/donate/\">donation to the archive team</a>. They provide an incredible service, all for free, without any fanfare. They are quite simply a service that the internet is lucky to have.\n\n  Now this feature isn't complete. I've been spending my time working on a new unrelated application, but I couldn't sit on a half-baked implementation. I know you all wanted this feature yesterday.\n\n  So here, it is. Fair warning – I've barely tested this. I played a few Scarlet -> Fires and my panties melted, so I can confirm that it does work. Until I have more time to implement it properly, gapless will remain an opt-in feature. The queue probably won't work so well, what will work [in a modern browser] is clicking on a song and listening to the entirety of that tape. That's how most of you use the site anyway.\n\n  There appears to be a core legion of a few hundred of you that use the site on a daily basis, often from 9 AM - 5 PM. The only reason I'm putting this up right now is for you – the people who actually use this site day-in and day-out. If you do use this site often, I'd love to say hi and get to know you - whether you have a suggestion or just want to share a story.\n\n– Daniel Saewitz, <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>\n\n  <button class=enable-gapless>";
   stack1 = helpers['if'].call(depth0, depth0.enabled, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += " GAPLESS PLAYBACK</button>\n\n  You must be using a browser that is <a href=\"http://caniuse.com/#feat=audio-api\">listed here</a>.\n\n\n  * Would you be interested in FLAC support? If so, send me an email: <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>\n\n\n\n\n\n\n\n</pre>\n";
+  buffer += " GAPLESS PLAYBACK</button>\n\n  <a href=\"http://relisten.net/phish/1995/12/29/bathtub-gin\">Once you have it enabled, give the Bathtub Gin -> The Real Me -> Bathtub Gin a shot.</a> Email me your favorite segues and I'll add them to this list.\n\n  You must be using a browser that is <a href=\"http://caniuse.com/#feat=audio-api\">listed here</a>. If something breaks, just try refreshing.\n\n  * Would you be interested in FLAC support? If so, send me an email: <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>\n</pre>\n";
   return buffer;
   });
 
@@ -88,7 +88,7 @@ function program6(depth0,data) {
   buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to </span>\n    ";
   stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.program(6, program6, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a class=\"gapless header-link\" href=\"/gapless\">GAPLESS</a></li>\n</ul>\n";
+  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a class=\"gapless header-link\" href=\"/gapless\">GAPLESS</a></li>\n    <li><a class=\"fucked-up header-link\" href=\"/oops\">I FUCKED UP</a></li>\n</ul>\n";
   return buffer;
   });
 
@@ -202,6 +202,15 @@ function program1(depth0,data) {
   buffer += escapeExpression(stack1)
     + "</p>\n</div>";
   return buffer;
+  });
+
+this["JST"]["oops"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<pre>\nYesterday I realized that for the past 4+ months, my relisten.net email has been broken. I  thought it was weird that I didn't hear from <i>any</i> of you after <a href=\"/gapless\">Gapless Playback</a> was launched. Turns out it was due to my own stupidity.\n\nIf I didn't respond to any of your emails, I truly do apologize. It bums me out to know that there were quite a few emails that I'll never get to read. I love hearing from you - so if you sent something and never heard back, please forward it along to <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>.\n\nEven if you never wrote me an email, I would love it if you took the opportunity to reach out. Whether you have a suggestion, need help moving, or just want to say hi and introduce yourself.\n\nThanks for your patronage.\n\n– Daniel Saewitz, <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>\n\n</pre>";
   });
 
 this["JST"]["player"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1607,6 +1616,7 @@ App.Router = (function(_super) {
     this.route(/^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?s?\/?$/, 'song');
     this.route(/^about\/?$/, 'about');
     this.route(/^gapless\/?$/, 'gapless');
+    this.route(/^oops\/?$/, 'oops');
     this.route(/^real-music\/?$/, 'realMusic');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
@@ -1840,6 +1850,11 @@ App.Router = (function(_super) {
   Router.prototype.gapless = function() {
     this.changeView(new App.Views.GaplessPage());
     return document.title = 'Gapless | Relisten';
+  };
+
+  Router.prototype.oops = function() {
+    this.changeView(new App.Views.OopsPage());
+    return document.title = 'Oops | Relisten';
   };
 
   Router.prototype.login = function() {
@@ -2870,7 +2885,9 @@ App.Views.GaplessPage = (function(_super) {
     enabled = cookie("gapless");
     deleteCookie("gapless");
     cookie("gapless", !enabled, 1024);
-    return this.render();
+    ga('send', 'event', 'gapless', 'enable', 'button', !enabled ? 1 : 0);
+    this.render();
+    return location.reload();
   };
 
   return GaplessPage;
@@ -3152,6 +3169,37 @@ App.Views.Notifications = (function(_super) {
   };
 
   return Notifications;
+
+})(App.Views.View);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.OopsPage = (function(_super) {
+  __extends(OopsPage, _super);
+
+  function OopsPage() {
+    _ref = OopsPage.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  OopsPage.prototype.className = 'oops-page';
+
+  OopsPage.prototype.template = JST['oops'];
+
+  OopsPage.prototype.initialize = function() {
+    return App.router.clearActive($('header .fucked-up'));
+  };
+
+  OopsPage.prototype.render = function() {
+    this.$el.html(this.template({
+      enabled: cookie("oops")
+    }));
+    return this;
+  };
+
+  return OopsPage;
 
 })(App.Views.View);
 

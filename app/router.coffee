@@ -13,6 +13,7 @@ class App.Router extends Backbone.Router
     @route /^([a-z]+(?:-[a-z]+)*)\/([0-9]{4})\/([0-9]{1,2})\/([0-9]{1,2})-?([0-9]{1,2})?\/([a-zA-Z0-9\-]*)\/?([0-9]{1,2})?\:?\:?([0-9]{1,2}m[0-9]{1,2})?s?\/?$/, 'song'
     @route /^about\/?$/, 'about'
     @route /^gapless\/?$/, 'gapless'
+    @route /^oops\/?$/, 'oops'
     @route /^real-music\/?$/, 'realMusic'
 
     @$container = $('#page-container')
@@ -120,6 +121,9 @@ class App.Router extends Backbone.Router
   gapless: ->
     @changeView(new App.Views.GaplessPage())
     document.title = 'Gapless | Relisten'
+  oops: ->
+    @changeView(new App.Views.OopsPage())
+    document.title = 'Oops | Relisten'
   login: ->
     @changeView(new App.Views.LoginPage())
     document.title = 'Login | Relisten'
