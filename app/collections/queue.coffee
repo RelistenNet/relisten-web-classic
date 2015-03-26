@@ -31,6 +31,13 @@ class App.Collections.Queue extends App.Collections.Collection
 
     @notify title, "#{App.bands[band].name}\n#{year}/#{month}/#{day}"
 
+    $.ajax
+      type: "POST"
+      url: "#{App.root}/api/play"
+      data:
+        song: App.song.toJSON()
+      success: -> 0
+
     showVersionStr = if showVersion then '-' + showVersion else ''
     # If not on the URL already, go ahead!
     unless window.location.pathname.match "/#{band}/#{year}/#{month}/#{day}#{showVersionStr}/#{slug}"

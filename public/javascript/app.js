@@ -88,7 +88,7 @@ function program6(depth0,data) {
   buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to </span>\n    ";
   stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.program(6, program6, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a class=\"gapless header-link\" href=\"/gapless\">GAPLESS</a></li>\n    <li><a class=\"fucked-up header-link\" href=\"/oops\">I FUCKED UP</a></li>\n</ul>\n";
+  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a class=\"live header-link\" href=\"/live\">LIVE</a></li>\n    <li><a class=\"gapless header-link\" href=\"/gapless\">GAPLESS</a></li>\n    <li><a class=\"fucked-up header-link\" href=\"/oops\">I FUCKED UP</a></li>\n</ul>\n";
   return buffer;
   });
 
@@ -159,6 +159,119 @@ function program7(depth0,data) {
   return buffer;
   });
 
+this["JST"]["live"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data,depth1) {
+  
+  var buffer = "", stack1, stack2;
+  buffer += "\n    <li class=";
+  stack1 = helpers['if'].call(depth0, depth0.listed, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += " data-id=";
+  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + ">\n      "
+    + escapeExpression(((stack1 = depth1.pla),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n      <a href=\"/";
+  if (stack2 = helpers.band) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.band; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/";
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/";
+  if (stack2 = helpers.month) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.month; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/";
+  if (stack2 = helpers.day) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.day; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2);
+  stack2 = helpers['if'].call(depth0, ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.showVersion), {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "/";
+  if (stack2 = helpers.slug) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.slug; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\">";
+  if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</a>\n      from\n      <a href=\"/";
+  if (stack2 = helpers.band) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.band; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/";
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/";
+  if (stack2 = helpers.month) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.month; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/";
+  if (stack2 = helpers.day) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.day; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2);
+  stack2 = helpers['if'].call(depth0, ((stack1 = data),stack1 == null || stack1 === false ? stack1 : stack1.showVersion), {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\">";
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/";
+  if (stack2 = helpers.month) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.month; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/";
+  if (stack2 = helpers.day) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.day; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</a> by <a href=\"/";
+  if (stack2 = helpers.band) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.band; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\">";
+  if (stack2 = helpers.bandName) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.bandName; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</a>\n    </li>\n  ";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  
+  return "listed";
+  }
+
+function program4(depth0,data) {
+  
+  
+  return "fresh";
+  }
+
+function program6(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "-";
+  if (stack1 = helpers.showVersion) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.showVersion; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1);
+  return buffer;
+  }
+
+  buffer += "<h2>What are people listening to?</h2>\n<ul>\n  ";
+  stack1 = helpers.each.call(depth0, depth0.plays, {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</ul>";
+  return buffer;
+  });
+
 this["JST"]["login"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -210,7 +323,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<pre>\nYesterday I realized that for the past 4+ months, my relisten.net email has been broken. I  thought it was weird that I didn't hear from <i>any</i> of you after <a href=\"/gapless\">Gapless Playback</a> was launched. Turns out it was due to my own stupidity.\n\nIf I didn't respond to any of your emails, I truly do apologize. It bums me out to know that there were quite a few emails that I'll never get to read. I love hearing from you - so if you sent something and never heard back, please forward it along to <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>.\n\nEven if you never wrote me an email, I would love it if you took the opportunity to reach out. Whether you have a suggestion, need help moving, or just want to say hi and introduce yourself.\n\nThanks for your patronage.\n\n– Daniel Saewitz, <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>\n\n</pre>";
+  return "<pre>\nYesterday I realized that my relisten.net email has been broken for the past 4+ months. I thought it was weird that I didn't hear from <i>any</i> of you after <a href=\"/gapless\">Gapless Playback</a> was launched. Turns out it was due to my own stupidity.\n\nIf I didn't respond to any of your emails, I truly do apologize. It bums me out to know that there are quite a few emails that I'll never get to read. I love hearing from you - so if you sent something and never heard back, please forward it along to <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>.\n\nEven if you never wrote me an email, I would love it if you took the opportunity to reach out. Whether you have a suggestion, need help moving, or just want to say hi and introduce yourself.\n\nThanks for your patronage.\n\n– Daniel Saewitz, <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>\n\n</pre>";
   });
 
 this["JST"]["player"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1571,10 +1684,12 @@ Application = (function() {
 
   Application.prototype.pushAnchors = function() {
     return $(document).on("click", "a[href^='/']", function(event) {
-      var href, passThrough, url;
-      href = $(event.currentTarget).attr('href');
+      var $el, bypass, href, passThrough, url;
+      $el = $(event.currentTarget);
+      href = $el.attr('href');
+      bypass = $el.attr('data-bypass');
       passThrough = /logout|auth/.test(href);
-      if (!passThrough && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
+      if (!bypass && !passThrough && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
         event.preventDefault();
         url = href.replace(/^\//, '').replace('\#\!\/', '');
         App.router.navigate(url, {
@@ -1617,6 +1732,7 @@ App.Router = (function(_super) {
     this.route(/^about\/?$/, 'about');
     this.route(/^gapless\/?$/, 'gapless');
     this.route(/^oops\/?$/, 'oops');
+    this.route(/^live\/?$/, 'live');
     this.route(/^real-music\/?$/, 'realMusic');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
@@ -1855,6 +1971,11 @@ App.Router = (function(_super) {
   Router.prototype.oops = function() {
     this.changeView(new App.Views.OopsPage());
     return document.title = 'Oops | Relisten';
+  };
+
+  Router.prototype.live = function() {
+    this.changeView(new App.Views.LivePage());
+    return document.title = 'Live | Relisten';
   };
 
   Router.prototype.login = function() {
@@ -2307,6 +2428,68 @@ App.Models.Playlist = (function(_super) {
 })(App.Models.Model);
 
 var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Models.Plays = (function(_super) {
+  __extends(Plays, _super);
+
+  function Plays() {
+    this.onFetch = __bind(this.onFetch, this);
+    this.executeLongPolling = __bind(this.executeLongPolling, this);
+    this.stopLongPolling = __bind(this.stopLongPolling, this);
+    this.startLongPolling = __bind(this.startLongPolling, this);
+    _ref = Plays.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Plays.prototype.longPolling = false;
+
+  Plays.prototype.lastPoll = 0;
+
+  Plays.prototype.intervalSeconds = 7;
+
+  Plays.prototype.first = true;
+
+  Plays.prototype.responses = 0;
+
+  Plays.prototype.url = function() {
+    return "" + App.root + "/api/poll?since=" + this.lastPoll;
+  };
+
+  Plays.prototype.parse = function(response) {
+    this.lastPoll = response.now;
+    return response;
+  };
+
+  Plays.prototype.startLongPolling = function() {
+    this.longPolling = true;
+    return this.executeLongPolling();
+  };
+
+  Plays.prototype.stopLongPolling = function() {
+    return this.longPolling = false;
+  };
+
+  Plays.prototype.executeLongPolling = function() {
+    return this.fetch({
+      success: this.onFetch
+    });
+  };
+
+  Plays.prototype.onFetch = function() {
+    this.responses++;
+    if (this.longPolling) {
+      return setTimeout(this.executeLongPolling, 1000 * this.intervalSeconds);
+    }
+  };
+
+  return Plays;
+
+})(App.Models.Model);
+
+var _ref,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -2592,6 +2775,16 @@ App.Collections.Queue = (function(_super) {
     _ref1 = App.song.toJSON(), slug = _ref1.slug, title = _ref1.title, year = _ref1.year, month = _ref1.month, day = _ref1.day, showVersion = _ref1.showVersion, band = _ref1.band;
     App.router.updateDescription("Relisten to " + (App.bands[band].the ? "the " : void 0) + App.bands[band].name + " playing " + title + " on " + months[month - 1] + " " + (App.utils.ordinal_suffix(day)) + ", " + year + " at " + App.songs.songs.venue.name + " in " + App.songs.songs.venue.city);
     this.notify(title, "" + App.bands[band].name + "\n" + year + "/" + month + "/" + day);
+    $.ajax({
+      type: "POST",
+      url: "" + App.root + "/api/play",
+      data: {
+        song: App.song.toJSON()
+      },
+      success: function() {
+        return 0;
+      }
+    });
     showVersionStr = showVersion ? '-' + showVersion : '';
     if (!window.location.pathname.match("/" + band + "/" + year + "/" + month + "/" + day + showVersionStr + "/" + slug)) {
       url = "/" + band + "/" + year + "/" + month + "/" + day + showVersionStr + "/" + slug;
@@ -3035,6 +3228,92 @@ App.Views.IndexPage = (function(_super) {
   };
 
   return IndexPage;
+
+})(App.Views.View);
+
+var listedPlays, _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+listedPlays = {};
+
+App.Views.LivePage = (function(_super) {
+  __extends(LivePage, _super);
+
+  function LivePage() {
+    this.fresh = __bind(this.fresh, this);
+    this.render = __bind(this.render, this);
+    _ref = LivePage.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  LivePage.prototype.className = 'live-page';
+
+  LivePage.prototype.template = JST['live'];
+
+  LivePage.prototype.events = {
+    'click a': 'clickA'
+  };
+
+  LivePage.prototype.initialize = function() {
+    this.model = new App.Models.Plays();
+    this.model.startLongPolling(this.render);
+    this.model.on('change', this.render);
+    App.router.clearActive($('header .live'));
+    return this.fresh();
+  };
+
+  LivePage.prototype.render = function() {
+    var plays, total,
+      _this = this;
+    if (this.$el) {
+      total = 0;
+      plays = this.model.get('plays') || [];
+      plays = plays.map(function(play) {
+        var listed;
+        if (_this.model.responses === 0 && ++total > 5) {
+          listedPlays[play.id] = true;
+        }
+        listed = listedPlays[play.id] || false;
+        return _.extend(play, {
+          bandName: App.bands[play.band].name,
+          listed: listed
+        });
+      });
+      return this.$el.html(this.template({
+        plays: plays,
+        listedPlays: listedPlays
+      }));
+    }
+  };
+
+  LivePage.prototype.fresh = function() {
+    var $el, id,
+      _this = this;
+    $el = this.$('.fresh:last');
+    id = $el.attr('data-id');
+    listedPlays[id] = true;
+    $el.slideDown(function() {
+      return $el.removeClass('fresh');
+    });
+    if (this.model.longPolling) {
+      return setTimeout(function() {
+        return _this.fresh();
+      }, Math.floor(Math.random() * 2000) + 300);
+    }
+  };
+
+  LivePage.prototype.remove = function() {
+    this.model.stopLongPolling();
+    return LivePage.__super__.remove.apply(this, arguments);
+  };
+
+  LivePage.prototype.clickA = function() {
+    return App.initial = true;
+  };
+
+  return LivePage;
 
 })(App.Views.View);
 

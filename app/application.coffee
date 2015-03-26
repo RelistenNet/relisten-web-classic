@@ -33,13 +33,15 @@ class Application
     # through list, route them through Backbone's navigate method.
     $(document).on "click", "a[href^='/']", (event) ->
 
-      href = $(event.currentTarget).attr('href')
+      $el = $(event.currentTarget)
+      href = $el.attr('href')
+      bypass = $el.attr('data-bypass')
 
       # chain 'or's for other black list routes
       passThrough = /logout|auth/.test href
 
       # Allow shift+click for new tabs, etc.
-      if !passThrough && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey
+      if !bypass && !passThrough && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey
         event.preventDefault()
 
         # Remove leading slashes and hash bangs (backward compatablility)

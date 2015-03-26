@@ -1,0 +1,11 @@
+<h2>What are people listening to?</h2>
+<ul>
+  {{#each plays}}
+    <li class={{#if listed}}listed{{else}}fresh{{/if}} data-id={{id}}>
+      {{../pla}}
+      <a href="/{{band}}/{{year}}/{{month}}/{{day}}{{#if @showVersion}}-{{showVersion}}{{/if}}/{{slug}}">{{title}}</a>
+      from
+      <a href="/{{band}}/{{year}}/{{month}}/{{day}}{{#if @showVersion}}-{{showVersion}}{{/if}}">{{year}}/{{month}}/{{day}}</a> by <a href="/{{band}}">{{bandName}}</a>
+    </li>
+  {{/each}}
+</ul>

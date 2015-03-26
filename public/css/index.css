@@ -5490,7 +5490,7 @@ header ul.left li.band-selector span{font-size:3em}
 header ul.left li.band-selector .bands{display:none;width:300px;min-height:200px;font-size:1.8em;background:#eee;border:1px solid #333;}
 header ul.left li.band-selector .bands li{padding:10px 10px;width:100%;height:30px}
 header ul.left li.band-selector:hover .bands{display:block}
-header ul.right{position:absolute;right:0;width:50%;}
+header ul.right{position:absolute;right:0;width:80%;}
 header ul.right li{float:right;height:100%;text-align:center;border-left:1px solid #ddd;position:relative;background:#fff;border-bottom:1px solid #aaa;}
 header ul.right li:hover,header ul.right li.active{border-left:1px solid #008ab0}
 header ul.right li input{height:100%;min-width:200px;width:100%;display:block;background:#f6f6f6;font-size:2em;font-family:"HelveticaNeue-CondensedBold",Helvetica,Arial,sans-serif;}
@@ -5637,6 +5637,8 @@ footer .buttons .bar-right .next{border-left:30px solid #333}
 .gapless-page,.oops-page{padding:30px 0 100px 0;}
 .gapless-page pre,.oops-page pre{max-width:800px;margin:0 auto;word-break:normal}
 .gapless-page .enable-gapless,.oops-page .enable-gapless{height:50px;width:50%;text-align:center;margin:20px 0 20px 150px;font-size:1.5em;font-weight:bold}
+.live-page li{list-style-type:none;font-size:1.2em;padding:5px 0}
+.live-page li.fresh{display:none}
 
 #powerTip{cursor:default;background-color:#333;background-color:rgba(0,0,0,0.8);border-radius:6px;color:#fff;display:none;padding:10px;position:absolute;z-index:2147483647;max-width:600px}
 #powerTip:before{content:"";position:absolute}
