@@ -88,7 +88,7 @@ function program6(depth0,data) {
   buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to </span>\n    ";
   stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.program(6, program6, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a class=\"live header-link\" href=\"/live\">LIVE</a></li>\n    <li><a class=\"gapless header-link\" href=\"/gapless\">GAPLESS</a></li>\n    <li><a class=\"fucked-up header-link\" href=\"/oops\">I FUCKED UP</a></li>\n</ul>\n";
+  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a class=\"live header-link\" href=\"/live\">LIVE</a></li>\n    <li><a class=\"today header-link\" href=\"/today\">TODAY</a></li>\n    <li><a class=\"gapless header-link\" href=\"/gapless\">GAPLESS</a></li>\n    <li><a class=\"fucked-up header-link\" href=\"/oops\">I FUCKED UP</a></li>\n</ul>\n";
   return buffer;
   });
 
@@ -167,16 +167,16 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data,depth1) {
   
   var buffer = "", stack1, stack2;
-  buffer += "\n    <li class=";
+  buffer += "\n      <li class=";
   stack1 = helpers['if'].call(depth0, depth0.listed, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += " data-id=";
   if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + ">\n      "
+    + ">\n        "
     + escapeExpression(((stack1 = depth1.pla),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\n      <a href=\"/";
+    + "\n        <a href=\"/";
   if (stack2 = helpers.band) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.band; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
@@ -202,7 +202,7 @@ function program1(depth0,data,depth1) {
   if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "</a>\n      from\n      <a href=\"/";
+    + "</a>\n        from\n        <a href=\"/";
   if (stack2 = helpers.band) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.band; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
@@ -240,7 +240,7 @@ function program1(depth0,data,depth1) {
   if (stack2 = helpers.bandName) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.bandName; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "</a>\n    </li>\n  ";
+    + "</a>\n      </li>\n    ";
   return buffer;
   }
 function program2(depth0,data) {
@@ -265,10 +265,10 @@ function program6(depth0,data) {
   return buffer;
   }
 
-  buffer += "<h2>What are people listening to?</h2>\n<ul>\n  ";
+  buffer += "<div class=\"pre\">\n  <h2>What are people listening to?</h2>\n  <ul>\n    ";
   stack1 = helpers.each.call(depth0, depth0.plays, {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n</ul>";
+  buffer += "\n  </ul>\n</div>\n";
   return buffer;
   });
 
@@ -988,6 +988,54 @@ function program35(depth0,data) {
   stack2 = ((stack1 = helpers.if_eq || depth0.if_eq),stack1 ? stack1.call(depth0, depth0.band, "phish", options) : helperMissing.call(depth0, "if_eq", depth0.band, "phish", options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</ul>\n";
+  return buffer;
+  });
+
+this["JST"]["today"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n    <h3>";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</h3>\n    <ul>\n      ";
+  stack1 = helpers.each.call(depth0, depth0.shows, {hash:{},inverse:self.noop,fn:self.programWithDepth(2, program2, data, depth0),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </ul>\n  ";
+  return buffer;
+  }
+function program2(depth0,data,depth1) {
+  
+  var buffer = "", stack1, stack2, options;
+  buffer += "\n      <li>\n        <a href=\"/"
+    + escapeExpression(((stack1 = depth1.slug),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/";
+  if (stack2 = helpers.year) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.year; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.addZero || depth0.addZero),stack1 ? stack1.call(depth0, depth0.month, options) : helperMissing.call(depth0, "addZero", depth0.month, options)))
+    + "/";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.addZero || depth0.addZero),stack1 ? stack1.call(depth0, depth0.day, options) : helperMissing.call(depth0, "addZero", depth0.day, options)))
+    + "\">";
+  if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.title; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</a>\n      </li>\n      ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"pre\">\n\n  <h2>Today in History</h2>\n  ";
+  stack1 = helpers.each.call(depth0, depth0.tih, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</pre>\n";
   return buffer;
   });
 
@@ -1732,6 +1780,7 @@ App.Router = (function(_super) {
     this.route(/^about\/?$/, 'about');
     this.route(/^gapless\/?$/, 'gapless');
     this.route(/^oops\/?$/, 'oops');
+    this.route(/^today\/?$/, 'today');
     this.route(/^live\/?$/, 'live');
     this.route(/^real-music\/?$/, 'realMusic');
     this.$container = $('#page-container');
@@ -1973,8 +2022,13 @@ App.Router = (function(_super) {
     return document.title = 'Oops | Relisten';
   };
 
+  Router.prototype.today = function() {
+    this.changeView(new App.Views.TodayPage(), false);
+    return document.title = 'Today | Relisten';
+  };
+
   Router.prototype.live = function() {
-    this.changeView(new App.Views.LivePage());
+    this.changeView(new App.Views.LivePage(), false);
     return document.title = 'Live | Relisten';
   };
 
@@ -2628,6 +2682,30 @@ App.Models.Songs = (function(_super) {
   };
 
   return Songs;
+
+})(App.Models.Model);
+
+var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Models.Today = (function(_super) {
+  __extends(Today, _super);
+
+  function Today() {
+    _ref = Today.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  Today.prototype.url = function() {
+    return "" + App.root + "/api/today";
+  };
+
+  Today.prototype.initialize = function() {
+    return this.fetch();
+  };
+
+  return Today;
 
 })(App.Models.Model);
 
@@ -4102,6 +4180,48 @@ App.Views.Songs = (function(_super) {
   };
 
   return Songs;
+
+})(App.Views.View);
+
+var _ref,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.TodayPage = (function(_super) {
+  __extends(TodayPage, _super);
+
+  function TodayPage() {
+    this.render = __bind(this.render, this);
+    _ref = TodayPage.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  TodayPage.prototype.className = 'today-page';
+
+  TodayPage.prototype.template = JST['today'];
+
+  TodayPage.prototype.events = {
+    'click a': 'clickA'
+  };
+
+  TodayPage.prototype.initialize = function() {
+    this.model = new App.Models.Today();
+    this.model.on('change', this.render);
+    return App.router.clearActive($('header .today'));
+  };
+
+  TodayPage.prototype.render = function() {
+    if (this.$el) {
+      return this.$el.html(this.template(this.model.toJSON()));
+    }
+  };
+
+  TodayPage.prototype.clickA = function() {
+    return App.initial = true;
+  };
+
+  return TodayPage;
 
 })(App.Views.View);
 

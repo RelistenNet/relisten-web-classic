@@ -6,13 +6,23 @@
   p.big
     font-size 1.5em
 
-.gapless-page, .oops-page
+.gapless-page, .oops-page, .today-page, .live-page
   padding 30px 0 100px 0
 
-  pre
+  pre, .pre
     max-width 800px
     margin 0 auto
     word-break normal
+    display: block;
+    padding: 9.5px;
+    font-size: 13px;
+    line-height: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 
   .enable-gapless
     height 50px

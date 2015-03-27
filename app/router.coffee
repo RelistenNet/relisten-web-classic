@@ -14,6 +14,7 @@ class App.Router extends Backbone.Router
     @route /^about\/?$/, 'about'
     @route /^gapless\/?$/, 'gapless'
     @route /^oops\/?$/, 'oops'
+    @route /^today\/?$/, 'today'
     @route /^live\/?$/, 'live'
     @route /^real-music\/?$/, 'realMusic'
 
@@ -125,8 +126,11 @@ class App.Router extends Backbone.Router
   oops: ->
     @changeView(new App.Views.OopsPage())
     document.title = 'Oops | Relisten'
+  today: ->
+    @changeView(new App.Views.TodayPage(), false)
+    document.title = 'Today | Relisten'
   live: ->
-    @changeView(new App.Views.LivePage())
+    @changeView(new App.Views.LivePage(), false)
     document.title = 'Live | Relisten'
   login: ->
     @changeView(new App.Views.LoginPage())

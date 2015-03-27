@@ -1,0 +1,14 @@
+<div class="pre">
+
+  <h2>Today in History</h2>
+  {{#each tih}}
+    <h3>{{name}}</h3>
+    <ul>
+      {{#each shows}}
+      <li>
+        <a href="/{{../slug}}/{{year}}/{{addZero month}}/{{addZero day}}">{{title}}</a>
+      </li>
+      {{/each}}
+    </ul>
+  {{/each}}
+</pre>

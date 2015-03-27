@@ -110,7 +110,7 @@ header
     &.right
       position absolute
       right 0
-      width 80%
+      width 615px
 
       li
         float right
@@ -147,9 +147,9 @@ header
           //font-weight bold
           font-family "HelveticaNeue-CondensedBold", Helvetica, Arial, sans-serif
 
-          &.gapless, &.fucked-up
+          &.gapless, &.fucked-up, &.today, &.live
             &:before
-              content: "ahhh"
+              content: ""
               position absolute
               top 5px
               left 15px
@@ -162,12 +162,20 @@ header
             &:before
               content: "sorry"
 
+          &.today
+            &:before
+              content: "new"
+
+          &.live
+            &:before
+              content: "new"
+
           &:hover, &.active
             color #F6F6F6
             background asihtosblue
             text-decoration none
 
-            &.gapless, &.fucked-up
+            &.gapless, &.fucked-up, &.today, &.live
               &:before, &:after
                 color #FFF
 
