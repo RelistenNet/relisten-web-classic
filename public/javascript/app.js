@@ -9,6 +9,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return "<pre>\n\nWelcome to yet another internet experiment.\n\nFor any comments, suggestions, or data errors please email <a href=\"mailto:admin@relisten.net\">admin@relisten.net</a>.\n\nPeruse the various bands and enjoy their extensive live catalogues for free.\n\nThis site is powered by Archive.org and Alec Gorge's <a href=\"https://github.com/alecgorge/iguana\" target=\"_blank\">Iguana</a>. The Phish collection is hosted and provided by <a href=\"http://phish.in\" target=\"_blank\">Phish.in</a>.\n\nIf you'd like to donate, all of the proceeds will go towards the running of this site and others like it. Any extra funds will be donated to Archive.org and The Mockingbird Foundation.\n\n<center>\n<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_blank\">\n<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n<input type=\"hidden\" name=\"encrypted\" value=\"-----BEGIN PKCS7-----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-----END PKCS7-----\n\">\n<input type=\"image\" src=\"https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n</form>\n</center>\n\n<center>Bitcoin: 1FQRjYy5hqzeDD5DWThGNzfyy1E2PoNdMC</center>\n\nThis site complies with Archive.org's <a href=\"https://archive.org/post/261115/hotlinking-allowed\">policy</a>.\n\n<i>\nThe Grateful Dead and our managing organizations have long encouraged the purely non-commercial exchange of music taped at our concerts and those of our individual members. That a new medium of distribution has arisen - digital audio files being traded over the Internet - does not change our policy in this regard. Our stipulations regarding digital distribution are merely extensions of those long-standing principles and they are as follow:\n\nNo commercial gain may be sought by websites offering digital files of our music, whether through advertising, exploiting databases compiled from their traffic, or any other means.\nAll participants in such digital exchange acknowledge and respect the copyrights of the performers, writers and publishers of the music.\n\nThis notice should be clearly posted on all sites engaged in this activity.\nWe reserve the ability to withdraw our sanction of non-commercial digital music should circumstances arise that compromise our ability to protect and steward the integrity of our work.\n</i>\n\n\n</pre>";
   });
 
+this["JST"]["chat"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"pre\">\n  <h4>Chat Rules</h4>\n\n  <p>1) There are plenty of places on the internet to act immaturely. This is not one of those places.</p>\n\n  <br>\n  <br>\n\n  <div id=\"tlkio\" data-channel=\"relisten\" style=\"width:100%;height:400px;\"></div>\n</div>\n";
+  });
+
 this["JST"]["footer"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -88,7 +97,7 @@ function program6(depth0,data) {
   buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to </span>\n    ";
   stack1 = helpers['if'].call(depth0, depth0.bandName, {hash:{},inverse:self.program(6, program6, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a class=\"live header-link\" href=\"/live\">LIVE</a></li>\n    <li><a class=\"today header-link\" href=\"/today\">TODAY</a></li>\n    <li><a class=\"gapless header-link\" href=\"/gapless\">GAPLESS</a></li>\n    <li><a class=\"fucked-up header-link\" href=\"/oops\">I FUCKED UP</a></li>\n</ul>\n";
+  buffer += "\n    <div class=\"clear\"></div>\n  </li>\n</ul>\n\n<ul class=\"right\">\n    <li><a class=\"about header-link\" href=\"/about\">ABOUT</a></li>\n    <li><a class=\"chat header-link\" href=\"/chat\">CHAT</a></li>\n    <li><a class=\"live header-link\" href=\"/live\">LIVE</a></li>\n    <li><a class=\"today header-link\" href=\"/today\">TODAY</a></li>\n    <li><a class=\"gapless header-link\" href=\"/gapless\">GAPLESS</a></li>\n</ul>\n";
   return buffer;
   });
 
@@ -1564,6 +1573,10 @@ window.App = {
   "root": "http://relisten.net"
 };
 
+if (/localhost/.test(window.location.origin)) {
+  window.App.root = "http://localhost:9000";
+}
+
 $(function() {
   var Tweezer;
   Tweezer = new Application().initialize();
@@ -1782,6 +1795,7 @@ App.Router = (function(_super) {
     this.route(/^oops\/?$/, 'oops');
     this.route(/^today\/?$/, 'today');
     this.route(/^live\/?$/, 'live');
+    this.route(/^chat\/?$/, 'chat');
     this.route(/^real-music\/?$/, 'realMusic');
     this.$container = $('#page-container');
     return this.bind('all', this._trackPageview);
@@ -2024,12 +2038,23 @@ App.Router = (function(_super) {
 
   Router.prototype.today = function() {
     this.changeView(new App.Views.TodayPage(), false);
-    return document.title = 'Today | Relisten';
+    document.title = 'Today | Relisten';
+    this.band = 'today';
+    return App.header.render();
+  };
+
+  Router.prototype.chat = function() {
+    this.changeView(new App.Views.ChatPage());
+    document.title = 'Chat | Relisten';
+    this.band = 'chat';
+    return App.header.render();
   };
 
   Router.prototype.live = function() {
     this.changeView(new App.Views.LivePage(), false);
-    return document.title = 'Live | Relisten';
+    document.title = 'Live | Relisten';
+    this.band = '';
+    return App.header.render();
   };
 
   Router.prototype.login = function() {
@@ -2971,6 +2996,61 @@ App.Views.AboutPage = (function(_super) {
 })(App.Views.View);
 
 var _ref,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+App.Views.ChatPage = (function(_super) {
+  __extends(ChatPage, _super);
+
+  function ChatPage() {
+    _ref = ChatPage.__super__.constructor.apply(this, arguments);
+    return _ref;
+  }
+
+  ChatPage.prototype.className = 'chat-page';
+
+  ChatPage.prototype.template = JST['chat'];
+
+  ChatPage.prototype.initialize = function() {
+    return App.router.clearActive($('header .chat'));
+  };
+
+  ChatPage.prototype.render = function() {
+    this.$el.html(this.template({}));
+    return _.defer(function() {
+      var channel_name, current_style, custom_css_path, iframe, iframe_query, iframe_src, nickname, target_element;
+      target_element = document.getElementById("tlkio");
+      channel_name = target_element.getAttribute("data-channel");
+      custom_css_path = target_element.getAttribute("data-theme");
+      nickname = target_element.getAttribute("data-nickname");
+      iframe = document.createElement("iframe");
+      iframe_src = "//embed.tlk.io/" + channel_name;
+      iframe_query = [];
+      if (custom_css_path && custom_css_path.length > 0) {
+        iframe_query.push("custom_css_path=" + custom_css_path);
+      }
+      if (nickname && nickname.length > 0) {
+        iframe_query.push("nickname=" + nickname);
+      }
+      if (iframe_query.length > 0) {
+        iframe_src += "?" + iframe_query.join("&");
+      }
+      iframe.setAttribute("src", iframe_src);
+      iframe.setAttribute("width", "100%");
+      iframe.setAttribute("height", "100%");
+      iframe.setAttribute("frameborder", "0");
+      iframe.setAttribute("style", "margin-bottom: -8px;");
+      current_style = target_element.getAttribute("style");
+      target_element.setAttribute("style", "overflow: auto; -webkit-overflow-scrolling: touch;" + current_style);
+      return target_element.appendChild(iframe);
+    });
+  };
+
+  return ChatPage;
+
+})(App.Views.View);
+
+var _ref,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -3165,10 +3245,19 @@ App.Views.GaplessPage = (function(_super) {
 
 })(App.Views.View);
 
-var _ref,
+var otherPages, _ref,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+otherPages = {
+  today: {
+    name: "Today in History"
+  },
+  chat: {
+    name: "People wax poetic about Jerry"
+  }
+};
 
 App.Views.Header = (function(_super) {
   __extends(Header, _super);
@@ -3194,12 +3283,12 @@ App.Views.Header = (function(_super) {
   };
 
   Header.prototype.render = function(playlist) {
-    var _ref1, _ref2, _ref3, _ref4, _ref5;
+    var _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7;
     return this.$el.html(this.template({
       loggedIn: App.user.loggedIn(),
       slug: (_ref1 = App.router) != null ? _ref1.band : void 0,
-      bandName: (_ref2 = App.bands[(_ref3 = App.router) != null ? _ref3.band : void 0]) != null ? _ref2.name : void 0,
-      the: (_ref4 = App.bands[(_ref5 = App.router) != null ? _ref5.band : void 0]) != null ? _ref4.the : void 0
+      bandName: ((_ref2 = App.bands[(_ref3 = App.router) != null ? _ref3.band : void 0]) != null ? _ref2.name : void 0) || ((_ref4 = otherPages[(_ref5 = App.router) != null ? _ref5.band : void 0]) != null ? _ref4.name : void 0),
+      the: (_ref6 = App.bands[(_ref7 = App.router) != null ? _ref7.band : void 0]) != null ? _ref6.the : void 0
     }));
   };
 

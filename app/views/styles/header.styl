@@ -69,6 +69,9 @@ header
               & + .tip
                 display block
 
+              &[href$="/today"] + .tip, &[href$="/chat"] + .tip
+                display none
+
           span
             font-size 1.5em
             line-height 57px
@@ -147,7 +150,7 @@ header
           //font-weight bold
           font-family "HelveticaNeue-CondensedBold", Helvetica, Arial, sans-serif
 
-          &.gapless, &.fucked-up, &.today, &.live
+          &.gapless, &.fucked-up, &.today, &.live, &.chat
             &:before
               content: ""
               position absolute
@@ -166,7 +169,7 @@ header
             &:before
               content: "new"
 
-          &.live
+          &.live, &.chat
             &:before
               content: "new"
 
@@ -175,7 +178,7 @@ header
             background asihtosblue
             text-decoration none
 
-            &.gapless, &.fucked-up, &.today, &.live
+            &.gapless, &.fucked-up, &.today, &.live, &.chat
               &:before, &:after
                 color #FFF
 

@@ -16,6 +16,7 @@ class App.Router extends Backbone.Router
     @route /^oops\/?$/, 'oops'
     @route /^today\/?$/, 'today'
     @route /^live\/?$/, 'live'
+    @route /^chat\/?$/, 'chat'
     @route /^real-music\/?$/, 'realMusic'
 
     @$container = $('#page-container')
@@ -129,9 +130,18 @@ class App.Router extends Backbone.Router
   today: ->
     @changeView(new App.Views.TodayPage(), false)
     document.title = 'Today | Relisten'
+    @band = 'today'
+    App.header.render()
+  chat: ->
+    @changeView(new App.Views.ChatPage())
+    document.title = 'Chat | Relisten'
+    @band = 'chat'
+    App.header.render()
   live: ->
     @changeView(new App.Views.LivePage(), false)
     document.title = 'Live | Relisten'
+    @band = ''
+    App.header.render()
   login: ->
     @changeView(new App.Views.LoginPage())
     document.title = 'Login | Relisten'
