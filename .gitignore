@@ -3,5 +3,4 @@
 node_modules/
 dump/
 cert/
-production/
 config.json
