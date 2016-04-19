@@ -34,8 +34,9 @@ class App.Collections.Queue extends App.Collections.Collection
     $.ajax
       type: "POST"
       url: "#{App.root}/api/play"
-      data:
-        song: App.song.toJSON()
+      contentType: "application/json; charset=utf-8"
+      dataType: "json"
+      data: JSON.stringify({ song: App.song.toJSON() })
       success: -> 0
 
     showVersionStr = if showVersion then '-' + showVersion else ''

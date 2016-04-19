@@ -2883,9 +2883,11 @@ App.Collections.Queue = (function(_super) {
     $.ajax({
       type: "POST",
       url: "" + App.root + "/api/play",
-      data: {
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      data: JSON.stringify({
         song: App.song.toJSON()
-      },
+      }),
       success: function() {
         return 0;
       }
