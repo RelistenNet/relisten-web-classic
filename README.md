@@ -6,10 +6,6 @@ This is the code that powers [relisten.net](http://relisten.net), a completely f
 
 This code was written several years ago when I was in college and has remained relatively untouched since. It was not intended to be open sourced, but I can not come up with a single valid reason why it should not be. Peruse the source at your own risk [or mine?].
 
-## Contributing
-
-You are welcome to contribute to this project, whether it be by opening an issue or sending a pull request. The code is, at times, messy. Feel free to reach out with questions or comments and I'll do my best to answer them.
-
 ## Running
 
 ```
@@ -18,6 +14,12 @@ $ npm install -g grunt-cli
 $ grunt watch
 $ node server.js # in a new shell
 ```
+
+## Contributing
+
+You are welcome to contribute to this project, whether it be by opening an issue or sending a pull request. The code is, at times, messy. Feel free to reach out with questions or comments and I'll do my best to answer them.
+
+If you do send a PR, please run `$ grunt production` first.
 
 ## License
 
