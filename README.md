@@ -1,6 +1,6 @@
 # Relisten.net
 
-This is the code that powers [relisten.net](http://relisten.net), a completely free live music streaming service utilizing the music of [Archive.org] and [Phish.in]. The backend is powered by [Alec Gorge](https://twitter.com/alecgorge)'s [Iguana](https://github.com/alecgorge/iguana).
+This is the code that powers [relisten.net](http://relisten.net), a completely free live music streaming service utilizing the music of [Archive.org](http://archive.org) and [Phish.in](http://phish.in). The backend is powered by [Alec Gorge](https://twitter.com/alecgorge)'s [Iguana](https://github.com/alecgorge/iguana).
 
 ## Warning
 
@@ -29,4 +29,4 @@ Alec Gorge built a phenomenal companion iOS app. Check it out here: https://itun
 
 ## Gracias
 
-Thanks to Alec Gorge, the wonderful people over at Archive.org and Phish.in, Jeff Lang, as well as the gracious musicians who allow free taping and distribution at their concerts.
+Thanks to Alec Gorge, the wonderful people over at Archive.org and Phish.in, Jeff Lang, as well as the gracious musicians who allow free taping and distribution of their concerts.
