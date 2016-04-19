@@ -22,7 +22,7 @@ class App.Models.Player extends App.Models.Model
 
     self = this
 
-    if cookie("gapless") && gapless5AudioContext && App.queue.gaplessPlayer
+    if App.isGapless() && App.queue.gaplessPlayer
       App.queue.gaplessPlayer.gotoTrack(App.queue.idx, true)
       @updateText()
       @slideDown()

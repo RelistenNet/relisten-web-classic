@@ -90,13 +90,14 @@ class App.Router extends Backbone.Router
     self = @
     App.queue.on 'reset', ->
 
-      tracks = @pluck("file")
+      tracks = @pluck("file").map (track) -> track.replace '_vbr', ''
 
-      if cookie("gapless") && gapless5AudioContext
+      if App.isGapless()
         if @gaplessPlayer
           @gaplessPlayer.stop()
           @gaplessPlayer.removeAllTracks()
           for track in tracks
+            track = track.replace('_vbr', '')
             @gaplessPlayer.addTrack track
         else
           @gaplessPlayer = new Gapless5 "gapless-block",

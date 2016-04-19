@@ -21170,6 +21170,7 @@ function Gapless5Source(parentPlayer, inContext, inOutputNode) {
   var state = Gapless5State.None;
   var loadedPercent = 0;
   var audioFinished = false;
+  var endedCallback = null;
 
   this.uiDirty = false;
   var that = this;
@@ -21267,7 +21268,11 @@ function Gapless5Source(parentPlayer, inContext, inOutputNode) {
     {
       if (source)
       {
-        source.onended = null;
+        if (endedCallback)
+        {
+          window.clearTimeout(endedCallback);
+          endedCallback = null;
+        }
         if (window.hasWebKit)
           source.noteOff(0);
         else
@@ -21285,6 +21290,7 @@ function Gapless5Source(parentPlayer, inContext, inOutputNode) {
 
   var playAudioFile = function (force) {
     if (state == Gapless5State.Play) return;
+    position = Math.max(position, 0);
     if (position >= endpos) position = 0;
 
     var offsetSec = position / 1000;
@@ -21296,10 +21302,13 @@ function Gapless5Source(parentPlayer, inContext, inOutputNode) {
       source = context.createBufferSource();
       source.connect(outputNode);
       source.buffer = buffer;
-      source.onended = onEnded;
 
-      var offsetSec = position / 1000;
       var restSec = source.buffer.duration-offsetSec;
+      if (endedCallback)
+      {
+        window.clearTimeout(endedCallback);
+      }
+      endedCallback = window.setTimeout(onEnded, restSec*1000);
       if (window.hasWebKit)
         source.noteGrainOn(0, offsetSec, restSec);
       else
@@ -21405,10 +21414,13 @@ function Gapless5Source(parentPlayer, inContext, inOutputNode) {
       audio.addEventListener('play', onPlayEvent, false);
       // not using audio.networkState because it's not dependable on all browsers
     }
-    // cancel if url doesn't exist
-    $.get(inAudioPath).fail(function() {
-          that.cancelRequest(true);
-      })
+    // cancel if url doesn't exist, but don't download again
+    $.ajax({
+      url: inAudioPath,
+      type: "HEAD",
+    }).fail(function() {
+      that.cancelRequest(true);
+    });
   }
 }
 
@@ -21780,7 +21792,7 @@ this.gotoTrack = function (newIndex, bForcePlay) {
     if (sources[oldIndex].getState() == Gapless5State.Loading)
     {
       sources[oldIndex].cancelRequest();
-      that.loadQueue.push([oldIndex, sources[oldIndex].audioPath]);
+      that.loadQueue.push([oldIndex, that.tracks[oldIndex]]);
     }
 
     resetPosition(true); // make sure this comes after trackIndex has been updated
@@ -22032,10 +22044,10 @@ var Init = function(elem_id, options, tickMS) {
 
   player_html += '</div>';
   player_html += '<div class="g5buttons" id="g5buttons' + that.id + '">';
-  player_html += '<div class="g5button g5prev" id="prev' + that.id + '">Prev</div>';
-  player_html += '<div class="g5button g5play" id="play' + that.id + '"></div>';
-  player_html += '<div class="g5button g5stop" id="stop' + that.id + '">Stop</div>';
-  player_html += '<div class="g5button g5next" id="next' + that.id + '">Next</div>';
+  player_html += '<button class="g5button g5prev" id="prev' + that.id + '"/>';
+  player_html += '<button class="g5button g5play" id="play' + that.id + '"/>';
+  player_html += '<button class="g5button g5stop" id="stop' + that.id + '"/>';
+  player_html += '<button class="g5button g5next" id="next' + that.id + '"/>';
 
   if (isMobileBrowser)
   {
@@ -22115,7 +22127,6 @@ var Init = function(elem_id, options, tickMS) {
 $(document).ready(Init(elem_id, options, this.tickMS));
 
 };
-
 /*!
  PowerTip - v1.2.0 - 2013-04-03
  http://stevenbenner.github.com/jquery-powertip/

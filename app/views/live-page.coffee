@@ -18,7 +18,7 @@ class App.Views.LivePage extends App.Views.View
       plays = plays.map (play) =>
         listedPlays[play.id] = true if @model.responses == 0 && ++total > 5
         listed = listedPlays[play.id] || false
-        _.extend play, { bandName: App.bands[play.band].name, listed }
+        _.extend play, { bandName: App.bands[play.band]?.name, listed }
       @$el.html @template({ plays, listedPlays })
   fresh: =>
     $el = @$('.fresh:last')
@@ -30,7 +30,7 @@ class App.Views.LivePage extends App.Views.View
     if @model.longPolling
       setTimeout =>
         @fresh()
-      , Math.floor(Math.random() * 2000) + 300
+      , Math.floor(Math.random() * 3000) + 350
 
   remove: ->
     @model.stopLongPolling()

@@ -118,19 +118,8 @@ module.exports = function(grunt) {
           }
         ]
       }
-    },
-    aerobatic: {
-      deploy: {
-        src: ['public/*.*']
-      },
-      sim: {
-        index: 'public/index.html',
-        port: 3000,
-        livereload: true
-      }
     }
   });
-  grunt.loadNpmTasks('grunt-aerobatic');
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.loadNpmTasks("grunt-contrib-coffee");
@@ -142,8 +131,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-rename');
-  grunt.registerTask('sim', ['aerobatic:sim:sync', 'watch']);
-  grunt.registerTask('deploy', ['production', 'aerobatic:deploy']);
   grunt.registerTask("compile", ["coffee", "handlebars", "concat", "stylus", "clean"]);
   grunt.registerTask("compile:coffee", ["coffee", "handlebars", "concat", "clean"]);
   return grunt.registerTask("production", ["coffee", "handlebars", "concat", "stylus", "clean", "copy:production", "cssmin", "uglify", "rename"]);

@@ -53,7 +53,7 @@ class App.Views.Footer extends App.Views.View
     App.player.sound.setPosition coord * App.song.get('length') * 1000
 
   pause: ->
-    if cookie("gapless") && gapless5AudioContext && App.queue.gaplessPlayer
+    if App.isGapless() && App.queue.gaplessPlayer
       App.queue.gaplessPlayer.pause()
     else
       soundManager.pause "phish" + App.player.get('id')
@@ -62,7 +62,7 @@ class App.Views.Footer extends App.Views.View
     id = App.player.get('id')
     App.player.set 'playing', true
 
-    App.queue.gaplessPlayer.play() if cookie("gapless") && gapless5AudioContext && App.queue.gaplessPlayer && App.playerView.played.indexOf id >= 0
+    App.queue.gaplessPlayer.play() if App.isGapless() && App.queue.gaplessPlayer && App.playerView.played.indexOf id >= 0
 
     return soundManager.resume "phish#{id}" if App.playerView.played.indexOf id >= 0
     App.player.play()
