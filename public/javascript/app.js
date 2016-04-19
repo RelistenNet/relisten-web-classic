@@ -1099,91 +1099,103 @@ window.App = {
   "bands": {
     "akron-family": {
       "name": "Akron/Family",
-      "shows": 35
+      "shows": 37
+    },
+    "american-babies": {
+      "name": "American Babies",
+      "shows": 59
+    },
+    "andrew-bird": {
+      "name": "Andrew Bird",
+      "shows": 102
     },
     "animal-collective": {
       "name": "Animal Collective",
-      "shows": 23
-    },
-    "aqueous": {
-      "name": "Aqueous",
-      "shows": 58
+      "shows": 26
     },
     "aru": {
       "name": "Aquarium Rescue Unit",
-      "shows": 103
+      "shows": 171
+    },
+    "aqueous": {
+      "name": "Aqueous",
+      "shows": 108
+    },
+    "aodust": {
+      "name": "Assembly of Dust",
+      "shows": 351
     },
     "bela-fleck": {
-      "name": "Béla Fleck and the Flecktones",
-      "shows": 321
+      "name": "Bela Fleck and the Flecktones",
+      "shows": 416
     },
     "ben-kweller": {
       "name": "Ben Kweller",
-      "shows": 18
+      "shows": 29
     },
     "duo": {
       "name": "Benevento Russo Duo",
-      "the": true,
-      "shows": 288
+      "shows": 352
     },
     "bernie-worrell": {
       "name": "Bernie Worrell Orchestra",
-      "the": true,
       "shows": 27
-    },
-    "the-big-wu": {
-      "name": "The Big Wu",
-      "shows": 252
     },
     "blues-traveler": {
       "name": "Blues Traveler",
-      "shows": "1,099"
-    },
-    "the-breakfast": {
-      "name": "The Breakfast",
-      "shows": 317
+      "shows": 1140
     },
     "weir": {
       "name": "Bob Weir",
-      "shows": 80
+      "shows": 95
+    },
+    "brothers-past": {
+      "name": "Brothers Past",
+      "shows": 551
+    },
+    "cabinet": {
+      "name": "Cabinet",
+      "shows": 573
     },
     "club-d-elf": {
       "name": "Club d'Elf",
-      "shows": 523
+      "shows": 612
     },
     "dark-star": {
       "name": "Dark Star Orchestra",
-      "shows": 546
+      "shows": 629
     },
-    "the-decemberists": {
-      "name": "The Decemberists",
-      "shows": 74
+    "dead-and-company": {
+      "name": "Dead & Company",
+      "shows": 77
     },
     "disco-biscuits": {
       "name": "Disco Biscuits",
-      "the": true,
-      "shows": "1,251"
+      "shows": 1387
     },
     "dispatch": {
       "name": "Dispatch",
-      "shows": 32
+      "shows": 35
+    },
+    "donna-the-buffalo": {
+      "name": "Donna the Buffalo",
+      "shows": 842
     },
     "dopapod": {
       "name": "Dopapod",
-      "shows": 357
+      "shows": 544
     },
     "drive-by-truckers": {
       "name": "Drive-By Truckers",
-      "the": true,
-      "shows": 680
+      "shows": 805
     },
     "elliott-smith": {
       "name": "Elliott Smith",
-      "shows": 81
+      "shows": 95
     },
     "everyone-orchestra": {
       "name": "Everyone Orchestra",
-      "shows": 123
+      "shows": 158
     },
     "fugazi": {
       "name": "Fugazi",
@@ -1191,209 +1203,235 @@ window.App = {
     },
     "furthur": {
       "name": "Furthur",
-      "shows": 972
-    },
-    "g-love": {
-      "name": "G. Love and Special Sauce",
-      "shows": 124
+      "shows": 1026
     },
     "g-nome": {
       "name": "G-Nome Project",
-      "the": true,
-      "shows": 4
+      "shows": 5
+    },
+    "g-love": {
+      "name": "G. Love and Special Sauce",
+      "shows": 172
     },
     "garage-a-trois": {
       "name": "Garage A Trois",
-      "shows": 74
+      "shows": 83
     },
     "god-street-wine": {
       "name": "God Street Wine",
-      "shows": 240
+      "shows": 259
     },
     "grace-potter": {
       "name": "Grace Potter",
-      "the": true,
-      "shows": 488
+      "shows": 546
     },
     "grateful-dead": {
       "name": "Grateful Dead",
-      "the": true,
-      "shows": "9,142"
+      "shows": 10459
     },
     "greensky-bluegrass": {
       "name": "Greensky Bluegrass",
-      "shows": 462
+      "shows": 670
     },
     "guster": {
       "name": "Guster",
-      "shows": 484
-    },
-    "the-heavy-pets": {
-      "name": "The Heavy Pets",
-      "shows": 142
-    },
-    "jack-johnson": {
-      "name": "Jack Johnson",
-      "shows": 146
-    },
-    "jazz-mandolin-project": {
-      "name": "Jazz Mandolin Project",
-      "the": true,
-      "shows": 163
-    },
-    "jerry-joseph": {
-      "name": "Jerry Joseph and the Jackmormons",
-      "shows": 604
-    },
-    "john-popper": {
-      "name": "John Popper",
-      "shows": 67
-    },
-    "keller-williams": {
-      "name": "Keller Williams",
-      "shows": 608
-    },
-    "kvhw": {
-      "name": "KVHW",
-      "shows": 109
-    },
-    "leftover-salmon": {
-      "name": "Leftover Salmon",
-      "shows": 542
-    },
-    "little-feat": {
-      "name": "Little Feat",
-      "shows": 567
-    },
-    "lotus": {
-      "name": "Lotus",
-      "shows": 368
-    },
-    "marco": {
-      "name": "Marco Benevento",
-      "shows": 136
-    },
-    "matisyahu": {
-      "name": "Matisyahu",
-      "shows": 296
-    },
-    "matt-pond-pa": {
-      "name": "Matt Pond PA",
-      "shows": 8
-    },
-    "max-creek": {
-      "name": "Max Creek",
-      "shows": "1,850"
-    },
-    "mmj": {
-      "name": "My Morning Jacket",
-      "shows": 253
-    },
-    "moe": {
-      "name": "moe.",
-      "shows": 959
-    },
-    "mogwai": {
-      "name": "Mogwai",
-      "shows": 164
-    },
-    "the-motet": {
-      "name": "The Motet",
-      "shows": 166
-    },
-    "the-new-deal": {
-      "name": "The New Deal",
-      "shows": 241
-    },
-    "new-mastersounds": {
-      "name": "The New Mastersounds",
-      "shows": 197
-    },
-    "percy-hill": {
-      "name": "Percy Hill",
-      "shows": 102
-    },
-    "phil-lesh": {
-      "name": "Phil Lesh and Friends",
-      "shows": "1,707"
-    },
-    "phish": {
-      "name": "Phish",
-      "the": true,
-      "shows": "1,420"
-    },
-    "radiators": {
-      "name": "The Radiators",
-      "shows": "1,163"
-    },
-    "railroad-earth": {
-      "name": "Railroad Earth",
-      "shows": "1,180"
-    },
-    "raq": {
-      "name": "Raq",
-      "shows": 290
-    },
-    "ratdog": {
-      "name": "Ratdog",
-      "shows": 831
-    },
-    "ryan-adams": {
-      "name": "Ryan Adams",
-      "shows": 409
-    },
-    "sci": {
-      "name": "String Cheese Incident",
-      "the": true,
-      "shows": 932
-    },
-    "smashing-pumpkins": {
-      "name": "Smashing Pumpkins",
-      "the": true,
-      "shows": "1,005"
-    },
-    "spoon": {
-      "name": "Spoon",
-      "shows": 51
-    },
-    "steve-kimock": {
-      "name": "Steve Kimock",
-      "shows": 256
-    },
-    "steve-kimock-band": {
-      "name": "Steve Kimock Band",
-      "the": true,
-      "shows": 441
-    },
-    "strangefolk": {
-      "name": "Strangefolk",
-      "shows": 727
+      "shows": 584
     },
     "stringdusters": {
       "name": "Infamous Stringdusters",
-      "the": true,
-      "shows": 406
+      "shows": 528
+    },
+    "jack-johnson": {
+      "name": "Jack Johnson",
+      "shows": 158
+    },
+    "jazz-mandolin-project": {
+      "name": "Jazz Mandolin Project",
+      "shows": 171
+    },
+    "jerry-joseph": {
+      "name": "Jerry Joseph and the Jackmormons",
+      "shows": 761
+    },
+    "joe-russos-almost-dead": {
+      "name": "Joe Russo's Almost Dead",
+      "shows": 173
+    },
+    "john-kadlecik": {
+      "name": "John Kadlecik",
+      "shows": 221
+    },
+    "john-popper": {
+      "name": "John Popper",
+      "shows": 73
+    },
+    "keller-williams": {
+      "name": "Keller Williams",
+      "shows": 944
+    },
+    "kvhw": {
+      "name": "KVHW",
+      "shows": 116
+    },
+    "leftover-salmon": {
+      "name": "Leftover Salmon",
+      "shows": 716
+    },
+    "lettuce": {
+      "name": "Lettuce",
+      "shows": 285
+    },
+    "little-feat": {
+      "name": "Little Feat",
+      "shows": 643
+    },
+    "lotus": {
+      "name": "Lotus",
+      "shows": 481
+    },
+    "marco": {
+      "name": "Marco Benevento",
+      "shows": 161
+    },
+    "matisyahu": {
+      "name": "Matisyahu",
+      "shows": 358
+    },
+    "matt-pond-pa": {
+      "name": "Matt Pond PA",
+      "shows": 15
+    },
+    "max-creek": {
+      "name": "Max Creek",
+      "shows": 2034
+    },
+    "moe": {
+      "name": "moe.",
+      "shows": 3162
+    },
+    "mogwai": {
+      "name": "Mogwai",
+      "shows": 221
+    },
+    "mmj": {
+      "name": "My Morning Jacket",
+      "shows": 339
+    },
+    "percy-hill": {
+      "name": "Percy Hill",
+      "shows": 118
+    },
+    "phil-lesh": {
+      "name": "Phil Lesh and Friends",
+      "shows": 2023
+    },
+    "phish": {
+      "name": "Phish",
+      "shows": 1478
+    },
+    "railroad-earth": {
+      "name": "Railroad Earth",
+      "shows": 1463
+    },
+    "raq": {
+      "name": "Raq",
+      "shows": 358
+    },
+    "ratdog": {
+      "name": "Ratdog",
+      "shows": 927
+    },
+    "ryan-adams": {
+      "name": "Ryan Adams",
+      "shows": 542
+    },
+    "smashing-pumpkins": {
+      "name": "Smashing Pumpkins",
+      "shows": 1105
+    },
+    "sts9": {
+      "name": "Sound Tribe Sector 9",
+      "shows": 663
+    },
+    "spafford": {
+      "name": "Spafford",
+      "shows": 97
+    },
+    "spoon": {
+      "name": "Spoon",
+      "shows": 62
+    },
+    "steve-kimock": {
+      "name": "Steve Kimock",
+      "shows": 327
+    },
+    "steve-kimock-band": {
+      "name": "Steve Kimock Band",
+      "shows": 509
+    },
+    "strangefolk": {
+      "name": "Strangefolk",
+      "shows": 786
+    },
+    "sci": {
+      "name": "String Cheese Incident",
+      "shows": 1549
     },
     "tea-leaf-green": {
       "name": "Tea Leaf Green",
-      "shows": 976
+      "shows": 1068
     },
     "ted-leo": {
       "name": "Ted Leo and the Pharmacists",
-      "shows": 20
+      "shows": 21
     },
     "tedeschi-trucks": {
       "name": "Tedeschi Trucks Band",
-      "the": true,
-      "shows": 239
+      "shows": 378
     },
     "tenacious-d": {
       "name": "Tenacious D",
-      "shows": 31
+      "shows": 41
     },
-    "umphreys": {
-      "name": "Umphrey's McGee",
-      "shows": "2,024"
+    "the-big-wu": {
+      "name": "The Big Wu",
+      "shows": 334
+    },
+    "the-breakfast": {
+      "name": "The Breakfast",
+      "shows": 510
+    },
+    "the-dead": {
+      "name": "The Dead",
+      "shows": 370
+    },
+    "the-decemberists": {
+      "name": "The Decemberists",
+      "shows": 79
+    },
+    "the-heavy-pets": {
+      "name": "The Heavy Pets",
+      "shows": 186
+    },
+    "jauntee": {
+      "name": "The Jauntee",
+      "shows": 303
+    },
+    "the-motet": {
+      "name": "The Motet",
+      "shows": 218
+    },
+    "the-new-deal": {
+      "name": "The New Deal",
+      "shows": 293
+    },
+    "new-mastersounds": {
+      "name": "The New Mastersounds",
+      "shows": 278
+    },
+    "radiators": {
+      "name": "The Radiators",
+      "shows": 1272
     },
     "the-walkmen": {
       "name": "The Walkmen",
@@ -1401,27 +1439,39 @@ window.App = {
     },
     "war-on-drugs": {
       "name": "The War on Drugs",
-      "shows": 30
+      "shows": 43
+    },
+    "the-werks": {
+      "name": "The Werks",
+      "shows": 150
+    },
+    "twiddle": {
+      "name": "Twiddle",
+      "shows": 295
+    },
+    "umphreys": {
+      "name": "Umphrey's McGee",
+      "shows": 2492
     },
     "warren-zevon": {
       "name": "Warren Zevon",
-      "shows": 104
+      "shows": 112
     },
     "ween": {
       "name": "Ween",
-      "shows": 447
-    },
-    "white-denim": {
-      "name": "White Denim",
-      "shows": 24
+      "shows": 527
     },
     "yonder": {
       "name": "Yonder Mountain String Band",
-      "shows": 792
+      "shows": 1655
+    },
+    "zebu": {
+      "name": "Zebu",
+      "shows": 7
     },
     "zero": {
       "name": "Zero",
-      "shows": 416
+      "shows": 454
     }
   },
   "realMusic": {
