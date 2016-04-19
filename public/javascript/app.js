@@ -1116,7 +1116,7 @@ bands = {
     "name": "Aqueous",
     "shows": "108"
   },
-  "aodust": {
+  "assembly-of-dust": {
     "name": "Assembly of Dust",
     "shows": "351"
   },
@@ -1287,6 +1287,10 @@ bands = {
   "keller-williams": {
     "name": "Keller Williams",
     "shows": "944"
+  },
+  "kung-fu": {
+    "name": "Kung Fu",
+    "shows": "299"
   },
   "kvhw": {
     "name": "KVHW",
