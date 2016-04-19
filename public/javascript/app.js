@@ -1141,6 +1141,10 @@ window.App = {
       "name": "Bernie Worrell Orchestra",
       "shows": 27
     },
+    "the-big-wu": {
+      "name": "The Big Wu",
+      "shows": 334
+    },
     "blues-traveler": {
       "name": "Blues Traveler",
       "shows": 1140
@@ -1148,6 +1152,10 @@ window.App = {
     "weir": {
       "name": "Bob Weir",
       "shows": 95
+    },
+    "the-breakfast": {
+      "name": "The Breakfast",
+      "shows": 510
     },
     "brothers-past": {
       "name": "Brothers Past",
@@ -1165,9 +1173,17 @@ window.App = {
       "name": "Dark Star Orchestra",
       "shows": 629
     },
+    "the-dead": {
+      "name": "The Dead",
+      "shows": 370
+    },
     "dead-and-company": {
       "name": "Dead & Company",
       "shows": 77
+    },
+    "the-decemberists": {
+      "name": "The Decemberists",
+      "shows": 79
     },
     "disco-biscuits": {
       "name": "Disco Biscuits",
@@ -1237,6 +1253,10 @@ window.App = {
       "name": "Guster",
       "shows": 584
     },
+    "the-heavy-pets": {
+      "name": "The Heavy Pets",
+      "shows": 186
+    },
     "stringdusters": {
       "name": "Infamous Stringdusters",
       "shows": 528
@@ -1244,6 +1264,10 @@ window.App = {
     "jack-johnson": {
       "name": "Jack Johnson",
       "shows": 158
+    },
+    "jauntee": {
+      "name": "The Jauntee",
+      "shows": 303
     },
     "jazz-mandolin-project": {
       "name": "Jazz Mandolin Project",
@@ -1313,9 +1337,21 @@ window.App = {
       "name": "Mogwai",
       "shows": 221
     },
+    "the-motet": {
+      "name": "The Motet",
+      "shows": 218
+    },
     "mmj": {
       "name": "My Morning Jacket",
       "shows": 339
+    },
+    "the-new-deal": {
+      "name": "The New Deal",
+      "shows": 293
+    },
+    "new-mastersounds": {
+      "name": "The New Mastersounds",
+      "shows": 278
     },
     "percy-hill": {
       "name": "Percy Hill",
@@ -1328,6 +1364,10 @@ window.App = {
     "phish": {
       "name": "Phish",
       "shows": 1478
+    },
+    "radiators": {
+      "name": "The Radiators",
+      "shows": 1272
     },
     "railroad-earth": {
       "name": "Railroad Earth",
@@ -1393,45 +1433,13 @@ window.App = {
       "name": "Tenacious D",
       "shows": 41
     },
-    "the-big-wu": {
-      "name": "The Big Wu",
-      "shows": 334
+    "twiddle": {
+      "name": "Twiddle",
+      "shows": 295
     },
-    "the-breakfast": {
-      "name": "The Breakfast",
-      "shows": 510
-    },
-    "the-dead": {
-      "name": "The Dead",
-      "shows": 370
-    },
-    "the-decemberists": {
-      "name": "The Decemberists",
-      "shows": 79
-    },
-    "the-heavy-pets": {
-      "name": "The Heavy Pets",
-      "shows": 186
-    },
-    "jauntee": {
-      "name": "The Jauntee",
-      "shows": 303
-    },
-    "the-motet": {
-      "name": "The Motet",
-      "shows": 218
-    },
-    "the-new-deal": {
-      "name": "The New Deal",
-      "shows": 293
-    },
-    "new-mastersounds": {
-      "name": "The New Mastersounds",
-      "shows": 278
-    },
-    "radiators": {
-      "name": "The Radiators",
-      "shows": 1272
+    "umphreys": {
+      "name": "Umphrey's McGee",
+      "shows": 2492
     },
     "the-walkmen": {
       "name": "The Walkmen",
@@ -1441,18 +1449,6 @@ window.App = {
       "name": "The War on Drugs",
       "shows": 43
     },
-    "the-werks": {
-      "name": "The Werks",
-      "shows": 150
-    },
-    "twiddle": {
-      "name": "Twiddle",
-      "shows": 295
-    },
-    "umphreys": {
-      "name": "Umphrey's McGee",
-      "shows": 2492
-    },
     "warren-zevon": {
       "name": "Warren Zevon",
       "shows": 112
@@ -1460,6 +1456,10 @@ window.App = {
     "ween": {
       "name": "Ween",
       "shows": 527
+    },
+    "the-werks": {
+      "name": "The Werks",
+      "shows": 150
     },
     "yonder": {
       "name": "Yonder Mountain String Band",
