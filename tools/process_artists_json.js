@@ -12,10 +12,14 @@ process.stdin.resume();
 process.stdin.on('data', function(buf) { content += buf.toString(); });
 process.stdin.on('end', function() {
     var j = JSON.parse(content);
+    var totals = { bands: 0, shows: 0, songs: 0 };
 
     var artists = {};
 
     j.data.map(function (v) {
+        totals.bands++;
+        totals.shows += v.recording_count;
+
     	return {
     		name: v.name,
     		slug: v.slug,
@@ -28,5 +32,7 @@ process.stdin.on('end', function() {
     });
 
     console.log(JSON.stringify(artists));
+    console.log('\n\n');
+    console.log(JSON.stringify(totals));
 });
 
