@@ -91,7 +91,7 @@ function program4(depth0,data) {
 function program6(depth0,data) {
   
   
-  return "\n      <div class=\"info\" href=\"/about\">\n        833,640 songs from 45,645 shows by 78 bands\n      </div>\n    ";
+  return "\n      <div class=\"info\" href=\"/about\">\n        1,028,334 songs from 58,302 tapes of 97 bands\n      </div>\n    ";
   }
 
   buffer += "<ul class=\"left\">\n  <li class=\"home-container\">\n    <a class=\"home\" href=\"/\">Relisten</a>\n    <span> to </span>\n    ";
@@ -1102,7 +1102,7 @@ bands = {
   },
   "andrew-bird": {
     "name": "Andrew Bird",
-    "shows": "102"
+    "shows": "103"
   },
   "animal-collective": {
     "name": "Animal Collective",
@@ -1114,11 +1114,11 @@ bands = {
   },
   "aqueous": {
     "name": "Aqueous",
-    "shows": "108"
+    "shows": "117"
   },
   "assembly-of-dust": {
     "name": "Assembly of Dust",
-    "shows": "351"
+    "shows": "354"
   },
   "bela-fleck": {
     "name": "Bela Fleck and the Flecktones",
@@ -1138,7 +1138,7 @@ bands = {
   },
   "the-big-wu": {
     "name": "The Big Wu",
-    "shows": "334"
+    "shows": "335"
   },
   "blues-traveler": {
     "name": "Blues Traveler",
@@ -1158,15 +1158,15 @@ bands = {
   },
   "cabinet": {
     "name": "Cabinet",
-    "shows": "573"
+    "shows": "577"
   },
   "club-d-elf": {
     "name": "Club d'Elf",
-    "shows": "612"
+    "shows": "618"
   },
   "dark-star": {
     "name": "Dark Star Orchestra",
-    "shows": "629"
+    "shows": "631"
   },
   "the-dead": {
     "name": "The Dead",
@@ -1182,7 +1182,7 @@ bands = {
   },
   "disco-biscuits": {
     "name": "Disco Biscuits",
-    "shows": "1,387"
+    "shows": "1,389"
   },
   "dispatch": {
     "name": "Dispatch",
@@ -1194,15 +1194,19 @@ bands = {
   },
   "dopapod": {
     "name": "Dopapod",
-    "shows": "544"
+    "shows": "554"
   },
   "drive-by-truckers": {
     "name": "Drive-By Truckers",
-    "shows": "805"
+    "shows": "806"
+  },
+  "egi": {
+    "name": "EGi",
+    "shows": "34"
   },
   "elliott-smith": {
     "name": "Elliott Smith",
-    "shows": "95"
+    "shows": "96"
   },
   "everyone-orchestra": {
     "name": "Everyone Orchestra",
@@ -1234,15 +1238,15 @@ bands = {
   },
   "grace-potter": {
     "name": "Grace Potter",
-    "shows": "546"
+    "shows": "547"
   },
   "grateful-dead": {
     "name": "Grateful Dead",
-    "shows": "10,459"
+    "shows": "10,509"
   },
   "greensky-bluegrass": {
     "name": "Greensky Bluegrass",
-    "shows": "670"
+    "shows": "673"
   },
   "guster": {
     "name": "Guster",
@@ -1250,11 +1254,11 @@ bands = {
   },
   "the-heavy-pets": {
     "name": "The Heavy Pets",
-    "shows": "186"
+    "shows": "187"
   },
   "stringdusters": {
     "name": "Infamous Stringdusters",
-    "shows": "528"
+    "shows": "529"
   },
   "jack-johnson": {
     "name": "Jack Johnson",
@@ -1262,7 +1266,7 @@ bands = {
   },
   "jauntee": {
     "name": "The Jauntee",
-    "shows": "303"
+    "shows": "308"
   },
   "jazz-mandolin-project": {
     "name": "Jazz Mandolin Project",
@@ -1270,15 +1274,15 @@ bands = {
   },
   "jerry-joseph": {
     "name": "Jerry Joseph and the Jackmormons",
-    "shows": "761"
+    "shows": "785"
   },
   "joe-russos-almost-dead": {
     "name": "Joe Russo's Almost Dead",
-    "shows": "173"
+    "shows": "175"
   },
   "john-kadlecik": {
     "name": "John Kadlecik",
-    "shows": "221"
+    "shows": "229"
   },
   "john-popper": {
     "name": "John Popper",
@@ -1286,11 +1290,11 @@ bands = {
   },
   "keller-williams": {
     "name": "Keller Williams",
-    "shows": "944"
+    "shows": "945"
   },
   "kung-fu": {
     "name": "Kung Fu",
-    "shows": "299"
+    "shows": "306"
   },
   "kvhw": {
     "name": "KVHW",
@@ -1298,7 +1302,7 @@ bands = {
   },
   "leftover-salmon": {
     "name": "Leftover Salmon",
-    "shows": "716"
+    "shows": "720"
   },
   "lettuce": {
     "name": "Lettuce",
@@ -1314,7 +1318,7 @@ bands = {
   },
   "marco": {
     "name": "Marco Benevento",
-    "shows": "161"
+    "shows": "162"
   },
   "matisyahu": {
     "name": "Matisyahu",
@@ -1326,11 +1330,11 @@ bands = {
   },
   "max-creek": {
     "name": "Max Creek",
-    "shows": "2,034"
+    "shows": "2,040"
   },
   "moe": {
     "name": "moe.",
-    "shows": "3,162"
+    "shows": "3,168"
   },
   "mogwai": {
     "name": "Mogwai",
@@ -1338,7 +1342,7 @@ bands = {
   },
   "the-motet": {
     "name": "The Motet",
-    "shows": "218"
+    "shows": "219"
   },
   "mmj": {
     "name": "My Morning Jacket",
@@ -1350,7 +1354,7 @@ bands = {
   },
   "new-mastersounds": {
     "name": "The New Mastersounds",
-    "shows": "278"
+    "shows": "289"
   },
   "percy-hill": {
     "name": "Percy Hill",
@@ -1358,7 +1362,7 @@ bands = {
   },
   "phil-lesh": {
     "name": "Phil Lesh and Friends",
-    "shows": "2,023"
+    "shows": "2,024"
   },
   "phish": {
     "name": "Phish",
@@ -1374,7 +1378,7 @@ bands = {
   },
   "raq": {
     "name": "Raq",
-    "shows": "358"
+    "shows": "361"
   },
   "ratdog": {
     "name": "Ratdog",
@@ -1382,11 +1386,11 @@ bands = {
   },
   "ryan-adams": {
     "name": "Ryan Adams",
-    "shows": "542"
+    "shows": "545"
   },
   "smashing-pumpkins": {
     "name": "Smashing Pumpkins",
-    "shows": "1,105"
+    "shows": "1,109"
   },
   "sts9": {
     "name": "Sound Tribe Sector 9",
@@ -1394,7 +1398,7 @@ bands = {
   },
   "spafford": {
     "name": "Spafford",
-    "shows": "97"
+    "shows": "101"
   },
   "spoon": {
     "name": "Spoon",
@@ -1414,7 +1418,7 @@ bands = {
   },
   "sci": {
     "name": "String Cheese Incident",
-    "shows": "1,549"
+    "shows": "1,551"
   },
   "tea-leaf-green": {
     "name": "Tea Leaf Green",
@@ -1426,7 +1430,7 @@ bands = {
   },
   "tedeschi-trucks": {
     "name": "Tedeschi Trucks Band",
-    "shows": "378"
+    "shows": "385"
   },
   "tenacious-d": {
     "name": "Tenacious D",
@@ -1434,11 +1438,11 @@ bands = {
   },
   "twiddle": {
     "name": "Twiddle",
-    "shows": "295"
+    "shows": "300"
   },
   "umphreys": {
     "name": "Umphrey's McGee",
-    "shows": "2,492"
+    "shows": "2,515"
   },
   "the-walkmen": {
     "name": "The Walkmen",
@@ -1454,15 +1458,19 @@ bands = {
   },
   "ween": {
     "name": "Ween",
-    "shows": "527"
+    "shows": "529"
   },
   "the-werks": {
     "name": "The Werks",
-    "shows": "150"
+    "shows": "151"
+  },
+  "white-denim": {
+    "name": "White Denim",
+    "shows": "27"
   },
   "yonder": {
     "name": "Yonder Mountain String Band",
-    "shows": "1,655"
+    "shows": "1,656"
   },
   "zebu": {
     "name": "Zebu",
