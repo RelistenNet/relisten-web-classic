@@ -40,7 +40,7 @@ class App.Router extends Backbone.Router
       App.shows = new App.Views.Shows { @band, @year }
       App.songs = new App.Views.Songs { @band, @year, @month, @day, @showVersion }
     App.header.render()
-    document.title = "Relisten to #{"the " if App.bands[@band].the}#{App.bands[@band].name}"
+    document.title = "Relisten to #{if App.bands[@band].the then "the " else ""}#{App.bands[@band].name}"
   year: (@band, @year, @month, @day) ->
     App.router.updateDescription """
       Relisten to #{App.bands[@band].name} concerts from #{@year}
